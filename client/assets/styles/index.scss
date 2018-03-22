@@ -1,2 +1,10 @@
-@import 'variables';
+// helpers
+@import './helpers/variables';
+@import './helpers/functions';
+@import './helpers/mixins';
+
+// global styles
 @import 'globals';
+
+// containers
+@import './containers/login';

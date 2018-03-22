@@ -1,11 +1,21 @@
+* {
+  box-sizing: border-box;
+  &:before,
+  &:after {
+    box-sizing: inherit;
+  }
+}
+
 html,
 body {
   margin: 0;
   height: 100%;
   overflow-x: hidden;
+  font-size: em($browser-context);
 }
 
 #root,
 #app {
   height: inherit;
+  font-size: inherit;
 }

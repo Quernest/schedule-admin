@@ -1,44 +1,36 @@
 const express = require('express');
-const app = express();
-const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const portNumber = 3000;
-const sourceDir = 'public';
 
 require('dotenv').config();
 
-const isDev = process.env.NODE_ENV === 'development';
+const app = express();
+const port = process.env.PORT || 3000;
+const sourceDir = 'public';
+const isDevelopment = process.env.NODE_ENV.trim() === 'development';
 
-if (isDev) {
+if (isDevelopment) {
   const webpack = require('webpack');
-  const webpackConfig = require('../webpack.config');
-  const webpackDevMiddleware = require('webpack-dev-middleware');
-  const webpackHotMiddleware = require('webpack-hot-middleware');
-  const webpackCompiler = webpack(webpackConfig);
+  const config = require('../webpack.config');
+  const compiler = webpack(config);
 
-  app.use(
-    webpackDevMiddleware(webpackCompiler, {
-      noInfo: true
-    })
-  );
-  app.use(webpackHotMiddleware(webpackCompiler));
+  app.use(require('webpack-dev-middleware')(compiler, {
+    noInfo: true,
+    publicPath: config.output.publicPath,
+  }));
+  app.use(require('webpack-hot-middleware')(compiler));
   app.use(require('morgan')('dev'));
-
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../dist/index.html'));
-  });
 } else {
   app.use(express.static(sourceDir));
+  app.use(cors());
 }
 
-app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/', require('./routes'));
 
-app.listen(process.env.PORT || portNumber, () => {
-  console.log(`[INFO] Server successfully started!`);
+app.listen(port, () => {
+  console.log(`[INFO]: Server started on port: ${port}!`);
 });
 
 module.exports = app;
