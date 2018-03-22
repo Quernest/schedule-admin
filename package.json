@@ -5,7 +5,8 @@
   "scripts": {
     "start": "webpack-dev-server --mode development --open",
     "dev": "webpack --mode development ./client/src/index.js --output ./public/main.js",
-    "build": "webpack --mode production ./client/src/index.js --output ./public/main.js"
+    "build": "webpack --mode production ./client/src/index.js --output ./public/main.js",
+    "server": "node ./server/app.js"
   },
   "main": "index.js",
   "repository": "https://github.com/Quernest/schedule-admin.git",
@@ -31,6 +32,14 @@
     "webpack-dev-server": "^3.1.1"
   },
   "dependencies": {
+    "bcrypt": "^1.0.3",
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
+    "dotenv": "^5.0.1",
+    "express": "^4.16.3",
+    "jsonwebtoken": "^8.2.0",
+    "morgan": "^1.9.0",
+    "mysql": "^2.15.0",
     "node-sass": "^4.7.2"
   }
 }
