@@ -1,0 +1,9 @@
+{
+  "name": "schedule-admin",
+  "version": "1.0.0",
+  "description": "admin panel for react-native schedule application",
+  "main": "index.js",
+  "repository": "https://github.com/Quernest/schedule-admin.git",
+  "author": "Quernest <a.zhit4enko@gmail.com>",
+  "license": "MIT"
+}
