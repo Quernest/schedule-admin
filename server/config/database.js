@@ -1,5 +1,7 @@
 const mysql = require('mysql');
 
+console.log(process.env);
+
 const config = {
   database: process.env.DB_NAME,
   host: process.env.DB_HOST,

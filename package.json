@@ -4,10 +4,8 @@
   "description": "admin panel for react-native schedule application",
   "scripts": {
     "start": "webpack-dev-server --mode development --open",
-    "dev":
-      "webpack --mode development ./client/src/index.js --output ./public/main.js",
-    "build":
-      "webpack --mode production ./client/src/index.js --output ./public/main.js",
+    "dev": "webpack --mode development ./client/src/index.js --output ./public/main.js",
+    "build": "webpack --mode production ./client/src/index.js --output ./public/main.js",
     "server": "set NODE_ENV=production && node ./server/app.js",
     "dev-server": "set NODE_ENV=development && node ./server/app.js"
   },
