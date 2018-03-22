@@ -2,8 +2,19 @@
   "name": "schedule-admin",
   "version": "1.0.0",
   "description": "admin panel for react-native schedule application",
+  "scripts": {
+    "dev": "webpack --mode development ./client/src/js/index.js --output ./public/main.js",
+    "build": "webpack --mode production ./client/src/js/index.js --output ./public/main.js"
+  },
   "main": "index.js",
   "repository": "https://github.com/Quernest/schedule-admin.git",
   "author": "Quernest <a.zhit4enko@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.6.1",
+    "webpack": "^4.2.0",
+    "webpack-cli": "^2.0.12"
+  }
 }
