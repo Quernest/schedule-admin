@@ -6,9 +6,12 @@ const cors = require('cors');
 const portNumber = 3000;
 const sourceDir = 'public';
 
+require('dotenv').config();
+
 const isDev = process.env.NODE_ENV === 'development';
 
 if (isDev) {
+  console.log('development mode');
   // Initialize Webpack && Hot
   const webpack = require('webpack');
   const webpackConfig = require('../webpack.config');
@@ -28,6 +31,8 @@ if (isDev) {
     res.sendFile(path.join(__dirname, '../dist/index.html'));
   });
 } else {
+  console.log('production mode');
+
   app.use(express.static(sourceDir));
 }
 
