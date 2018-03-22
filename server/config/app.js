@@ -1,5 +1,5 @@
 module.exports.config = {
   keys: {
-    secret: '/ssdmoRuQ7SOqbOAZmPpQTGhe352'
+    secret: process.env.SECRET
   }
 };
