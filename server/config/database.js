@@ -7,8 +7,6 @@ const config = {
   password: process.env.DB_PASSWORD
 };
 
-console.log(config);
-
 module.exports = {
   connection: mysql.createConnection(config),
   pool: mysql.createPool(
