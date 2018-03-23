@@ -1,15 +1,24 @@
 .jumbotron {
+  font-size: 0.75em;
   margin-bottom: em(10);
   text-align: center;
 
+  @include xs {
+    font-size: 0.85em;
+  }
+
+  @include sm {
+    font-size: 1em;
+  }
+
   &-heading {
-    font-size: em($font-size-heading);
     margin: 0;
+    font-size: em($font-size-h1);
     color: $black;
   }
   &-text {
-    font-size: em($font-size-normal);
     margin: em(10) 0;
+    font-size: em($font-size-large);
     color: $grey;
   }
 }

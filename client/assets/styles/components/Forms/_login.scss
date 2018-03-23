@@ -2,9 +2,19 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: em(500);
   border-radius: em(5);
   padding: em($gutter-y) 0;
+  font-size: 0.85em;
+  max-width: em(400);
+
+  @include xs {
+    font-size: 0.95em;
+  }
+
+  @include sm {
+    font-size: 1em;
+    max-width: em(500);
+  }
 
   &-input,
   &-button {
@@ -20,8 +30,8 @@
     padding: em(15) em(20);
 
     &.invalid {
-      border: 1px solid rgba($red, 0.5);
-      background-color: rgba($red, 0.05);
+      border: 1px solid rgba($red, 0.35);
+      background-color: rgba($red, 0.025);
     }
   }
 

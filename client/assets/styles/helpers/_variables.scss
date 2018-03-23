@@ -7,13 +7,24 @@ $black: #343434;
 $steel: #b2bec3;
 $red: #e84118;
 
-// font-size browser context
+// font-sizes
 $browser-context: 16;
-
-$font-size-heading: 36;
-$font-size-large: 24;
+$font-size-large: 18;
 $font-size-normal: 16;
 $font-size-small: 13;
+$font-size-h1: 48;
+$font-size-h2: 36;
+$font-size-h3: 28;
+$font-size-h4: 24;
+$font-size-h5: 21;
+$font-size-h6: 18;
+
+// breakpoints
+$screen-xs-min: 425px;
+$screen-sm-min: 576px;
+$screen-md-min: 768px;
+$screen-lg-min: 992px;
+$screen-xl-min: 1200px;
 
 // sizes
 $gutter-x: 15;
