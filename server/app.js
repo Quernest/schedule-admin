@@ -13,7 +13,7 @@ if (isDevelopment) {
   console.log('[INFO]: development enviroment');
 
   const webpack = require('webpack');
-  const config = require('../webpack.config');
+  const config = require('../webpack.config.dev');
   const compiler = webpack(config);
 
   app.use(require('webpack-dev-middleware')(compiler, {
@@ -24,6 +24,7 @@ if (isDevelopment) {
   app.use(require('morgan')('dev'));
 } else {
   console.log('[INFO]: production enviroment');
+
   app.use(express.static(sourceDir));
   app.use(cors());
 }

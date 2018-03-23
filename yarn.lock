@@ -1567,6 +1567,12 @@ clean-css@4.1.x:
   dependencies:
     source-map "0.5.x"
 
+clean-webpack-plugin@^0.1.19:
+  version "0.1.19"
+  resolved "https://registry.yarnpkg.com/clean-webpack-plugin/-/clean-webpack-plugin-0.1.19.tgz#ceda8bb96b00fe168e9b080272960d20fdcadd6d"
+  dependencies:
+    rimraf "^2.6.1"
+
 cli-cursor@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/cli-cursor/-/cli-cursor-1.0.2.tgz#64da3f7d56a54412e59794bd62dc35295e8f2987"
@@ -4624,6 +4630,13 @@ min-document@^2.19.0:
   dependencies:
     dom-walk "^0.1.0"
 
+mini-css-extract-plugin@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/mini-css-extract-plugin/-/mini-css-extract-plugin-0.2.0.tgz#7a16b0e1096c86de8e4d1c3b063aa1aeae88d41d"
+  dependencies:
+    loader-utils "^1.1.0"
+    webpack-sources "^1.1.0"
+
 minimalistic-assert@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/minimalistic-assert/-/minimalistic-assert-1.0.0.tgz#702be2dda6b37f4836bcb3f5db56641b64a1d3d3"
@@ -7471,6 +7484,12 @@ webpack-log@^1.0.1, webpack-log@^1.1.2:
     log-symbols "^2.1.0"
     loglevelnext "^1.0.1"
     uuid "^3.1.0"
+
+webpack-merge@^4.1.2:
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/webpack-merge/-/webpack-merge-4.1.2.tgz#5d372dddd3e1e5f8874f5bf5a8e929db09feb216"
+  dependencies:
+    lodash "^4.17.5"
 
 webpack-sources@^1.0.1, webpack-sources@^1.1.0:
   version "1.1.0"
