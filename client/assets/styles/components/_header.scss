@@ -1,0 +1,47 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+
+  &-logo {
+    img {
+      transition: opacity $transition-normal;
+      width: em(50);
+      opacity: 0.75;
+
+      &:hover {
+        opacity: 1;
+        cursor: pointer;
+      }
+    }
+  }
+
+  &__languages {
+    margin-left: auto;
+    &-list {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      list-style-type: none;
+      padding-left: 0;
+      margin-top: 0;
+      margin-bottom: 0;
+      &-item {
+        margin-left: em(10);
+        .active {
+          opacity: 1;
+        }
+        img {
+          width: em(40);
+          transition: opacity $transition-normal;
+          opacity: 0.75;
+        }
+        &:hover {
+          img {
+            opacity: 1;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}

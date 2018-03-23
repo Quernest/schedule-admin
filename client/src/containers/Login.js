@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Header from '../components/Header';
 
 export default class Login extends Component {
   constructor(props) {
@@ -8,6 +9,10 @@ export default class Login extends Component {
   }
 
   render() {
-    return <div className="login">Login page</div>;
+    return (
+      <div className="login">
+        <Header />
+      </div>
+    );
   }
 }
