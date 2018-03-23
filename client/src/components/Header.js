@@ -1,24 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { appLocales } from '../intl';
 
-const languages = [
-  {
-    id: 0,
-    label: 'en',
-    icon: 'eng',
-  },
-  {
-    id: 1,
-    label: 'ru',
-    icon: 'ru',
-  },
-  {
-    id: 2,
-    label: 'ua',
-    icon: 'ua',
-  },
-];
-
-const Header = () => (
+const Header = ({ onChangeLang }) => (
   <header className="header">
     <div className="header-logo">
       <a href="/">
@@ -27,21 +11,24 @@ const Header = () => (
     </div>
     <div className="header__languages">
       <ul className="header__languages-list">
-        {languages.map((language) => {
-          const { label, icon, id } = language;
-
-          return (
-            <li className="header__languages-list-item" key={id}>
-              <img
-                src={require(`../../assets/img/flags/${icon}.svg`)}
-                alt={`${label} translation`}
-              />
-            </li>
-          );
-        })}
+        {appLocales.map(lang => (
+          <li
+            role="menuitem"
+            className="header__languages-list-item"
+            key={lang}
+            onClick={() => onChangeLang(lang)}
+            onKeyPress={() => {}}
+          >
+            <img src={require(`../../assets/img/flags/${lang}.svg`)} alt={`${lang} translation`} />
+          </li>
+        ))}
       </ul>
     </div>
   </header>
 );
+
+Header.propTypes = {
+  onChangeLang: PropTypes.func.isRequired,
+};
 
 export default Header;

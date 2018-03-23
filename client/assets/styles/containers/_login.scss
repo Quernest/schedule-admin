@@ -2,4 +2,15 @@
   height: 100%;
   padding: em(15px);
   background-color: $lightgrey;
+
+  &-title {
+    font-size: em(32px);
+    text-align: center;
+    margin-top: em(25px);
+    color: $black;
+
+    @media screen and (min-width: em(600px)) {
+      font-size: em(64px);
+    }
+  }
 }
