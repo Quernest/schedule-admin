@@ -10,6 +10,8 @@ const sourceDir = 'public';
 const isDevelopment = process.env.NODE_ENV.trim() === 'development';
 
 if (isDevelopment) {
+  console.log('[INFO]: development enviroment');
+
   const webpack = require('webpack');
   const config = require('../webpack.config');
   const compiler = webpack(config);
@@ -21,6 +23,7 @@ if (isDevelopment) {
   app.use(require('webpack-hot-middleware')(compiler));
   app.use(require('morgan')('dev'));
 } else {
+  console.log('[INFO]: production enviroment');
   app.use(express.static(sourceDir));
   app.use(cors());
 }

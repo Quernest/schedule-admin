@@ -9,7 +9,7 @@
     "server": "set NODE_ENV=production && node ./server/app.js",
     "dev-server": "set NODE_ENV=development && node ./server/app.js"
   },
-  "main": "index.js",
+  "main": "./client/src/index.js",
   "repository": "https://github.com/Quernest/schedule-admin.git",
   "author": "Quernest <a.zhit4enko@gmail.com>",
   "license": "MIT",

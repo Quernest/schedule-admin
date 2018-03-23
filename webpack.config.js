@@ -6,10 +6,7 @@ const autoprefixer = require('autoprefixer');
 module.exports = {
   mode: 'development',
   devtool: 'eval',
-  entry: [
-    './client/src/index.js',
-    'webpack-hot-middleware/client?path=http://localhost:3000/__webpack_hmr',
-  ],
+  entry: ['webpack-hot-middleware/client', './client/src/index.js'],
   resolve: {
     modules: ['node_modules'],
     extensions: ['.js', '.jsx', '.scss', '.css'],
