@@ -1,0 +1,15 @@
+.jumbotron {
+  margin-bottom: em(10);
+  text-align: center;
+
+  &-heading {
+    font-size: em($font-size-heading);
+    margin: 0;
+    color: $black;
+  }
+  &-text {
+    font-size: em($font-size-normal);
+    margin: em(10) 0;
+    color: $grey;
+  }
+}

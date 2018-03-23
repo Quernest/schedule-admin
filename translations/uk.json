@@ -1,6 +1,26 @@
 [
   {
-    "id": "app.title",
-    "message": "Розклад"
+    "id": "app.jumbotron.text",
+    "message": "-"
+  },
+  {
+    "id": "app.login.form.button.submit",
+    "message": "Увійти"
+  },
+  {
+    "id": "app.login.form.input.username",
+    "message": "Ім'я"
+  },
+  {
+    "id": "app.login.form.input.password",
+    "message": "Пароль"
+  },
+  {
+    "id": "app.login.form.input.password.feedback",
+    "message": "Необхідно ввести пароль"
+  },
+  {
+    "id": "app.login.form.input.username.feedback",
+    "message": "Необхідно ввести ім'я користувача"
   }
 ]

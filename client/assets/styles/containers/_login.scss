@@ -1,16 +1,9 @@
 .login {
-  height: 100%;
-  padding: em(15px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: calc(100% - #{em($header-height)});
+  padding: em($gutter-y) em($gutter-x);
   background-color: $lightgrey;
-
-  &-title {
-    font-size: em(32px);
-    text-align: center;
-    margin-top: em(25px);
-    color: $black;
-
-    @media screen and (min-width: em(600px)) {
-      font-size: em(64px);
-    }
-  }
 }

@@ -1,12 +1,14 @@
 .header {
   display: flex;
   justify-content: space-between;
+  height: em($header-height);
+  padding: em($gutter-y) em($gutter-x);
+  background-color: $lightgrey;
 
-  &-logo {
+  &__logo {
     img {
       transition: opacity $transition-normal;
-      width: em(50);
-      opacity: 0.75;
+      width: em(45px);
 
       &:hover {
         opacity: 1;
@@ -26,14 +28,16 @@
       margin-top: 0;
       margin-bottom: 0;
       &-item {
-        margin-left: em(10);
-        .active {
-          opacity: 1;
-        }
+        margin-left: em(10px);
         img {
-          width: em(40);
+          width: em(35px);
           transition: opacity $transition-normal;
-          opacity: 0.75;
+          opacity: 0.5;
+        }
+        &.active {
+          img {
+            opacity: 1;
+          }
         }
         &:hover {
           img {

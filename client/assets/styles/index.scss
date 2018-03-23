@@ -8,6 +8,9 @@
 
 // components
 @import './components/header';
+@import './components/forms/login';
+@import './components/loader';
+@import './components/jumbotron';
 
 // containers
 @import './containers/login';

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { hot } from 'react-hot-loader';
 import { IntlProvider } from 'react-intl';
+import Header from '../components/Header';
 import Login from './Login';
 import { translationMessages } from '../intl';
 
@@ -46,7 +47,8 @@ class App extends Component {
     return (
       <IntlProvider locale={lang} messages={translationMessages[lang]}>
         <div id="app">
-          <Login onChangeLang={this.onChangeLang} />
+          <Header onChangeLang={this.onChangeLang} currentLang={lang} />
+          <Login />
         </div>
       </IntlProvider>
     );

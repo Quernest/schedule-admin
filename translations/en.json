@@ -1,6 +1,26 @@
 [
   {
-    "id": "app.title",
-    "message": "Schedule"
+    "id": "app.jumbotron.text",
+    "message": "-"
+  },
+  {
+    "id": "app.login.form.button.submit",
+    "message": "Login"
+  },
+  {
+    "id": "app.login.form.input.username",
+    "message": "Username"
+  },
+  {
+    "id": "app.login.form.input.password",
+    "message": "Password"
+  },
+  {
+    "id": "app.login.form.input.password.feedback",
+    "message": "You must enter your password"
+  },
+  {
+    "id": "app.login.form.input.username.feedback",
+    "message": "You must enter your username"
   }
 ]

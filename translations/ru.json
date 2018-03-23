@@ -1,6 +1,26 @@
 [
   {
-    "id": "app.title",
-    "message": "Расписание"
+    "id": "app.jumbotron.text",
+    "message": "-"
+  },
+  {
+    "id": "app.login.form.button.submit",
+    "message": "Войти"
+  },
+  {
+    "id": "app.login.form.input.username",
+    "message": "Имя"
+  },
+  {
+    "id": "app.login.form.input.password",
+    "message": "Пароль"
+  },
+  {
+    "id": "app.login.form.input.password.feedback",
+    "message": "Необходимо ввести пароль"
+  },
+  {
+    "id": "app.login.form.input.username.feedback",
+    "message": "Необходимо ввести имя пользователя"
   }
 ]

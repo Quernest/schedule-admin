@@ -1,10 +1,24 @@
 // colors
 $white: #fff;
 $lightgrey: #eeefef;
-$black: #1e272e;
+$lightblue: #38498c;
+$grey: #989898;
+$black: #343434;
+$steel: #b2bec3;
+$red: #e84118;
+
+// font-size browser context
+$browser-context: 16;
+
+$font-size-heading: 36;
+$font-size-large: 24;
+$font-size-normal: 16;
+$font-size-small: 13;
 
 // sizes
-$browser-context: 16;
+$gutter-x: 15;
+$gutter-y: 10;
+$header-height: 65px;
 
 // transitions
 $transition-fast: 200ms;
