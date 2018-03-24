@@ -1,73 +1,47 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-
-import API from '../services/api.service';
-import loggedIn from '../helpers/loggedIn';
-
 import LoginForm from '../components/Forms/LoginForm';
 import Jumbotron from '../components/Jumbotron';
+import userActions from '../actions/user.actions';
+import history from '../helpers/history';
 
-export default class Login extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      loading: false,
       submitted: false,
       username: '',
       password: '',
-      error: '',
     };
 
     this.onSubmit = this.onSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
-    this.clearErrors = this.clearErrors.bind(this);
   }
 
   componentWillMount() {
-    const { history } = this.props;
+    const { user } = this.props;
+    const { loggedIn } = user;
 
-    if (loggedIn()) {
-      history.push('/dashboard');
+    if (loggedIn) {
+      history.push('dashboard');
     }
   }
 
   onSubmit(e) {
     e.preventDefault();
 
-    const { history } = this.props;
+    const { dispatch } = this.props;
     const { username, password } = this.state;
+
+    if (username && password) {
+      dispatch(userActions.login(username, password));
+    }
 
     this.setState({
       submitted: true,
     });
-
-    if (username && password) {
-      this.clearErrors();
-
-      this.setState({
-        loading: true,
-      });
-
-      API.login(username, password)
-        .then((user) => {
-          if (user && user.token) {
-            localStorage.setItem('user', JSON.stringify(user));
-
-            this.setState({
-              loading: false,
-            });
-
-            history.push('/dashboard');
-          }
-        })
-        .catch((error) => {
-          this.setState({
-            loading: false,
-            error,
-          });
-        });
-    }
   }
 
   onChange(e) {
@@ -78,28 +52,18 @@ export default class Login extends Component {
     });
   }
 
-  clearErrors() {
-    this.setState({
-      error: '',
-    });
-  }
-
   render() {
-    const {
-      submitted, username, password, loading, error,
-    } = this.state;
+    const { submitted, username, password } = this.state;
 
     return (
       <div className="login">
         <Jumbotron />
         <LoginForm
-          loading={loading}
           username={username}
           password={password}
-          submitted={submitted}
           onChange={this.onChange}
           onSubmit={this.onSubmit}
-          error={error}
+          submitted={submitted}
         />
       </div>
     );
@@ -107,7 +71,25 @@ export default class Login extends Component {
 }
 
 Login.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired,
-  }).isRequired,
+  user: PropTypes.shape({
+    id: PropTypes.number,
+    token: PropTypes.string,
+    username: PropTypes.string,
+    loggedIn: PropTypes.bool,
+    loading: PropTypes.bool,
+  }),
 };
+
+Login.defaultProps = {
+  user: {},
+};
+
+const mapStateToProps = (state) => {
+  const { user } = state;
+
+  return {
+    user,
+  };
+};
+
+export default connect(mapStateToProps)(Login);

@@ -1,58 +1,32 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { hot } from 'react-hot-loader';
 import { IntlProvider } from 'react-intl';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import Main from './Main';
 import { translationMessages } from '../intl';
 
-class App extends Component {
-  constructor(props) {
-    super(props);
+const App = ({ lang }) => (
+  <IntlProvider locale={lang} messages={translationMessages[lang]}>
+    <div id="app">
+      <Header />
+      <Main />
+    </div>
+  </IntlProvider>
+);
 
-    this.state = {
-      lang: 'en',
-    };
+App.propTypes = {
+  lang: PropTypes.string.isRequired,
+};
 
-    this.onChangeLang = this.onChangeLang.bind(this);
-    this.getCurrentLang = this.getCurrentLang.bind(this);
-  }
+const mapStateToProps = (state) => {
+  const { locale } = state;
+  const { lang } = locale;
 
-  componentDidMount() {
-    this.getCurrentLang();
-  }
+  return {
+    lang,
+  };
+};
 
-  onChangeLang(lang) {
-    if (lang && typeof lang === 'string') {
-      localStorage.setItem('lang', lang);
-    }
-
-    this.setState({
-      lang,
-    });
-  }
-
-  getCurrentLang() {
-    const lang = localStorage.getItem('lang');
-
-    if (lang) {
-      this.setState({
-        lang,
-      });
-    }
-  }
-
-  render() {
-    const { lang } = this.state;
-
-    return (
-      <IntlProvider locale={lang} messages={translationMessages[lang]}>
-        <div id="app">
-          <Header onChangeLang={this.onChangeLang} lang={lang} />
-          <Main />
-        </div>
-      </IntlProvider>
-    );
-  }
-}
-
-export default hot(module)(App);
+export default hot(module)(connect(mapStateToProps)(App));

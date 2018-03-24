@@ -1,9 +1,11 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import localeActions from '../actions/locale.actions';
 import { appLocales } from '../intl';
 
-const Header = ({ onChangeLang, lang }) => (
+const Header = ({ dispatch, lang }) => (
   <header className="header">
     <div className="header__logo">
       <a href="/">
@@ -19,7 +21,7 @@ const Header = ({ onChangeLang, lang }) => (
               active: locale === lang,
             })}
             key={locale}
-            onClick={() => onChangeLang(locale)}
+            onClick={() => dispatch(localeActions.setLocale(locale))}
             onKeyPress={() => {}}
           >
             <img
@@ -34,8 +36,16 @@ const Header = ({ onChangeLang, lang }) => (
 );
 
 Header.propTypes = {
-  onChangeLang: PropTypes.func.isRequired,
   lang: PropTypes.string.isRequired,
 };
 
-export default Header;
+const mapStateToProps = (state) => {
+  const { locale } = state;
+  const { lang } = locale;
+
+  return {
+    lang,
+  };
+};
+
+export default connect(mapStateToProps)(Header);

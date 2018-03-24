@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl } from 'react-intl';
 
 const Jumbotron = () => (
   <div className="jumbotron">
@@ -10,4 +10,4 @@ const Jumbotron = () => (
   </div>
 );
 
-export default Jumbotron;
+export default injectIntl(Jumbotron);
