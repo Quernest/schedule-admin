@@ -19,3 +19,9 @@ body {
   height: inherit;
   font-size: inherit;
 }
+
+#content {
+  height: calc(100% - #{em($header-height)});
+  padding: em($gutter-y) em($gutter-x);
+  background-color: $lightgrey;
+}

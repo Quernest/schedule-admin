@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { appLocales } from '../intl';
 
-const Header = ({ onChangeLang, currentLang }) => (
+const Header = ({ onChangeLang, lang }) => (
   <header className="header">
     <div className="header__logo">
       <a href="/">
@@ -16,7 +16,7 @@ const Header = ({ onChangeLang, currentLang }) => (
           <li
             role="menuitem"
             className={classNames('header__languages-list-item', {
-              active: locale === currentLang,
+              active: locale === lang,
             })}
             key={locale}
             onClick={() => onChangeLang(locale)}
@@ -35,7 +35,7 @@ const Header = ({ onChangeLang, currentLang }) => (
 
 Header.propTypes = {
   onChangeLang: PropTypes.func.isRequired,
-  currentLang: PropTypes.string.isRequired,
+  lang: PropTypes.string.isRequired,
 };
 
 export default Header;

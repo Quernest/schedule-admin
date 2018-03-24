@@ -1,29 +1,29 @@
 @mixin xs {
-  @media (min-width: #{em($screen-xs-min)}) {
+  @media (min-width: $screen-xs-min) {
     @content;
   }
 }
 
 @mixin sm {
-  @media (min-width: #{em($screen-sm-min)}) {
+  @media (min-width: $screen-sm-min) {
     @content;
   }
 }
 
 @mixin md {
-  @media (min-width: #{em($screen-md-min)}) {
+  @media (min-width: $screen-md-min) {
     @content;
   }
 }
 
 @mixin lg {
-  @media (min-width: #{em($screen-lg-min)}) {
+  @media (min-width: $screen-lg-min) {
     @content;
   }
 }
 
 @mixin xl {
-  @media (min-width: #{em($screen-xl-min)}) {
+  @media (min-width: $screen-xl-min) {
     @content;
   }
 }

@@ -3,7 +3,5 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: calc(100% - #{em($header-height)});
-  padding: em($gutter-y) em($gutter-x);
-  background-color: $lightgrey;
+  height: 100%;
 }

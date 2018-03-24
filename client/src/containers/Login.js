@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import API from '../services/api.service';
+import loggedIn from '../helpers/loggedIn';
 
 import LoginForm from '../components/Forms/LoginForm';
 import Jumbotron from '../components/Jumbotron';
@@ -21,9 +24,19 @@ export default class Login extends Component {
     this.clearErrors = this.clearErrors.bind(this);
   }
 
+  componentWillMount() {
+    const { history } = this.props;
+
+    if (loggedIn()) {
+      history.push('/dashboard');
+    }
+  }
+
   onSubmit(e) {
-    const { username, password } = this.state;
     e.preventDefault();
+
+    const { history } = this.props;
+    const { username, password } = this.state;
 
     this.setState({
       submitted: true,
@@ -37,10 +50,16 @@ export default class Login extends Component {
       });
 
       API.login(username, password)
-        .then(() => {
-          this.setState({
-            loading: false,
-          });
+        .then((user) => {
+          if (user && user.token) {
+            localStorage.setItem('user', JSON.stringify(user));
+
+            this.setState({
+              loading: false,
+            });
+
+            history.push('/dashboard');
+          }
         })
         .catch((error) => {
           this.setState({
@@ -86,3 +105,9 @@ export default class Login extends Component {
     );
   }
 }
+
+Login.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+};
