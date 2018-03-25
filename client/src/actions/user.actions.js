@@ -32,8 +32,18 @@ const login = (username, password) => {
   };
 };
 
+const logout = () => {
+  localStorage.removeItem('user');
+
+  return {
+    type: userConstants.LOGOUT,
+    loggedIn: false,
+  };
+};
+
 const userActions = {
   login,
+  logout,
 };
 
 export default userActions;

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import localeActions from '../actions/locale.actions';
+import userActions from '../actions/user.actions';
 import { appLocales } from '../intl';
 
 const Header = ({ dispatch, lang, loggedIn }) => (
@@ -33,7 +34,13 @@ const Header = ({ dispatch, lang, loggedIn }) => (
       </ul>
     </div>
     {loggedIn && (
-      <div className="header__logout">
+      <div
+        role="button"
+        tabIndex="0"
+        className="header__logout"
+        onClick={() => dispatch(userActions.logout())}
+        onKeyPress={() => {}}
+      >
         <img src={require('../../assets/img/logout.svg')} alt="logout" />
       </div>
     )}

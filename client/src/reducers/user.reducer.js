@@ -19,6 +19,10 @@ const user = (state = initialState, action) => {
       return {
         loading: false,
       };
+    case userConstants.LOGOUT:
+      return {
+        loggedIn: false,
+      };
     default:
       return state;
   }
