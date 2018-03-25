@@ -1,7 +1,7 @@
 [
   {
     "id": "app.jumbotron.text",
-    "message": "Панель управління для створення розкладу для навчального закладу"
+    "message": "Панель управління для створення розкладу для навчальних закладів"
   },
   {
     "id": "app.login.form.button.submit",
@@ -34,5 +34,9 @@
   {
     "id": "app.errors.user.token.invalid",
     "message": "Токен недійсний"
+  },
+  {
+    "id": "app.dashboard.title",
+    "message": "Панель управління"
   }
 ]

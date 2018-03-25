@@ -1,12 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Helmet } from 'react-helmet';
+import { injectIntl, intlShape } from 'react-intl';
 import PropTypes from 'prop-types';
 
-const Dashboard = ({ user }) => (
-  <div className="dashboard">
-    <p>You are logged, {user.username}</p>
-  </div>
-);
+const Dashboard = ({ user, intl }) => {
+  const { formatMessage } = intl;
+
+  return (
+    <div className="dashboard">
+      <Helmet>
+        <title>Schedule - {formatMessage({ id: 'app.dashboard.title' })}</title>
+      </Helmet>
+      <p>You are logged, {user.username}</p>
+    </div>
+  );
+};
 
 Dashboard.propTypes = {
   user: PropTypes.shape({
@@ -16,6 +25,7 @@ Dashboard.propTypes = {
     loggedIn: PropTypes.bool,
     loading: PropTypes.bool,
   }),
+  intl: intlShape.isRequired,
 };
 
 Dashboard.defaultProps = {
@@ -30,4 +40,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(Dashboard);
+export default injectIntl(connect(mapStateToProps)(Dashboard));
