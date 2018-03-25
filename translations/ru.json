@@ -1,7 +1,7 @@
 [
   {
     "id": "app.jumbotron.text",
-    "message": "-"
+    "message": "Панель управления для создания расписания для учебных учреждений"
   },
   {
     "id": "app.login.form.button.submit",
@@ -25,7 +25,7 @@
   },
   {
     "id": "app.errors.login.user.notfound",
-    "message": "Пользователь не найден."
+    "message": "Пользователь не найден"
   },
   {
     "id": "app.errors.login.password.doesntmatch",

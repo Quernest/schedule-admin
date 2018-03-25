@@ -1,13 +1,19 @@
 import React from 'react';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import { injectIntl, intlShape } from 'react-intl';
 
-const Jumbotron = () => (
-  <div className="jumbotron">
-    <h1 className="jumbotron-heading">Schedule</h1>
-    <FormattedMessage id="app.jumbotron.text">
-      {text => <p className="jumbotron-text">{text}</p>}
-    </FormattedMessage>
-  </div>
-);
+const Jumbotron = ({ intl }) => {
+  const { formatMessage } = intl;
+
+  return (
+    <div className="jumbotron">
+      <h1 className="jumbotron-heading">Schedule</h1>
+      <p className="jumbotron-text">{formatMessage({ id: 'app.jumbotron.text' })}</p>
+    </div>
+  );
+};
+
+Jumbotron.propTypes = {
+  intl: intlShape.isRequired,
+};
 
 export default injectIntl(Jumbotron);
