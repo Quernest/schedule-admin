@@ -1,17 +1,9 @@
-const handleError = (err) => {
-  if (err && typeof err === 'string') {
-    return Promise.reject(err);
+const handleErrors = (response) => {
+  if (!response.ok) {
+    throw new Error(response.statusText);
   }
 
-  return err.statusText;
+  return response;
 };
 
-const handleSuccess = (msg) => {
-  if (msg && typeof msg === 'string') {
-    return Promise.resolve(msg);
-  }
-
-  return msg.statusText;
-};
-
-export { handleError, handleSuccess };
+export { handleErrors };

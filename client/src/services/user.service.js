@@ -1,4 +1,4 @@
-import { handleError } from '../helpers/handlers';
+import { handleErrors } from '../helpers/handlers';
 
 const login = async (username, password) => {
   const requestOptions = {
@@ -17,7 +17,7 @@ const login = async (username, password) => {
 
     return user;
   } catch (err) {
-    handleError(err);
+    handleErrors(res);
   }
 };
 
