@@ -1,0 +1,16 @@
+.alert {
+  padding-top: em($gutter-y);
+  padding-bottom: em($gutter-y);
+
+  &-success {
+    color: $green;
+  }
+
+  &-error {
+    color: $red;
+  }
+
+  &-warning {
+    color: $yellow;
+  }
+}

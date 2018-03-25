@@ -22,5 +22,17 @@
   {
     "id": "app.login.form.input.username.feedback",
     "message": "You must enter your username"
+  },
+  {
+    "id": "app.errors.login.user.notfound",
+    "message": "User not found"
+  },
+  {
+    "id": "app.errors.login.password.doesntmatch",
+    "message": "Password doesn't match"
+  },
+  {
+    "id": "app.errors.user.token.invalid",
+    "message": "Token is not valid"
   }
 ]

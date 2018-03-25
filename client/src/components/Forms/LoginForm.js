@@ -3,14 +3,16 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { intlShape, injectIntl } from 'react-intl';
+import Alert from '../Alert';
 
 const LoginForm = ({
-  intl, username, password, onChange, onSubmit, submitted, loading,
+  intl, username, password, onChange, onSubmit, submitted, loading, alert,
 }) => {
   const { formatMessage } = intl;
 
   return (
     <form className="login__form" onSubmit={onSubmit}>
+      {alert.id && <Alert id={alert.id} type={alert.type} />}
       <input
         className={classNames('login__form-input', { invalid: submitted && !username })}
         onChange={onChange}
@@ -56,20 +58,26 @@ LoginForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   submitted: PropTypes.bool.isRequired,
   loading: PropTypes.bool,
+  alert: PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    type: PropTypes.string,
+  }),
 };
 
 LoginForm.defaultProps = {
   username: '',
   password: '',
   loading: false,
+  alert: {},
 };
 
 const mapStateToProps = (state) => {
-  const { user } = state;
+  const { user, alert } = state;
   const { loading } = user;
 
   return {
     loading,
+    alert,
   };
 };
 

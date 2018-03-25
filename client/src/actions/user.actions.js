@@ -1,4 +1,5 @@
 import userConstants from '../constants/user.constants';
+import alertActions from '../actions/alert.actions';
 import userService from '../services/user.service';
 import history from '../helpers/history';
 
@@ -28,7 +29,10 @@ const login = (username, password) => {
         dispatch(success(user));
         history.push('/dashboard');
       })
-      .catch(error => dispatch(failure(error)));
+      .catch((error) => {
+        dispatch(alertActions.error(error));
+        dispatch(failure(error));
+      });
   };
 };
 

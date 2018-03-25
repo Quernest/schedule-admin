@@ -1,5 +1,3 @@
-import { handleErrors } from '../helpers/handlers';
-
 const login = async (username, password) => {
   const requestOptions = {
     method: 'POST',
@@ -7,18 +5,24 @@ const login = async (username, password) => {
     body: JSON.stringify({ username, password }),
   };
 
-  try {
-    const res = await fetch('/api/login', requestOptions);
-    const user = await res.json();
+  return fetch('/api/login', requestOptions)
+    .then((res) => {
+      if (!res.ok) {
+        return Promise.reject(res.statusText);
+      }
 
-    if (user && typeof user === 'object' && user.token) {
-      localStorage.setItem('user', JSON.stringify(user));
-    }
+      return res.json();
+    })
+    .then((user) => {
+      if (user && user.token) {
+        localStorage.setItem('user', JSON.stringify(user));
 
-    return user;
-  } catch (err) {
-    handleErrors(res);
-  }
+        return user;
+      }
+
+      return Promise.reject(Error('app.errors.user.token.invalid'));
+    })
+    .catch(err => Promise.reject(err));
 };
 
 const userService = {

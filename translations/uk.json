@@ -22,5 +22,17 @@
   {
     "id": "app.login.form.input.username.feedback",
     "message": "Необхідно ввести ім'я користувача"
+  },
+  {
+    "id": "app.errors.login.user.notfound",
+    "message": "Користувач не знайдений"
+  },
+  {
+    "id": "app.errors.login.password.doesntmatch",
+    "message": "Пароль не збігається"
+  },
+  {
+    "id": "app.errors.user.token.invalid",
+    "message": "Токен недійсний"
   }
 ]
