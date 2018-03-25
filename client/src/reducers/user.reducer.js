@@ -1,7 +1,7 @@
 import userConstants from '../constants/user.constants';
 
 const u = JSON.parse(localStorage.getItem('user'));
-const initialState = { ...u, loggedIn: true } || {};
+const initialState = u ? { ...u, loggedIn: true } : {};
 
 const user = (state = initialState, action) => {
   switch (action.type) {

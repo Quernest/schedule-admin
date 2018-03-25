@@ -1,7 +1,7 @@
 import localeConstants from '../constants/locale.constants';
 
 const lang = localStorage.getItem('lang');
-const initialState = { lang } || {};
+const initialState = lang ? { lang } : {};
 
 const locale = (state = initialState, action) => {
   switch (action.type) {

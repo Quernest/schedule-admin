@@ -1,6 +1,7 @@
 import React from 'react';
 import { hot } from 'react-hot-loader';
 import { IntlProvider } from 'react-intl';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
@@ -29,4 +30,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default hot(module)(connect(mapStateToProps)(App));
+export default hot(module)(withRouter(connect(mapStateToProps)(App)));
