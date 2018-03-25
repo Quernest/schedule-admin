@@ -23,6 +23,15 @@
     }
   }
 
+  &__logout {
+    margin-left: em(20);
+
+    img {
+      width: em(35);
+      opacity: 0.75;
+    }
+  }
+
   &__languages {
     margin-left: auto;
     &-list {
@@ -52,15 +61,6 @@
           }
         }
       }
-    }
-  }
-
-  &__logout {
-    margin-left: em(20);
-
-    img {
-      width: em(35);
-      opacity: 0.75;
     }
   }
 }
