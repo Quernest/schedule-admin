@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import localeActions from '../actions/locale.actions';
 import { appLocales } from '../intl';
 
-const Header = ({ dispatch, lang }) => (
+const Header = ({ dispatch, lang, loggedIn }) => (
   <header className="header">
     <div className="header__logo">
       <a href="/">
@@ -32,6 +32,11 @@ const Header = ({ dispatch, lang }) => (
         ))}
       </ul>
     </div>
+    {loggedIn && (
+      <div className="header__logout">
+        <img src={require('../../assets/img/logout.svg')} alt="logout" />
+      </div>
+    )}
   </header>
 );
 
@@ -40,10 +45,12 @@ Header.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  const { locale } = state;
+  const { locale, user } = state;
+  const { loggedIn } = user;
   const { lang } = locale;
 
   return {
+    loggedIn,
     lang,
   };
 };

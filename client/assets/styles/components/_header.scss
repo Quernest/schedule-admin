@@ -5,15 +5,21 @@
   padding: em($gutter-y) em($gutter-x);
   background-color: $lightgrey;
 
-  &__logo {
+  &__logo,
+  &__logout {
     img {
       transition: opacity $transition-normal;
-      width: em(45px);
 
       &:hover {
         opacity: 1;
         cursor: pointer;
       }
+    }
+  }
+
+  &__logo {
+    img {
+      width: em(45px);
     }
   }
 
@@ -46,6 +52,15 @@
           }
         }
       }
+    }
+  }
+
+  &__logout {
+    margin-left: em(20);
+
+    img {
+      width: em(35);
+      opacity: 0.75;
     }
   }
 }
