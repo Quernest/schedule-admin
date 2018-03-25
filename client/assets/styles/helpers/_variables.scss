@@ -21,6 +21,11 @@ $font-size-h4: 24;
 $font-size-h5: 21;
 $font-size-h6: 18;
 
+// font-families
+$fallback: Arial, Helvetica, sans-serif;
+$font-family-bold: 'Roboto-Bold', $fallback;
+$font-family-regular: 'Roboto-Regular', $fallback;
+
 // breakpoints
 $screen-xs-min: 425px;
 $screen-sm-min: 576px;

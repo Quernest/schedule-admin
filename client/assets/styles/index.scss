@@ -3,6 +3,9 @@
 @import './helpers/functions';
 @import './helpers/mixins';
 
+// base
+@import './base/typography';
+
 // global styles
 @import 'globals';
 

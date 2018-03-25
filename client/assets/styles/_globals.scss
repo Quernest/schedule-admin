@@ -11,6 +11,7 @@ body {
   margin: 0;
   height: 100%;
   overflow-x: hidden;
+  font-family: $font-family-regular;
   font-size: em($browser-context);
 }
 

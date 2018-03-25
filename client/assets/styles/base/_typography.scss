@@ -1,0 +1,23 @@
+$fonts: (
+  'Roboto-Bold',
+  'Roboto-Regular'
+);
+
+@each $font in $fonts {
+  @font-face {
+    font-family: $font;
+    src: url('../fonts/#{$font}.ttf');
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+strong,
+b {
+  font-family: $font-family-bold;
+  color: $black;
+}

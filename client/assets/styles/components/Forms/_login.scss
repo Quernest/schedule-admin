@@ -4,7 +4,7 @@
   width: 100%;
   border-radius: em(5);
   padding: em($gutter-y) 0;
-  max-width: em(400);
+  max-width: em(450);
 
   &-input,
   &-button {
@@ -32,6 +32,7 @@
     margin-left: auto;
     min-width: em(125);
     padding: em(10) em(20);
+    font-family: $font-family-bold;
     text-transform: uppercase;
     background-color: $lightblue;
     transition: background-color $transition-normal;

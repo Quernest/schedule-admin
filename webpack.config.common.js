@@ -23,7 +23,14 @@ module.exports = {
       },
       {
         test: /\.(png|ico|gif|svg|jpe?g)(\?[a-z0-9]+)?$/,
-        use: 'url-loader',
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              name: './images/[name].[ext]',
+            },
+          },
+        ],
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
@@ -32,6 +39,7 @@ module.exports = {
             loader: 'url-loader',
             options: {
               limit: 10000,
+              name: './fonts/[name].[ext]',
             },
           },
         ],
