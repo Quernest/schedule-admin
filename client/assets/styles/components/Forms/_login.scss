@@ -7,7 +7,7 @@
   max-width: em(450);
 
   &-input,
-  &-button {
+  &-btn {
     border: none;
     outline: none;
     border-radius: em(5);
@@ -25,23 +25,11 @@
     }
   }
 
-  &-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  &-btn {
     margin-left: auto;
     min-width: em(125);
-    padding: em(10) em(20);
     font-family: $font-family-bold;
     text-transform: uppercase;
-    background-color: $lightblue;
-    transition: background-color $transition-normal;
-    color: $white;
-
-    &:hover {
-      background-color: lighten($lightblue, 10%);
-      cursor: pointer;
-    }
   }
 
   &-feedback {

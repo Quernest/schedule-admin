@@ -25,6 +25,6 @@ module.exports.getLessonsById = (id, callback) => {
     (err, rows) => {
       if (err) throw err;
       return callback(err, rows);
-    }
+    },
   );
 };

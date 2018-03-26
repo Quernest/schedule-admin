@@ -1,0 +1,36 @@
+button {
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  overflow: visible;
+  &::-moz-focus-inner {
+    border: none;
+    padding: 0;
+  }
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1em;
+  padding: em(10) em(20);
+  border-radius: em(5);
+  transition: background-color $transition-normal;
+  background-color: $lightblue;
+  color: $lightgrey;
+
+  @include md {
+    &:hover {
+      background-color: lighten($lightblue, 5%);
+    }
+  }
+
+  &-sm {
+    font-size: 0.85em;
+  }
+
+  &-lg {
+    font-size: 1.15em;
+  }
+}

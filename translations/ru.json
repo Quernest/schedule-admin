@@ -38,5 +38,9 @@
   {
     "id": "app.dashboard.title",
     "message": "Панель управления"
+  },
+  {
+    "id": "app.dashboard.buttons.addgroup",
+    "message": "Добавить группу"
   }
 ]

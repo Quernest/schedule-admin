@@ -39,7 +39,7 @@ const LoginForm = ({
             {formatMessage({ id: 'app.login.form.input.password.feedback' })}
           </div>
         )}
-      <button className="login__form-button" type="submit">
+      <button className="btn login__form-btn" type="submit">
         {loading ? (
           <div className="loader" />
         ) : (

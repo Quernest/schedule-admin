@@ -12,7 +12,9 @@ const Dashboard = ({ user, intl }) => {
       <Helmet>
         <title>Schedule - {formatMessage({ id: 'app.dashboard.title' })}</title>
       </Helmet>
-      <p>You are logged, {user.username}</p>
+      <button type="button" className="btn btn-lg dashboard-btn-addgroup">
+        {formatMessage({ id: 'app.dashboard.buttons.addgroup' })}
+      </button>
     </div>
   );
 };

@@ -9,9 +9,9 @@ module.exports.getLessonsById = (req, res) => {
       semester: {
         start: '02-01-2018',
         end: '25-05-2018',
-        firstWeekType: 0
+        firstWeekType: 0,
       },
-      events: rows
+      events: rows,
     };
 
     res.send(hardCode);

@@ -38,5 +38,9 @@
   {
     "id": "app.dashboard.title",
     "message": "Dashboard"
+  },
+  {
+    "id": "app.dashboard.buttons.addgroup",
+    "message": "Add a group"
   }
 ]
