@@ -6,7 +6,7 @@ const secret = require('../config/app').config.keys.secret;
 
 function verifyToken(req, res, next) {
   // Get auth header value
-  const bearerHeader = req.headers['authorization'];
+  const bearerHeader = req.headers.authorization;
   // Check if bearer is undefined
   if (typeof bearerHeader !== '') {
     // Split at the space
@@ -24,7 +24,7 @@ function verifyToken(req, res, next) {
 }
 
 const auth = {
-  required: verifyToken
+  required: verifyToken,
 };
 
 module.exports = auth;

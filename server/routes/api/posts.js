@@ -11,7 +11,7 @@ router.use('/', auth.required, (req, res) => {
     }
     res.json({
       message: 'Post created...',
-      data
+      data,
     });
   });
 });

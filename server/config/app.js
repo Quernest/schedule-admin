@@ -1,5 +1,5 @@
 module.exports.config = {
   keys: {
-    secret: process.env.SECRET
-  }
+    secret: process.env.SECRET,
+  },
 };
