@@ -1,32 +1,39 @@
 const groupModel = require('../models/group');
 
-module.exports.getSchedule = (req, res) => {
-  let schedule = [];
-  let semester = {};
-  let group = {};
+module.exports.getAllData = (req, res) => {
+  const data = {
+    group: {},
+    semester: {},
+    schedule: [],
+  };
 
   groupModel.getGroup(req.params.id, (err, rows) => {
     if (err) throw err;
 
-    group = rows[0];
+    const [group] = rows;
+    data.group = group;
 
-    groupModel.getSchedule(req.params.id, (err, rows) => {
+    groupModel.getSemester(req.params.id, (err, rows) => {
       if (err) throw err;
 
-      schedule = rows;
+      const [semester] = rows;
 
-      groupModel.getSemester(req.params.id, (err, rows) => {
+      data.semester = semester;
+      groupModel.getSchedule(req.params.id, (err, rows) => {
         if (err) throw err;
 
-        semester = rows[0];
-
-        res.send({
-          group,
-          semester,
-          schedule,
-        });
+        data.schedule = rows;
+        res.send(data);
       });
     });
+  });
+};
+
+module.exports.getSchedule = (req, res) => {
+  groupModel.getSchedule(req.params.id, (err, rows) => {
+    if (err) throw err;
+
+    res.send(rows);
   });
 };
 
