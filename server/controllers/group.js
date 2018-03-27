@@ -1,19 +1,49 @@
-const groupController = require('../models/group');
+const groupModel = require('../models/group');
 
-module.exports.getLessonsById = (req, res) => {
-  groupController.getLessonsById(req.params.id, (err, rows) => {
+module.exports.getSchedule = (req, res) => {
+  let schedule = [];
+  let semester = {};
+  let group = {};
+
+  groupModel.getGroup(req.params.id, (err, rows) => {
     if (err) throw err;
 
-    const hardCode = {
-      group: 'it-14-1',
-      semester: {
-        start: '02-01-2018',
-        end: '25-05-2018',
-        firstWeekType: 0,
-      },
-      events: rows,
-    };
+    group = rows[0];
 
-    res.send(hardCode);
+    groupModel.getSchedule(req.params.id, (err, rows) => {
+      if (err) throw err;
+
+      schedule = rows;
+
+      groupModel.getSemester(req.params.id, (err, rows) => {
+        if (err) throw err;
+
+        semester = rows[0];
+
+        res.send({
+          group,
+          semester,
+          schedule,
+        });
+      });
+    });
+  });
+};
+
+module.exports.getSemester = (req, res) => {
+  groupModel.getSemester(req.params.id, (err, rows) => {
+    if (err) throw err;
+
+    res.send({
+      semesters: rows,
+    });
+  });
+};
+
+module.exports.getGroup = (req, res) => {
+  groupModel.getGroup(req.params.id, (err, rows) => {
+    if (err) throw err;
+
+    res.send(rows[0]);
   });
 };
