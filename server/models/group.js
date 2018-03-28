@@ -8,8 +8,9 @@ module.exports.getSchedule = (id, callback) => {
       tc.name AS teacher,
       t.start,
       t.end,
-      s.day,
+      s.weekDay,
       s.weekType,
+      sem.id AS semesterId,
       s.location
     FROM
       schedule s
@@ -17,6 +18,7 @@ module.exports.getSchedule = (id, callback) => {
     INNER JOIN times t ON s.lessonNumberId = t.id
     INNER JOIN lessons l ON s.lessonId = l.id
     INNER JOIN teachers tc ON s.teacherId = tc.id
+    INNER JOIN semesters sem ON s.semesterId = sem.id
     WHERE
       g.id = ${id}
     `,
@@ -27,7 +29,7 @@ module.exports.getSchedule = (id, callback) => {
   );
 };
 
-module.exports.getSemester = (id, callback) => {
+module.exports.getSemesters = (id, callback) => {
   database.pool.query('SELECT * FROM semesters', (err, rows) => {
     if (err) throw err;
 

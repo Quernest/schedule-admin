@@ -3,26 +3,37 @@ const groupModel = require('../models/group');
 module.exports.getAllData = (req, res) => {
   const data = {
     group: {},
-    semester: {},
-    schedule: [],
+    semesters: [],
   };
 
-  groupModel.getGroup(req.params.id, (err, rows) => {
+  groupModel.getGroup(req.params.id, (err, groups) => {
     if (err) throw err;
 
-    const [group] = rows;
-    data.group = group;
+    if (groups && groups.length) {
+      const [group] = groups;
+      data.group = group;
+    }
 
-    groupModel.getSemester(req.params.id, (err, rows) => {
+    groupModel.getSemesters(req.params.id, (err, semesters) => {
       if (err) throw err;
 
-      const [semester] = rows;
+      if (semesters && semesters.length) {
+        data.semesters = semesters.map(row => (Object.assign(row, { schedule: [] })));
+      }
 
-      data.semester = semester;
       groupModel.getSchedule(req.params.id, (err, rows) => {
         if (err) throw err;
 
-        data.schedule = rows;
+        if (rows && rows.length) {
+          rows.map((row) => {
+            data.semesters.map((semester, i) => {
+              if (row.semesterId === semester.id) {
+                data.semesters[i].schedule.push(row);
+              }
+            })
+          });
+        }
+
         res.send(data);
       });
     });
@@ -37,10 +48,21 @@ module.exports.getSchedule = (req, res) => {
   });
 };
 
-module.exports.getSemester = (req, res) => {
-  groupModel.getSemester(req.params.id, (err, rows) => {
+module.exports.getSemesters = (req, res) => {
+  groupModel.getSemesters(req.params.id, (err, rows) => {
     if (err) throw err;
 
+    // test get current semester
+    // let currentSemester;
+    // let currentDate = new Date();
+    //
+    // rows.map(row => {
+    //   const { start, end } = row;
+    //
+    //   if (start > currentDate && currentDate < end) {
+    //     console.log(row);
+    //   }
+    // });
     res.send({
       semesters: rows,
     });
