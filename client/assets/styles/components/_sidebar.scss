@@ -9,29 +9,15 @@
   padding: em($gutter-y) em($gutter-x);
   border-top: 1px solid rgba($grey, 0.15);
   border-right: 1px solid rgba($grey, 0.15);
-  background-color: rgba($lightgrey, 0.75);
+  background-color: rgba($lightgrey, 0.9);
   transition: left $transition-fast;
-  z-index: 1;
-
-  &:before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    display: block;
-    height: 100%;
-    width: inherit;
-    filter: blur(5px);
-    background-color: inherit;
-    z-index: -1;
-  }
 
   @include md {
     position: relative;
     top: initial;
     left: initial;
     margin-left: - em($sidebar-width);
+    background-color: $lightgrey;
     transition: margin-left $transition-fast;
 
     &.in {
