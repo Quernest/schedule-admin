@@ -1,7 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { injectIntl, intlShape } from 'react-intl';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, withRouter } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
 import Content from '../components/Dashboard/Content';
 
@@ -36,4 +36,4 @@ Dashboard.propTypes = {
   intl: intlShape.isRequired,
 };
 
-export default injectIntl(Dashboard);
+export default injectIntl(withRouter(Dashboard));

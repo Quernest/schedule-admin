@@ -7,9 +7,25 @@
   left: - em($sidebar-width);
   width: em($sidebar-width);
   padding: em($gutter-y) em($gutter-x);
-  border-right: 1px solid rgba($grey, .5);
-  background-color: rgba($lightgrey, 0.9);
+  border-top: 1px solid rgba($grey, 0.15);
+  border-right: 1px solid rgba($grey, 0.15);
+  background-color: rgba($lightgrey, 0.75);
   transition: left $transition-fast;
+  z-index: 1;
+
+  &:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    display: block;
+    height: 100%;
+    width: inherit;
+    filter: blur(5px);
+    background-color: inherit;
+    z-index: -1;
+  }
 
   @include md {
     position: relative;
@@ -22,7 +38,7 @@
       margin-left: 0;
     }
   }
-  
+
   &.in {
     left: 0;
   }
@@ -40,27 +56,30 @@
     }
 
     &__item {
-      font-size: em(20);
+      font-size: em($font-size-large);
 
       &-link {
+        border-bottom: 1px solid transparent;
         text-decoration: none;
-        color: $grey;
+        color: $black;
 
         &.active {
-          color: $black;
+          border-bottom: 1px solid $lightblue;
+          color: $lightblue;
         }
 
         @include md {
           transition: color $transition-fast, border-bottom $transition-fast;
           &:hover {
-            color: $black;
+            border-bottom: 1px solid $lightblue;
+            color: $lightblue;
           }
         }
       }
 
       &-logout {
-        padding-top: em(10);
-        border-top: 1px solid rgba($grey, .5);
+        padding-top: em($gutter-y);
+        border-top: 1px solid rgba($grey, 0.15);
         @include md {
           span {
             &:hover {

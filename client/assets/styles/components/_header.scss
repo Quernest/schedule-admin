@@ -1,12 +1,12 @@
 .header {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   height: em($header-height);
   padding: em($gutter-y) em($gutter-x);
   background-color: $lightgrey;
 
-  &__logo,
-  &__logout {
+  &__logo {
     img {
       transition: opacity $transition-normal;
 
@@ -23,18 +23,12 @@
     }
   }
 
-  &__logout {
-    margin-left: em(20);
-
-    img {
-      width: em(35);
-      opacity: 0.75;
-    }
-  }
-
   &__menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: em($gutter-x);
     &-icon {
-      margin-left: em(20);
       width: em(35);
       opacity: 0.75;
       transition: opacity $transition-normal;
