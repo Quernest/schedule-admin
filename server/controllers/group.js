@@ -18,7 +18,8 @@ module.exports.getAllData = (req, res) => {
       if (err) throw err;
 
       if (semesters && semesters.length) {
-        data.semesters = semesters.map(row => (Object.assign(row, { schedule: [] })));
+        data.semesters = semesters.map(row =>
+          Object.assign(row, { schedule: [] }),);
       }
 
       groupModel.getSchedule(req.params.id, (err, rows) => {
@@ -30,7 +31,7 @@ module.exports.getAllData = (req, res) => {
               if (row.semesterId === semester.id) {
                 data.semesters[i].schedule.push(row);
               }
-            })
+            });
           });
         }
 

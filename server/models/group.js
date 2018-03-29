@@ -38,9 +38,12 @@ module.exports.getSemesters = (id, callback) => {
 };
 
 module.exports.getGroup = (id, callback) => {
-  database.pool.query(`SELECT * FROM groups g WHERE g.id = ${id}`, (err, rows) => {
-    if (err) throw err;
+  database.pool.query(
+    `SELECT * FROM groups g WHERE g.id = ${id}`,
+    (err, rows) => {
+      if (err) throw err;
 
-    return callback(err, rows);
-  });
+      return callback(err, rows);
+    },
+  );
 };

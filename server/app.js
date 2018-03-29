@@ -15,11 +15,12 @@ if (isDevelopment) {
   const webpack = require('webpack');
   const config = require('../webpack.config.dev');
   const compiler = webpack(config);
-
-  app.use(require('webpack-dev-middleware')(compiler, {
+  const devMiddlewareConfig = {
     noInfo: true,
     publicPath: config.output.publicPath,
-  }));
+  };
+
+  app.use(require('webpack-dev-middleware')(compiler, devMiddlewareConfig));
   app.use(require('webpack-hot-middleware')(compiler));
   app.use(require('morgan')('dev'));
 } else {
