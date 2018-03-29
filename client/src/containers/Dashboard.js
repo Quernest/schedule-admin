@@ -1,10 +1,17 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { injectIntl, intlShape } from 'react-intl';
-import PropTypes from 'prop-types';
+import { Switch, Route } from 'react-router-dom';
+import Sidebar from '../components/Sidebar';
+import Content from '../components/Dashboard/Content';
 
-const Dashboard = ({ user, intl }) => {
+// routes
+import Home from '../components/Dashboard/Home';
+import Groups from '../components/Dashboard/Groups';
+import Lessons from '../components/Dashboard/Lessons';
+import Teachers from '../components/Dashboard/Teachers';
+
+const Dashboard = ({ intl }) => {
   const { formatMessage } = intl;
 
   return (
@@ -12,34 +19,21 @@ const Dashboard = ({ user, intl }) => {
       <Helmet>
         <title>Schedule - {formatMessage({ id: 'app.dashboard.title' })}</title>
       </Helmet>
-      <button type="button" className="btn btn-lg dashboard-btn-addgroup">
-        {formatMessage({ id: 'app.dashboard.buttons.addgroup' })}
-      </button>
+      <Sidebar />
+      <Content>
+        <Switch>
+          <Route exact path="/dashboard" component={Home} />
+          <Route path="/dashboard/groups" component={Groups} />
+          <Route path="/dashboard/lessons" component={Lessons} />
+          <Route path="/dashboard/teachers" component={Teachers} />
+        </Switch>
+      </Content>
     </div>
   );
 };
 
 Dashboard.propTypes = {
-  user: PropTypes.shape({
-    id: PropTypes.number,
-    token: PropTypes.string,
-    username: PropTypes.string,
-    loggedIn: PropTypes.bool,
-    loading: PropTypes.bool,
-  }),
   intl: intlShape.isRequired,
 };
 
-Dashboard.defaultProps = {
-  user: {},
-};
-
-const mapStateToProps = (state) => {
-  const { user } = state;
-
-  return {
-    user,
-  };
-};
-
-export default injectIntl(connect(mapStateToProps)(Dashboard));
+export default injectIntl(Dashboard);

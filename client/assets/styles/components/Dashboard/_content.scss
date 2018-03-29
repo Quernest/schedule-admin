@@ -1,0 +1,6 @@
+.dashboard {
+  &-content {
+    flex: 1 1 0;
+    padding: em($gutter-y) em($gutter-x);
+  }
+}

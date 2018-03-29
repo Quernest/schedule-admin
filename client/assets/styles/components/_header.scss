@@ -19,7 +19,7 @@
 
   &__logo {
     img {
-      width: em(45px);
+      width: em(45);
     }
   }
 
@@ -29,6 +29,21 @@
     img {
       width: em(35);
       opacity: 0.75;
+    }
+  }
+
+  &__menu {
+    &-icon {
+      margin-left: em(20);
+      width: em(35);
+      opacity: 0.75;
+      transition: opacity $transition-normal;
+      cursor: pointer;
+      @include md {
+        &:hover {
+          opacity: 1;
+        }
+      }
     }
   }
 

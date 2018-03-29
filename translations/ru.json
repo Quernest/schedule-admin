@@ -42,5 +42,25 @@
   {
     "id": "app.dashboard.buttons.addgroup",
     "message": "Добавить группу"
+  },
+  {
+    "id": "app.sidebar.menu.item.home",
+    "message": "Главная"
+  },
+  {
+    "id": "app.sidebar.menu.item.groups",
+    "message": "Группы"
+  },
+  {
+    "id": "app.sidebar.menu.item.lessons",
+    "message": "Предметы"
+  },
+  {
+    "id": "app.sidebar.menu.item.teachers",
+    "message": "Преподаватели"
+  },
+  {
+    "id": "app.sidebar.menu.item.logout",
+    "message": "Выйти"
   }
 ]

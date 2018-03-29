@@ -2,16 +2,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { Link } from 'react-router-dom';
 import localeActions from '../actions/locale.actions';
-import userActions from '../actions/user.actions';
+import sidebarActions from '../actions/sidebar.actions';
 import { appLocales } from '../intl';
 
-const Header = ({ dispatch, lang, loggedIn }) => (
+const Header = ({ dispatch, lang, loggedIn, isOpened }) => (
   <header className="header">
     <div className="header__logo">
-      <a href="/">
+      <Link to="/">
         <img src={require('../../assets/img/logo.svg')} alt="logo" />
-      </a>
+      </Link>
     </div>
     <div className="header__languages">
       <ul className="header__languages-list">
@@ -33,7 +34,7 @@ const Header = ({ dispatch, lang, loggedIn }) => (
         ))}
       </ul>
     </div>
-    {loggedIn && (
+    {/* {loggedIn && (
       <div
         role="button"
         tabIndex="0"
@@ -43,20 +44,36 @@ const Header = ({ dispatch, lang, loggedIn }) => (
       >
         <img src={require('../../assets/img/logout.svg')} alt="logout" />
       </div>
+    )} */}
+    {loggedIn && (
+      <div
+        className="header__menu"
+        onClick={() => isOpened ? dispatch(sidebarActions.hide()) : dispatch(sidebarActions.show())}
+      >
+        <img
+          className="header__menu-icon"
+          src={require('../../assets/img/menu.svg')}
+          alt="menu icon"
+        />
+      </div>
     )}
   </header>
 );
 
 Header.propTypes = {
   lang: PropTypes.string.isRequired,
+  isOpened: PropTypes.bool.isRequired,
+  loggedIn: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => {
-  const { locale, user } = state;
+  const { locale, user, sidebar } = state;
   const { loggedIn } = user;
   const { lang } = locale;
+  const { isOpened } = sidebar;
 
   return {
+    isOpened,
     loggedIn,
     lang,
   };

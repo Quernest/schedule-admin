@@ -3,6 +3,9 @@
 @import './helpers/functions';
 @import './helpers/mixins';
 
+// vendors
+@import './vendors';
+
 // base
 @import './base/typography';
 
@@ -16,6 +19,8 @@
 @import './components/jumbotron';
 @import './components/alerts';
 @import './components/buttons';
+@import './components/sidebar';
+@import './components/Dashboard/content';
 
 // containers
 @import './containers/login';

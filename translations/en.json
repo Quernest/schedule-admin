@@ -42,5 +42,25 @@
   {
     "id": "app.dashboard.buttons.addgroup",
     "message": "Add a group"
+  },
+  {
+    "id": "app.sidebar.menu.item.home",
+    "message": "Home"
+  },
+  {
+    "id": "app.sidebar.menu.item.groups",
+    "message": "Groups"
+  },
+  {
+    "id": "app.sidebar.menu.item.lessons",
+    "message": "Lessons"
+  },
+  {
+    "id": "app.sidebar.menu.item.teachers",
+    "message": "Teachers"
+  },
+  {
+    "id": "app.sidebar.menu.item.logout",
+    "message": "Logout"
   }
 ]
