@@ -3,6 +3,7 @@ module.exports = {
   plugins: ['react'],
   parserOptions: {
     ecmaFeatures: {
+      es6: true,
       jsx: true,
     },
   },
