@@ -78,6 +78,7 @@ Login.propTypes = {
     loggedIn: PropTypes.bool,
     loading: PropTypes.bool,
   }),
+  dispatch: PropTypes.func.isRequired,
 };
 
 Login.defaultProps = {

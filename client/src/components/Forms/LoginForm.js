@@ -6,7 +6,14 @@ import { intlShape, injectIntl } from 'react-intl';
 import Alert from '../Alert';
 
 const LoginForm = ({
-  intl, username, password, onChange, onSubmit, submitted, loading, alert,
+  intl,
+  username,
+  password,
+  onChange,
+  onSubmit,
+  submitted,
+  loading,
+  alert,
 }) => {
   const { formatMessage } = intl;
 
@@ -14,7 +21,9 @@ const LoginForm = ({
     <form className="login__form" onSubmit={onSubmit}>
       {alert.id && <Alert id={alert.id} type={alert.type} />}
       <input
-        className={classNames('login__form-input', { invalid: submitted && !username })}
+        className={classNames('login__form-input', {
+          invalid: submitted && !username,
+        })}
         onChange={onChange}
         name="username"
         type="text"
@@ -27,7 +36,9 @@ const LoginForm = ({
           </div>
         )}
       <input
-        className={classNames('login__form-input', { invalid: submitted && !password })}
+        className={classNames('login__form-input', {
+          invalid: submitted && !password,
+        })}
         onChange={onChange}
         name="password"
         type="password"

@@ -7,7 +7,9 @@ const Jumbotron = ({ intl }) => {
   return (
     <div className="jumbotron">
       <h1 className="jumbotron-heading">Schedule</h1>
-      <p className="jumbotron-text">{formatMessage({ id: 'app.jumbotron.text' })}</p>
+      <p className="jumbotron-text">
+        {formatMessage({ id: 'app.jumbotron.text' })}
+      </p>
     </div>
   );
 };

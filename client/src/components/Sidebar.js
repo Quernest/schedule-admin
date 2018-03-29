@@ -78,7 +78,7 @@ class Sidebar extends Component {
           <ul className="sidebar-menu">
             {menu.map((item) => {
               const { id, link } = item;
-    
+
               return (
                 <li className="sidebar-menu__item" key={id}>
                   <NavLink
@@ -92,11 +92,13 @@ class Sidebar extends Component {
                 </li>
               );
             })}
-            <li
-              className="sidebar-menu__item sidebar-menu__item-logout"
-            >
+            <li className="sidebar-menu__item sidebar-menu__item-logout">
               <span
-                onClick={() => dispatch(userActions.logout())}>
+                onClick={() => dispatch(userActions.logout())}
+                onKeyPress={() => {}}
+                role="button"
+                tabIndex="0"
+              >
                 {formatMessage({ id: 'app.sidebar.menu.item.logout' })}
               </span>
             </li>
@@ -123,4 +125,3 @@ const mapStateToProps = (state) => {
 };
 
 export default injectIntl(connect(mapStateToProps)(Sidebar));
-

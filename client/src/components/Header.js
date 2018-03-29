@@ -7,7 +7,9 @@ import localeActions from '../actions/locale.actions';
 import sidebarActions from '../actions/sidebar.actions';
 import { appLocales } from '../intl';
 
-const Header = ({ dispatch, lang, loggedIn, isOpened }) => (
+const Header = ({
+ dispatch, lang, loggedIn, isOpened 
+}) => (
   <header className="header">
     <div className="header__logo">
       <Link to="/">
@@ -48,7 +50,14 @@ const Header = ({ dispatch, lang, loggedIn, isOpened }) => (
     {loggedIn && (
       <div
         className="header__menu"
-        onClick={() => isOpened ? dispatch(sidebarActions.hide()) : dispatch(sidebarActions.show())}
+        onClick={() =>
+          (isOpened
+            ? dispatch(sidebarActions.hide())
+            : dispatch(sidebarActions.show()))
+        }
+        onKeyPress={() => {}}
+        tabIndex="0"
+        role="button"
       >
         <img
           className="header__menu-icon"

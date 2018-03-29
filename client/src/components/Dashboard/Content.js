@@ -2,9 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Content = ({ children }) => (
-  <article className="dashboard-content">
-    {children}
-  </article>
+  <article className="dashboard-content">{children}</article>
 );
 
 Content.propTypes = {
