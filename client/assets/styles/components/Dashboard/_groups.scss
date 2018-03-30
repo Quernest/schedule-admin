@@ -23,8 +23,20 @@
       border: 1px solid rgba($grey, 0.5);
 
       &-remove {
+        outline: none;
         img {
           width: em(25);
+          opacity: 0.75;
+          transition: opacity $transition-normal;
+        }
+
+        @include md {
+          cursor: pointer;
+          &:hover {
+            img {
+              opacity: 1;
+            }
+          }
         }
       }
     }

@@ -46,6 +46,9 @@ class Groups extends Component {
                     <div
                       className="dashboard-groups__list-item-remove"
                       onClick={() => dispatch(groupsActions.remove(id))}
+                      onKeyPress={() => {}}
+                      role="button"
+                      tabIndex="0"
                     >
                       <img
                         src={require('../../../../assets/img/dustbin.svg')}
