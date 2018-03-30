@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { intlShape, injectIntl } from 'react-intl';
+import { ClipLoader } from 'react-spinners';
 import Alert from '../Alert';
 
 const LoginForm = ({
@@ -52,7 +53,7 @@ const LoginForm = ({
         )}
       <button className="btn login__form-btn" type="submit">
         {loading ? (
-          <div className="loader" />
+          <ClipLoader size={18} color="#fff" />
         ) : (
           formatMessage({ id: 'app.login.form.button.submit' })
         )}

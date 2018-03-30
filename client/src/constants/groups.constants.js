@@ -1,0 +1,7 @@
+const groupsConstants = {
+  GET_ALL_GROUPS_REQUEST: 'GET_ALL_GROUPS_REQUEST',
+  GET_ALL_GROUPS_SUCCESS: 'GET_ALL_GROUPS_SUCCESS',
+  GET_ALL_GROUPS_FAILURE: 'GET_ALL_GROUPS_FAILURE',
+};
+
+export default groupsConstants;

@@ -1,27 +1,28 @@
 // helpers
-@import './helpers/variables';
-@import './helpers/functions';
-@import './helpers/mixins';
+@import "./helpers/variables";
+@import "./helpers/functions";
+@import "./helpers/mixins";
 
 // vendors
-@import './vendors';
+@import "./vendors";
 
 // base
-@import './base/typography';
+@import "./base/typography";
 
 // global styles
-@import 'globals';
+@import "globals";
 
 // components
-@import './components/header';
-@import './components/forms/login';
-@import './components/loader';
-@import './components/jumbotron';
-@import './components/alerts';
-@import './components/buttons';
-@import './components/sidebar';
-@import './components/Dashboard/content';
+@import "./components/header";
+@import "./components/jumbotron";
+@import "./components/alerts";
+@import "./components/buttons";
+@import "./components/sidebar";
+@import "./components/activity";
+@import "./components/forms/login";
+@import "./components/dashboard/content";
+@import "./components/dashboard/groups";
 
 // containers
-@import './containers/login';
-@import './containers/dashboard';
+@import "./containers/login";
+@import "./containers/dashboard";

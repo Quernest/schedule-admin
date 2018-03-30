@@ -7,7 +7,8 @@ import Content from '../components/Dashboard/Content';
 
 // routes
 import Home from '../components/Dashboard/Home';
-import Groups from '../components/Dashboard/Groups';
+import Groups from '../components/Dashboard/Groups/Groups';
+import AddGroup from '../components/Dashboard/Groups/AddGroup';
 import Lessons from '../components/Dashboard/Lessons';
 import Teachers from '../components/Dashboard/Teachers';
 
@@ -23,7 +24,8 @@ const Dashboard = ({ intl }) => {
       <Content>
         <Switch>
           <Route exact path="/dashboard" component={Home} />
-          <Route path="/dashboard/groups" component={Groups} />
+          <Route exact path="/dashboard/groups" component={Groups} />
+          <Route path="/dashboard/groups/add" component={AddGroup} />
           <Route path="/dashboard/lessons" component={Lessons} />
           <Route path="/dashboard/teachers" component={Teachers} />
         </Switch>

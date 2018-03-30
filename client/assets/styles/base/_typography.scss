@@ -1,12 +1,12 @@
 $fonts: (
-  'Roboto-Bold',
-  'Roboto-Regular'
+  "Roboto-Bold",
+  "Roboto-Regular"
 );
 
 @each $font in $fonts {
   @font-face {
     font-family: $font;
-    src: url('../fonts/#{$font}.ttf');
+    src: url("../fonts/#{$font}.ttf");
   }
 }
 
@@ -21,4 +21,8 @@ b {
   margin: 0;
   font-family: $font-family-bold;
   color: $black;
+}
+
+.heading {
+  margin-bottom: em($gutter-y);
 }
