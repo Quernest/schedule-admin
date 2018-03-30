@@ -41,7 +41,11 @@
     }
 
     &__item {
-      font-size: em($font-size-large);
+      font-size: em($font-size-large * 1.25);
+
+      @include md {
+        font-size: em($font-size-large);
+      }
 
       &-link {
         border-bottom: 1px solid transparent;
