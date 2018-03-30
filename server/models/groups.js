@@ -15,7 +15,18 @@ module.exports.add = (name, callback) => {
     (err, rows) => {
       if (err) throw err;
 
-      return callback(null, rows);
+      if (rows) {
+        database.pool.query(
+          `SELECT g.id, g.name FROM groups g WHERE g.name = "${name}"`,
+          (err, groups) => {
+            if (err) throw err;
+
+            const [group] = groups;
+
+            return callback(null, group);
+          },
+        );
+      }
     },
   );
 };

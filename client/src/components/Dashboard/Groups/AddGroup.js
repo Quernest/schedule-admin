@@ -49,10 +49,6 @@ class AddGroup extends Component {
     const { submitted, groupName } = this.state;
     const { formatMessage } = intl;
 
-    if (fetching) {
-      return <ActivityLoader />;
-    }
-
     return (
       <div className="dashboard-groups">
         <div className="dashboard-groups__heading">
@@ -84,7 +80,11 @@ class AddGroup extends Component {
               </div>
             )}
           <button className="btn dashboard-groups__form-btn">
-            {formatMessage({ id: 'app.button.add' })}
+            {fetching ? (
+              <ActivityLoader size={18} color="#fff" />
+            ) : (
+              formatMessage({ id: 'app.button.add' })
+            )}
           </button>
         </form>
       </div>

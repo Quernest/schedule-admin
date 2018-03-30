@@ -1,6 +1,11 @@
 import groupsConstants from '../constants/groups.constants';
+import LS from '../helpers/localStorage';
 
-const groups = (state = {}, action) => {
+const initialState = {
+  list: LS.get('groups') || [],
+};
+
+const groups = (state = initialState, action) => {
   switch (action.type) {
     case groupsConstants.GET_ALL_REQUEST:
       return {
@@ -27,6 +32,12 @@ const groups = (state = {}, action) => {
     case groupsConstants.ADD_SUCCESS:
       return {
         ...state,
+        list: ((list, group) => {
+          const newList = [...list, group];
+          LS.set('groups', newList);
+
+          return newList;
+        })(state.list, action.group),
         fetching: false,
       };
     case groupsConstants.ADD_FAILURE:

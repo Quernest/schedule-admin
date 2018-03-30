@@ -3,7 +3,7 @@ import groupsService from '../services/groups.service';
 import alertActions from '../actions/alert.actions';
 import history from '../helpers/history';
 
-const getAll = () => {
+const getAll = (isUseStorage) => {
   const request = () => ({
     type: groupsConstants.GET_ALL_REQUEST,
   });
@@ -22,7 +22,7 @@ const getAll = () => {
     dispatch(request());
 
     try {
-      const list = await groupsService.getAll();
+      const list = await groupsService.getAll(isUseStorage);
 
       dispatch(success(list));
     } catch (error) {
@@ -38,8 +38,9 @@ const add = (name) => {
     name,
   });
 
-  const success = () => ({
+  const success = group => ({
     type: groupsConstants.ADD_SUCCESS,
+    group,
   });
 
   const failure = error => ({
@@ -52,8 +53,8 @@ const add = (name) => {
 
     try {
       // FIXME: make sure that msg here
-      const msg = await groupsService.add(name);
-      dispatch(success(msg));
+      const group = await groupsService.add(name);
+      dispatch(success(group));
       // redirect to groups page
       history.push('/dashboard/groups');
     } catch (error) {
@@ -86,6 +87,7 @@ const remove = (id) => {
       // FIXME: make sure that msg here
       const msg = await groupsService.remove(id);
       dispatch(success(msg));
+      dispatch(getAll(false));
     } catch (error) {
       dispatch(failure(error));
       dispatch(alertActions.error(error));

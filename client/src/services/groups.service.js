@@ -1,19 +1,28 @@
 import authHeader from '../helpers/auth-header';
+import LS from '../helpers/localStorage';
 
-const getAll = async () => {
-  try {
-    const response = await fetch('/api/groups');
+const getAll = async (isUseStorage = true) => {
+  const groups = LS.get('groups');
 
-    if (!response.ok) {
-      return Promise.reject(response.statusText);
+  if (!isUseStorage || !groups) {
+    try {
+      const response = await fetch('/api/groups');
+
+      if (!response.ok) {
+        return Promise.reject(response.statusText);
+      }
+
+      const list = await response.json();
+
+      LS.set('groups', list);
+
+      return Promise.resolve(list);
+    } catch (error) {
+      return error;
     }
-
-    const list = response.json();
-
-    return Promise.resolve(list);
-  } catch (error) {
-    return error;
   }
+
+  return Promise.resolve(groups);
 };
 
 const add = async (name) => {
@@ -30,9 +39,9 @@ const add = async (name) => {
       return Promise.reject(response.statusText);
     }
 
-    const msg = response.json();
+    const group = await response.json();
 
-    return Promise.resolve(msg);
+    return Promise.resolve(group);
   } catch (error) {
     return error;
   }
@@ -52,7 +61,7 @@ const remove = async (id) => {
       return Promise.reject(response.statusText);
     }
 
-    const msg = response.json();
+    const msg = await response.json();
 
     return Promise.resolve(msg);
   } catch (error) {
