@@ -32,6 +32,7 @@ const groups = (state = initialState, action) => {
     case groupsConstants.ADD_SUCCESS:
       return {
         ...state,
+        // merge added group with list and save to localStorage
         list: ((list, group) => {
           const newList = [...list, group];
           LS.set('groups', newList);
