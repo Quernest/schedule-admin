@@ -1,4 +1,9 @@
 .dashboard-groups {
+  &__heading {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: em($gutter-y);
+  }
   &__list {
     list-style-type: none;
     padding-left: 0;

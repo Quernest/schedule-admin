@@ -1,4 +1,6 @@
-const getAllGroups = async () => {
+import authHeader from '../helpers/auth-header';
+
+const getAll = async () => {
   try {
     const response = await fetch('/api/groups');
 
@@ -14,8 +16,33 @@ const getAllGroups = async () => {
   }
 };
 
+const add = async (name) => {
+  console.log(name);
+
+  const requestOptions = {
+    method: 'POST',
+    body: JSON.stringify({ name }),
+    headers: { ...authHeader(), 'Content-Type': 'application/json' },
+  };
+
+  try {
+    const response = await fetch('/api/groups/add', requestOptions);
+
+    if (!response.ok) {
+      return Promise.reject(response.statusText);
+    }
+
+    const msg = response.json();
+
+    return Promise.resolve(msg);
+  } catch (error) {
+    return error;
+  }
+};
+
 const groupsService = {
-  getAllGroups,
+  getAll,
+  add,
 };
 
 export default groupsService;

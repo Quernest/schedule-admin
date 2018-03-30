@@ -16,6 +16,7 @@ button {
   font-size: 1em;
   padding: em(10) em(20);
   border-radius: em(5);
+  text-decoration: none;
   transition: background-color $transition-normal;
   background-color: $lightblue;
   color: $lightgrey;

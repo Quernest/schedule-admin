@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { injectIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 
+import ActivityLoader from '../../ActivityLoader';
 import groupsActions from '../../../actions/groups.actions';
 
 class AddGroup extends Component {
@@ -23,8 +24,10 @@ class AddGroup extends Component {
     const { dispatch } = this.props;
     const { groupName } = this.state;
 
+    console.log(groupName);
+
     if (groupName) {
-      dispatch(groupsActions.addGroup(groupName));
+      dispatch(groupsActions.add(groupName));
     }
   }
 
@@ -37,10 +40,16 @@ class AddGroup extends Component {
   }
 
   render() {
+    const { groups: { fetching } } = this.props;
+
+    if (fetching) {
+      return <ActivityLoader />;
+    }
+
     return (
       <div className="dashboard-groups">
         <form onSubmit={this.handleSubmit}>
-          <input name="groupName" type="text" />
+          <input name="groupName" type="text" onChange={this.handleChange} />
           <button className="btn">Добавить</button>
         </form>
       </div>

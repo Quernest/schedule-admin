@@ -1,7 +1,9 @@
 .dashboard {
+  border-top: 1px solid rgba($grey, 0.15);
   &-content {
     flex: 1 1 0;
     padding: em($gutter-y) em($gutter-x);
-    border-top: 1px solid rgba($grey, 0.15);
+    max-width: em($screen-xl-min);
+    @include mx-auto;
   }
 }

@@ -7,7 +7,6 @@
   left: - em($sidebar-width);
   width: em($sidebar-width);
   padding: em($gutter-y) em($gutter-x);
-  border-top: 1px solid rgba($grey, 0.15);
   border-right: 1px solid rgba($grey, 0.15);
   background-color: rgba($lightgrey, 0.9);
   transition: left $transition-fast;

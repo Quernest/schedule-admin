@@ -17,35 +17,39 @@ class Groups extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
 
-    dispatch(groupsActions.getAllGroups());
+    dispatch(groupsActions.getAll());
   }
 
   render() {
     const { groups: { list, fetching } } = this.props;
 
-    if (!fetching) {
-      return (
-        <div className="dashboard-groups">
-          {/* <h2 className="heading">Groups</h2> */}
-          {list &&
-            list.length > 0 && (
-              <ul className="dashboard-groups__list">
-                {list.map((group) => {
-                  const { name, id } = group;
-                  return (
-                    <li className="dashboard-groups__list-item" key={id}>
-                      {name}
-                    </li>
-                  );
-                })}
-              </ul>
-            )}
-          <Link to="/dashboard/groups/add">Add a group</Link>
-        </div>
-      );
+    if (fetching) {
+      return <ActivityLoader />;
     }
 
-    return <ActivityLoader />;
+    return (
+      <div className="dashboard-groups">
+        <div className="dashboard-groups__heading">
+          <h3>Groups</h3>
+          <Link className="btn" to="/dashboard/groups/add">
+            Add a group
+          </Link>
+        </div>
+        {list &&
+          list.length > 0 && (
+            <ul className="dashboard-groups__list">
+              {list.map((group) => {
+                const { name, id } = group;
+                return (
+                  <li className="dashboard-groups__list-item" key={id}>
+                    {name}
+                  </li>
+                );
+              })}
+            </ul>
+          )}
+      </div>
+    );
   }
 }
 
