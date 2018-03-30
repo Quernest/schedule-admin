@@ -54,7 +54,38 @@ const add = (name) => {
       // FIXME: make sure that msg here
       const msg = await groupsService.add(name);
       dispatch(success(msg));
+      // redirect to groups page
       history.push('/dashboard/groups');
+    } catch (error) {
+      dispatch(failure(error));
+      dispatch(alertActions.error(error));
+    }
+  };
+};
+
+const remove = (id) => {
+  const request = id => ({
+    type: groupsConstants.REMOVE_REQUEST,
+    id,
+  });
+
+  const success = msg => ({
+    type: groupsConstants.REMOVE_SUCCESS,
+    msg,
+  });
+
+  const failure = error => ({
+    type: groupsConstants.REMOVE_FAILURE,
+    error,
+  });
+
+  return async (dispatch) => {
+    dispatch(request(id));
+
+    try {
+      // FIXME: make sure that msg here
+      const msg = await groupsService.remove(id);
+      dispatch(success(msg));
     } catch (error) {
       dispatch(failure(error));
       dispatch(alertActions.error(error));
@@ -65,6 +96,7 @@ const add = (name) => {
 const groupsActions = {
   getAll,
   add,
+  remove,
 };
 
 export default groupsActions;

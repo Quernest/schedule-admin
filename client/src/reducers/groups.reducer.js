@@ -37,11 +37,14 @@ const groups = (state = {}, action) => {
     case groupsConstants.REMOVE_REQUEST:
       return {
         ...state,
-        fetchig: true,
+        removedGroupId: action.id,
+        fetching: true,
       };
     case groupsConstants.REMOVE_SUCCESS:
       return {
         ...state,
+        // remove group object from groups list
+        list: state.list.filter(group => group.id !== state.removedGroupId),
         fetching: false,
       };
     case groupsConstants.REMOVE_FAILURE:

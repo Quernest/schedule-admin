@@ -21,7 +21,7 @@ class Groups extends Component {
   }
 
   render() {
-    const { groups: { list, fetching } } = this.props;
+    const { dispatch, groups: { list, fetching } } = this.props;
 
     if (fetching) {
       return <ActivityLoader />;
@@ -42,7 +42,16 @@ class Groups extends Component {
                 const { name, id } = group;
                 return (
                   <li className="dashboard-groups__list-item" key={id}>
-                    {name}
+                    <span>{name}</span>
+                    <div
+                      className="dashboard-groups__list-item-remove"
+                      onClick={() => dispatch(groupsActions.remove(id))}
+                    >
+                      <img
+                        src={require('../../../../assets/img/dustbin.svg')}
+                        alt="click to remove"
+                      />
+                    </div>
                   </li>
                 );
               })}
