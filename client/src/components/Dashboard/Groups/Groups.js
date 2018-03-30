@@ -44,17 +44,31 @@ class Groups extends Component {
                 return (
                   <li className="dashboard-groups__list-item" key={id}>
                     <span>{name}</span>
-                    <div
-                      className="dashboard-groups__list-item-remove"
-                      onClick={() => dispatch(groupsActions.remove(id))}
-                      onKeyPress={() => {}}
-                      role="button"
-                      tabIndex="0"
-                    >
-                      <img
-                        src={require('../../../../assets/img/dustbin.svg')}
-                        alt="click to remove"
-                      />
+                    <div className="dashboard-groups__list-item-controls">
+                      <div
+                        className="dashboard-groups__list-item-edit"
+                        // onClick={() => dispatch(groupsActions.remove(id))}
+                        // onKeyPress={() => {}}
+                        role="button"
+                        tabIndex="0"
+                      >
+                        <img
+                          src={require('../../../../assets/img/pencil.svg')}
+                          alt="click to edit"
+                        />
+                      </div>
+                      <div
+                        className="dashboard-groups__list-item-remove"
+                        onClick={() => dispatch(groupsActions.remove(id))}
+                        onKeyPress={() => {}}
+                        role="button"
+                        tabIndex="0"
+                      >
+                        <img
+                          src={require('../../../../assets/img/dustbin.svg')}
+                          alt="click to remove"
+                        />
+                      </div>
                     </div>
                   </li>
                 );

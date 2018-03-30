@@ -66,5 +66,21 @@
   {
     "id": "app.dashboard.groups.button.addgroup",
     "message": "Add a group"
+  },
+  {
+    "id": "app.dashboard.groups.form.addgroup.input.placeholder",
+    "message": "For example: IT-14-1"
+  },
+  {
+    "id": "app.errors.dashboard.groups.form.addgroup.feedback",
+    "message": "Enter the name of the group"
+  },
+  {
+    "id": "app.button.back",
+    "message": "Back"
+  },
+  {
+    "id": "app.button.add",
+    "message": "Add"
   }
 ]

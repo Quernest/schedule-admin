@@ -3,7 +3,7 @@
   &-content {
     flex: 1 1 0;
     padding: em($gutter-y) em($gutter-x);
-    max-width: em($screen-xl-min);
+    max-width: em($screen-md-min);
     @include mx-auto;
   }
 }

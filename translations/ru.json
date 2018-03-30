@@ -67,5 +67,21 @@
   {
     "id": "app.dashboard.groups.button.addgroup",
     "message": "Добавить группу"
+  },
+  {
+    "id": "app.errors.dashboard.groups.form.addgroup.feedback",
+    "message": "Введите название группы"
+  },
+  {
+    "id": "app.button.back",
+    "message": "Назад"
+  },
+  {
+    "id": "app.dashboard.groups.form.addgroup.input.placeholder",
+    "message": "Например: ИТ-14-1"
+  },
+  {
+    "id": "app.button.add",
+    "message": "Добавить"
   }
 ]
