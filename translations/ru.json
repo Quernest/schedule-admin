@@ -1,7 +1,8 @@
 [
   {
     "id": "app.jumbotron.text",
-    "message": "Панель управления для создания расписания для учебных учреждений"
+    "message":
+      "Панель управления для создания расписания для учебных учреждений"
   },
   {
     "id": "app.login.form.button.submit",
@@ -62,5 +63,9 @@
   {
     "id": "app.sidebar.menu.item.logout",
     "message": "Выйти"
+  },
+  {
+    "id": "app.dashboard.groups.button.addgroup",
+    "message": "Добавить группу"
   }
 ]

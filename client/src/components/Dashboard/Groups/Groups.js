@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { injectIntl } from 'react-intl';
+import { injectIntl, intlShape } from 'react-intl';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -21,7 +21,8 @@ class Groups extends Component {
   }
 
   render() {
-    const { dispatch, groups: { list, fetching } } = this.props;
+    const { dispatch, groups: { list, fetching }, intl } = this.props;
+    const { formatMessage } = intl;
 
     if (fetching) {
       return <ActivityLoader />;
@@ -30,9 +31,9 @@ class Groups extends Component {
     return (
       <div className="dashboard-groups">
         <div className="dashboard-groups__heading">
-          <h3>Groups</h3>
+          <h3>{formatMessage({ id: 'app.sidebar.menu.item.groups' })}</h3>
           <Link className="btn" to="/dashboard/groups/add">
-            Add a group
+            {formatMessage({ id: 'app.dashboard.groups.button.addgroup' })}
           </Link>
         </div>
         {list &&
@@ -71,6 +72,7 @@ Groups.propTypes = {
     list: PropTypes.arrayOf(PropTypes.object),
     fetching: PropTypes.bool,
   }),
+  intl: intlShape.isRequired,
 };
 
 Groups.defaultProps = {

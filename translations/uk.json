@@ -1,7 +1,8 @@
 [
   {
     "id": "app.jumbotron.text",
-    "message": "Панель управління для створення розкладу для навчальних закладів"
+    "message":
+      "Панель управління для створення розкладу для навчальних закладів"
   },
   {
     "id": "app.login.form.button.submit",
@@ -62,5 +63,9 @@
   {
     "id": "app.sidebar.menu.item.logout",
     "message": "Вийти"
+  },
+  {
+    "id": "app.dashboard.groups.button.addgroup",
+    "message": "Додати групу"
   }
 ]

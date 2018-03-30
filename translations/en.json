@@ -62,5 +62,9 @@
   {
     "id": "app.sidebar.menu.item.logout",
     "message": "Logout"
+  },
+  {
+    "id": "app.dashboard.groups.button.addgroup",
+    "message": "Add a group"
   }
 ]
