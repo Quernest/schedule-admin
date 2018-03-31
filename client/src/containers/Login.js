@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import LoginForm from '../components/Forms/LoginForm';
+import LoginForm from '../components/Login/LoginForm';
 import Jumbotron from '../components/Jumbotron';
 import userActions from '../actions/user.actions';
 import history from '../helpers/history';

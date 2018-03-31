@@ -72,7 +72,11 @@ const Header = ({
 Header.propTypes = {
   lang: PropTypes.string.isRequired,
   isOpened: PropTypes.bool.isRequired,
-  loggedIn: PropTypes.bool.isRequired,
+  loggedIn: PropTypes.bool,
+};
+
+Header.defaultProps = {
+  loggedIn: false,
 };
 
 const mapStateToProps = (state) => {
