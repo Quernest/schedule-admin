@@ -4,6 +4,30 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom: em($gutter-y);
+
+    &-btns {
+      display: inherit;
+      align-items: inherit;
+
+      .refresh {
+        width: em(25);
+        height: em(25);
+        margin-right: em($gutter-x);
+        margin-left: em($gutter-x);
+        background-image: url(../img/refresh.svg);
+        background-size: contain;
+        background-repeat: no-repeat;
+        transition: opacity $transition-normal;
+        opacity: 0.75;
+
+        @include md {
+          &:hover {
+            opacity: 1;
+            cursor: pointer;
+          }
+        }
+      }
+    }
   }
   &__list {
     list-style-type: none;

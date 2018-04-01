@@ -32,9 +32,18 @@ class Groups extends Component {
       <div className="dashboard-groups">
         <div className="dashboard-groups__heading">
           <h3>{formatMessage({ id: 'app.sidebar.menu.item.groups' })}</h3>
-          <Link className="btn" to="/dashboard/groups/add">
-            {formatMessage({ id: 'app.dashboard.groups.button.addgroup' })}
-          </Link>
+          <div className="dashboard-groups__heading-btns">
+            <div
+              className="refresh"
+              onClick={() => dispatch(groupsActions.getAll(false))}
+              onKeyPress={() => {}}
+              role="button"
+              tabIndex="0"
+            />
+            <Link className="btn" to="/dashboard/groups/add">
+              {formatMessage({ id: 'app.dashboard.groups.button.addgroup' })}
+            </Link>
+          </div>
         </div>
         {list &&
           list.length > 0 && (
