@@ -3,8 +3,9 @@
   align-items: center;
   justify-content: space-between;
   height: em($header-height);
+  width: 100%;
   padding: em($gutter-y) em($gutter-x);
-  background-color: $lightgrey;
+  background-color: $lightblue;
 
   &__logo {
     img {
@@ -31,14 +32,8 @@
     outline: none;
     &-icon {
       width: em(35);
-      opacity: 0.75;
       transition: opacity $transition-normal;
       cursor: pointer;
-      @include md {
-        &:hover {
-          opacity: 1;
-        }
-      }
     }
   }
 

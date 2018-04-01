@@ -1,8 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
+import { connect } from 'react-redux';
 
-const Content = ({ children }) => (
-  <article className="dashboard-content">{children}</article>
+const Content = ({ children, isOpened }) => (
+  <article className={classNames('dashboard-content', { in: isOpened })}>
+    <div className="dashboard-content__container">{children}</div>
+  </article>
 );
 
 Content.propTypes = {
@@ -10,10 +14,20 @@ Content.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]),
+  isOpened: PropTypes.bool.isRequired,
 };
 
 Content.defaultProps = {
   children: undefined,
 };
 
-export default Content;
+const mapStateToProps = (state) => {
+  const { sidebar } = state;
+  const { isOpened } = sidebar;
+
+  return {
+    isOpened,
+  };
+};
+
+export default connect(mapStateToProps)(Content);

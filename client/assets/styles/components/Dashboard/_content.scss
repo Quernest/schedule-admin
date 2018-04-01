@@ -1,9 +1,17 @@
 .dashboard {
-  border-top: 1px solid rgba($grey, 0.15);
   &-content {
-    flex: 1 1 0;
+    flex-grow: 1;
     padding: em($gutter-y) em($gutter-x);
-    max-width: em($screen-md-min);
-    @include mx-auto;
+
+    @include md {
+      &.in {
+        margin-left: em($sidebar-width);
+      }
+    }
+
+    &__container {
+      max-width: em($screen-md-min);
+      @include mx-auto;
+    }
   }
 }

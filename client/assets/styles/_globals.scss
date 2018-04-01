@@ -24,9 +24,7 @@ body {
 }
 
 #content {
-  display: flex;
-  flex-direction: column;
-  height: auto;
-  min-height: calc(100% - #{em($header-height)});
+  height: calc(100% - #{em($header-height)});
+  overflow-y: auto;
   background-color: $lightgrey;
 }

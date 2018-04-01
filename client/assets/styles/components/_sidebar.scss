@@ -1,32 +1,22 @@
 .sidebar {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: - em($sidebar-width);
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
   width: em($sidebar-width);
   padding: em($gutter-y) em($gutter-x);
-  border-right: 1px solid rgba($grey, 0.15);
-  background-color: rgba($lightgrey, 0.9);
+  background-color: darken($lightblue, 5%);
   transition: left $transition-fast;
-  z-index: 1000;
-
-  @include md {
-    position: relative;
-    top: initial;
-    left: initial;
-    margin-left: - em($sidebar-width);
-    background-color: $lightgrey;
-    transition: margin-left $transition-fast;
-
-    &.in {
-      margin-left: 0;
-    }
-  }
+  z-index: 50;
 
   &.in {
     left: 0;
+  }
+
+  @include md {
+    top: em($header-height);
   }
 
   &-menu {
@@ -49,20 +39,17 @@
       }
 
       &-link {
-        border-bottom: 1px solid transparent;
         text-decoration: none;
-        color: $black;
+        color: $lightgrey;
 
         &.active {
-          border-bottom: 1px solid $lightblue;
-          color: $lightblue;
+          color: $yellow;
         }
 
         @include md {
           transition: color $transition-fast, border-bottom $transition-fast;
           &:hover {
-            border-bottom: 1px solid $lightblue;
-            color: $lightblue;
+            color: $yellow;
           }
         }
       }
@@ -70,6 +57,9 @@
       &-logout {
         padding-top: em($gutter-y);
         border-top: 1px solid rgba($grey, 0.15);
+        font-size: em($font-size-large);
+        color: $lightgrey;
+
         @include md {
           span {
             &:hover {

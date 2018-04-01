@@ -3,6 +3,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  flex-grow: 1;
+  min-height: 100%;
   padding: em($gutter-y) em($gutter-x);
 }
