@@ -6,7 +6,7 @@ import { intlShape, injectIntl } from 'react-intl';
 import { ClipLoader } from 'react-spinners';
 import Alert from '../Alert';
 
-const LoginForm = ({
+const Form = ({
   intl,
   username,
   password,
@@ -62,7 +62,7 @@ const LoginForm = ({
   );
 };
 
-LoginForm.propTypes = {
+Form.propTypes = {
   intl: intlShape.isRequired,
   username: PropTypes.string,
   password: PropTypes.string,
@@ -76,7 +76,7 @@ LoginForm.propTypes = {
   }),
 };
 
-LoginForm.defaultProps = {
+Form.defaultProps = {
   username: '',
   password: '',
   loading: false,
@@ -93,4 +93,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default injectIntl(connect(mapStateToProps)(LoginForm));
+export default injectIntl(connect(mapStateToProps)(Form));

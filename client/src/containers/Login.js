@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import LoginForm from '../components/Login/LoginForm';
+import Form from '../components/Login/Form';
 import Jumbotron from '../components/Jumbotron';
 import userActions from '../actions/user.actions';
 import history from '../helpers/history';
@@ -58,7 +58,7 @@ class Login extends Component {
     return (
       <div className="login">
         <Jumbotron />
-        <LoginForm
+        <Form
           username={username}
           password={password}
           onChange={this.onChange}

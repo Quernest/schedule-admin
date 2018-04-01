@@ -61,6 +61,10 @@
     "message": "Викладачі"
   },
   {
+    "id": "app.sidebar.menu.item.semesters",
+    "message": "Семестри"
+  },
+  {
     "id": "app.sidebar.menu.item.logout",
     "message": "Вийти"
   },

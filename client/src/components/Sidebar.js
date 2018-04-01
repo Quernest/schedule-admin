@@ -24,6 +24,10 @@ const menu = [
     id: 'app.sidebar.menu.item.teachers',
     link: '/dashboard/teachers',
   },
+  {
+    id: 'app.sidebar.menu.item.semesters',
+    link: '/dashboard/semesters',
+  },
 ];
 
 class Sidebar extends Component {
@@ -82,6 +86,7 @@ class Sidebar extends Component {
               return (
                 <li className="sidebar-menu__item" key={id}>
                   <NavLink
+                    exact
                     onClick={() => this.toggle(windowWidth)}
                     activeClassName="active"
                     className="sidebar-menu__item-link"

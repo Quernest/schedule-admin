@@ -60,6 +60,10 @@
     "message": "Teachers"
   },
   {
+    "id": "app.sidebar.menu.item.semesters",
+    "message": "Semesters"
+  },
+  {
     "id": "app.sidebar.menu.item.logout",
     "message": "Logout"
   },
