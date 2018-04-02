@@ -1,0 +1,34 @@
+.heading {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: em($gutter-y);
+
+  &__title {
+    font-size: em($font-size-h4);
+  }
+
+  &__controls {
+    display: flex;
+    align-items: center;
+
+    &-refresh {
+      display: block;
+      width: em(25);
+      height: em(25);
+      outline: none;
+      margin: 0 em($gutter-x);
+      background-image: url(../img/refresh.svg);
+      background-repeat: no-repeat;
+      background-color: transparent;
+      transition: opacity $transition-normal;
+      opacity: 0.75;
+
+      @include md {
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}

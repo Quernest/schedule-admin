@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { injectIntl, intlShape } from 'react-intl';
 import PropTypes from 'prop-types';
 import Form from './Form';
 import groupsActions from '../../../actions/groups.actions';
+import Heading from '../../Heading';
 
 class AddGroup extends Component {
   constructor(props) {
@@ -46,19 +46,17 @@ class AddGroup extends Component {
     const { groups: { fetching }, intl } = this.props;
     const { submitted, groupName } = this.state;
     const { formatMessage } = intl;
-
-    // TODO: external heading <h3> component
+    const headingParams = {
+      title: formatMessage({ id: 'app.dashboard.groups.button.addgroup' }),
+      link: {
+        path: '/dashboard/groups',
+        label: formatMessage({ id: 'app.button.back' }),
+      },
+    };
 
     return (
       <div className="dashboard-groups">
-        <div className="dashboard-groups__heading">
-          <h3>
-            {formatMessage({ id: 'app.dashboard.groups.button.addgroup' })}
-          </h3>
-          <Link to="/dashboard/groups">
-            {formatMessage({ id: 'app.button.back' })}
-          </Link>
-        </div>
+        <Heading title={headingParams.title} link={headingParams.link} />
         <Form
           onSubmit={this.onSubmit}
           onChange={this.onChange}

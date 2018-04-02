@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { injectIntl, intlShape } from 'react-intl';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import ActivityLoader from '../../../components/ActivityLoader';
+import ActivityLoader from '../../ActivityLoader';
 import groupsActions from '../../../actions/groups.actions';
+import Heading from '../../Heading';
 import List from './List';
 
 class Groups extends Component {
@@ -46,20 +46,24 @@ class Groups extends Component {
   }
 
   render() {
-    const { dispatch, groups: { list, fetching }, intl } = this.props;
+    const { groups: { list, fetching }, intl } = this.props;
     const { formatMessage } = intl;
+    const headingParams = {
+      title: formatMessage({ id: 'app.sidebar.menu.item.groups' }),
+      link: {
+        path: '/dashboard/groups/add',
+        label: formatMessage({ id: 'app.dashboard.groups.button.addgroup' }),
+      },
+    };
 
     return (
       <div className="dashboard-groups">
-        <div className="dashboard-groups__heading">
-          <h3>{formatMessage({ id: 'app.sidebar.menu.item.groups' })}</h3>
-          <div className="dashboard-groups__heading-btns">
-            <button className="refresh" onClick={this.onRefresh} />
-            <Link className="btn" to="/dashboard/groups/add">
-              {formatMessage({ id: 'app.dashboard.groups.button.addgroup' })}
-            </Link>
-          </div>
-        </div>
+        <Heading
+          title={headingParams.title}
+          hasRefreshBtn
+          onRefresh={this.onRefresh}
+          link={headingParams.link}
+        />
         <List
           items={list}
           fetching={fetching}
