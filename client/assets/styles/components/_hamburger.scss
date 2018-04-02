@@ -1,0 +1,63 @@
+.hamburger {
+  position: relative;
+  width: em($hamburger-size);
+  height: em($hamburger-size);
+  margin-left: em($gutter-x);
+  outline: none;
+  background-color: transparent;
+
+  &.active {
+    .hamburger-lines {
+      transform: rotate(45deg) translateY(-50%);
+      &:before {
+        top: 0;
+        transition: top $transition-fast ease, opacity $transition-fast ease;
+        opacity: 0;
+      }
+      &:after {
+        bottom: 0;
+        transform: rotate(-90deg);
+        transition: bottom $transition-fast ease,
+          transform $transition-fast ease;
+      }
+    }
+  }
+
+  &-lines {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: em($hamburger-line-size);
+    transform: translateY(-50%);
+    border-radius: em(5);
+    background-color: $lightgrey;
+    transition-timing-function: ease;
+    transition-duration: $transition-fast;
+    transition-property: transform;
+    opacity: 1;
+
+    &:before,
+    &:after {
+      content: "";
+      position: absolute;
+      left: 0;
+      width: inherit;
+      height: inherit;
+      border-radius: inherit;
+      background-color: inherit;
+      transition: inherit;
+      opacity: inherit;
+    }
+
+    &:before {
+      top: -#{em(10)};
+      transition: top $transition-fast ease, opacity $transition-fast ease;
+    }
+
+    &:after {
+      bottom: -#{em(10)};
+      transition: bottom $transition-fast ease, transform $transition-fast ease;
+    }
+  }
+}

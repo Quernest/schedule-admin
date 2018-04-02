@@ -24,19 +24,6 @@
     }
   }
 
-  &__menu {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: em($gutter-x);
-    outline: none;
-    &-icon {
-      width: em(35);
-      transition: opacity $transition-normal;
-      cursor: pointer;
-    }
-  }
-
   &__languages {
     margin-left: auto;
     &-list {

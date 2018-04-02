@@ -1,0 +1,16 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: em($gutter-y) em($gutter-x);
+  max-width: em($container-max-width);
+  @include mx-auto;
+
+  &.no-gutters {
+    padding: 0 !important;
+  }
+
+  &-fluid {
+    @extend .container;
+    max-width: 100%;
+  }
+}

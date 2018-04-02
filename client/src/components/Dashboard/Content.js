@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 const Content = ({ children, isOpened }) => (
   <article className={classNames('dashboard-content', { in: isOpened })}>
-    <div className="dashboard-content__container">{children}</div>
+    <div className="container no-gutters">{children}</div>
   </article>
 );
 

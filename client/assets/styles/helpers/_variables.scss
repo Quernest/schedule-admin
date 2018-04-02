@@ -27,17 +27,22 @@ $font-family-bold: "Roboto-Bold", $fallback;
 $font-family-regular: "Roboto-Regular", $fallback;
 
 // breakpoints
-$screen-xs-min: 425px;
-$screen-sm-min: 576px;
-$screen-md-min: 768px;
-$screen-lg-min: 992px;
-$screen-xl-min: 1200px;
+$screen-xs-min: 424px;
+$screen-sm-min: 575px;
+$screen-md-min: 767px;
+$screen-lg-min: 991px;
+$screen-xl-min: 1199px;
 
 // sizes
 $gutter-x: 10;
 $gutter-y: 10;
 $header-height: 65;
 $sidebar-width: 230;
+$container-max-width: $screen-md-min;
+
+// hamburger
+$hamburger-size: 40;
+$hamburger-line-size: 4;
 
 // transitions
 $transition-fast: 200ms;

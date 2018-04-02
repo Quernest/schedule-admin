@@ -16,6 +16,7 @@ class Header extends Component {
     };
 
     this.handleResize = this.handleResize.bind(this);
+    this.toggleSidebar = this.toggleSidebar.bind(this);
   }
 
   componentDidMount() {
@@ -36,9 +37,19 @@ class Header extends Component {
     });
   }
 
+  toggleSidebar() {
+    const { dispatch, isOpened } = this.props;
+
+    if (isOpened) {
+      dispatch(sidebarActions.hide());
+    } else {
+      dispatch(sidebarActions.show());
+    }
+  }
+
   render() {
     const { windowWidth } = this.state;
-    const isSmallScreen = windowWidth < 768;
+    const isSmallScreen = windowWidth <= 768;
 
     const {
  dispatch, lang, loggedIn, isOpened 
@@ -73,23 +84,13 @@ class Header extends Component {
         </div>
         {loggedIn &&
           isSmallScreen && (
-            <div
-              className="header__menu"
-              onClick={() =>
-                (isOpened
-                  ? dispatch(sidebarActions.hide())
-                  : dispatch(sidebarActions.show()))
-              }
-              onKeyPress={() => {}}
-              tabIndex="0"
-              role="button"
+            <button
+              className={classNames('hamburger', { active: isOpened })}
+              type="button"
+              onClick={this.toggleSidebar}
             >
-              <img
-                className="header__menu-icon"
-                src={require('../../assets/img/menu.svg')}
-                alt="menu icon"
-              />
-            </div>
+              <span className="hamburger-lines" />
+            </button>
           )}
       </header>
     );

@@ -8,10 +8,5 @@
         margin-left: em($sidebar-width);
       }
     }
-
-    &__container {
-      max-width: em($screen-md-min);
-      @include mx-auto;
-    }
   }
 }
