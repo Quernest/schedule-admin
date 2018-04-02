@@ -7,8 +7,8 @@
   min-height: 100%;
   width: em($sidebar-width);
   padding: em($gutter-y) em($gutter-x);
-  background-color: darken($lightblue, 5%);
-  transition: left $transition-fast;
+  background-color: darken(rgba($lightblue, 0.95), 2.5%);
+  transition: left $transition-fast ease;
   z-index: 50;
 
   &.in {
@@ -47,7 +47,7 @@
         }
 
         @include md {
-          transition: color $transition-fast, border-bottom $transition-fast;
+          transition: color $transition-fast;
           &:hover {
             color: $yellow;
           }
