@@ -56,7 +56,11 @@ class AddGroup extends Component {
 
     return (
       <div className="dashboard-groups">
-        <Heading title={headingParams.title} link={headingParams.link} />
+        <Heading
+          title={headingParams.title}
+          hasLink
+          link={headingParams.link}
+        />
         <Form
           onSubmit={this.onSubmit}
           onChange={this.onChange}

@@ -62,6 +62,7 @@ class Groups extends Component {
           title={headingParams.title}
           hasRefreshBtn
           onRefresh={this.onRefresh}
+          hasLink
           link={headingParams.link}
         />
         <List
