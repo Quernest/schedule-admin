@@ -1,10 +1,12 @@
 import React from 'react';
+import { injectIntl } from 'react-intl';
+
+import Heading from '../Heading';
 
 const Home = () => (
   <div className="dashboard-home">
-    {/* <h1>Welcome</h1>
-    <p>How to use</p> */}
+    <Heading title="Title" subtitle="Subtitle ... " />
   </div>
 );
 
-export default Home;
+export default injectIntl(Home);

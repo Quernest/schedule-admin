@@ -1,11 +1,20 @@
 .heading {
   display: flex;
-  justify-content: space-between;
-  width: 100%;
+  flex-direction: column;
   margin-bottom: em($gutter-y);
+  width: 100%;
+
+  &.has-controls {
+    flex-direction: row;
+    justify-content: space-between;
+  }
 
   &__title {
     font-size: em($font-size-h4);
+  }
+
+  &__subtitle {
+    font-size: em($font-size-large);
   }
 
   &__controls {
