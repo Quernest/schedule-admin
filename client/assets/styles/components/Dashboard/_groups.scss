@@ -17,7 +17,9 @@
         background-image: url(../img/refresh.svg);
         background-size: contain;
         background-repeat: no-repeat;
+        background-color: transparent;
         transition: opacity $transition-normal;
+        outline: none;
         opacity: 0.75;
 
         @include md {
@@ -52,27 +54,33 @@
         align-items: center;
       }
 
-      &-remove {
-        margin-left: em(10);
-      }
-
       &-remove,
       &-edit {
+        margin-left: em($gutter-x);
+        width: em(25);
+        height: em(25);
+        background-color: transparent;
+        background-size: contain;
+        background-position: center center;
+        background-repeat: no-repeat;
+        transition: opacity $transition-normal;
         outline: none;
-        img {
-          width: em(25);
-          opacity: 0.75;
-          transition: opacity $transition-normal;
-        }
+        opacity: 0.75;
 
         @include md {
-          cursor: pointer;
           &:hover {
-            img {
-              opacity: 1;
-            }
+            opacity: 1;
+            cursor: pointer;
           }
         }
+      }
+
+      &-remove {
+        background-image: url(../img/dustbin.svg);
+      }
+
+      &-edit {
+        background-image: url(../img/pencil.svg);
       }
     }
   }
