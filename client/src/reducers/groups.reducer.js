@@ -1,11 +1,6 @@
 import groupsConstants from '../constants/groups.constants';
-import LS from '../helpers/localStorage';
 
-const initialState = {
-  list: LS.get('groups') || [],
-};
-
-const groups = (state = initialState, action) => {
+const groups = (state = {}, action) => {
   switch (action.type) {
     case groupsConstants.GET_ALL_REQUEST:
       return {
@@ -32,13 +27,7 @@ const groups = (state = initialState, action) => {
     case groupsConstants.ADD_SUCCESS:
       return {
         ...state,
-        // merge added group with list and save to localStorage
-        list: ((list, group) => {
-          const newList = [...list, group];
-          LS.set('groups', newList);
-
-          return newList;
-        })(state.list, action.group),
+        list: [...state.list, action.group],
         fetching: false,
       };
     case groupsConstants.ADD_FAILURE:
@@ -55,13 +44,7 @@ const groups = (state = initialState, action) => {
     case groupsConstants.REMOVE_SUCCESS:
       return {
         ...state,
-        // remove group object from groups list
-        list: ((list, id) => {
-          const newList = list.filter(group => group.id !== id);
-          LS.set('groups', newList);
-
-          return newList;
-        })(state.list, state.removedGroupId),
+        list: state.list.filter(group => group.id !== state.removedGroupId),
         fetching: false,
       };
     case groupsConstants.REMOVE_FAILURE:

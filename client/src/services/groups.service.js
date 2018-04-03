@@ -1,28 +1,19 @@
 import authHeader from '../helpers/auth-header';
-import LS from '../helpers/localStorage';
 
-const getAll = async (isUseStorage = true) => {
-  const groups = LS.get('groups');
+const getAll = async () => {
+  try {
+    const response = await fetch('/api/groups');
 
-  if (!isUseStorage || !groups) {
-    try {
-      const response = await fetch('/api/groups');
-
-      if (!response.ok) {
-        return Promise.reject(response.statusText);
-      }
-
-      const list = await response.json();
-
-      LS.set('groups', list);
-
-      return Promise.resolve(list);
-    } catch (error) {
-      return error;
+    if (!response.ok) {
+      return Promise.reject(response.statusText);
     }
-  }
 
-  return Promise.resolve(groups);
+    const list = await response.json();
+
+    return Promise.resolve(list);
+  } catch (error) {
+    return error;
+  }
 };
 
 const add = async (name) => {

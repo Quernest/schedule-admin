@@ -3,7 +3,7 @@ import groupsService from '../services/groups.service';
 import alertActions from '../actions/alert.actions';
 import history from '../helpers/history';
 
-const getAll = (isUseStorage) => {
+const getAll = () => {
   const request = () => ({
     type: groupsConstants.GET_ALL_REQUEST,
   });
@@ -22,7 +22,7 @@ const getAll = (isUseStorage) => {
     dispatch(request());
 
     try {
-      const list = await groupsService.getAll(isUseStorage);
+      const list = await groupsService.getAll();
 
       dispatch(success(list));
     } catch (error) {

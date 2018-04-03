@@ -1,28 +1,19 @@
 import authHeader from '../helpers/auth-header';
-import LS from '../helpers/localStorage';
 
-const getAll = async (isUseStorage = true) => {
-  const teachers = LS.get('teachers');
+const getAll = async () => {
+  try {
+    const response = await fetch('/api/teachers');
 
-  if (!isUseStorage || !teachers) {
-    try {
-      const response = await fetch('/api/teachers');
-
-      if (!response.ok) {
-        return Promise.reject(response.statusText);
-      }
-
-      const list = await response.json();
-
-      LS.set('teachers', list);
-
-      return Promise.resolve(list);
-    } catch (error) {
-      return error;
+    if (!response.ok) {
+      return Promise.reject(response.statusText);
     }
-  }
 
-  return Promise.resolve(teachers);
+    const list = await response.json();
+
+    return Promise.resolve(list);
+  } catch (error) {
+    return error;
+  }
 };
 
 const add = async (name) => {

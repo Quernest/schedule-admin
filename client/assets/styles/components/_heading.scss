@@ -21,26 +21,7 @@
   &__controls {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     padding-top: em($gutter-y);
-
-    &-refresh {
-      display: block;
-      width: em(25);
-      height: em(25);
-      outline: none;
-      background-image: url(../img/refresh.svg);
-      background-repeat: no-repeat;
-      background-color: transparent;
-      transition: opacity $transition-normal;
-      opacity: 0.75;
-
-      @include md {
-        &:hover {
-          opacity: 1;
-        }
-      }
-    }
 
     &-link {
       margin-left: auto;

@@ -12,7 +12,7 @@ class Teachers extends Component {
     super(props);
 
     this.state = {};
-    this.onRefresh = this.onRefresh.bind(this);
+
     this.onRemove = this.onRemove.bind(this);
     this.onEdit = this.onEdit.bind(this);
   }
@@ -35,12 +35,6 @@ class Teachers extends Component {
     console.log('[callback]: clicked on edit btn', id);
   }
 
-  onRefresh() {
-    const { dispatch } = this.props;
-
-    dispatch(teachersActions.getAll(false));
-  }
-
   render() {
     const { teachers, intl } = this.props;
     const { formatMessage } = intl;
@@ -59,8 +53,6 @@ class Teachers extends Component {
       <div className="dashboard-teachers">
         <Heading
           title={headingParams.title}
-          hasRefreshBtn
-          onRefresh={this.onRefresh}
           hasLink
           link={headingParams.link}
         />

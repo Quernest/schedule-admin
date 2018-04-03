@@ -1,11 +1,6 @@
 import teachersConstants from '../constants/teachers.constants';
-import LS from '../helpers/localStorage';
 
-const initialState = {
-  list: LS.get('teachers') || [],
-};
-
-const teachers = (state = initialState, action) => {
+const teachers = (state = {}, action) => {
   switch (action.type) {
     case teachersConstants.GET_ALL_REQUEST:
       return {
@@ -32,13 +27,7 @@ const teachers = (state = initialState, action) => {
     case teachersConstants.ADD_SUCCESS:
       return {
         ...state,
-        // merge added teacher with list and save to localStorage
-        list: ((list, teacher) => {
-          const newList = [...list, teacher];
-          LS.set('teachers', newList);
-
-          return newList;
-        })(state.list, action.teacher),
+        list: [...state.list, action.teacher],
         fetching: false,
       };
     case teachersConstants.ADD_FAILURE:
@@ -55,19 +44,16 @@ const teachers = (state = initialState, action) => {
     case teachersConstants.REMOVE_SUCCESS:
       return {
         ...state,
-        // remove teacher object from teachers list
-        list: ((list, id) => {
-          const newList = list.filter(teacher => teacher.id !== id);
-          LS.set('teachers', newList);
-
-          return newList;
-        })(state.list, state.removedTeacherId),
-        fetching: false,
+        /* eslint-disable */
+        list: state.list.filter(
+          teacher => teacher.id !== state.removedTeacherId
+        ),
+        fetching: false
       };
     case teachersConstants.REMOVE_FAILURE:
       return {
         ...state,
-        fetching: false,
+        fetching: false
       };
     default:
       return state;

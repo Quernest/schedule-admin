@@ -3,7 +3,7 @@ import teachersService from '../services/teachers.service';
 import alertActions from '../actions/alert.actions';
 import history from '../helpers/history';
 
-const getAll = (isUseStorage) => {
+const getAll = () => {
   const request = () => ({
     type: teachersConstants.GET_ALL_REQUEST,
   });
@@ -22,7 +22,7 @@ const getAll = (isUseStorage) => {
     dispatch(request());
 
     try {
-      const list = await teachersService.getAll(isUseStorage);
+      const list = await teachersService.getAll();
 
       dispatch(success(list));
     } catch (error) {

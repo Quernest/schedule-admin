@@ -13,7 +13,6 @@ class Groups extends Component {
 
     this.state = {};
 
-    this.onRefresh = this.onRefresh.bind(this);
     this.onRemove = this.onRemove.bind(this);
     this.onEdit = this.onEdit.bind(this);
   }
@@ -34,15 +33,6 @@ class Groups extends Component {
     const { dispatch } = this.props;
 
     console.log('[callback]: clicked on edit btn', id);
-
-    // TODO: create logic
-    // dispatch(groupsActions.edit(id));
-  }
-
-  onRefresh() {
-    const { dispatch } = this.props;
-
-    dispatch(groupsActions.getAll(false));
   }
 
   render() {
@@ -60,8 +50,6 @@ class Groups extends Component {
       <div className="dashboard-groups">
         <Heading
           title={headingParams.title}
-          hasRefreshBtn
-          onRefresh={this.onRefresh}
           hasLink
           link={headingParams.link}
         />
