@@ -81,12 +81,20 @@
     "message": "Введите название группы"
   },
   {
+    "id": "app.errors.dashboard.teachers.form.addteacher.feedback",
+    "message": "Введите имя преподавателя"
+  },
+  {
     "id": "app.button.back",
     "message": "Назад"
   },
   {
     "id": "app.dashboard.groups.form.addgroup.input.placeholder",
     "message": "Например: ИТ-14-1"
+  },
+  {
+    "id": "app.dashboard.teachers.form.addteacher.input.placeholder",
+    "message": "Например: Сташкевич Игорь Игоревич"
   },
   {
     "id": "app.button.add",

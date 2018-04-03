@@ -11,6 +11,7 @@ import Groups from '../components/Dashboard/Groups/Groups';
 import AddGroup from '../components/Dashboard/Groups/AddGroup';
 import Lessons from '../components/Dashboard/Lessons';
 import Teachers from '../components/Dashboard/Teachers/Teachers';
+import AddTeacher from '../components/Dashboard/Teachers/AddTeacher';
 
 const Dashboard = ({ intl }) => {
   const { formatMessage } = intl;
@@ -27,7 +28,8 @@ const Dashboard = ({ intl }) => {
           <Route exact path="/dashboard/groups" component={Groups} />
           <Route path="/dashboard/groups/add" component={AddGroup} />
           <Route path="/dashboard/lessons" component={Lessons} />
-          <Route path="/dashboard/teachers" component={Teachers} />
+          <Route exact path="/dashboard/teachers" component={Teachers} />
+          <Route path="/dashboard/teachers/add" component={AddTeacher} />
         </Switch>
       </Content>
     </div>

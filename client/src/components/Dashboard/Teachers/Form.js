@@ -7,7 +7,7 @@ import ActivityLoader from '../../ActivityLoader';
 const Form = ({
   fetching,
   submitted,
-  groupName,
+  teacherName,
   intl: { formatMessage },
   onSubmit,
   onChange,
@@ -15,20 +15,20 @@ const Form = ({
   <form className="form" onSubmit={onSubmit}>
     <input
       className={classNames('form__input', {
-        invalid: submitted && !groupName,
+        invalid: submitted && !teacherName,
       })}
-      name="groupName"
+      name="teacherName"
       type="text"
       onChange={onChange}
       placeholder={formatMessage({
-        id: 'app.dashboard.groups.form.addgroup.input.placeholder',
+        id: 'app.dashboard.teachers.form.addteacher.input.placeholder',
       })}
     />
     {submitted &&
-      !groupName && (
+      !teacherName && (
         <div className="form__feedback">
           {formatMessage({
-            id: 'app.errors.dashboard.groups.form.addgroup.feedback',
+            id: 'app.errors.dashboard.teachers.form.addteacher.feedback',
           })}
         </div>
       )}
@@ -47,11 +47,11 @@ const Form = ({
 Form.defaultProps = {
   fetching: false,
   submitted: false,
-  groupName: '',
+  teacherName: '',
 };
 
 Form.propTypes = {
-  groupName: PropTypes.string,
+  teacherName: PropTypes.string,
   submitted: PropTypes.bool,
   fetching: PropTypes.bool,
   intl: intlShape.isRequired,

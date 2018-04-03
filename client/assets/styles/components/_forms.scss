@@ -1,0 +1,42 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-radius: em(5);
+  padding-bottom: em($gutter-y);
+
+  &__input {
+    width: 100%;
+    margin-bottom: em(10);
+    padding: em(15) em(20);
+
+    &.invalid {
+      border: 1px solid rgba($red, 0.35);
+      background-color: rgba($red, 0.025);
+    }
+  }
+
+  &__btn {
+    width: 100%;
+
+    @include md {
+      min-width: em(125);
+      margin-right: auto;
+      width: auto;
+    }
+  }
+
+  &__input,
+  &__btn {
+    border: none;
+    outline: none;
+    border-radius: em(5);
+    font-size: em(16);
+  }
+
+  &__feedback {
+    margin-bottom: em(15);
+    width: 100%;
+    color: $red;
+  }
+}

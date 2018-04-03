@@ -80,8 +80,16 @@
     "message": "For example: IT-14-1"
   },
   {
+    "id": "app.dashboard.teachers.form.addteacher.input.placeholder",
+    "message": "For example: Walter White"
+  },
+  {
     "id": "app.errors.dashboard.groups.form.addgroup.feedback",
     "message": "Enter the name of the group"
+  },
+  {
+    "id": "app.errors.dashboard.teachers.form.addteacher.feedback",
+    "message": "Enter the teacher name"
   },
   {
     "id": "app.button.back",

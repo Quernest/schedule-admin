@@ -81,8 +81,16 @@
     "message": "Введіть назву групи"
   },
   {
+    "id": "app.errors.dashboard.teachers.form.addteacher.feedback",
+    "message": "Введіть ім'я викладача"
+  },
+  {
     "id": "app.dashboard.groups.form.addgroup.input.placeholder",
     "message": "Наприклад: ІТ-14-1"
+  },
+  {
+    "id": "app.dashboard.teachers.form.addteacher.input.placeholder",
+    "message": "Наприклад: Сташкевич Ігор Ігорович"
   },
   {
     "id": "app.button.back",

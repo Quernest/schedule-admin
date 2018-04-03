@@ -31,7 +31,7 @@ const Heading = ({
             />
           )}
           {hasLink && (
-            <Link className="btn" to={link.path}>
+            <Link className="btn heading__controls-link" to={link.path}>
               {link.label}
             </Link>
           )}

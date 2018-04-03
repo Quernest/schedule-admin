@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { injectIntl } from 'react-intl';
+import { injectIntl, intlShape } from 'react-intl';
+import PropTypes from 'prop-types';
 import ActivityLoader from '../../ActivityLoader';
 import Heading from '../../Heading';
 import List from '../../List';
@@ -32,9 +33,6 @@ class Teachers extends Component {
     const { dispatch } = this.props;
 
     console.log('[callback]: clicked on edit btn', id);
-
-    // TODO: create logic
-    // dispatch(teachersActions.edit(id));
   }
 
   onRefresh() {
@@ -77,6 +75,19 @@ class Teachers extends Component {
     );
   }
 }
+
+Teachers.propTypes = {
+  intl: intlShape.isRequired,
+  teachers: PropTypes.shape({
+    list: PropTypes.arrayOf(PropTypes.object),
+    fetching: PropTypes.bool,
+  }),
+  dispatch: PropTypes.func.isRequired,
+};
+
+Teachers.defaultProps = {
+  teachers: {},
+};
 
 const mapStateToProps = (state) => {
   const { teachers } = state;
