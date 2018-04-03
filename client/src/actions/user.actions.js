@@ -2,6 +2,7 @@ import userConstants from '../constants/user.constants';
 import alertActions from '../actions/alert.actions';
 import userService from '../services/user.service';
 import history from '../helpers/history';
+import LS from '../helpers/localStorage';
 
 const login = (username, password) => {
   const request = (username, password) => ({
@@ -37,7 +38,7 @@ const login = (username, password) => {
 };
 
 const logout = () => {
-  localStorage.removeItem('user');
+  LS.clear();
 
   return {
     type: userConstants.LOGOUT,
