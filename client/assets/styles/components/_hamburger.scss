@@ -8,7 +8,7 @@
 
   &.active {
     .hamburger-lines {
-      transform: rotate(45deg) translateY(-50%);
+      transform: rotate(45deg);
       &:before {
         top: 0;
         transition: top $transition-fast ease, opacity $transition-fast ease;
@@ -46,7 +46,6 @@
       height: inherit;
       border-radius: inherit;
       background-color: inherit;
-      transition: inherit;
       opacity: inherit;
     }
 
