@@ -5,7 +5,7 @@ import history from '../helpers/history';
 import LS from '../helpers/localStorage';
 
 const login = (username, password) => {
-  const request = (username, password) => ({
+  const request = () => ({
     type: userConstants.LOGIN_REQUEST,
     username,
     password,
@@ -21,19 +21,17 @@ const login = (username, password) => {
     error,
   });
 
-  return (dispatch) => {
-    dispatch(request(username, password));
+  return async (dispatch) => {
+    dispatch(request());
 
-    userService
-      .login(username, password)
-      .then((user) => {
-        dispatch(success(user));
-        history.push('/dashboard');
-      })
-      .catch((error) => {
-        dispatch(alertActions.error(error));
-        dispatch(failure(error));
-      });
+    try {
+      const user = await userService.login(username, password);
+      dispatch(success(user));
+      history.push('/dashboard');
+    } catch (error) {
+      dispatch(alertActions.error(error));
+      dispatch(failure(error));
+    }
   };
 };
 

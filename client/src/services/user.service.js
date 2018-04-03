@@ -1,3 +1,5 @@
+import LS from '../helpers/localStorage';
+
 const login = async (username, password) => {
   const requestOptions = {
     method: 'POST',
@@ -5,24 +7,24 @@ const login = async (username, password) => {
     body: JSON.stringify({ username, password }),
   };
 
-  return fetch('/api/login', requestOptions)
-    .then((res) => {
-      if (!res.ok) {
-        return Promise.reject(res.statusText);
-      }
+  try {
+    const response = await fetch('/api/login', requestOptions);
 
-      return res.json();
-    })
-    .then((user) => {
-      if (user && user.token) {
-        localStorage.setItem('user', JSON.stringify(user));
+    if (!response.ok) {
+      return Promise.reject(response.statusText);
+    }
 
-        return user;
-      }
+    const user = await response.json();
 
+    if (!user.token) {
       return Promise.reject(Error('app.errors.user.token.invalid'));
-    })
-    .catch(err => Promise.reject(err));
+    }
+
+    LS.set('user', user);
+    return user;
+  } catch (error) {
+    return error;
+  }
 };
 
 const userService = {
