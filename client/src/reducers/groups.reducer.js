@@ -56,7 +56,12 @@ const groups = (state = initialState, action) => {
       return {
         ...state,
         // remove group object from groups list
-        list: state.list.filter(group => group.id !== state.removedGroupId),
+        list: ((list, id) => {
+          const newList = list.filter(group => group.id !== id);
+          LS.set('groups', newList);
+
+          return newList;
+        })(state.list, state.removedGroupId),
         fetching: false,
       };
     case groupsConstants.REMOVE_FAILURE:

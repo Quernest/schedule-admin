@@ -87,7 +87,6 @@ const remove = (id) => {
       // FIXME: make sure that msg here
       const msg = await teachersService.remove(id);
       dispatch(success(msg));
-      dispatch(getAll(false));
     } catch (error) {
       dispatch(failure(error));
       dispatch(alertActions.error(error));

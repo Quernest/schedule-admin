@@ -56,7 +56,12 @@ const teachers = (state = initialState, action) => {
       return {
         ...state,
         // remove teacher object from teachers list
-        list: state.list.filter(teacher => teacher.id !== state.removedTeacherId,),
+        list: ((list, id) => {
+          const newList = list.filter(teacher => teacher.id !== id);
+          LS.set('teachers', newList);
+
+          return newList;
+        })(state.list, state.removedTeacherId),
         fetching: false,
       };
     case teachersConstants.REMOVE_FAILURE:
