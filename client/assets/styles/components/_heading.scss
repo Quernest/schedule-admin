@@ -4,10 +4,6 @@
   margin-bottom: em($gutter-y);
   width: 100%;
 
-  &.has-controls {
-    justify-content: space-between;
-  }
-
   &__title {
     font-size: em($font-size-h3);
     border-bottom: 1px solid rgba($grey, 0.25);
