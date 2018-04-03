@@ -72,6 +72,10 @@
     "message": "Add a group"
   },
   {
+    "id": "app.dashboard.teachers.buttons.addteacher",
+    "message": "Add a teacher"
+  },
+  {
     "id": "app.dashboard.groups.form.addgroup.input.placeholder",
     "message": "For example: IT-14-1"
   },

@@ -4,6 +4,7 @@ import locale from './locale.reducer';
 import alert from './alert.reducer';
 import sidebar from './sidebar.reducer';
 import groups from './groups.reducer';
+import teachers from './teachers.reducer';
 
 const rootReducer = combineReducers({
   user,
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   alert,
   sidebar,
   groups,
+  teachers,
 });
 
 export default rootReducer;

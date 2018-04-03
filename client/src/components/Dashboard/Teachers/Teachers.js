@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { injectIntl, intlShape } from 'react-intl';
-import PropTypes from 'prop-types';
+import { injectIntl } from 'react-intl';
 import ActivityLoader from '../../ActivityLoader';
-import groupsActions from '../../../actions/groups.actions';
 import Heading from '../../Heading';
 import List from '../../List';
+import teachersActions from '../../../actions/teachers.actions';
 
-class Groups extends Component {
+class Teachers extends Component {
   constructor(props) {
     super(props);
 
     this.state = {};
-
     this.onRefresh = this.onRefresh.bind(this);
     this.onRemove = this.onRemove.bind(this);
     this.onEdit = this.onEdit.bind(this);
@@ -21,13 +19,13 @@ class Groups extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
 
-    dispatch(groupsActions.getAll());
+    dispatch(teachersActions.getAll());
   }
 
   onRemove(id) {
     const { dispatch } = this.props;
 
-    dispatch(groupsActions.remove(id));
+    dispatch(teachersActions.remove(id));
   }
 
   onEdit(id) {
@@ -36,28 +34,31 @@ class Groups extends Component {
     console.log('[callback]: clicked on edit btn', id);
 
     // TODO: create logic
-    // dispatch(groupsActions.edit(id));
+    // dispatch(teachersActions.edit(id));
   }
 
   onRefresh() {
     const { dispatch } = this.props;
 
-    dispatch(groupsActions.getAll(false));
+    dispatch(teachersActions.getAll(false));
   }
 
   render() {
-    const { groups: { list, fetching }, intl } = this.props;
+    const { teachers, intl } = this.props;
     const { formatMessage } = intl;
+    const { list, fetching } = teachers;
     const headingParams = {
-      title: formatMessage({ id: 'app.sidebar.menu.item.groups' }),
+      title: formatMessage({ id: 'app.sidebar.menu.item.teachers' }),
       link: {
-        path: '/dashboard/groups/add',
-        label: formatMessage({ id: 'app.dashboard.groups.button.addgroup' }),
+        path: '/dashboard/teachers/add',
+        label: formatMessage({
+          id: 'app.dashboard.teachers.buttons.addteacher',
+        }),
       },
     };
 
     return (
-      <div className="dashboard-groups">
+      <div className="dashboard-teachers">
         <Heading
           title={headingParams.title}
           hasRefreshBtn
@@ -68,8 +69,8 @@ class Groups extends Component {
         <List
           items={list}
           fetching={fetching}
-          onEdit={this.onEdit}
           onRemove={this.onRemove}
+          onEdit={this.onEdit}
         />
         <ActivityLoader fetching={fetching} />
       </div>
@@ -77,28 +78,12 @@ class Groups extends Component {
   }
 }
 
-Groups.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  groups: PropTypes.shape({
-    list: PropTypes.arrayOf(PropTypes.object),
-    fetching: PropTypes.bool,
-  }),
-  intl: intlShape.isRequired,
-};
-
-Groups.defaultProps = {
-  groups: {
-    list: [],
-    fetching: false,
-  },
-};
-
 const mapStateToProps = (state) => {
-  const { groups } = state;
+  const { teachers } = state;
 
   return {
-    groups,
+    teachers,
   };
 };
 
-export default injectIntl(connect(mapStateToProps)(Groups));
+export default injectIntl(connect(mapStateToProps)(Teachers));

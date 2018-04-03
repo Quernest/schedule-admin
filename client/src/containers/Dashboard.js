@@ -10,7 +10,7 @@ import Home from '../components/Dashboard/Home';
 import Groups from '../components/Dashboard/Groups/Groups';
 import AddGroup from '../components/Dashboard/Groups/AddGroup';
 import Lessons from '../components/Dashboard/Lessons';
-import Teachers from '../components/Dashboard/Teachers';
+import Teachers from '../components/Dashboard/Teachers/Teachers';
 
 const Dashboard = ({ intl }) => {
   const { formatMessage } = intl;

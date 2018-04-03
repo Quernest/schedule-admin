@@ -73,6 +73,10 @@
     "message": "Додати групу"
   },
   {
+    "id": "app.dashboard.teachers.buttons.addteacher",
+    "message": "Додати викладача"
+  },
+  {
     "id": "app.errors.dashboard.groups.form.addgroup.feedback",
     "message": "Введіть назву групи"
   },

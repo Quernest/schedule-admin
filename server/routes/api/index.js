@@ -1,10 +1,10 @@
 const router = require('express').Router();
 
+router.use('/teachers', require('./teachers'));
 router.use('/groups', require('./groups'));
 router.use('/group', require('./group'));
 router.use('/login', require('./login'));
 router.use('/registration', require('./registration'));
-router.use('/posts', require('./posts'));
 
 router.use((err, req, res, next) => {
   if (err.name === 'ValidationError') {

@@ -7,17 +7,17 @@ const List = ({
   <ul className="list">
     {!fetching &&
       items &&
-      items.map((group, index) => (
+      items.map((item, index) => (
         <li className="list__item" key={index}>
-          <span>{group.name}</span>
+          <span>{item.name}</span>
           <div className="list__item-controls">
             <button
               className="list__item-edit"
-              onClick={() => onEdit(group.id)}
+              onClick={() => onEdit(item.id)}
             />
             <button
               className="list__item-remove"
-              onClick={() => onRemove(group.id)}
+              onClick={() => onRemove(item.id)}
             />
           </div>
         </li>
