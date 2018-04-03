@@ -8,44 +8,36 @@ module.exports.getAll = (callback) => {
   });
 };
 
-// module.exports.getAll = (callback) => {
-//   database.pool.query('SELECT g.id, g.name FROM groups g', (err, rows) => {
-//     if (err) throw err;
+module.exports.add = (name, callback) => {
+  database.pool.query(
+    'INSERT INTO teachers (name) values (?)',
+    [name],
+    (err, rows) => {
+      if (err) throw err;
 
-//     return callback(null, rows);
-//   });
-// };
+      if (rows) {
+        database.pool.query(
+          `SELECT t.id, t.name FROM teachers t WHERE t.name = "${name}"`,
+          (err, teachers) => {
+            if (err) throw err;
 
-// module.exports.add = (name, callback) => {
-//   database.pool.query(
-//     'INSERT INTO groups (name) values (?)',
-//     [name],
-//     (err, rows) => {
-//       if (err) throw err;
+            const [teacher] = teachers;
 
-//       if (rows) {
-//         database.pool.query(
-//           `SELECT g.id, g.name FROM groups g WHERE g.name = "${name}"`,
-//           (err, groups) => {
-//             if (err) throw err;
+            return callback(null, teacher);
+          },
+        );
+      }
+    },
+  );
+};
 
-//             const [group] = groups;
+module.exports.remove = (id, callback) => {
+  database.pool.query(
+    `DELETE FROM teachers WHERE teachers.id = ${id}`,
+    (err, rows) => {
+      if (err) throw err;
 
-//             return callback(null, group);
-//           },
-//         );
-//       }
-//     },
-//   );
-// };
-
-// module.exports.remove = (id, callback) => {
-//   database.pool.query(
-//     `DELETE FROM groups WHERE groups.id = ${id}`,
-//     (err, rows) => {
-//       if (err) throw err;
-
-//       return callback(null, rows);
-//     },
-//   );
-// };
+      return callback(null, rows);
+    },
+  );
+};

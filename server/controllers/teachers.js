@@ -8,33 +8,24 @@ module.exports.getAll = (req, res) => {
   });
 };
 
-// module.exports.getAll = (req, res) => {
-//   groupsModel.getAll((err, rows) => {
-//     if (err) throw err;
-//     res.send(rows);
-//   });
-// };
+module.exports.add = (req, res) => {
+  const { body } = req;
+  const { name } = body;
 
-// module.exports.add = (req, res) => {
-//   const { body } = req;
-//   const { name } = body;
+  teachersModel.add(name, (err, rows) => {
+    if (err) throw err;
 
-//   groupsModel.add(name, (err, rows) => {
-//     if (err) throw err;
+    res.send(rows);
+  });
+};
 
-//     // TODO: send message to client
-//     res.send(rows);
-//   });
-// };
+module.exports.remove = (req, res) => {
+  const { body } = req;
+  const { id } = body;
 
-// module.exports.remove = (req, res) => {
-//   const { body } = req;
-//   const { id } = body;
+  teachersModel.remove(id, (err, rows) => {
+    if (err) throw err;
 
-//   groupsModel.remove(id, (err, rows) => {
-//     if (err) throw err;
-
-//     // TODO: send message to client
-//     res.send(rows);
-//   });
-// };
+    res.send(rows);
+  });
+};

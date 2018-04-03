@@ -4,33 +4,31 @@ const teachersController = require('../../controllers/teachers');
 const auth = require('../auth');
 const secret = require('../../config/app').config.keys.secret;
 
+// get all teachers
 router.get('/', teachersController.getAll);
 
-// // get all avilable groups
-// router.get('/', groupsController.getAll);
+// add teacher
+router.use('/add', auth.required, (req, res) => {
+  jwt.verify(req.token, secret, (err) => {
+    if (err) {
+      res.sendStatus(403);
+      res.end();
+    }
 
-// // add group
-// router.use('/add', auth.required, (req, res) => {
-//   jwt.verify(req.token, secret, (err) => {
-//     if (err) {
-//       res.sendStatus(403);
-//       res.end();
-//     }
+    return teachersController.add(req, res);
+  });
+});
 
-//     return groupsController.add(req, res);
-//   });
-// });
+// remove teacher
+router.use('/remove', auth.required, (req, res) => {
+  jwt.verify(req.token, secret, (err) => {
+    if (err) {
+      res.sendStatus(403);
+      res.end();
+    }
 
-// // remove group
-// router.use('/remove', auth.required, (req, res) => {
-//   jwt.verify(req.token, secret, (err) => {
-//     if (err) {
-//       res.sendStatus(403);
-//       res.end();
-//     }
-
-//     return groupsController.remove(req, res);
-//   });
-// });
+    return teachersController.remove(req, res);
+  });
+});
 
 module.exports = router;

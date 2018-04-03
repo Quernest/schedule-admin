@@ -25,54 +25,54 @@ const getAll = async (isUseStorage = true) => {
   return Promise.resolve(teachers);
 };
 
-// const add = async (name) => {
-//   const requestOptions = {
-//     method: 'POST',
-//     body: JSON.stringify({ name }),
-//     headers: { ...authHeader(), 'Content-Type': 'application/json' },
-//   };
+const add = async (name) => {
+  const requestOptions = {
+    method: 'POST',
+    body: JSON.stringify({ name }),
+    headers: { ...authHeader(), 'Content-Type': 'application/json' },
+  };
 
-//   try {
-//     const response = await fetch('/api/teachers/add', requestOptions);
+  try {
+    const response = await fetch('/api/teachers/add', requestOptions);
 
-//     if (!response.ok) {
-//       return Promise.reject(response.statusText);
-//     }
+    if (!response.ok) {
+      return Promise.reject(response.statusText);
+    }
 
-//     const teacher = await response.json();
+    const teacher = await response.json();
 
-//     return Promise.resolve(teacher);
-//   } catch (error) {
-//     return error;
-//   }
-// };
+    return Promise.resolve(teacher);
+  } catch (error) {
+    return error;
+  }
+};
 
-// const remove = async (id) => {
-//   const requestOptions = {
-//     method: 'POST',
-//     body: JSON.stringify({ id }),
-//     headers: { ...authHeader(), 'Content-Type': 'application/json' },
-//   };
+const remove = async (id) => {
+  const requestOptions = {
+    method: 'POST',
+    body: JSON.stringify({ id }),
+    headers: { ...authHeader(), 'Content-Type': 'application/json' },
+  };
 
-//   try {
-//     const response = await fetch('/api/teachers/remove', requestOptions);
+  try {
+    const response = await fetch('/api/teachers/remove', requestOptions);
 
-//     if (!response.ok) {
-//       return Promise.reject(response.statusText);
-//     }
+    if (!response.ok) {
+      return Promise.reject(response.statusText);
+    }
 
-//     const msg = await response.json();
+    const msg = await response.json();
 
-//     return Promise.resolve(msg);
-//   } catch (error) {
-//     return error;
-//   }
-// };
+    return Promise.resolve(msg);
+  } catch (error) {
+    return error;
+  }
+};
 
 const teachersService = {
   getAll,
-  // add,
-  // remove,
+  add,
+  remove,
 };
 
 export default teachersService;

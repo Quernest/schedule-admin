@@ -32,73 +32,73 @@ const getAll = (isUseStorage) => {
   };
 };
 
-// const add = (name) => {
-//   const request = name => ({
-//     type: groupsConstants.ADD_REQUEST,
-//     name,
-//   });
+const add = (name) => {
+  const request = name => ({
+    type: teachersConstants.ADD_REQUEST,
+    name,
+  });
 
-//   const success = group => ({
-//     type: groupsConstants.ADD_SUCCESS,
-//     group,
-//   });
+  const success = teacher => ({
+    type: teachersConstants.ADD_SUCCESS,
+    teacher,
+  });
 
-//   const failure = error => ({
-//     type: groupsConstants.ADD_FAILURE,
-//     error,
-//   });
+  const failure = error => ({
+    type: teachersConstants.ADD_FAILURE,
+    error,
+  });
 
-//   return async (dispatch) => {
-//     dispatch(request(name));
+  return async (dispatch) => {
+    dispatch(request(name));
 
-//     try {
-//       // FIXME: make sure that msg here
-//       const group = await groupsService.add(name);
-//       dispatch(success(group));
-//       // redirect to groups page
-//       history.push('/dashboard/groups');
-//     } catch (error) {
-//       dispatch(failure(error));
-//       dispatch(alertActions.error(error));
-//     }
-//   };
-// };
+    try {
+      // FIXME: make sure that msg here
+      const teacher = await teachersService.add(name);
+      dispatch(success(teacher));
+      // redirect to teachers page
+      history.push('/dashboard/teachers');
+    } catch (error) {
+      dispatch(failure(error));
+      dispatch(alertActions.error(error));
+    }
+  };
+};
 
-// const remove = (id) => {
-//   const request = id => ({
-//     type: groupsConstants.REMOVE_REQUEST,
-//     id,
-//   });
+const remove = (id) => {
+  const request = id => ({
+    type: teachersConstants.REMOVE_REQUEST,
+    id,
+  });
 
-//   const success = msg => ({
-//     type: groupsConstants.REMOVE_SUCCESS,
-//     msg,
-//   });
+  const success = msg => ({
+    type: teachersConstants.REMOVE_SUCCESS,
+    msg,
+  });
 
-//   const failure = error => ({
-//     type: groupsConstants.REMOVE_FAILURE,
-//     error,
-//   });
+  const failure = error => ({
+    type: teachersConstants.REMOVE_FAILURE,
+    error,
+  });
 
-//   return async (dispatch) => {
-//     dispatch(request(id));
+  return async (dispatch) => {
+    dispatch(request(id));
 
-//     try {
-//       // FIXME: make sure that msg here
-//       const msg = await groupsService.remove(id);
-//       dispatch(success(msg));
-//       dispatch(getAll(false));
-//     } catch (error) {
-//       dispatch(failure(error));
-//       dispatch(alertActions.error(error));
-//     }
-//   };
-// };
+    try {
+      // FIXME: make sure that msg here
+      const msg = await teachersService.remove(id);
+      dispatch(success(msg));
+      dispatch(getAll(false));
+    } catch (error) {
+      dispatch(failure(error));
+      dispatch(alertActions.error(error));
+    }
+  };
+};
 
 const teachersActions = {
   getAll,
-  // add,
-  // remove,
+  add,
+  remove,
 };
 
 export default teachersActions;
