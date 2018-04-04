@@ -8,8 +8,8 @@ const List = ({
   <ReactCSSTransitionGroup
     transitionName="fade"
     transitionAppear
-    transitionAppearTimeout={500}
-    transitionEnterTimeout={500}
+    transitionAppearTimeout={220}
+    transitionEnterTimeout={220}
     transitionLeaveTimeout={300}
   >
     <ul className="list">
