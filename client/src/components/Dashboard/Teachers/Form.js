@@ -37,7 +37,6 @@ const Form = ({
         fetching={fetching}
         size={18}
         color="#fff"
-        onComplete={e => console.log(e)}
       />
       {!fetching && formatMessage({ id: 'app.button.add' })}
     </button>

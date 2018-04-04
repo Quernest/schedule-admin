@@ -65,7 +65,13 @@ class Semesters extends Component {
           <ul className="list">
             {list &&
               list.map((semester) => {
-                const { id, number, start, end, firstWeekType } = semester;
+                const {
+                  id,
+                  number,
+                  start,
+                  end,
+                  firstWeekType
+                } = semester;
 
                 // TODO: parse and display start and end dates in list
                 // USE moment.js
