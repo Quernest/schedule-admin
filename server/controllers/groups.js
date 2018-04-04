@@ -14,7 +14,6 @@ module.exports.add = (req, res) => {
   groupsModel.add(name, (err, rows) => {
     if (err) throw err;
 
-    // TODO: send message to client
     res.send(rows);
   });
 };
@@ -26,7 +25,6 @@ module.exports.remove = (req, res) => {
   groupsModel.remove(id, (err, rows) => {
     if (err) throw err;
 
-    // TODO: send message to client
     res.send(rows);
   });
 };

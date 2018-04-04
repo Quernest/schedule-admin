@@ -77,6 +77,10 @@
     "message": "Добавить преподавателя"
   },
   {
+    "id": "app.dashboard.semesters.buttons.addsemester",
+    "message": "Добавить семестр"
+  },
+  {
     "id": "app.errors.dashboard.groups.form.addgroup.feedback",
     "message": "Введите название группы"
   },

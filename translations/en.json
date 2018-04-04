@@ -76,6 +76,10 @@
     "message": "Add a teacher"
   },
   {
+    "id": "app.dashboard.semesters.buttons.addsemester",
+    "message": "Add a semester"
+  },
+  {
     "id": "app.dashboard.groups.form.addgroup.input.placeholder",
     "message": "For example: IT-14-1"
   },

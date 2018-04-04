@@ -28,7 +28,7 @@ module.exports.getAllData = (req, res) => {
         if (rows && rows.length) {
           rows.map((row) => {
             data.semesters.map((semester, i) => {
-              if (row.semesterId === semester.id) {
+              if (row.semester === semester.number) {
                 data.semesters[i].schedule.push(row);
               }
             });
@@ -53,17 +53,6 @@ module.exports.getSemesters = (req, res) => {
   groupModel.getSemesters(req.params.id, (err, rows) => {
     if (err) throw err;
 
-    // test get current semester
-    // let currentSemester;
-    // let currentDate = new Date();
-    //
-    // rows.map(row => {
-    //   const { start, end } = row;
-    //
-    //   if (start > currentDate && currentDate < end) {
-    //     console.log(row);
-    //   }
-    // });
     res.send({
       semesters: rows,
     });

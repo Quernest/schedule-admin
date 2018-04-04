@@ -3,7 +3,7 @@
     opacity: 0.01;
     &.fade-enter-active {
       opacity: 1;
-      transition: opacity $transition-fast ease-in;
+      transition: opacity $transition-normal ease-in;
     }
   }
   &-leave {
@@ -17,7 +17,7 @@
     opacity: 0.01;
     &.fade-appear-active {
       opacity: 1;
-      transition: opacity $transition-fast ease-in;
+      transition: opacity $transition-normal ease-in;
     }
   }
 }

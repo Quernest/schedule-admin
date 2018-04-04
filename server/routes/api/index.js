@@ -1,5 +1,6 @@
 const router = require('express').Router();
 
+router.use('/semesters', require('./semesters'));
 router.use('/teachers', require('./teachers'));
 router.use('/groups', require('./groups'));
 router.use('/group', require('./group'));

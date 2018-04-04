@@ -16,38 +16,16 @@
     border-radius: em(5);
     background-color: $white;
 
+    &-body {
+    }
+
     &-controls {
       display: flex;
       align-items: center;
-    }
 
-    &-remove,
-    &-edit {
-      margin-left: em($gutter-x);
-      width: em(25);
-      height: em(25);
-      background-color: transparent;
-      background-size: contain;
-      background-position: center center;
-      background-repeat: no-repeat;
-      transition: opacity $transition-normal;
-      outline: none;
-      opacity: 0.75;
-
-      @include md {
-        &:hover {
-          opacity: 1;
-          cursor: pointer;
-        }
+      &-btn {
+        margin-left: em(10);
       }
-    }
-
-    &-remove {
-      background-image: url(../img/dustbin.svg);
-    }
-
-    &-edit {
-      background-image: url(../img/pencil.svg);
     }
   }
 }

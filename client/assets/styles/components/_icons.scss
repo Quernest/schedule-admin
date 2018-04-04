@@ -1,0 +1,27 @@
+.icon {
+  display: block;
+  width: em($icon-size);
+  height: em($icon-size);
+  outline: none;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center center;
+  opacity: 0.75;
+
+  @include lg {
+    transition: opacity $transition-fast ease;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  &-pencil {
+    background-image: url(../img/pencil.svg);
+  }
+
+  &-dustbin {
+    background-image: url(../img/dustbin.svg);
+  }
+}

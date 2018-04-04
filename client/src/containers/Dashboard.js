@@ -7,11 +7,12 @@ import Content from '../components/Dashboard/Content';
 
 // routes
 import Home from '../components/Dashboard/Home';
-import Groups from '../components/Dashboard/Groups/Groups';
+import Groups from '../components/Dashboard/Groups';
 import AddGroup from '../components/Dashboard/Groups/AddGroup';
 import Lessons from '../components/Dashboard/Lessons';
-import Teachers from '../components/Dashboard/Teachers/Teachers';
+import Teachers from '../components/Dashboard/Teachers';
 import AddTeacher from '../components/Dashboard/Teachers/AddTeacher';
+import Semesters from '../components/Dashboard/Semesters';
 
 const Dashboard = ({ intl }) => {
   const { formatMessage } = intl;
@@ -30,6 +31,7 @@ const Dashboard = ({ intl }) => {
           <Route path="/dashboard/lessons" component={Lessons} />
           <Route exact path="/dashboard/teachers" component={Teachers} />
           <Route path="/dashboard/teachers/add" component={AddTeacher} />
+          <Route exact path="/dashboard/semesters" component={Semesters} />
         </Switch>
       </Content>
     </div>

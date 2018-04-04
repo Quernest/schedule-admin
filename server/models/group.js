@@ -10,7 +10,7 @@ module.exports.getSchedule = (id, callback) => {
       t.end,
       s.weekDay,
       s.weekType,
-      sem.id AS semesterId,
+      sem.number as semester,
       s.location
     FROM
       schedule s
@@ -18,7 +18,7 @@ module.exports.getSchedule = (id, callback) => {
     INNER JOIN times t ON s.lessonNumberId = t.id
     INNER JOIN lessons l ON s.lessonId = l.id
     INNER JOIN teachers tc ON s.teacherId = tc.id
-    INNER JOIN semesters sem ON s.semesterId = sem.id
+    INNER JOIN semesters sem ON s.semester = sem.id
     WHERE
       g.id = ${id}
     `,

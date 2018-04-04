@@ -8,8 +8,8 @@ const List = ({
   <ReactCSSTransitionGroup
     transitionName="fade"
     transitionAppear
-    transitionAppearTimeout={220}
-    transitionEnterTimeout={220}
+    transitionAppearTimeout={300}
+    transitionEnterTimeout={300}
     transitionLeaveTimeout={300}
   >
     <ul className="list">
@@ -20,11 +20,11 @@ const List = ({
             <span>{item.name}</span>
             <div className="list__item-controls">
               <button
-                className="list__item-edit"
+                className="icon icon-pencil list__item-controls-btn"
                 onClick={() => onEdit(item.id)}
               />
               <button
-                className="list__item-remove"
+                className="icon icon-dustbin list__item-controls-btn"
                 onClick={() => onRemove(item.id)}
               />
             </div>

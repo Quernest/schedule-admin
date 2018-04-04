@@ -33,7 +33,7 @@ const getAll = () => {
 };
 
 const add = (name) => {
-  const request = name => ({
+  const request = () => ({
     type: teachersConstants.ADD_REQUEST,
     name,
   });
@@ -65,7 +65,7 @@ const add = (name) => {
 };
 
 const remove = (id) => {
-  const request = id => ({
+  const request = () => ({
     type: teachersConstants.REMOVE_REQUEST,
     id,
   });
