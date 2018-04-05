@@ -2,6 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import { injectIntl, intlShape } from 'react-intl';
+import { Link } from 'react-router-dom';
 
 const formatDate = (date) => moment(date).format('DD/MM');
 
@@ -10,7 +11,6 @@ const List = ({
   intl: {
     formatMessage,
   },
-  onEdit,
   onRemove,
 }) => (
   <ul className="list">
@@ -44,9 +44,9 @@ const List = ({
             </div>
 
             <div className="list__item-controls">
-              <button
+              <Link
                 className="icon icon-pencil list__item-controls-btn"
-                onClick={() => onEdit(id)}
+                to={`/dashboard/semesters/edit/${id}`}
               />
               <button
                 className="icon icon-dustbin list__item-controls-btn"
@@ -62,13 +62,11 @@ const List = ({
 List.propTypes = {
   intl: intlShape.isRequired,
   semesters: PropTypes.arrayOf(PropTypes.object),
-  onEdit: PropTypes.func,
   onRemove: PropTypes.func,
 };
 
 List.defaultProps = {
   semesters: [],
-  onEdit: () => undefined,
   onRemove: () => undefined,
 };
 

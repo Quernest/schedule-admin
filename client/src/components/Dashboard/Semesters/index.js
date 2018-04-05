@@ -14,7 +14,6 @@ class Semesters extends Component {
     this.state = {};
 
     this.onRemove = this.onRemove.bind(this);
-    this.onEdit = this.onEdit.bind(this);
   }
 
   componentDidMount() {
@@ -27,12 +26,6 @@ class Semesters extends Component {
     const { dispatch } = this.props;
 
     dispatch(semestersActions.remove(id));
-  }
-
-  onEdit(id) {
-    const { dispatch } = this.props;
-
-    console.log('[callback]: clicked on edit btn', id);
   }
 
   render() {
@@ -62,7 +55,6 @@ class Semesters extends Component {
         {!fetching && (
           <List
             semesters={list}
-            onEdit={this.onEdit}
             onRemove={this.onRemove}
           />
         )}

@@ -80,6 +80,10 @@
     "message": "Add a semester"
   },
   {
+    "id": "app.dashboard.semesters.buttons.editsemester",
+    "message": "Edit semester"
+  },
+  {
     "id": "app.dashboard.semesters.item.duration",
     "message": "duration"
   },

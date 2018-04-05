@@ -81,6 +81,10 @@
     "message": "Додати семестр"
   },
   {
+    "id": "app.dashboard.semesters.buttons.editsemester",
+    "message": "Редагувати семестр"
+  },
+  {
     "id": "app.dashboard.semesters.item.duration",
     "message": "тривалість"
   },

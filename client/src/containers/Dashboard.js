@@ -14,6 +14,7 @@ import Teachers from '../components/Dashboard/Teachers';
 import AddTeacher from '../components/Dashboard/Teachers/AddTeacher';
 import Semesters from '../components/Dashboard/Semesters';
 import AddSemester from '../components/Dashboard/Semesters/AddSemester';
+import EditSemester from '../components/Dashboard/Semesters/EditSemester';
 
 const Dashboard = ({ intl }) => {
   const { formatMessage } = intl;
@@ -34,6 +35,7 @@ const Dashboard = ({ intl }) => {
           <Route path="/dashboard/teachers/add" component={AddTeacher} />
           <Route exact path="/dashboard/semesters" component={Semesters} />
           <Route path="/dashboard/semesters/add" component={AddSemester} />
+          <Route path="/dashboard/semesters/edit/:id" component={EditSemester} />
         </Switch>
       </Content>
     </div>

@@ -8,7 +8,7 @@ import semestersActions from '../../../actions/semesters.actions';
 import Heading from '../../Heading';
 import Form from './Form';
 
-class AddSemester extends Component {
+class EditSemester extends Component {
   constructor(props) {
     super(props);
 
@@ -47,7 +47,7 @@ class AddSemester extends Component {
         firstWeekType,
       };
 
-      dispatch(semestersActions.add(data));
+      // dispatch(semestersActions.add(data));
     }
   }
 
@@ -66,7 +66,7 @@ class AddSemester extends Component {
     const { submitted } = this.state;
 
     const headingParams = {
-      title: formatMessage({ id: 'app.dashboard.semesters.buttons.addsemester' }),
+      title: formatMessage({ id: 'app.dashboard.semesters.buttons.editsemester' }),
       link: {
         path: '/dashboard/semesters',
         label: formatMessage({ id: 'app.button.back' }),
@@ -74,24 +74,24 @@ class AddSemester extends Component {
     };
 
     return (
-      <div className="dashboard-addsemester">
+      <div className="dashboard-editsemester">
         <Heading
           title={headingParams.title}
           hasLink
           link={headingParams.link}
         />
-        <Form
+        {/* <Form
           onSubmit={this.onSubmit}
           onChange={this.onChange}
           submitted={submitted}
           fetching={fetching}
-        />
+        /> */}
       </div>
     );
   }
 }
 
-AddSemester.propTypes = {
+EditSemester.propTypes = {
   dispatch: PropTypes.func.isRequired,
   intl: intlShape.isRequired,
   semesters: PropTypes.shape({
@@ -100,7 +100,7 @@ AddSemester.propTypes = {
   }),
 };
 
-AddSemester.defaultProps = {
+EditSemester.defaultProps = {
   semesters: {
     list: [],
     fetching: false,
@@ -115,4 +115,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default injectIntl(connect(mapStateToProps)(AddSemester));
+export default injectIntl(connect(mapStateToProps)(EditSemester));
