@@ -29,3 +29,13 @@ module.exports.remove = (req, res) => {
   });
 };
 
+module.exports.edit = (req, res) => {
+  const { body } = req;
+
+  semestersModel.edit(body, (err, rows) => {
+    if (err) throw err;
+
+    res.send(rows);
+  });
+};
+

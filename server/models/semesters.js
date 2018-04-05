@@ -43,3 +43,17 @@ module.exports.remove = (id, callback) => {
     },
   );
 };
+
+module.exports.edit = (body, callback) => {
+  const { id } = body;
+
+  database.pool.query(
+    `UPDATE semesters SET ? WHERE semesters.id = ${id}`,
+    body,
+    (err, rows) => {
+      if (err) throw err;
+
+      return callback(null, rows);
+    },
+  );
+};

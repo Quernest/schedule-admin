@@ -31,4 +31,16 @@ router.use('/remove', auth.required, (req, res) => {
   });
 });
 
+// edit semester
+router.use('/edit', auth.required, (req, res) => {
+  jwt.verify(req.token, secret, (err) => {
+    if (err) {
+      res.sendStatus(403);
+      res.end();
+    }
+
+    return semestersController.edit(req, res);
+  });
+});
+
 module.exports = router;
