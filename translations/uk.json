@@ -81,6 +81,14 @@
     "message": "Додати семестр"
   },
   {
+    "id": "app.dashboard.semesters.item.duration",
+    "message": "тривалість"
+  },
+  {
+    "id": "app.dashboard.semesters.item.firstWeekType",
+    "message": "перший тиждень"
+  },
+  {
     "id": "app.errors.dashboard.groups.form.addgroup.feedback",
     "message": "Введіть назву групи"
   },

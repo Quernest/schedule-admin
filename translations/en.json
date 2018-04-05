@@ -80,6 +80,14 @@
     "message": "Add a semester"
   },
   {
+    "id": "app.dashboard.semesters.item.duration",
+    "message": "duration"
+  },
+  {
+    "id": "app.dashboard.semesters.item.firstWeekType",
+    "message": "first week"
+  },
+  {
     "id": "app.dashboard.groups.form.addgroup.input.placeholder",
     "message": "For example: IT-14-1"
   },

@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { injectIntl, intlShape } from 'react-intl';
 import PropTypes from 'prop-types';
-import moment from 'moment';
 import semestersActions from '../../../actions/semesters.actions';
 import ActivityLoader from '../../ActivityLoader';
 import Heading from '../../Heading';
+import List from './List';
 
 class Semesters extends Component {
   constructor(props) {
@@ -62,37 +62,11 @@ class Semesters extends Component {
           link={headingParams.link}
         />
         {!fetching && (
-          <ul className="list">
-            {list &&
-              list.map((semester) => {
-                const {
-                  id,
-                  number,
-                  start,
-                  end,
-                  firstWeekType
-                } = semester;
-
-                // TODO: parse and display start and end dates in list
-                // USE moment.js
-
-                return (
-                  <li key={id} className="list__item">
-                    <h3>№{number}</h3>
-                    <div className="list__item-controls">
-                      <button
-                        className="icon icon-pencil list__item-controls-btn"
-                        onClick={() => this.onEdit(id)}
-                      />
-                      <button
-                        className="icon icon-dustbin list__item-controls-btn"
-                        onClick={() => this.onRemove(id)}
-                      />
-                    </div>
-                  </li>
-                );
-              })}
-          </ul>
+          <List
+            semesters={list}
+            onEdit={this.onEdit}
+            onRemove={this.onRemove}
+          />
         )}
         <ActivityLoader fetching={fetching} />
       </div>
