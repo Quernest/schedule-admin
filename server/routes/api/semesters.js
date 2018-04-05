@@ -7,4 +7,28 @@ const secret = require('../../config/app').config.keys.secret;
 // get all semesters
 router.get('/', semestersController.getAll);
 
+// add semester
+router.use('/add', auth.required, (req, res) => {
+  jwt.verify(req.token, secret, (err) => {
+    if (err) {
+      res.sendStatus(403);
+      res.end();
+    }
+
+    return semestersController.add(req, res);
+  });
+});
+
+// remove semester
+router.use('/remove', auth.required, (req, res) => {
+  jwt.verify(req.token, secret, (err) => {
+    if (err) {
+      res.sendStatus(403);
+      res.end();
+    }
+
+    return semestersController.remove(req, res);
+  });
+});
+
 module.exports = router;

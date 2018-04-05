@@ -7,3 +7,39 @@ module.exports.getAll = (callback) => {
     callback(null, rows);
   });
 };
+
+module.exports.add = (body, callback) => {
+  database.pool.query(
+    'INSERT INTO semesters SET ?',
+    body,
+    (err, rows) => {
+      if (err) throw err;
+
+      if (rows) {
+        const { number } = body;
+
+        database.pool.query(
+          `SELECT * FROM semesters WHERE semesters.number = ${number}`,
+          (err, semesters) => {
+            if (err) throw err;
+
+            const [semester] = semesters;
+
+            return callback(null, semester);
+          },
+        );
+      }
+    },
+  );
+};
+
+module.exports.remove = (id, callback) => {
+  database.pool.query(
+    `DELETE FROM semesters WHERE semesters.id = ${id}`,
+    (err, rows) => {
+      if (err) throw err;
+
+      return callback(null, rows);
+    },
+  );
+};

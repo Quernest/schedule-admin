@@ -32,72 +32,69 @@ const getAll = () => {
   };
 };
 
-// const add = (name) => {
-//   const request = () => ({
-//     type: semestersConstants.ADD_REQUEST,
-//     name,
-//   });
+const add = (data) => {
+  const request = () => ({
+    type: semestersConstants.ADD_REQUEST,
+    data,
+  });
 
-//   const success = semester => ({
-//     type: semestersConstants.ADD_SUCCESS,
-//     semester,
-//   });
+  const success = semester => ({
+    type: semestersConstants.ADD_SUCCESS,
+    semester,
+  });
 
-//   const failure = error => ({
-//     type: semestersConstants.ADD_FAILURE,
-//     error,
-//   });
+  const failure = error => ({
+    type: semestersConstants.ADD_FAILURE,
+    error,
+  });
 
-//   return async (dispatch) => {
-//     dispatch(request(name));
+  return async (dispatch) => {
+    dispatch(request());
 
-//     try {
-//       // FIXME: make sure that msg here
-//       const semester = await semestersService.add(name);
-//       dispatch(success(semester));
-//       // redirect to semesters page
-//       history.push('/dashboard/semesters');
-//     } catch (error) {
-//       dispatch(failure(error));
-//       dispatch(alertActions.error(error));
-//     }
-//   };
-// };
+    try {
+      const semester = await semestersService.add(data);
+      dispatch(success(semester));
+      history.push('/dashboard/semesters');
+    } catch (error) {
+      dispatch(failure(error));
+      dispatch(alertActions.error(error));
+    }
+  };
+};
 
-// const remove = (id) => {
-//   const request = () => ({
-//     type: semestersConstants.REMOVE_REQUEST,
-//     id,
-//   });
+const remove = (id) => {
+  const request = () => ({
+    type: semestersConstants.REMOVE_REQUEST,
+    id,
+  });
 
-//   const success = msg => ({
-//     type: semestersConstants.REMOVE_SUCCESS,
-//     msg,
-//   });
+  const success = msg => ({
+    type: semestersConstants.REMOVE_SUCCESS,
+    msg,
+  });
 
-//   const failure = error => ({
-//     type: semestersConstants.REMOVE_FAILURE,
-//     error,
-//   });
+  const failure = error => ({
+    type: semestersConstants.REMOVE_FAILURE,
+    error,
+  });
 
-//   return async (dispatch) => {
-//     dispatch(request(id));
+  return async (dispatch) => {
+    dispatch(request());
 
-//     try {
-//       // FIXME: make sure that msg here
-//       const msg = await semestersService.remove(id);
-//       dispatch(success(msg));
-//     } catch (error) {
-//       dispatch(failure(error));
-//       dispatch(alertActions.error(error));
-//     }
-//   };
-// };
+    try {
+      const msg = await semestersService.remove(id);
+      dispatch(success(msg));
+    } catch (error) {
+      dispatch(failure(error));
+      dispatch(alertActions.error(error));
+    }
+  };
+};
 
 const semestersActions = {
   getAll,
-  // add,
-  // remove,
+  add,
+  remove,
 };
 
 export default semestersActions;

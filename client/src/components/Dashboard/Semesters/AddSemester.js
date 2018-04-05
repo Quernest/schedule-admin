@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { injectIntl, intlShape } from 'react-intl';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 
+import semestersActions from '../../../actions/semesters.actions';
 import Heading from '../../Heading';
 import Form from './Form';
 
@@ -12,26 +14,57 @@ class AddSemester extends Component {
 
     this.state = {
       submitted: false,
+      number: undefined,
+      start: '',
+      end: '',
+      firstWeekType: 0, // default value
     };
 
     this.onSubmit = this.onSubmit.bind(this);
+    this.onChange = this.onChange.bind(this);
   }
 
   onSubmit(e) {
     e.preventDefault();
+    const { dispatch } = this.props;
+
+    const {
+      number,
+      start,
+      end,
+      firstWeekType,
+    } = this.state;
 
     this.setState({
       submitted: true,
     });
 
-    // dispatch
-    console.log('submitted');
+    if (number && start && end && (firstWeekType === "0" || firstWeekType === "1")) {
+      const data = {
+        number: Number(number),
+        start: moment(start),
+        end: moment(end),
+        firstWeekType,
+      };
+
+      dispatch(semestersActions.add(data));
+    }
+  }
+
+  onChange(e) {
+    const { value, name } = e.target;
+
+    this.setState({
+      [name]: value,
+    });
   }
 
   render() {
-    const { intl } = this.props;
+    const { intl, semesters } = this.props;
     const { formatMessage } = intl;
+    const { fetching } = semesters;
     const { submitted } = this.state;
+
     const headingParams = {
       title: formatMessage({ id: 'app.dashboard.semesters.buttons.addsemester' }),
       link: {
@@ -49,7 +82,9 @@ class AddSemester extends Component {
         />
         <Form
           onSubmit={this.onSubmit}
+          onChange={this.onChange}
           submitted={submitted}
+          fetching={fetching}
         />
       </div>
     );

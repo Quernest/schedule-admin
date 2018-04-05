@@ -7,6 +7,7 @@
 
   &__input {
     width: 100%;
+    margin-top: em(10);
     margin-bottom: em(10);
     padding: em(15) em(20);
 
@@ -27,11 +28,30 @@
   }
 
   &__input,
-  &__btn {
+  &__btn,
+  &__select {
     border: none;
     outline: none;
     border-radius: em(5);
     font-size: em(16);
+  }
+
+  &__select {
+    width: 100%;
+    margin-top: em(10);
+    margin-bottom: em(10);
+    padding: em(15) em(20);
+
+    &-option {}
+  }
+
+  &__label {}
+
+  &__group {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: em(10);
   }
 
   &__feedback {
