@@ -11,9 +11,7 @@ class Semesters extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-
-};
+    this.state = {};
 
     this.onRemove = this.onRemove.bind(this);
     this.onEdit = this.onEdit.bind(this);
