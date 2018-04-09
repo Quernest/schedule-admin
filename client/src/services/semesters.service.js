@@ -70,8 +70,6 @@ const getById = async (id) => {
 
     const semester = await response.json();
 
-    console.log(semester);
-
     return Promise.resolve(semester);
   } catch (error) {
     return error;

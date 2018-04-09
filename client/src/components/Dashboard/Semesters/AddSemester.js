@@ -17,7 +17,7 @@ class AddSemester extends Component {
       number: undefined,
       start: '',
       end: '',
-      firstWeekType: 0, // default value
+      firstWeekType: 0,
     };
 
     this.onSubmit = this.onSubmit.bind(this);
@@ -42,7 +42,7 @@ class AddSemester extends Component {
 
     if (number && start && end && (firstWeekType == 0 || firstWeekType == 1)) {
       const data = {
-        number: Number(number),
+        number,
         start,
         end,
         firstWeekType,

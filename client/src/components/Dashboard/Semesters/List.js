@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { injectIntl, intlShape } from 'react-intl';
 import { Link } from 'react-router-dom';
 
-const formatDate = (date) => moment(date).format('DD/MM');
+const formatDate = date => moment(date).format('DD/MM');
 
 const List = ({
   semesters,

@@ -8,10 +8,8 @@ import Heading from '../../Heading';
 import Form from './Form';
 
 /**
+ * TODO:
  * check all prop-types
- * 
- * fix incorrect date displaying
- * 
  */
 
 class EditSemester extends Component {
@@ -19,12 +17,12 @@ class EditSemester extends Component {
     super(props);
 
     this.state = {
-      submitted: false,
       id: undefined,
       number: undefined,
       start: '',
       end: '',
-      firstWeekType: 0, // default value
+      firstWeekType: 0,
+      submitted: false,
     };
 
     this.onSubmit = this.onSubmit.bind(this);
@@ -51,7 +49,7 @@ class EditSemester extends Component {
     if (id && number && start && end && (firstWeekType == 0 || firstWeekType == 1)) {
       const data = {
         id,
-        number: Number(number),
+        number,
         start,
         end,
         firstWeekType,
@@ -76,26 +74,29 @@ class EditSemester extends Component {
   }
 
   componentDidMount() {
-    const { dispatch, semester, semesters, match } = this.props;
-    const { id } = match.params;
+    const { semester, id, dispatch } = this.props;
 
-    if (!semester || semester.id !== id) {
-      // get the semester from api
-      dispatch(semestersActions.getById(id));
-    } else {
+    if (semester && semester.id === Number(id)) {
+      const { start, end } = semester;
+      
       this.setState({
-        ...semesters.semester,
+        ...semester,
+        start: moment(start),
+        end: moment(end),
       });
-    }
+    } else {
+      dispatch(semestersActions.getById(id));
+    };
   }
 
   UNSAFE_componentWillReceiveProps(nextProps) {
-    if (nextProps !== this.props) {
-      const { semesters } = nextProps;
-      const { semester } = semesters;
+    if (nextProps.semester !== this.props.semester) {
+      const { start, end } = nextProps.semester;
 
       this.setState({
-        ...semester,
+        ...nextProps.semester,
+        start: moment(start),
+        end: moment(end),
       });
     }
   }
@@ -134,8 +135,8 @@ class EditSemester extends Component {
           submitted={submitted}
           fetching={fetching}
           number={number}
-          start={moment.utc(start)}
-          end={moment.utc(end)}
+          start={start}
+          end={end}
           firstWeekType={firstWeekType}
           lang={lang}
         />
@@ -147,6 +148,8 @@ class EditSemester extends Component {
 EditSemester.propTypes = {
   dispatch: PropTypes.func.isRequired,
   intl: intlShape.isRequired,
+  id: PropTypes.string.isRequired,
+  lang: PropTypes.string.isRequired,
   semesters: PropTypes.shape({
     list: PropTypes.arrayOf(PropTypes.object),
     fetching: PropTypes.bool,
@@ -162,17 +165,17 @@ EditSemester.defaultProps = {
 
 const mapStateToProps = (state, props) => {
   const { semesters, locale } = state;
-  const { lang } = locale;
   const { id } = props.match.params;
-  const { list } = semesters;
-
-  // get semester from semesters list (by id)
-  const [semester] = list ? list.filter(semester => semester.id === Number(id)) : [];
+  const { lang } = locale;
+  const { list, semester } = semesters;
 
   return {
     semesters,
-    semester,
+    semester: semester || (list && list.length > 0
+      ? list.filter(semester => semester.id === Number(id))[0]
+      : semester),
     lang,
+    id,
   };
 };
 

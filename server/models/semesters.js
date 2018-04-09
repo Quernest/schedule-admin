@@ -1,4 +1,5 @@
 const database = require('../config/database');
+const moment = require('moment');
 
 module.exports.getAll = (callback) => {
   database.pool.query('SELECT * FROM semesters', (err, rows) => {
@@ -45,11 +46,22 @@ module.exports.remove = (id, callback) => {
 };
 
 module.exports.edit = (body, callback) => {
-  const { id } = body;
+  const {
+    id,
+    number,
+    start,
+    end,
+  } = body;
+
+  const newBody = Object.assign(body, {
+    number: Number(number),
+    start: moment(start).format('YYYY-MM-DD'),
+    end: moment(end).format('YYYY-MM-DD'),
+  });
 
   database.pool.query(
     `UPDATE semesters SET ? WHERE semesters.id = ${id}`,
-    body,
+    newBody,
     (err, rows) => {
       if (err) throw err;
     
