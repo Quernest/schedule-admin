@@ -43,4 +43,7 @@ router.use('/edit', auth.required, (req, res) => {
   });
 });
 
+// get the semester by id
+router.use('/:id', semestersController.getById);
+
 module.exports = router;

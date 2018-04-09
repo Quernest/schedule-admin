@@ -32,6 +32,35 @@ const getAll = () => {
   };
 };
 
+const getById = (id) => {
+  const request = () => ({
+    type: semestersConstants.GET_BY_ID_REQUEST,
+    id,
+  });
+
+  const success = semester => ({
+    type: semestersConstants.GET_BY_ID_SUCCESS,
+    semester,
+  });
+
+  const failure = error => ({
+    type: semestersConstants.GET_BY_ID_FAILURE,
+    error,
+  });
+
+  return async (dispatch) => {
+    dispatch(request());
+
+    try {
+      const semester = await semestersService.getById(id);
+      dispatch(success(semester));
+    } catch (error) {
+      dispatch(failure(error));
+      dispatch(alertActions.error(error));
+    }
+  };
+};
+
 const add = (data) => {
   const request = () => ({
     type: semestersConstants.ADD_REQUEST,
@@ -91,10 +120,42 @@ const remove = (id) => {
   };
 };
 
+const edit = (data) => {
+  const request = () => ({
+    type: semestersConstants.EDIT_REQUEST,
+    data,
+  });
+
+  const success = semester => ({
+    type: semestersConstants.EDIT_SUCCESS,
+    semester,
+  });
+
+  const failure = error => ({
+    type: semestersConstants.EDIT_FAILURE,
+    error,
+  });
+
+  return async (dispatch) => {
+    dispatch(request());
+
+    try {
+      const semester = await semestersService.edit(data);
+      dispatch(success(semester));
+      history.push('/dashboard/semesters');
+    } catch (error) {
+      dispatch(failure(error));
+      dispatch(alertActions.error(error));
+    }
+  };
+};
+
 const semestersActions = {
   getAll,
+  getById,
   add,
   remove,
+  edit,
 };
 
 export default semestersActions;

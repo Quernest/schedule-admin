@@ -19,6 +19,23 @@ const semesters = (state = {}, action) => {
         fetching: false,
         error: action.error,
       };
+    case semestersConstants.GET_BY_ID_REQUEST:
+      return {
+        ...state,
+        fetching: true,
+      };
+    case semestersConstants.GET_BY_ID_SUCCESS:
+      return {
+        ...state,
+        fetching: false,
+        semester: action.semester,
+      };
+    case semestersConstants.GET_BY_ID_FAILURE:
+      return {
+        ...state,
+        fetching: false,
+        error: action.error,
+      };
     case semestersConstants.ADD_REQUEST:
       return {
         ...state,
@@ -31,6 +48,22 @@ const semesters = (state = {}, action) => {
         fetching: false,
       };
     case semestersConstants.ADD_FAILURE:
+      return {
+        ...state,
+        fetching: false,
+      };
+    case semestersConstants.EDIT_REQUEST:
+      return {
+        ...state,
+        fetching: true,
+      };
+    case semestersConstants.EDIT_SUCCESS:
+      return {
+        ...state,
+        list: [...state.list, action.semester],
+        fetching: false,
+      };
+    case semestersConstants.EDIT_FAILURE:
       return {
         ...state,
         fetching: false,

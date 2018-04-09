@@ -39,3 +39,13 @@ module.exports.edit = (req, res) => {
   });
 };
 
+module.exports.getById = (req, res) => {
+  const { id } = req.params;
+
+  semestersModel.getById(id, (err, rows) => {
+    if (err) throw err;
+
+    res.send(rows);
+  });
+};
+

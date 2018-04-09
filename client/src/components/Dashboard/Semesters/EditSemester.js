@@ -13,6 +13,7 @@ class EditSemester extends Component {
 
     this.state = {
       submitted: false,
+      id: undefined,
       number: undefined,
       start: '',
       end: '',
@@ -21,6 +22,7 @@ class EditSemester extends Component {
 
     this.onSubmit = this.onSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.onDateChange = this.onDateChange.bind(this);
   }
 
   onSubmit(e) {
@@ -28,23 +30,34 @@ class EditSemester extends Component {
     const { dispatch } = this.props;
 
     const {
-      number, start, end, firstWeekType,
+      id,
+      number,
+      start,
+      end,
+      firstWeekType,
     } = this.state;
 
     this.setState({
       submitted: true,
     });
 
-    if (number && start && end && (firstWeekType == 0 || firstWeekType == 1)) {
+    if (id && number && start && end && (firstWeekType == 0 || firstWeekType == 1)) {
       const data = {
+        id,
         number: Number(number),
         start: moment(start),
         end: moment(end),
         firstWeekType,
       };
 
-      // dispatch(semestersActions.add(data));
+      dispatch(semestersActions.edit(data));
     }
+  }
+
+  onDateChange(date, name) {
+    this.setState({
+      [name]: date,
+    });
   }
 
   onChange(e) {
@@ -55,11 +68,43 @@ class EditSemester extends Component {
     });
   }
 
+  componentDidMount() {
+    const { dispatch, semester, semesters, match } = this.props;
+    const { id } = match.params;
+
+    if (!semester || semester.id !== id) {
+      // get the semester from api
+      dispatch(semestersActions.getById(id));
+      console.log('get from api');
+    } else {
+      this.setState({
+        ...semesters.semester,
+      });
+    }
+  }
+
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    if (nextProps !== this.props) {
+      const { semesters } = nextProps;
+      const { semester } = semesters;
+
+      this.setState({
+        ...semester,
+      });
+    }
+  }
+
   render() {
-    const { intl, semesters } = this.props;
+    const { intl, semesters, lang } = this.props;
     const { formatMessage } = intl;
     const { fetching } = semesters;
-    const { submitted } = this.state;
+    const {
+      submitted,
+      number,
+      start,
+      end,
+      firstWeekType,
+    } = this.state;
 
     const headingParams = {
       title: formatMessage({ id: 'app.dashboard.semesters.buttons.editsemester' }),
@@ -72,12 +117,18 @@ class EditSemester extends Component {
     return (
       <div className="dashboard-editsemester">
         <Heading title={headingParams.title} hasLink link={headingParams.link} />
-        {/* <Form
+        <Form
           onSubmit={this.onSubmit}
           onChange={this.onChange}
+          onDateChange={this.onDateChange}
           submitted={submitted}
           fetching={fetching}
-        /> */}
+          number={number}
+          start={moment(start)}
+          end={moment(end)}
+          firstWeekType={firstWeekType}
+          lang={lang}
+        />
       </div>
     );
   }
@@ -99,11 +150,19 @@ EditSemester.defaultProps = {
   },
 };
 
-const mapStateToProps = state => {
-  const { semesters } = state;
+const mapStateToProps = (state, props) => {
+  const { semesters, locale } = state;
+  const { lang } = locale;
+  const { id } = props.match.params;
+  const { list } = semesters;
+
+  // get semester from semesters list (by id)
+  const [semester] = list ? list.filter(semester => semester.id === Number(id)) : [];
 
   return {
     semesters,
+    semester,
+    lang,
   };
 };
 

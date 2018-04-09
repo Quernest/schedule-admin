@@ -40,8 +40,6 @@ class AddSemester extends Component {
       submitted: true,
     });
 
-    console.log(this.state);
-
     if (number && start && end && (firstWeekType == 0 || firstWeekType == 1)) {
       const data = {
         number: Number(number),
