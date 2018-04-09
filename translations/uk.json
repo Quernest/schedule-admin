@@ -93,6 +93,26 @@
     "message": "перший тиждень"
   },
   {
+    "id": "app.dashboard.semesters.form.addsemester.number",
+    "message": "Введіть номер семестру"
+  },
+  {
+    "id": "app.dashboard.semesters.form.addsemester.number.example",
+    "message": "Наприклад: 4"
+  },
+  {
+    "id": "app.dashboard.semesters.form.addsemester.start",
+    "message": "Введіть дату початка семестру"
+  },
+  {
+    "id": "app.dashboard.semesters.form.addsemester.end",
+    "message": "Введіть дату кінця семестру"
+  },
+  {
+    "id": "app.dashboard.semesters.form.addsemester.firstWeekType",
+    "message": "Виберіть тиждень з якого починається семестр"
+  },
+  {
     "id": "app.errors.dashboard.groups.form.addgroup.feedback",
     "message": "Введіть назву групи"
   },
@@ -115,5 +135,13 @@
   {
     "id": "app.button.add",
     "message": "Додати"
+  },
+  {
+    "id": "app.week.odd",
+    "message": "Непарна"
+  },
+  {
+    "id": "app.week.even",
+    "message": "Парна"
   }
 ]

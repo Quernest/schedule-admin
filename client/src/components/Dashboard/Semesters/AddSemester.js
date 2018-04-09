@@ -22,6 +22,7 @@ class AddSemester extends Component {
 
     this.onSubmit = this.onSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.onDateChange = this.onDateChange.bind(this);
   }
 
   onSubmit(e) {
@@ -39,11 +40,13 @@ class AddSemester extends Component {
       submitted: true,
     });
 
+    console.log(this.state);
+
     if (number && start && end && (firstWeekType == 0 || firstWeekType == 1)) {
       const data = {
         number: Number(number),
-        start: moment(start),
-        end: moment(end),
+        start,
+        end,
         firstWeekType,
       };
 
@@ -59,11 +62,23 @@ class AddSemester extends Component {
     });
   }
 
+  onDateChange(date, name) {
+    this.setState({
+      [name]: date,
+    });
+  }
+
   render() {
-    const { intl, semesters } = this.props;
+    const { intl, semesters, lang } = this.props;
     const { formatMessage } = intl;
     const { fetching } = semesters;
-    const { submitted } = this.state;
+    const {
+      submitted,
+      number,
+      start,
+      end,
+      firstWeekType,
+    } = this.state;
 
     const headingParams = {
       title: formatMessage({ id: 'app.dashboard.semesters.buttons.addsemester' }),
@@ -83,8 +98,14 @@ class AddSemester extends Component {
         <Form
           onSubmit={this.onSubmit}
           onChange={this.onChange}
+          onDateChange={this.onDateChange}
           submitted={submitted}
           fetching={fetching}
+          number={number}
+          start={start}
+          end={end}
+          firstWeekType={firstWeekType}
+          lang={lang}
         />
       </div>
     );
@@ -108,10 +129,12 @@ AddSemester.defaultProps = {
 };
 
 const mapStateToProps = (state) => {
-  const { semesters } = state;
+  const { semesters, locale } = state;
+  const { lang } = locale;
 
   return {
     semesters,
+    lang,
   };
 };
 

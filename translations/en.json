@@ -92,6 +92,26 @@
     "message": "first week"
   },
   {
+    "id": "app.dashboard.semesters.form.addsemester.number",
+    "message": "Enter the number of semester"
+  },
+  {
+    "id": "app.dashboard.semesters.form.addsemester.number.example",
+    "message": "For example: 4"
+  },
+  {
+    "id": "app.dashboard.semesters.form.addsemester.start",
+    "message": "Enter the start date of semester"
+  },
+  {
+    "id": "app.dashboard.semesters.form.addsemester.end",
+    "message": "Enter the end date of semester"
+  },
+  {
+    "id": "app.dashboard.semesters.form.addsemester.firstWeekType",
+    "message": "Select the week from which the semester begins"
+  },
+  {
     "id": "app.dashboard.groups.form.addgroup.input.placeholder",
     "message": "For example: IT-14-1"
   },
@@ -114,5 +134,13 @@
   {
     "id": "app.button.add",
     "message": "Add"
+  },
+  {
+    "id": "app.week.odd",
+    "message": "Odd"
+  },
+  {
+    "id": "app.week.even",
+    "message": "Even"
   }
 ]
