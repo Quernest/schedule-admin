@@ -7,6 +7,13 @@ import semestersActions from '../../../actions/semesters.actions';
 import Heading from '../../Heading';
 import Form from './Form';
 
+/**
+ * check all prop-types
+ * 
+ * fix incorrect date displaying
+ * 
+ */
+
 class EditSemester extends Component {
   constructor(props) {
     super(props);
@@ -45,8 +52,8 @@ class EditSemester extends Component {
       const data = {
         id,
         number: Number(number),
-        start: moment(start),
-        end: moment(end),
+        start,
+        end,
         firstWeekType,
       };
 
@@ -75,7 +82,6 @@ class EditSemester extends Component {
     if (!semester || semester.id !== id) {
       // get the semester from api
       dispatch(semestersActions.getById(id));
-      console.log('get from api');
     } else {
       this.setState({
         ...semesters.semester,
@@ -116,7 +122,11 @@ class EditSemester extends Component {
 
     return (
       <div className="dashboard-editsemester">
-        <Heading title={headingParams.title} hasLink link={headingParams.link} />
+        <Heading
+          title={headingParams.title}
+          hasLink
+          link={headingParams.link}
+        />
         <Form
           onSubmit={this.onSubmit}
           onChange={this.onChange}
@@ -124,8 +134,8 @@ class EditSemester extends Component {
           submitted={submitted}
           fetching={fetching}
           number={number}
-          start={moment(start)}
-          end={moment(end)}
+          start={moment.utc(start)}
+          end={moment.utc(end)}
           firstWeekType={firstWeekType}
           lang={lang}
         />

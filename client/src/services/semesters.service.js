@@ -92,9 +92,9 @@ const edit = async (data) => {
       return Promise.reject(response.statusText);
     }
 
-    const semester = await response.json();
+    const msg = await response.json();
 
-    return Promise.resolve(semester);
+    return Promise.resolve(msg);
   } catch (error) {
     return error;
   }

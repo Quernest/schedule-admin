@@ -52,7 +52,7 @@ module.exports.edit = (body, callback) => {
     body,
     (err, rows) => {
       if (err) throw err;
-
+    
       return callback(null, rows);
     },
   );

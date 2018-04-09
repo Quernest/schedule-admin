@@ -126,9 +126,9 @@ const edit = (data) => {
     data,
   });
 
-  const success = semester => ({
+  const success = msg => ({
     type: semestersConstants.EDIT_SUCCESS,
-    semester,
+    msg,
   });
 
   const failure = error => ({
@@ -140,8 +140,8 @@ const edit = (data) => {
     dispatch(request());
 
     try {
-      const semester = await semestersService.edit(data);
-      dispatch(success(semester));
+      const msg = await semestersService.edit(data);
+      dispatch(success(msg));
       history.push('/dashboard/semesters');
     } catch (error) {
       dispatch(failure(error));

@@ -60,7 +60,6 @@ const semesters = (state = {}, action) => {
     case semestersConstants.EDIT_SUCCESS:
       return {
         ...state,
-        list: [...state.list, action.semester],
         fetching: false,
       };
     case semestersConstants.EDIT_FAILURE:
