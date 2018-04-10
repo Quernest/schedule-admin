@@ -52,8 +52,8 @@
     "message": "Groups"
   },
   {
-    "id": "app.sidebar.menu.item.lessons",
-    "message": "Lessons"
+    "id": "app.sidebar.menu.item.subjects",
+    "message": "Subjects"
   },
   {
     "id": "app.sidebar.menu.item.teachers",

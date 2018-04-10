@@ -4,12 +4,10 @@ import { injectIntl, intlShape } from 'react-intl';
 import { Switch, Route, withRouter } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
 import Content from '../components/Dashboard/Content';
-
-// routes
-import Home from '../components/Dashboard/Home';
+import Home from '../components/Dashboard/Home/index';
 import Groups from '../components/Dashboard/Groups';
 import AddGroup from '../components/Dashboard/Groups/AddGroup';
-import Lessons from '../components/Dashboard/Lessons';
+import Subjects from '../components/Dashboard/Subjects';
 import Teachers from '../components/Dashboard/Teachers';
 import AddTeacher from '../components/Dashboard/Teachers/AddTeacher';
 import Semesters from '../components/Dashboard/Semesters';
@@ -28,11 +26,15 @@ const Dashboard = ({ intl }) => {
       <Content>
         <Switch>
           <Route exact path="/dashboard" component={Home} />
+
           <Route exact path="/dashboard/groups" component={Groups} />
           <Route path="/dashboard/groups/add" component={AddGroup} />
-          <Route path="/dashboard/lessons" component={Lessons} />
+
+          <Route exact path="/dashboard/subjects" component={Subjects} />
+
           <Route exact path="/dashboard/teachers" component={Teachers} />
           <Route path="/dashboard/teachers/add" component={AddTeacher} />
+
           <Route exact path="/dashboard/semesters" component={Semesters} />
           <Route path="/dashboard/semesters/add" component={AddSemester} />
           <Route path="/dashboard/semesters/edit/:id" component={EditSemester} />

@@ -4,7 +4,7 @@ module.exports.getSchedule = (id, callback) => {
   database.pool.query(
     `SELECT
       s.id,
-      l.name,
+      sub.name,
       tc.name AS teacher,
       t.start,
       t.end,
@@ -15,8 +15,8 @@ module.exports.getSchedule = (id, callback) => {
     FROM
       schedule s
     INNER JOIN groups g ON s.groupId = g.id
-    INNER JOIN times t ON s.lessonNumberId = t.id
-    INNER JOIN lessons l ON s.lessonId = l.id
+    INNER JOIN times t ON s.lesson = t.id
+    INNER JOIN subjects sub ON s.subjectId = sub.id
     INNER JOIN teachers tc ON s.teacherId = tc.id
     INNER JOIN semesters sem ON s.semester = sem.id
     WHERE

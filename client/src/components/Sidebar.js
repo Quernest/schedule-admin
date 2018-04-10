@@ -17,8 +17,8 @@ const menu = [
     link: '/dashboard/groups',
   },
   {
-    id: 'app.sidebar.menu.item.lessons',
-    link: '/dashboard/lessons',
+    id: 'app.sidebar.menu.item.subjects',
+    link: '/dashboard/subjects',
   },
   {
     id: 'app.sidebar.menu.item.teachers',
