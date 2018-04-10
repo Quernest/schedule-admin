@@ -3,6 +3,7 @@ import { injectIntl, intlShape } from 'react-intl';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+import subjectsActions from '../../../actions/subjects.actions';
 import Heading from '../../Heading';
 
 class Subjects extends Component {
@@ -12,6 +13,12 @@ class Subjects extends Component {
     this.state = {};
 
     this.onRemove = this.onRemove.bind(this);
+  }
+
+  componentDidMount() {
+    const { dispatch } = this.props;
+
+    dispatch(subjectsActions.getAll());
   }
 
   onRemove(id) {
@@ -50,8 +57,10 @@ Subjects.propTypes = {
 };
 
 const mapStateToProps = (state) => {
+  const { subjects } = state;
+
   return {
-    state,
+    subjects,
   };
 };
 

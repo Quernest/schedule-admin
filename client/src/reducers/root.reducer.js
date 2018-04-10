@@ -6,6 +6,7 @@ import sidebar from './sidebar.reducer';
 import groups from './groups.reducer';
 import teachers from './teachers.reducer';
 import semesters from './semesters.reducer';
+import subjects from './subjects.reducer';
 
 const rootReducer = combineReducers({
   user,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   groups,
   teachers,
   semesters,
+  subjects,
 });
 
 export default rootReducer;
