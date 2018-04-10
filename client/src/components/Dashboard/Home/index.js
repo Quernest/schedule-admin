@@ -12,7 +12,7 @@ class Home extends Component {
   render() {
     return (
       <div className="dashboard-home">
-        <Heading title="Title" subtitle="Subtitle ... " />
+        <Heading title="Title" />
       </div>
     );
   }
