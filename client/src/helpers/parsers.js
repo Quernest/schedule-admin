@@ -5,6 +5,7 @@
  * 2 - practice
  *
  * @param {number} type
+ * @return {string} translations id
  */
 const parseSubjectTypes = (type) => {
   const numbericalType = typeof type === 'string' ? Number(type) : type;
@@ -24,6 +25,7 @@ const parseSubjectTypes = (type) => {
  * 2 - even
  *
  * @param {number} type
+ * @return {string} translations id
  */
 const parseWeekTypes = (type) => {
   const numbericalType = typeof type === 'string' ? Number(type) : type;

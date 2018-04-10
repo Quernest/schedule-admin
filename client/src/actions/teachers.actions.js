@@ -52,10 +52,8 @@ const add = (name) => {
     dispatch(request(name));
 
     try {
-      // FIXME: make sure that msg here
       const teacher = await teachersService.add(name);
       dispatch(success(teacher));
-      // redirect to teachers page
       history.push('/dashboard/teachers');
     } catch (error) {
       dispatch(failure(error));

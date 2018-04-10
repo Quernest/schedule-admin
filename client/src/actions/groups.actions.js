@@ -33,7 +33,7 @@ const getAll = () => {
 };
 
 const add = (name) => {
-  const request = name => ({
+  const request = () => ({
     type: groupsConstants.ADD_REQUEST,
     name,
   });
@@ -49,13 +49,11 @@ const add = (name) => {
   });
 
   return async (dispatch) => {
-    dispatch(request(name));
+    dispatch(request());
 
     try {
-      // FIXME: make sure that msg here
       const group = await groupsService.add(name);
       dispatch(success(group));
-      // redirect to groups page
       history.push('/dashboard/groups');
     } catch (error) {
       dispatch(failure(error));
