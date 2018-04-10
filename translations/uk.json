@@ -153,12 +153,12 @@
     "message": "Додати"
   },
   {
-    "id": "app.week.odd",
-    "message": "Непарна"
+    "id": "app.words.odd",
+    "message": "Непарний"
   },
   {
-    "id": "app.week.even",
-    "message": "Парна"
+    "id": "app.words.even",
+    "message": "Парний"
   },
   {
     "id": "app.words.lecture",

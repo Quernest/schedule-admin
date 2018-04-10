@@ -21,13 +21,41 @@ class EditSemester extends Component {
       number: undefined,
       start: '',
       end: '',
-      firstWeekType: 0,
+      firstWeekType: 1,
       submitted: false,
     };
 
     this.onSubmit = this.onSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
     this.onDateChange = this.onDateChange.bind(this);
+  }
+
+  componentDidMount() {
+    const { semester, id, dispatch } = this.props;
+
+    if (semester && semester.id === Number(id)) {
+      const { start, end } = semester;
+      
+      this.setState({
+        ...semester,
+        start: moment(start),
+        end: moment(end),
+      });
+    } else {
+      dispatch(semestersActions.getById(id));
+    }
+  }
+
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    if (nextProps.semester !== this.props.semester) {
+      const { start, end } = nextProps.semester;
+
+      this.setState({
+        ...nextProps.semester,
+        start: moment(start),
+        end: moment(end),
+      });
+    }
   }
 
   onSubmit(e) {
@@ -46,7 +74,7 @@ class EditSemester extends Component {
       submitted: true,
     });
 
-    if (id && number && start && end && (firstWeekType == 0 || firstWeekType == 1)) {
+    if (id && number && start && end && firstWeekType) {
       const data = {
         id,
         number,
@@ -71,34 +99,6 @@ class EditSemester extends Component {
     this.setState({
       [name]: value,
     });
-  }
-
-  componentDidMount() {
-    const { semester, id, dispatch } = this.props;
-
-    if (semester && semester.id === Number(id)) {
-      const { start, end } = semester;
-      
-      this.setState({
-        ...semester,
-        start: moment(start),
-        end: moment(end),
-      });
-    } else {
-      dispatch(semestersActions.getById(id));
-    };
-  }
-
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    if (nextProps.semester !== this.props.semester) {
-      const { start, end } = nextProps.semester;
-
-      this.setState({
-        ...nextProps.semester,
-        start: moment(start),
-        end: moment(end),
-      });
-    }
   }
 
   render() {

@@ -153,11 +153,11 @@
     "message": "Добавить"
   },
   {
-    "id": "app.week.odd",
+    "id": "app.words.odd",
     "message": "Нечетная"
   },
   {
-    "id": "app.week.even",
+    "id": "app.words.even",
     "message": "Четная"
   },
   {

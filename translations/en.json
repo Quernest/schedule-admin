@@ -152,11 +152,11 @@
     "message": "Add"
   },
   {
-    "id": "app.week.odd",
+    "id": "app.words.odd",
     "message": "Odd"
   },
   {
-    "id": "app.week.even",
+    "id": "app.words.even",
     "message": "Even"
   },
   {

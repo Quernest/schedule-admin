@@ -8,28 +8,30 @@ module.exports.getAll = (callback) => {
   });
 };
 
-// module.exports.add = (body, callback) => {
-//   database.pool.query(
-//     'INSERT INTO groups (name) values (?)',
-//     [body],
-//     (err, rows) => {
-//       if (err) throw err;
+module.exports.add = (body, callback) => {
+  const { name, type } = body;
 
-//       if (rows) {
-//         database.pool.query(
-//           `SELECT g.id, g.name FROM groups g WHERE g.name = "${name}"`,
-//           (err, groups) => {
-//             if (err) throw err;
+  database.pool.query(
+    'INSERT INTO subjects SET ?',
+    body,
+    (err, rows) => {
+      if (err) throw err;
 
-//             const [group] = groups;
+      if (rows) {
+        database.pool.query(
+          `SELECT s.id, s.name FROM subjects s WHERE s.name = "${name}" AND s.type = "${type}"`,
+          (err, subjects) => {
+            if (err) throw err;
 
-//             return callback(null, group);
-//           },
-//         );
-//       }
-//     },
-//   );
-// };
+            const [subject] = subjects;
+
+            return callback(null, subject);
+          },
+        );
+      }
+    },
+  );
+};
 
 module.exports.remove = (id, callback) => {
   database.pool.query(`DELETE FROM subjects WHERE subjects.id = ${id}`, (err, rows) => {

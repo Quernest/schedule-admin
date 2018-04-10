@@ -71,14 +71,17 @@ Form.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
   subjectName: PropTypes.string,
-  subjectType: PropTypes.string,
+  subjectType: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]),
 };
 
 Form.defaultProps = {
   submitted: false,
   fetching: false,
   subjectName: '',
-  subjectType: '',
+  subjectType: 1,
 };
 
 export default injectIntl(Form);

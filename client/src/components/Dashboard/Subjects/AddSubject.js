@@ -12,7 +12,7 @@ class AddSubject extends Component {
 
     this.state = {
       subjectName: '',
-      subjectType: '',
+      subjectType: 1,
       submitted: false,
     };
 

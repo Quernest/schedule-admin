@@ -8,16 +8,15 @@ module.exports.getAll = (req, res) => {
   });
 };
 
-// module.exports.add = (req, res) => {
-//   const { body } = req;
-//   const { name } = body;
+module.exports.add = (req, res) => {
+  const { body } = req;
 
-//   subjectsModel.add(name, (err, rows) => {
-//     if (err) throw err;
+  subjectsModel.add(body, (err, rows) => {
+    if (err) throw err;
 
-//     res.send(rows);
-//   });
-// };
+    res.send(rows);
+  });
+};
 
 module.exports.remove = (req, res) => {
   const { body } = req;

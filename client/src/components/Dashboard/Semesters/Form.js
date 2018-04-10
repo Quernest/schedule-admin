@@ -86,11 +86,11 @@ const Form = ({
           onChange={onChange}
           value={firstWeekType}
         >
-          <option className="form__select-option" value="0">
-            {formatMessage({ id: 'app.week.even' })}
-          </option>
           <option className="form__select-option" value="1">
-            {formatMessage({ id: 'app.week.odd' })}
+            {formatMessage({ id: 'app.words.odd' })}
+          </option>
+          <option className="form__select-option" value="2">
+            {formatMessage({ id: 'app.words.even' })}
           </option>
         </select>
       </label>
@@ -124,7 +124,7 @@ Form.propTypes = {
     PropTypes.object,
     PropTypes.string,
   ]),
-  firstWeekType: PropTypes.number.isRequired,
+  firstWeekType: PropTypes.number,
 };
 
 Form.defaultProps = {
@@ -132,6 +132,7 @@ Form.defaultProps = {
   number: undefined,
   start: '',
   end: '',
+  firstWeekType: 1,
 };
 
 export default injectIntl(Form);

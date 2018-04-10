@@ -32,6 +32,36 @@ const getAll = () => {
   };
 };
 
+const add = (data) => {
+  const request = () => ({
+    type: subjectsConstants.ADD_REQUEST,
+    data,
+  });
+
+  const success = subject => ({
+    type: subjectsConstants.ADD_SUCCESS,
+    subject,
+  });
+
+  const failure = error => ({
+    type: subjectsConstants.ADD_FAILURE,
+    error,
+  });
+
+  return async (dispatch) => {
+    dispatch(request());
+
+    try {
+      const subject = await subjectsService.add(data);
+      dispatch(success(subject));
+      history.push('/dashboard/subjects');
+    } catch (error) {
+      dispatch(failure(error));
+      dispatch(alertActions.error(error));
+    }
+  };
+};
+
 const remove = (id) => {
   const request = () => ({
     type: subjectsConstants.REMOVE_REQUEST,
@@ -63,5 +93,6 @@ const remove = (id) => {
 
 export default {
   getAll,
+  add,
   remove,
 };

@@ -3,8 +3,10 @@ import moment from 'moment';
 import PropTypes from 'prop-types';
 import { injectIntl, intlShape } from 'react-intl';
 import { Link } from 'react-router-dom';
+import parsers from '../../../helpers/parsers';
 
 const formatDate = date => moment(date).format('DD/MM');
+const { parseWeekTypes } = parsers;
 
 const List = ({
   semesters,
@@ -38,7 +40,7 @@ const List = ({
                 </div>
                 <small className="info">
                   <span className="info-label">{formatMessage({ id: 'app.dashboard.semesters.item.firstWeekType' })}:</span>
-                  <strong className="info-value">{firstWeekType}</strong>
+                  <strong className="info-value">{formatMessage({ id: parseWeekTypes(firstWeekType) })}</strong>
                 </small>
               </div>
             </div>

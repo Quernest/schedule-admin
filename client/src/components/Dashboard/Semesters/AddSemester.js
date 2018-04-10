@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { injectIntl, intlShape } from 'react-intl';
 import PropTypes from 'prop-types';
-import moment from 'moment';
 
 import semestersActions from '../../../actions/semesters.actions';
 import Heading from '../../Heading';
@@ -17,7 +16,7 @@ class AddSemester extends Component {
       number: undefined,
       start: '',
       end: '',
-      firstWeekType: 0,
+      firstWeekType: 1,
     };
 
     this.onSubmit = this.onSubmit.bind(this);
@@ -40,7 +39,7 @@ class AddSemester extends Component {
       submitted: true,
     });
 
-    if (number && start && end && (firstWeekType == 0 || firstWeekType == 1)) {
+    if (number && start && end && firstWeekType) {
       const data = {
         number,
         start,
@@ -113,6 +112,7 @@ class AddSemester extends Component {
 AddSemester.propTypes = {
   dispatch: PropTypes.func.isRequired,
   intl: intlShape.isRequired,
+  lang: PropTypes.string.isRequired,
   semesters: PropTypes.shape({
     list: PropTypes.arrayOf(PropTypes.object),
     fetching: PropTypes.bool,
