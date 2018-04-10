@@ -3,7 +3,10 @@ import PropTypes from 'prop-types';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 const List = ({
- items, fetching, onRemove, onEdit 
+  items,
+  fetching,
+  onRemove,
+  onEdit,
 }) => (
   <ReactCSSTransitionGroup
     transitionName="fade"

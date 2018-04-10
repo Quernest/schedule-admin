@@ -81,6 +81,10 @@
     "message": "Добавить семестр"
   },
   {
+    "id": "app.dashboard.subjects.button.addsubject",
+    "message": "Добавить предмет"
+  },
+  {
     "id": "app.dashboard.semesters.buttons.editsemester",
     "message": "Редактировать семестр"
   },

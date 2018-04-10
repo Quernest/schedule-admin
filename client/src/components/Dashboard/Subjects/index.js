@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { injectIntl, intlShape } from 'react-intl';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-
 import subjectsActions from '../../../actions/subjects.actions';
+import ActivityLoader from '../../ActivityLoader';
 import Heading from '../../Heading';
+import List from './List';
 
 class Subjects extends Component {
   constructor(props) {
@@ -28,14 +29,15 @@ class Subjects extends Component {
   }
 
   render() {
-    const { intl } = this.props;
+    const { intl, subjects } = this.props;
     const { formatMessage } = intl;
+    const { list, fetching } = subjects;
 
     const headingParams = {
       title: formatMessage({ id: 'app.sidebar.menu.item.subjects' }),
       link: {
-        path: '/dashboard/subjects',
-        label: formatMessage({ id: 'app.button.back' }),
+        path: '/dashboard/subjects/add',
+        label: formatMessage({ id: 'app.dashboard.subjects.button.addsubject' }),
       },
     };
 
@@ -43,9 +45,16 @@ class Subjects extends Component {
       <div className="dashboard-subjects">
         <Heading
           title={headingParams.title}
-          // hasLink
-          // link={headingParams.link}
+          hasLink
+          link={headingParams.link}
         />
+        {!fetching && (
+          <List
+            items={list}
+            onRemove={this.onRemove}
+          />
+        )}
+        <ActivityLoader fetching={fetching} />
       </div>
     );
   }
@@ -54,6 +63,14 @@ class Subjects extends Component {
 Subjects.propTypes = {
   intl: intlShape.isRequired,
   dispatch: PropTypes.func.isRequired,
+  subjects: PropTypes.shape({
+    list: PropTypes.arrayOf(PropTypes.object),
+    fetching: PropTypes.bool,
+  }),
+};
+
+Subjects.defaultProps = {
+  subjects: {},
 };
 
 const mapStateToProps = (state) => {
