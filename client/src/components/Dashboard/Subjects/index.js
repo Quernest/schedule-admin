@@ -25,7 +25,7 @@ class Subjects extends Component {
   onRemove(id) {
     const { dispatch } = this.props;
 
-    // dispatch(subjectsActions.remove(id));
+    dispatch(subjectsActions.remove(id));
   }
 
   render() {

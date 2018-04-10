@@ -32,6 +32,36 @@ const getAll = () => {
   };
 };
 
+const remove = (id) => {
+  const request = () => ({
+    type: subjectsConstants.REMOVE_REQUEST,
+    id,
+  });
+
+  const success = msg => ({
+    type: subjectsConstants.REMOVE_SUCCESS,
+    msg,
+  });
+
+  const failure = error => ({
+    type: subjectsConstants.REMOVE_FAILURE,
+    error,
+  });
+
+  return async (dispatch) => {
+    dispatch(request(id));
+
+    try {
+      const msg = await subjectsService.remove(id);
+      dispatch(success(msg));
+    } catch (error) {
+      dispatch(failure(error));
+      dispatch(alertActions.error(error));
+    }
+  };
+};
+
 export default {
   getAll,
+  remove,
 };

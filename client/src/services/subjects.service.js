@@ -16,6 +16,29 @@ const getAll = async () => {
   }
 };
 
+const remove = async (id) => {
+  const requestOptions = {
+    method: 'POST',
+    body: JSON.stringify({ id }),
+    headers: { ...authHeader(), 'Content-Type': 'application/json' },
+  };
+
+  try {
+    const response = await fetch('/api/subjects/remove', requestOptions);
+
+    if (!response.ok) {
+      return Promise.reject(response.statusText);
+    }
+
+    const msg = await response.json();
+
+    return Promise.resolve(msg);
+  } catch (error) {
+    return error;
+  }
+};
+
 export default {
   getAll,
+  remove,
 };
