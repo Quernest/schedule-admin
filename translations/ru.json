@@ -129,6 +129,18 @@
     "message": "Назад"
   },
   {
+    "id": "app.dashboard.subjects.form.addsubject.input.subjectName.placeholder",
+    "message": "Например: Математика"
+  },
+  {
+    "id": "app.dashboard.subjects.form.addsubject.input.subjectName",
+    "message": "Введите название предмета"
+  },
+  {
+    "id": "app.dashboard.subjects.form.addsubject.input.subjectType",
+    "message": "Выберите тип предмета"
+  },
+  {
     "id": "app.dashboard.groups.form.addgroup.input.placeholder",
     "message": "Например: ИТ-14-1"
   },
@@ -147,5 +159,13 @@
   {
     "id": "app.week.even",
     "message": "Четная"
+  },
+  {
+    "id": "app.words.lecture",
+    "message": "Лекция"
+  },
+  {
+    "id": "app.words.practice",
+    "message": "Практика"
   }
 ]

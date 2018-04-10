@@ -116,6 +116,18 @@
     "message": "Select the week from which the semester begins"
   },
   {
+    "id": "app.dashboard.subjects.form.addsubject.input.subjectName.placeholder",
+    "message": "For example: Mathematic"
+  },
+  {
+    "id": "app.dashboard.subjects.form.addsubject.input.subjectName",
+    "message": "Enter the subject name"
+  },
+  {
+    "id": "app.dashboard.subjects.form.addsubject.input.subjectType",
+    "message": "Select the subject type"
+  },
+  {
     "id": "app.dashboard.groups.form.addgroup.input.placeholder",
     "message": "For example: IT-14-1"
   },
@@ -146,5 +158,13 @@
   {
     "id": "app.week.even",
     "message": "Even"
+  },
+  {
+    "id": "app.words.lecture",
+    "message": "Lecture"
+  },
+  {
+    "id": "app.words.practice",
+    "message": "Practice"
   }
 ]

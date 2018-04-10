@@ -12,7 +12,6 @@ class Subjects extends Component {
     super(props);
 
     this.state = {};
-
     this.onRemove = this.onRemove.bind(this);
   }
 

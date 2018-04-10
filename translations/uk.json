@@ -125,6 +125,18 @@
     "message": "Введіть ім'я викладача"
   },
   {
+    "id": "app.dashboard.subjects.form.addsubject.input.subjectName.placeholder",
+    "message": "Наприклад: Математика"
+  },
+  {
+    "id": "app.dashboard.subjects.form.addsubject.input.subjectName",
+    "message": "Введіть назву предмету"
+  },
+  {
+    "id": "app.dashboard.subjects.form.addsubject.input.subjectType",
+    "message": "Виберіть тип предмету"
+  },
+  {
     "id": "app.dashboard.groups.form.addgroup.input.placeholder",
     "message": "Наприклад: ІТ-14-1"
   },
@@ -147,5 +159,13 @@
   {
     "id": "app.week.even",
     "message": "Парна"
+  },
+  {
+    "id": "app.words.lecture",
+    "message": "Лекція"
+  },
+  {
+    "id": "app.words.practice",
+    "message": "Практика"
   }
 ]

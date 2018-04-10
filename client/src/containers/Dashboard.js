@@ -2,12 +2,14 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import { injectIntl, intlShape } from 'react-intl';
 import { Switch, Route, withRouter } from 'react-router-dom';
+
 import Sidebar from '../components/Sidebar';
 import Content from '../components/Dashboard/Content';
 import Home from '../components/Dashboard/Home/index';
 import Groups from '../components/Dashboard/Groups';
 import AddGroup from '../components/Dashboard/Groups/AddGroup';
 import Subjects from '../components/Dashboard/Subjects';
+import AddSubject from '../components/Dashboard/Subjects/AddSubject';
 import Teachers from '../components/Dashboard/Teachers';
 import AddTeacher from '../components/Dashboard/Teachers/AddTeacher';
 import Semesters from '../components/Dashboard/Semesters';
@@ -31,6 +33,7 @@ const Dashboard = ({ intl }) => {
           <Route path="/dashboard/groups/add" component={AddGroup} />
 
           <Route exact path="/dashboard/subjects" component={Subjects} />
+          <Route path="/dashboard/subjects/add" component={AddSubject} />
 
           <Route exact path="/dashboard/teachers" component={Teachers} />
           <Route path="/dashboard/teachers/add" component={AddTeacher} />
