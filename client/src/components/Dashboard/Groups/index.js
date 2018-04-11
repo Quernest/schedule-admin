@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import ActivityLoader from '../../ActivityLoader';
 import groupsActions from '../../../actions/groups.actions';
 import Heading from '../../Heading';
-import List from '../../List';
+import List from './List';
 
 class Groups extends Component {
   constructor(props) {
@@ -14,7 +14,6 @@ class Groups extends Component {
     this.state = {};
 
     this.onRemove = this.onRemove.bind(this);
-    this.onEdit = this.onEdit.bind(this);
   }
 
   componentDidMount() {
@@ -27,12 +26,6 @@ class Groups extends Component {
     const { dispatch } = this.props;
 
     dispatch(groupsActions.remove(id));
-  }
-
-  onEdit(id) {
-    const { dispatch } = this.props;
-
-    console.log('[callback]: clicked on edit btn', id);
   }
 
   render() {
@@ -53,12 +46,10 @@ class Groups extends Component {
           hasLink
           link={headingParams.link}
         />
-        <List
+        {!fetching && <List
           items={list}
-          fetching={fetching}
-          onEdit={this.onEdit}
           onRemove={this.onRemove}
-        />
+        />}
         <ActivityLoader fetching={fetching} />
       </div>
     );

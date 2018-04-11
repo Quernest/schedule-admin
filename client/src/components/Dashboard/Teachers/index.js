@@ -4,7 +4,7 @@ import { injectIntl, intlShape } from 'react-intl';
 import PropTypes from 'prop-types';
 import ActivityLoader from '../../ActivityLoader';
 import Heading from '../../Heading';
-import List from '../../List';
+import List from './List';
 import teachersActions from '../../../actions/teachers.actions';
 
 class Teachers extends Component {
@@ -14,7 +14,6 @@ class Teachers extends Component {
     this.state = {};
 
     this.onRemove = this.onRemove.bind(this);
-    this.onEdit = this.onEdit.bind(this);
   }
 
   componentDidMount() {
@@ -27,12 +26,6 @@ class Teachers extends Component {
     const { dispatch } = this.props;
 
     dispatch(teachersActions.remove(id));
-  }
-
-  onEdit(id) {
-    const { dispatch } = this.props;
-
-    console.log('[callback]: clicked on edit btn', id);
   }
 
   render() {
@@ -56,12 +49,10 @@ class Teachers extends Component {
           hasLink
           link={headingParams.link}
         />
-        <List
+        {!fetching && (<List
           items={list}
-          fetching={fetching}
           onRemove={this.onRemove}
-          onEdit={this.onEdit}
-        />
+        />)}
         <ActivityLoader fetching={fetching} />
       </div>
     );

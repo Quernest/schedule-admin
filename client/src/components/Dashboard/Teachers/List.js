@@ -1,12 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { Link } from 'react-router-dom';
 
 const List = ({
   items,
-  fetching,
   onRemove,
-  onEdit,
 }) => (
   <ReactCSSTransitionGroup
     transitionName="fade"
@@ -16,15 +15,14 @@ const List = ({
     transitionLeaveTimeout={300}
   >
     <ul className="list">
-      {!fetching &&
-        items &&
+      { items &&
         items.map((item, index) => (
           <li className="list__item" key={index}>
             <span>{item.name}</span>
             <div className="list__item-controls">
-              <button
+              <Link
                 className="icon icon-pencil list__item-controls-btn"
-                onClick={() => onEdit(item.id)}
+                to={`/dashboard/teachers/edit/${item.id}`}
               />
               <button
                 className="icon icon-dustbin list__item-controls-btn"
@@ -39,16 +37,12 @@ const List = ({
 
 List.propTypes = {
   items: PropTypes.arrayOf(PropTypes.object),
-  fetching: PropTypes.bool,
   onRemove: PropTypes.func,
-  onEdit: PropTypes.func,
 };
 
 List.defaultProps = {
   items: [],
-  fetching: false,
   onRemove: () => undefined,
-  onEdit: () => undefined,
 };
 
 export default List;
