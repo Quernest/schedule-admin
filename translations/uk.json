@@ -85,6 +85,10 @@
     "message": "Додати предмет"
   },
   {
+    "id": "app.dashboard.semesters.buttons.editgroup",
+    "message": "Редагувати групу"
+  },
+  {
     "id": "app.dashboard.semesters.buttons.editsemester",
     "message": "Редагувати семестр"
   },

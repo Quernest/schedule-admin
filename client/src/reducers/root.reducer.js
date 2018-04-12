@@ -7,6 +7,7 @@ import groups from './groups.reducer';
 import teachers from './teachers.reducer';
 import semesters from './semesters.reducer';
 import subjects from './subjects.reducer';
+import schedule from './schedule.reducer';
 
 const rootReducer = combineReducers({
   user,
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   teachers,
   semesters,
   subjects,
+  schedule,
 });
 
 export default rootReducer;
