@@ -11,10 +11,12 @@ const { parseSubjectTypes } = parsers;
  * - translations
  * - prop-types
  * - add keys in loops
+ * - submit button
  */
 
 const ScheduleForm = ({
   intl,
+  submitted,
   onChange,
   onSubmit,
   group,
@@ -22,6 +24,7 @@ const ScheduleForm = ({
   semesters,
   semester,
   subjects,
+  schedule,
 }) => {
   const { formatMessage } = intl;
 
@@ -48,30 +51,40 @@ const ScheduleForm = ({
               className="form__select"
               onChange={onChange}
             >
-              {semesters.list && semesters.list.map((semester) => (
-                <option value={semester.id}>
-                  {semester.number}
+              {semesters.list && semesters.list.map((_semester) => (
+                <option
+                  key={_semester.id}
+                  value={_semester.id}
+                >
+                  {_semester.number}
                 </option>
               ))}
             </select>
           </label>
         </div>
 
-        <div className="col-xs-12 col-sm-6">
-          <h3 className="form__title">Нечетная неделя</h3>
+        <div className="form__week col-xs-12 col-sm-6">
+          <h3 className="form__week-title">Нечетная неделя</h3>
 
           <div className="form__group">
             <fieldset className="form__fieldset">
               <legend>Понедельник</legend>
 
-              <div className="">
-                <h4>1 пара</h4>
-
+              <div className="form__pair">
+                <h3 className="form__pair-title">1 пара</h3>
                 <label className="form__label" htmlFor="d1w1teachers">
                   Выберите преподавателя:
-                  <select id="d1w1teachers" className="form__select">
+                  <select
+                    id="d1w1teachers"
+                    name="teacherId"
+                    className="form__select"
+                    onChange={(e) => onChange(e, 1, 1, 1)}
+                  >
                     {teachers.list && teachers.list.map((teacher) => (
-                      <option value={teacher.id}>
+                      <option
+                        key={teacher.id}
+                        value={teacher.id}
+                      >
                         {teacher.name}
                       </option>
                     ))}
@@ -79,190 +92,83 @@ const ScheduleForm = ({
                 </label>
                 <label className="form__label" htmlFor="d1w1subjects">
                   Выберите предмет:
-                  <select id="d1w1subjects" className="form__select">
+                  <select
+                    id="d1w1subjects"
+                    name="subjectId"
+                    className="form__select"
+                    onChange={(e) => onChange(e, 1, 1, 1)}
+                  >
                     {subjects.list && subjects.list.map((subject) => (
-                      <option value={subject.id}>
+                      <option
+                        key={subject.id}
+                        value={subject.id}
+                      >
                         {subject.name} {formatMessage({ id: parseSubjectTypes(subject.type) }).toLowerCase()}
                       </option>
                     ))}
                   </select>
                 </label>
-                <input className="form__input" placeholder="location" />
+                <label className="form__label" htmlFor="d1w1location">
+                  Введите № аудитории
+                  <input
+                    id="d1w1location"
+                    name="location"
+                    className="form__input"
+                    onChange={(e) => onChange(e, 1, 1, 1)}
+                    placeholder="Например: 2215"
+                  />
+                </label>
               </div>
-              <div className="">
-                2 пара
-                <select className="form__select">
-                  {teachers.list && teachers.list.map((teacher) => (
-                    <option value={teacher.id}>
-                      {teacher.name}
-                    </option>
-                  ))}
-                </select>
-                <input className="form__input" placeholder="location" />
+
+              <div className="form__pair">
+                <h3 className="form__pair-title">2 пара</h3>
+                <label className="form__label" htmlFor="d1w1teachers">
+                  Выберите преподавателя:
+                  <select
+                    id="d1w1teachers"
+                    name="teacherId"
+                    className="form__select"
+                    onChange={(e) => onChange(e, 1, 1, 1)}
+                  >
+                    {teachers.list && teachers.list.map((teacher) => (
+                      <option
+                        key={teacher.id}
+                        value={teacher.id}
+                      >
+                        {teacher.name}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+                <label className="form__label" htmlFor="d1w1subjects">
+                  Выберите предмет:
+                  <select
+                    id="d1w1subjects"
+                    name="subjectId"
+                    className="form__select"
+                    onChange={(e) => onChange(e, 1, 1, 1)}
+                  >
+                    {subjects.list && subjects.list.map((subject) => (
+                      <option
+                        key={subject.id}
+                        value={subject.id}
+                      >
+                        {subject.name} {formatMessage({ id: parseSubjectTypes(subject.type) }).toLowerCase()}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+                <label className="form__label" htmlFor="d1w1location">
+                  Введите № аудитории
+                  <input
+                    id="d1w1location"
+                    name="location"
+                    className="form__input"
+                    onChange={(e) => onChange(e, 1, 1, 1)}
+                    placeholder="Например: 2215"
+                  />
+                </label>
               </div>
-              <div className="">
-                3 пара
-                <select className="form__select">
-                  {teachers.list && teachers.list.map((teacher) => (
-                    <option value={teacher.id}>
-                      {teacher.name}
-                    </option>
-                  ))}
-                </select>
-                <input className="form__input" placeholder="location" />
-              </div>
-              <div className="">
-                4 пара
-                <select className="form__select">
-                  {teachers.list && teachers.list.map((teacher) => (
-                    <option value={teacher.id}>
-                      {teacher.name}
-                    </option>
-                  ))}
-                </select>
-                <input className="form__input" placeholder="location" />
-              </div>
-              <div className="">
-                5 пара
-                <select className="form__select">
-                  {teachers.list && teachers.list.map((teacher) => (
-                    <option value={teacher.id}>
-                      {teacher.name}
-                    </option>
-                  ))}
-                </select>
-                <input className="form__input" placeholder="location" />
-              </div>
-            </fieldset>
-          </div>
-
-          <div className="form__group">
-            <fieldset className="form__fieldset">
-              <legend>Вторник</legend>
-              <select className="form__select">
-                {teachers.list && teachers.list.map((teacher) => (
-                  <option value={teacher.id}>
-                    {teacher.name}
-                  </option>
-                ))}
-              </select>
-              <input className="form__input" placeholder="location" />
-            </fieldset>
-          </div>
-
-          <div className="form__group">
-            <fieldset className="form__fieldset">
-              <legend>Среда</legend>
-              <select className="form__select">
-                {teachers.list && teachers.list.map((teacher) => (
-                  <option value={teacher.id}>
-                    {teacher.name}
-                  </option>
-                ))}
-              </select>
-              <input className="form__input" placeholder="location" />
-            </fieldset>
-          </div>
-
-          <div className="form__group">
-            <fieldset className="form__fieldset">
-              <legend>Четверг</legend>
-              <select className="form__select">
-                {teachers.list && teachers.list.map((teacher) => (
-                  <option value={teacher.id}>
-                    {teacher.name}
-                  </option>
-                ))}
-              </select>
-              <input className="form__input" placeholder="location" />
-            </fieldset>
-          </div>
-
-          <div className="form__group">
-            <fieldset className="form__fieldset">
-              <legend>Пятница</legend>
-              <select className="form__select">
-                {teachers.list && teachers.list.map((teacher) => (
-                  <option value={teacher.id}>
-                    {teacher.name}
-                  </option>
-                ))}
-              </select>
-              <input className="form__input" placeholder="location" />
-            </fieldset>
-          </div>
-        </div>
-
-        <div className="col-xs-12 col-sm-6">
-          <h3 className="form__title">Четная неделя</h3>
-
-          <div className="form__group">
-            <fieldset className="form__fieldset">
-              <legend>Понедельник</legend>
-              <select className="form__select">
-                {teachers.list && teachers.list.map((teacher) => (
-                  <option value={teacher.id}>
-                    {teacher.name}
-                  </option>
-                ))}
-              </select>
-              <input className="form__input" placeholder="location" />
-            </fieldset>
-          </div>
-
-          <div className="form__group">
-            <fieldset className="form__fieldset">
-              <legend>Вторник</legend>
-              <select className="form__select">
-                {teachers.list && teachers.list.map((teacher) => (
-                  <option value={teacher.id}>
-                    {teacher.name}
-                  </option>
-                ))}
-              </select>
-              <input className="form__input" placeholder="location" />
-            </fieldset>
-          </div>
-
-          <div className="form__group">
-            <fieldset className="form__fieldset">
-              <legend>Среда</legend>
-              <select className="form__select">
-                {teachers.list && teachers.list.map((teacher) => (
-                  <option value={teacher.id}>
-                    {teacher.name}
-                  </option>
-                ))}
-              </select>
-              <input className="form__input" placeholder="location" />
-            </fieldset>
-          </div>
-
-          <div className="form__group">
-            <fieldset className="form__fieldset">
-              <legend>Четверг</legend>
-              <select className="form__select">
-                {teachers.list && teachers.list.map((teacher) => (
-                  <option value={teacher.id}>
-                    {teacher.name}
-                  </option>
-                ))}
-              </select>
-              <input className="form__input" placeholder="location" />
-            </fieldset>
-          </div>
-
-          <div className="form__group">
-            <fieldset className="form__fieldset">
-              <legend>Пятница</legend>
-              <select className="form__select">
-                {teachers.list && teachers.list.map((teacher) => (
-                  <option value={teacher.id}>
-                    {teacher.name}
-                  </option>
-                ))}
-              </select>
-              <input className="form__input" placeholder="location" />
             </fieldset>
           </div>
         </div>
@@ -273,16 +179,16 @@ const ScheduleForm = ({
 
 ScheduleForm.propTypes = {
   intl: intlShape.isRequired,
+  submitted: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
-  // schedule: PropTypes.shape({
-  //   fetching: PropTypes.bool,
-  //   list: PropTypes.arrayOf(PropTypes.object),
-  // }),
-  // groups: PropTypes.shape({
-  //   fetching: PropTypes.bool,
-  //   list: PropTypes.arrayOf(PropTypes.object),
-  // }),
+  group: PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string,
+    ]),
+  }),
   semesters: PropTypes.shape({
     fetching: PropTypes.bool,
     list: PropTypes.arrayOf(PropTypes.object),
@@ -299,12 +205,17 @@ ScheduleForm.propTypes = {
     PropTypes.string,
     PropTypes.number,
   ]),
+  schedule: PropTypes.shape({
+    fetching: PropTypes.bool,
+    list: PropTypes.arrayOf(PropTypes.object),
+  }),
 };
 
 ScheduleForm.defaultProps = {
-  // schedule: {},
-  // groups: {},
+  submitted: false,
+  group: {},
   semesters: {},
+  schedule: {},
   teachers: {},
   subjects: {},
   semester: '',

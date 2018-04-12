@@ -24,50 +24,88 @@ class EditGroup extends Component {
     super(props);
 
     this.state = {
-      semester: undefined,
+      semester: 1,
+      submitted: false,
+      scheduleList: [],
     };
 
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
-    this.getGroup = this.getGroup.bind(this);
-    this.getSchedule = this.getSchedule.bind(this);
+    this.getGroupById = this.getGroupById.bind(this);
+    this.getScheduleById = this.getScheduleById.bind(this);
     this.getTeachers = this.getTeachers.bind(this);
     this.getSemesters = this.getSemesters.bind(this);
     this.getSubjects = this.getSubjects.bind(this);
   }
 
   componentDidMount() {
-    this.getGroup();
-    this.getSchedule();
+    this.getGroupById();
+    this.getScheduleById();
     this.getTeachers();
     this.getSemesters();
     this.getSubjects();
   }
 
-  onChange(e) {
+  onChange(e, weekDay, weekType, lesson) {
     const { name, value } = e.target;
+    const { scheduleList, semester } = this.state;
 
-    console.log(this.state);
+    if (weekDay && weekType && lesson && semester) {
+      const newItem = {
+        [name]: value,
+        semester,
+        weekDay,
+        weekType,
+        lesson,
+      };
 
-    this.setState({
-      [name]: value,
-    });
+      console.log('new item', newItem);
+
+      if (scheduleList && scheduleList.length) {
+        const [prevItem] = scheduleList.filter((item) => {
+          if (!item.isFreeTime &&
+            item.weekDay === weekDay &&
+            item.weekType === weekType &&
+            item.lesson === lesson &&
+            item.semester === Number(semester)
+          ) {
+            return item;
+          }
+        });
+
+        console.log('previous item', prevItem);
+      }
+    } else {
+      this.setState({
+        [name]: value,
+      });
+    }
   }
 
   onSubmit(e) {
     e.preventDefault();
+    const { dispatch } = this.props;
 
-    console.log(this.state);
+    // this array will be send to API
+    const { scheduleList } = this.state;
+
+    this.setState({
+      submitted: true,
+    });
+
+    // if (scheduleList && scheduleList.length) {
+    //   dispatch(scheduleActions.add(scheduleList));
+    // }
   }
 
-  getGroup() {
+  getGroupById() {
     const { dispatch, groupId } = this.props;
 
     dispatch(groupsActions.getById(groupId));
   }
 
-  getSchedule() {
+  getScheduleById() {
     const { dispatch, groupId } = this.props;
 
     dispatch(scheduleActions.getById(groupId));
@@ -91,6 +129,20 @@ class EditGroup extends Component {
     dispatch(subjectsActions.getAll());
   }
 
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    if (nextProps.schedule !== this.props.schedule) {
+      const { schedule } = nextProps;
+      const { list, fetching } = schedule;
+
+      // set schedule list to state
+      if (!fetching && list && list.length) {
+        this.setState({
+          scheduleList: list,
+        });
+      }
+    }
+  }
+
   render() {
     const {
       intl,
@@ -100,8 +152,8 @@ class EditGroup extends Component {
       semesters,
       subjects,
     } = this.props;
-    const { semester } = this.state;
-    const { group } = groups; // state is better?
+    const { semester, submitted } = this.state;
+    const { group } = groups;
     const { formatMessage } = intl;
 
     const headingParams = {
@@ -112,8 +164,11 @@ class EditGroup extends Component {
       },
     };
 
-    // FIXME: smth better
-    const noFetching = !schedule.fetching && !groups.fetching && !teachers.fetching && !subjects.fetching && !semesters.fetching;
+    const noFetching = !schedule.fetching
+      && !groups.fetching
+      && !teachers.fetching
+      && !subjects.fetching
+      && !semesters.fetching;
 
     return (
       <div className="dashboard-editgroup">
@@ -123,6 +178,7 @@ class EditGroup extends Component {
           link={headingParams.link}
         />
         {noFetching && <ScheduleForm
+          submitted={submitted}
           onSubmit={this.onSubmit}
           onChange={this.onChange}
           group={group}
@@ -130,11 +186,9 @@ class EditGroup extends Component {
           semesters={semesters}
           semester={semester}
           subjects={subjects}
+          schedule={schedule}
         />}
-        <ActivityLoader
-          // FIXME: smth better
-          fetching={schedule.fetching || groups.fetching || teachers.fetching || subjects.fetching || semesters.fetching}
-        />
+        <ActivityLoader fetching={!noFetching} />
       </div>
     );
   }
@@ -191,11 +245,11 @@ const mapStateToProps = (state, props) => {
    * get from store (by id) function
    */
 
-  console.log('groups: ', groups);
+  // console.log('groups: ', groups);
   console.log('schedule: ', schedule);
-  console.log('teachers: ', teachers);
-  console.log('semesters: ', semesters);
-  console.log('subjects: ', subjects);
+  // console.log('teachers: ', teachers);
+  // console.log('semesters: ', semesters);
+  // console.log('subjects: ', subjects);
 
   return {
     groups,
