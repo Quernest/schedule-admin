@@ -30,9 +30,9 @@ const getById = async (id) => {
       return Promise.reject(response.statusText);
     }
 
-    const schedule = await response.json();
+    const list = await response.json();
 
-    return Promise.resolve(schedule);
+    return Promise.resolve(list);
   } catch (error) {
     return error;
   }

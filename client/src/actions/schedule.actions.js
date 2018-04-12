@@ -39,9 +39,9 @@ const getById = (id) => {
     id,
   });
 
-  const success = schedule => ({
+  const success = list => ({
     type: scheduleConstants.GET_BY_ID_SUCCESS,
-    schedule,
+    list,
   });
 
   const failure = error => ({
@@ -53,8 +53,8 @@ const getById = (id) => {
     dispatch(request());
 
     try {
-      const schedule = await scheduleService.getById(id);
-      dispatch(success(schedule));
+      const list = await scheduleService.getById(id);
+      dispatch(success(list));
     } catch (error) {
       dispatch(failure(error));
       dispatch(alertActions.error(error));

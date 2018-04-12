@@ -10,7 +10,7 @@ const schedule = (state = {}, action) => {
     case scheduleConstants.ADD_SUCCESS:
       return {
         ...state,
-        list: [...state.list, action.schedule],
+        list: [...state.list, ...action.list],
         fetching: false,
       };
     case scheduleConstants.ADD_FAILURE:
@@ -28,7 +28,7 @@ const schedule = (state = {}, action) => {
       return {
         ...state,
         fetching: false,
-        schedule: action.schedule,
+        list: action.list,
       };
     case scheduleConstants.GET_BY_ID_FAILURE:
       return {

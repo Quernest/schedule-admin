@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import Heading from '../../Heading';
 import ActivityLoader from '../../ActivityLoader';
 import scheduleActions from '../../../actions/schedule.actions';
+import ScheduleForm from './ScheduleForm';
 
 /**
  * TODO:
@@ -17,20 +18,31 @@ class EditGroup extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      // schedule schema
-      id: undefined,
-      groupId: undefined,
-      lesson: undefined,
-      location: '',
-      subjectId: undefined,
-      teacherId: undefined,
-      weekDay: undefined,
-      weekType: undefined,
-    };
+    this.state = {};
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+    this.getSchedule = this.getSchedule.bind(this);
   }
 
   componentDidMount() {
+    this.getSchedule();
+  }
+
+  onChange(e) {
+    const { name, value } = e.target;
+
+    this.setState({
+      [name]: value,
+    });
+  }
+
+  onSubmit(e) {
+    e.preventDefault();
+
+    console.log(this.state);
+  }
+
+  getSchedule() {
     const { dispatch, groupId } = this.props;
 
     dispatch(scheduleActions.getById(groupId));
@@ -48,6 +60,8 @@ class EditGroup extends Component {
       },
     };
 
+    const noFetching = !schedule.fetching && !groups.fetching;
+
     return (
       <div className="dashboard-editgroup">
         <Heading
@@ -55,109 +69,10 @@ class EditGroup extends Component {
           hasLink
           link={headingParams.link}
         />
-
-        <form className="form">
-          <div className="row">
-            <div className="col-xs-12">
-              <input className="form__input" placeholder="group name" />
-            </div>
-
-            <div className="col-xs-12">
-              <h2>Расписание</h2>
-            </div>
-
-            <div className="col-xs-12 col-sm-6">
-              <h3>Нечетная неделя</h3>
-
-              <div className="form__group">
-                <fieldset>
-                  <legend>Понедельник</legend>
-                  <input className="form__input" />
-                  <input className="form__input" />
-                </fieldset>
-              </div>
-
-              <div className="form__group">
-                <fieldset>
-                  <legend>Вторник</legend>
-                  <input className="form__input" />
-                  <input className="form__input" />
-                </fieldset>
-              </div>
-
-              <div className="form__group">
-                <fieldset>
-                  <legend>Среда</legend>
-                  <input className="form__input" />
-                  <input className="form__input" />
-                </fieldset>
-              </div>
-
-              <div className="form__group">
-                <fieldset>
-                  <legend>Четверг</legend>
-                  <input className="form__input" />
-                  <input className="form__input" />
-                </fieldset>
-              </div>
-
-              <div className="form__group">
-                <fieldset>
-                  <legend>Пятница</legend>
-                  <input className="form__input" />
-                  <input className="form__input" />
-                </fieldset>
-              </div>
-
-            </div>
-
-            <div className="col-xs-12 col-sm-6">
-              <h3>Четная неделя</h3>
-
-              <div className="form__group">
-                <fieldset>
-                  <legend>Понедельник</legend>
-                  <input className="form__input" />
-                  <input className="form__input" />
-                </fieldset>
-              </div>
-
-              <div className="form__group">
-                <fieldset>
-                  <legend>Вторник</legend>
-                  <input className="form__input" />
-                  <input className="form__input" />
-                </fieldset>
-              </div>
-
-              <div className="form__group">
-                <fieldset>
-                  <legend>Среда</legend>
-                  <input className="form__input" />
-                  <input className="form__input" />
-                </fieldset>
-              </div>
-
-              <div className="form__group">
-                <fieldset>
-                  <legend>Четверг</legend>
-                  <input className="form__input" />
-                  <input className="form__input" />
-                </fieldset>
-              </div>
-
-              <div className="form__group">
-                <fieldset>
-                  <legend>Пятница</legend>
-                  <input className="form__input" />
-                  <input className="form__input" />
-                </fieldset>
-              </div>
-
-            </div>
-          </div>
-        </form>
-
+        {noFetching && <ScheduleForm
+          onSubmit={this.onSubmit}
+          onChange={this.onChange}
+        />}
         <ActivityLoader
           fetching={schedule.fetching || groups.fetching}
         />
@@ -169,11 +84,26 @@ class EditGroup extends Component {
 EditGroup.propTypes = {
   intl: intlShape.isRequired,
   groupId: PropTypes.string.isRequired,
+  schedule: PropTypes.shape({
+    fetching: PropTypes.bool,
+    list: PropTypes.arrayOf(PropTypes.object),
+  }),
+  groups: PropTypes.shape({
+    fetching: PropTypes.bool,
+    list: PropTypes.arrayOf(PropTypes.object),
+  }),
+};
+
+EditGroup.defaultProps = {
+  schedule: {},
+  groups: {},
 };
 
 const mapStateToProps = (state, props) => {
   const { groups, schedule } = state;
   const { id } = props.match.params;
+
+  console.log(schedule);
 
   return {
     groups,

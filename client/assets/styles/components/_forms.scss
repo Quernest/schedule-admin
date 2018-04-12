@@ -47,6 +47,23 @@
 
   &__label {}
 
+  &__title {
+    margin-top: em($gutter-y);
+    margin-bottom: em($gutter-y);
+    font-size: $font-size-h3;
+    color: $black;
+  }
+
+  &__fieldset {
+    border-color: $lightgrey;
+
+    legend {
+      font-family: $font-family-bold;
+      font-size: $font-size-small;
+      color: $black;
+    }
+  }
+
   &__group {
     display: flex;
     flex-direction: column;
