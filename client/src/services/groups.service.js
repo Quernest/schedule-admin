@@ -16,6 +16,22 @@ const getAll = async () => {
   }
 };
 
+const getById = async (id) => {
+  try {
+    const response = await fetch(`/api/groups/${id}`);
+
+    if (!response.ok) {
+      return Promise.reject(response.statusText);
+    }
+
+    const group = await response.json();
+
+    return Promise.resolve(group);
+  } catch (error) {
+    return error;
+  }
+};
+
 const add = async (name) => {
   const requestOptions = {
     method: 'POST',
@@ -62,6 +78,7 @@ const remove = async (id) => {
 
 const groupsService = {
   getAll,
+  getById,
   add,
   remove,
 };

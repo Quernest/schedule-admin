@@ -19,6 +19,23 @@ const groups = (state = {}, action) => {
         fetching: false,
         error: action.error,
       };
+    case groupsConstants.GET_BY_ID_REQUEST:
+      return {
+        ...state,
+        fetching: true,
+      };
+    case groupsConstants.GET_BY_ID_SUCCESS:
+      return {
+        ...state,
+        fetching: false,
+        group: action.group,
+      };
+    case groupsConstants.GET_BY_ID_FAILURE:
+      return {
+        ...state,
+        fetching: false,
+        error: action.error,
+      };
     case groupsConstants.ADD_REQUEST:
       return {
         ...state,

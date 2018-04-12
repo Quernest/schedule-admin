@@ -38,7 +38,7 @@ class EditGroup extends Component {
   }
 
   componentDidMount() {
-    // this.getGroup();
+    this.getGroup();
     this.getSchedule();
     this.getTeachers();
     this.getSemesters();
@@ -64,10 +64,7 @@ class EditGroup extends Component {
   getGroup() {
     const { dispatch, groupId } = this.props;
 
-    /**
-     * TODO: get group by id logic
-     */
-    // dispatch(groupsActions.getById())
+    dispatch(groupsActions.getById(groupId));
   }
 
   getSchedule() {
@@ -104,6 +101,7 @@ class EditGroup extends Component {
       subjects,
     } = this.props;
     const { semester } = this.state;
+    const { group } = groups; // state is better?
     const { formatMessage } = intl;
 
     const headingParams = {
@@ -114,9 +112,8 @@ class EditGroup extends Component {
       },
     };
 
-    const noFetching =
-      !schedule.fetching && !groups.fetching &&
-      !teachers.fetching && !subjects.fetching;
+    // FIXME: smth better
+    const noFetching = !schedule.fetching && !groups.fetching && !teachers.fetching && !subjects.fetching && !semesters.fetching;
 
     return (
       <div className="dashboard-editgroup">
@@ -128,13 +125,15 @@ class EditGroup extends Component {
         {noFetching && <ScheduleForm
           onSubmit={this.onSubmit}
           onChange={this.onChange}
+          group={group}
           teachers={teachers}
           semesters={semesters}
           semester={semester}
           subjects={subjects}
         />}
         <ActivityLoader
-          fetching={schedule.fetching || groups.fetching || teachers.fetching || subjects.fetching}
+          // FIXME: smth better
+          fetching={schedule.fetching || groups.fetching || teachers.fetching || subjects.fetching || semesters.fetching}
         />
       </div>
     );
@@ -184,6 +183,13 @@ const mapStateToProps = (state, props) => {
     subjects,
   } = state;
   const { id } = props.match.params;
+
+  /**
+   * TODO: 
+   *
+   * create
+   * get from store (by id) function
+   */
 
   console.log('groups: ', groups);
   console.log('schedule: ', schedule);

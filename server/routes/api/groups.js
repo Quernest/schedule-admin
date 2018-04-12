@@ -31,4 +31,7 @@ router.use('/remove', auth.required, (req, res) => {
   });
 });
 
+// get the semester by id
+router.use('/:id', groupsController.getById);
+
 module.exports = router;

@@ -17,6 +17,7 @@ const ScheduleForm = ({
   intl,
   onChange,
   onSubmit,
+  group,
   teachers,
   semesters,
   semester,
@@ -28,7 +29,13 @@ const ScheduleForm = ({
     <form className="form" onSubmit={onSubmit}>
       <div className="row">
         <div className="col-xs-12">
-          <input className="form__input" placeholder="IT-14-1" />
+          <input
+            id="groupName"
+            name="groupName"
+            value={(group && group.name) || ''}
+            className="form__input"
+            onChange={onChange}
+          />
         </div>
 
         <div className="col-xs-12">

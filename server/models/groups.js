@@ -8,6 +8,16 @@ module.exports.getAll = (callback) => {
   });
 };
 
+module.exports.getById = (id, callback) => {
+  database.pool.query(`SELECT * FROM groups WHERE groups.id = ${id}`, (err, rows) => {
+    if (err) throw err;
+
+    const [group] = rows;
+
+    return callback(null, group);
+  });
+};
+
 module.exports.add = (name, callback) => {
   database.pool.query(
     'INSERT INTO groups (name) values (?)',
