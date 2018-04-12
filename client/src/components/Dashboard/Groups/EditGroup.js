@@ -4,8 +4,13 @@ import { injectIntl, intlShape } from 'react-intl';
 import PropTypes from 'prop-types';
 import Heading from '../../Heading';
 import ActivityLoader from '../../ActivityLoader';
-import scheduleActions from '../../../actions/schedule.actions';
 import ScheduleForm from './ScheduleForm';
+
+import scheduleActions from '../../../actions/schedule.actions';
+import teachersActions from '../../../actions/teachers.actions';
+import semestersActions from '../../../actions/semesters.actions';
+import subjectsActions from '../../../actions/subjects.actions';
+import groupsActions from '../../../actions/groups.actions';
 
 /**
  * TODO:
@@ -18,18 +23,32 @@ class EditGroup extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      semester: undefined,
+    };
+
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+
+    this.getGroup = this.getGroup.bind(this);
     this.getSchedule = this.getSchedule.bind(this);
+    this.getTeachers = this.getTeachers.bind(this);
+    this.getSemesters = this.getSemesters.bind(this);
+    this.getSubjects = this.getSubjects.bind(this);
   }
 
   componentDidMount() {
+    // this.getGroup();
     this.getSchedule();
+    this.getTeachers();
+    this.getSemesters();
+    this.getSubjects();
   }
 
   onChange(e) {
     const { name, value } = e.target;
+
+    console.log(this.state);
 
     this.setState({
       [name]: value,
@@ -42,14 +61,49 @@ class EditGroup extends Component {
     console.log(this.state);
   }
 
+  getGroup() {
+    const { dispatch, groupId } = this.props;
+
+    /**
+     * TODO: get group by id logic
+     */
+    // dispatch(groupsActions.getById())
+  }
+
   getSchedule() {
     const { dispatch, groupId } = this.props;
 
     dispatch(scheduleActions.getById(groupId));
   }
 
+  getTeachers() {
+    const { dispatch } = this.props;
+
+    dispatch(teachersActions.getAll());
+  }
+
+  getSemesters() {
+    const { dispatch } = this.props;
+
+    dispatch(semestersActions.getAll());
+  }
+
+  getSubjects() {
+    const { dispatch } = this.props;
+
+    dispatch(subjectsActions.getAll());
+  }
+
   render() {
-    const { intl, schedule, groups } = this.props;
+    const {
+      intl,
+      schedule,
+      groups,
+      teachers,
+      semesters,
+      subjects,
+    } = this.props;
+    const { semester } = this.state;
     const { formatMessage } = intl;
 
     const headingParams = {
@@ -60,7 +114,9 @@ class EditGroup extends Component {
       },
     };
 
-    const noFetching = !schedule.fetching && !groups.fetching;
+    const noFetching =
+      !schedule.fetching && !groups.fetching &&
+      !teachers.fetching && !subjects.fetching;
 
     return (
       <div className="dashboard-editgroup">
@@ -72,9 +128,13 @@ class EditGroup extends Component {
         {noFetching && <ScheduleForm
           onSubmit={this.onSubmit}
           onChange={this.onChange}
+          teachers={teachers}
+          semesters={semesters}
+          semester={semester}
+          subjects={subjects}
         />}
         <ActivityLoader
-          fetching={schedule.fetching || groups.fetching}
+          fetching={schedule.fetching || groups.fetching || teachers.fetching || subjects.fetching}
         />
       </div>
     );
@@ -83,6 +143,7 @@ class EditGroup extends Component {
 
 EditGroup.propTypes = {
   intl: intlShape.isRequired,
+  dispatch: PropTypes.func.isRequired,
   groupId: PropTypes.string.isRequired,
   schedule: PropTypes.shape({
     fetching: PropTypes.bool,
@@ -92,22 +153,50 @@ EditGroup.propTypes = {
     fetching: PropTypes.bool,
     list: PropTypes.arrayOf(PropTypes.object),
   }),
+  semesters: PropTypes.shape({
+    fetching: PropTypes.bool,
+    list: PropTypes.arrayOf(PropTypes.object),
+  }),
+  teachers: PropTypes.shape({
+    fetching: PropTypes.bool,
+    list: PropTypes.arrayOf(PropTypes.object),
+  }),
+  subjects: PropTypes.shape({
+    fetching: PropTypes.bool,
+    list: PropTypes.arrayOf(PropTypes.object),
+  }),
 };
 
 EditGroup.defaultProps = {
   schedule: {},
   groups: {},
+  semesters: {},
+  teachers: {},
+  subjects: {},
 };
 
 const mapStateToProps = (state, props) => {
-  const { groups, schedule } = state;
+  const {
+    groups,
+    schedule,
+    teachers,
+    semesters,
+    subjects,
+  } = state;
   const { id } = props.match.params;
 
-  console.log(schedule);
+  console.log('groups: ', groups);
+  console.log('schedule: ', schedule);
+  console.log('teachers: ', teachers);
+  console.log('semesters: ', semesters);
+  console.log('subjects: ', subjects);
 
   return {
     groups,
     schedule,
+    teachers,
+    semesters,
+    subjects,
     groupId: id,
   };
 };
