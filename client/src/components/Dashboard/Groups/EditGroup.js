@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { injectIntl, intlShape } from 'react-intl';
 import PropTypes from 'prop-types';
+import update from 'react-addons-update';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import Heading from '../../Heading';
 import ActivityLoader from '../../ActivityLoader';
 import ScheduleForm from './ScheduleForm';
@@ -12,25 +14,22 @@ import semestersActions from '../../../actions/semesters.actions';
 import subjectsActions from '../../../actions/subjects.actions';
 import groupsActions from '../../../actions/groups.actions';
 
-/**
- * TODO:
- *
- * - translate heading and inner elements
- * - create schedule form
- */
-
 class EditGroup extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      semester: 1,
+      // TODO: auto select current semester
+      semester: 3,
+      groupName: '',
       submitted: false,
       scheduleList: [],
     };
 
-    this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.onChangeScheduleItem = this.onChangeScheduleItem.bind(this);
+    this.onChangeGroupName = this.onChangeGroupName.bind(this);
+    this.onChangeSemester = this.onChangeSemester.bind(this);
 
     this.getGroupById = this.getGroupById.bind(this);
     this.getScheduleById = this.getScheduleById.bind(this);
@@ -47,38 +46,60 @@ class EditGroup extends Component {
     this.getSubjects();
   }
 
-  onChange(e, weekDay, weekType, lesson) {
+  onChangeGroupName(e) {
+    const { value } = e.target;
+
+    this.setState({
+      groupName: value,
+    });
+  }
+
+  onChangeSemester(e) {
+    const { value } = e.target;
+
+    this.setState({
+      semester: value,
+    });
+  }
+
+  onChangeScheduleItem(e, weekDay, weekType, lesson, event) {
     const { name, value } = e.target;
-    const { scheduleList, semester } = this.state;
+    const { groupId } = this.props;
+    const { scheduleList = [], semester } = this.state;
 
-    if (weekDay && weekType && lesson && semester) {
-      const newItem = {
-        [name]: value,
-        semester,
-        weekDay,
-        weekType,
-        lesson,
-      };
+    const updatedItem = {
+      groupId: Number(groupId),
+      semester: Number(semester),
+      weekDay,
+      weekType,
+      lesson,
+      [name]: value,
+    };
 
-      console.log('new item', newItem);
+    const isEmptyEvent = !event || typeof event.item === 'undefined' || typeof event.index === 'undefined';
 
-      if (scheduleList && scheduleList.length) {
-        const [prevItem] = scheduleList.filter((item) => {
-          if (!item.isFreeTime &&
-            item.weekDay === weekDay &&
-            item.weekType === weekType &&
-            item.lesson === lesson &&
-            item.semester === Number(semester)
-          ) {
-            return item;
-          }
-        });
+    // edit
+    if (weekDay && weekType && lesson && !isEmptyEvent) {
+      const { item, index } = event;
 
-        console.log('previous item', prevItem);
-      }
-    } else {
       this.setState({
-        [name]: value,
+        scheduleList: update(scheduleList, {
+          [index]: {
+            $set: {
+              ...item,
+              ...updatedItem,
+            },
+          },
+        }),
+      });
+    }
+
+    // create new
+    if (isEmptyEvent) {
+      this.setState({
+        scheduleList: update(scheduleList, {
+          $push: [updatedItem],
+        }),
       });
     }
   }
@@ -94,9 +115,9 @@ class EditGroup extends Component {
       submitted: true,
     });
 
-    // if (scheduleList && scheduleList.length) {
-    //   dispatch(scheduleActions.add(scheduleList));
-    // }
+    if (scheduleList && scheduleList.length) {
+      dispatch(scheduleActions.add(scheduleList));
+    }
   }
 
   getGroupById() {
@@ -134,8 +155,7 @@ class EditGroup extends Component {
       const { schedule } = nextProps;
       const { list, fetching } = schedule;
 
-      // set schedule list to state
-      if (!fetching && list && list.length) {
+      if (!fetching) {
         this.setState({
           scheduleList: list,
         });
@@ -151,8 +171,9 @@ class EditGroup extends Component {
       teachers,
       semesters,
       subjects,
+      lang,
     } = this.props;
-    const { semester, submitted } = this.state;
+    const { semester, submitted, scheduleList } = this.state;
     const { group } = groups;
     const { formatMessage } = intl;
 
@@ -177,17 +198,31 @@ class EditGroup extends Component {
           hasLink
           link={headingParams.link}
         />
-        {noFetching && <ScheduleForm
-          submitted={submitted}
-          onSubmit={this.onSubmit}
-          onChange={this.onChange}
-          group={group}
-          teachers={teachers}
-          semesters={semesters}
-          semester={semester}
-          subjects={subjects}
-          schedule={schedule}
-        />}
+        {noFetching && (
+          <ReactCSSTransitionGroup
+            transitionName="fade"
+            transitionAppear
+            transitionAppearTimeout={300}
+            transitionEnterTimeout={300}
+            transitionLeaveTimeout={300}
+          >
+            <ScheduleForm
+              lang={lang}
+              submitted={submitted}
+              onSubmit={this.onSubmit}
+              onChangeScheduleItem={this.onChangeScheduleItem}
+              onChangeGroupName={this.onChangeGroupName}
+              onChangeSemester={this.onChangeSemester}
+              group={group}
+              teachers={teachers}
+              semesters={semesters}
+              semester={semester}
+              subjects={subjects}
+              schedule={schedule}
+              scheduleList={scheduleList}
+            />
+          </ReactCSSTransitionGroup>
+        )}
         <ActivityLoader fetching={!noFetching} />
       </div>
     );
@@ -196,6 +231,7 @@ class EditGroup extends Component {
 
 EditGroup.propTypes = {
   intl: intlShape.isRequired,
+  lang: PropTypes.string.isRequired,
   dispatch: PropTypes.func.isRequired,
   groupId: PropTypes.string.isRequired,
   schedule: PropTypes.shape({
@@ -235,8 +271,10 @@ const mapStateToProps = (state, props) => {
     teachers,
     semesters,
     subjects,
+    locale,
   } = state;
   const { id } = props.match.params;
+  const { lang } = locale;
 
   /**
    * TODO: 
@@ -246,7 +284,7 @@ const mapStateToProps = (state, props) => {
    */
 
   // console.log('groups: ', groups);
-  console.log('schedule: ', schedule);
+  // console.log('schedule: ', schedule);
   // console.log('teachers: ', teachers);
   // console.log('semesters: ', semesters);
   // console.log('subjects: ', subjects);
@@ -258,6 +296,7 @@ const mapStateToProps = (state, props) => {
     semesters,
     subjects,
     groupId: id,
+    lang,
   };
 };
 

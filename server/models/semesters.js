@@ -71,13 +71,11 @@ module.exports.edit = (body, callback) => {
 };
 
 module.exports.getById = (id, callback) => {
-  database.pool.query(
-    `SELECT * FROM semesters s WHERE s.id = ${id}`, (err, rows) => {
-      if (err) throw err;
+  database.pool.query(`SELECT * FROM semesters s WHERE s.id = ${id}`, (err, rows) => {
+    if (err) throw err;
 
-      const [semester] = rows;
+    const [semester] = rows;
 
-      return callback(null, semester);
-    },
-  );
+    return callback(null, semester);
+  });
 };
