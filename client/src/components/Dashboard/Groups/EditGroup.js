@@ -6,7 +6,7 @@ import update from 'react-addons-update';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import Heading from '../../Heading';
 import ActivityLoader from '../../ActivityLoader';
-import ScheduleForm from './ScheduleForm';
+import Form from '../Schedule/Form';
 
 import scheduleActions from '../../../actions/schedule.actions';
 import teachersActions from '../../../actions/teachers.actions';
@@ -206,7 +206,7 @@ class EditGroup extends Component {
             transitionEnterTimeout={300}
             transitionLeaveTimeout={300}
           >
-            <ScheduleForm
+            <Form
               lang={lang}
               submitted={submitted}
               onSubmit={this.onSubmit}
