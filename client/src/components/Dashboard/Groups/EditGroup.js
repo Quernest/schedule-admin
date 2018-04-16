@@ -58,7 +58,7 @@ class EditGroup extends Component {
     const { value } = e.target;
 
     this.setState({
-      semester: value,
+      semester: Number(value),
     });
   }
 

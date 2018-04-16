@@ -54,7 +54,7 @@ const Event = ({
           className="form__input"
           name="isFreeTime"
           value={(event.item && event.item.isFreeTime ? 1 : 0) || ''}
-          checked={(event.item && event.item.isFreeTime)}
+          checked={(event.item && event.item.isFreeTime) || false}
           onChange={(e) => onChangeScheduleItem(e, isoWeekDay, weekType, isoEventNumber, event)}
         />
       </label>
@@ -140,7 +140,10 @@ Event.propTypes = {
   index: PropTypes.number,
   weekType: PropTypes.number.isRequired,
   dayIndex: PropTypes.number.isRequired,
-  semester: PropTypes.number.isRequired,
+  semester: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+  ]).isRequired,
   scheduleList: PropTypes.arrayOf(PropTypes.object),
   onChangeScheduleItem: PropTypes.func.isRequired,
   teachersList: PropTypes.arrayOf(PropTypes.object),
