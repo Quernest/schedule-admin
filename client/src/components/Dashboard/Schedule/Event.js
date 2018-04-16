@@ -47,6 +47,15 @@ const Event = ({
     <div className="form__event" key={index}>
       <h3 className="form__event-title">{isoEventNumber}</h3>
 
+      <label className="form__label">
+        Свободное время
+        <input
+          type="checkbox"
+          className="form__input"
+          checked={(event.item && event.item.isFreeTime)}
+        />
+      </label>
+
       <label
         className="form__label"
         htmlFor={`${isoEventNumber}-teachers`}
@@ -57,8 +66,10 @@ const Event = ({
           name="teacherId"
           className="form__select"
           value={(event.item && event.item.teacherId) || ''}
+          disabled={(event.item && event.item.isFreeTime)}
           onChange={(e) => onChangeScheduleItem(e, isoWeekDay, weekType, isoEventNumber, event)}
         >
+          <option value="" />
           {teachersList.length && teachersList.map((teacher) => (
             <option
               key={teacher.id}
@@ -80,8 +91,10 @@ const Event = ({
           name="subjectId"
           className="form__select"
           value={(event.item && event.item.subjectId) || ''}
+          disabled={(event.item && event.item.isFreeTime)}
           onChange={(e) => onChangeScheduleItem(e, isoWeekDay, weekType, isoEventNumber, event)}
         >
+          <option value="" />
           {subjectsList.length && subjectsList.map((subject) => (
             <option
               key={subject.id}
@@ -103,6 +116,7 @@ const Event = ({
           name="location"
           className="form__input"
           value={(event.item && event.item.location) || ''}
+          disabled={(event.item && event.item.isFreeTime)}
           onChange={(e) => onChangeScheduleItem(e, isoWeekDay, weekType, isoEventNumber, event)}
           placeholder="Например: 2215"
         />

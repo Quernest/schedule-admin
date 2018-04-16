@@ -10,8 +10,8 @@ const schedule = (state = {}, action) => {
     case scheduleConstants.ADD_SUCCESS:
       return {
         ...state,
-        list: [...state.list, ...action.list],
         fetching: false,
+        list: action.list,
       };
     case scheduleConstants.ADD_FAILURE:
       return {

@@ -16,7 +16,9 @@ import Event from '../Schedule/Event';
  */
 
 const Form = ({
-  intl,
+  intl: {
+    formatMessage,
+  },
   lang,
   submitted,
   onChangeScheduleItem,
@@ -92,6 +94,10 @@ const Form = ({
         </Week>
       ))}
     </div>
+
+    <button className="form__btn btn">
+      {formatMessage({ id: 'app.button.add' })}
+    </button>
   </form>
 );
 

@@ -9,9 +9,9 @@ const add = (data) => {
     data,
   });
 
-  const success = subject => ({
+  const success = list => ({
     type: scheduleConstants.ADD_SUCCESS,
-    subject,
+    list,
   });
 
   const failure = error => ({
@@ -23,9 +23,9 @@ const add = (data) => {
     dispatch(request());
 
     try {
-      const subject = await scheduleService.add(data);
-      dispatch(success(subject));
-      history.push('/dashboard/schedule');
+      const list = await scheduleService.add(data);
+      dispatch(success(list));
+      history.push('/dashboard/groups');
     } catch (error) {
       dispatch(failure(error));
       dispatch(alertActions.error(error));

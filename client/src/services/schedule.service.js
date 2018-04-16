@@ -3,7 +3,7 @@ import authHeader from '../helpers/auth-header';
 const add = async (data) => {
   const requestOptions = {
     method: 'POST',
-    body: JSON.stringify({ ...data }),
+    body: JSON.stringify(data),
     headers: { ...authHeader(), 'Content-Type': 'application/json' },
   };
 
@@ -14,9 +14,9 @@ const add = async (data) => {
       return Promise.reject(response.statusText);
     }
 
-    const schedule = await response.json();
+    const list = await response.json();
 
-    return Promise.resolve(schedule);
+    return Promise.resolve(list);
   } catch (error) {
     return error;
   }

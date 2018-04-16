@@ -74,6 +74,7 @@ class EditGroup extends Component {
       weekType,
       lesson,
       [name]: value,
+      isFreeTime: 0,
     };
 
     const isEmptyEvent = !event || typeof event.item === 'undefined' || typeof event.index === 'undefined';
@@ -98,7 +99,10 @@ class EditGroup extends Component {
     if (isEmptyEvent) {
       this.setState({
         scheduleList: update(scheduleList, {
-          $push: [updatedItem],
+          $push: [{
+            id: new Date().getTime(),
+            ...updatedItem,
+          }],
         }),
       });
     }
@@ -117,6 +121,7 @@ class EditGroup extends Component {
 
     if (scheduleList && scheduleList.length) {
       dispatch(scheduleActions.add(scheduleList));
+      // console.log(scheduleList);
     }
   }
 
