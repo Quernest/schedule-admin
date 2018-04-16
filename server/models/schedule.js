@@ -3,14 +3,14 @@ const database = require('../config/database');
 module.exports.add = (body, callback) => {
   if (body && body.length) {
     const fields = [];
-    const count = body.length;
 
     let i = 0;
+    const count = body.length;
 
     for (i; i < count; i += 1) {
       const row = body[i] || {};
 
-      if (row && row !== 'undefined') {
+      if (row) {
         const {
           id,
           groupId,
@@ -24,20 +24,20 @@ module.exports.add = (body, callback) => {
           isFreeTime,
         } = row;
 
-        const newRow = {
-          id,
-          groupId,
+        const correctedRow = {
+          id: id || new Date().getTime(),
+          groupId: Number(groupId),
           subjectId: Number(subjectId),
           teacherId: Number(teacherId),
-          weekDay,
-          weekType,
-          location,
+          weekDay: Number(weekDay),
+          weekType: Number(weekType),
+          location: String(location),
           semester: Number(semester),
-          lesson,
-          isFreeTime,
+          lesson: Number(lesson),
+          isFreeTime: Number(isFreeTime),
         };
 
-        fields.push(Object.values(newRow));
+        fields.push(Object.values(correctedRow));
       }
     }
 
@@ -50,8 +50,6 @@ module.exports.add = (body, callback) => {
 
       database.pool.query('SELECT * FROM schedule', (err, rows) => {
         if (err) throw err;
-
-        console.log(rows);
 
         return callback(null, rows);
       });

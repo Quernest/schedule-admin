@@ -74,7 +74,7 @@ class EditGroup extends Component {
       weekType,
       lesson,
       [name]: value,
-      isFreeTime: 0,
+      isFreeTime: value ? 0 : 1,
     };
 
     const isEmptyEvent = !event || typeof event.item === 'undefined' || typeof event.index === 'undefined';

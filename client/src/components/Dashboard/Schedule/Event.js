@@ -52,7 +52,10 @@ const Event = ({
         <input
           type="checkbox"
           className="form__input"
+          name="isFreeTime"
+          value={(event.item && event.item.isFreeTime ? 1 : 0) || ''}
           checked={(event.item && event.item.isFreeTime)}
+          onChange={(e) => onChangeScheduleItem(e, isoWeekDay, weekType, isoEventNumber, event)}
         />
       </label>
 

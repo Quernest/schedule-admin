@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 
 const Week = ({ children, className, type }) => (
-  <div className={className}>
+  <div className={className} key={type}>
     <h3 className="form__week-title">{type}</h3>
     {children}
   </div>
