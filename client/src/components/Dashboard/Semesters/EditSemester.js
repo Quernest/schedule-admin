@@ -72,9 +72,14 @@ class EditSemester extends Component {
 
   onChange(e) {
     const { value, name } = e.target;
+    const { semester } = this.state;
 
     this.setState({
-      [name]: value,
+      semester: update(semester, {
+        $merge: {
+          [name]: value,
+        },
+      }),
     });
   }
 
