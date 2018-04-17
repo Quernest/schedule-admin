@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { injectIntl, intlShape } from 'react-intl';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import update from 'react-addons-update';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import Heading from '../../Heading';
 import ActivityLoader from '../../ActivityLoader';
 import Form from '../Schedule/Form';
-
 import scheduleActions from '../../../actions/schedule.actions';
 import teachersActions from '../../../actions/teachers.actions';
 import semestersActions from '../../../actions/semesters.actions';
@@ -19,10 +19,9 @@ class EditGroup extends Component {
     super(props);
 
     this.state = {
-      // TODO: auto select current semester
-      semester: 3,
-      groupName: '',
       submitted: false,
+      semester: 1,
+      group: {},
       scheduleList: [],
     };
 
@@ -30,12 +29,12 @@ class EditGroup extends Component {
     this.onChangeScheduleItem = this.onChangeScheduleItem.bind(this);
     this.onChangeGroupName = this.onChangeGroupName.bind(this);
     this.onChangeSemester = this.onChangeSemester.bind(this);
-
     this.getGroupById = this.getGroupById.bind(this);
     this.getScheduleById = this.getScheduleById.bind(this);
     this.getTeachers = this.getTeachers.bind(this);
     this.getSemesters = this.getSemesters.bind(this);
     this.getSubjects = this.getSubjects.bind(this);
+    this.detectCurrentSemester = this.detectCurrentSemester.bind(this);
   }
 
   componentDidMount() {
@@ -48,9 +47,15 @@ class EditGroup extends Component {
 
   onChangeGroupName(e) {
     const { value } = e.target;
+    const { group } = this.state;
 
     this.setState({
-      groupName: value,
+      group: update(group, {
+        $set: {
+          ...group,
+          name: value,
+        },
+      }),
     });
   }
 
@@ -79,7 +84,7 @@ class EditGroup extends Component {
 
     const isEmptyEvent = !event || typeof event.item === 'undefined' || typeof event.index === 'undefined';
 
-    // edit
+    // edit event
     if (weekDay && weekType && lesson && !isEmptyEvent) {
       const { item, index } = event;
 
@@ -95,12 +100,11 @@ class EditGroup extends Component {
       });
     }
 
-    // create new
+    // create new event
     if (isEmptyEvent) {
       this.setState({
         scheduleList: update(scheduleList, {
           $push: [{
-            id: new Date().getTime(),
             ...updatedItem,
           }],
         }),
@@ -111,17 +115,16 @@ class EditGroup extends Component {
   onSubmit(e) {
     e.preventDefault();
     const { dispatch } = this.props;
-
-    // this array will be send to API
     const { scheduleList } = this.state;
 
     this.setState({
       submitted: true,
     });
 
+    // TODO: send (changed!) group from state to server
+
     if (scheduleList && scheduleList.length) {
       dispatch(scheduleActions.add(scheduleList));
-      // console.log(scheduleList);
     }
   }
 
@@ -155,15 +158,55 @@ class EditGroup extends Component {
     dispatch(subjectsActions.getAll());
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    if (nextProps.schedule !== this.props.schedule) {
-      const { schedule } = nextProps;
-      const { list, fetching } = schedule;
+  detectCurrentSemester(semesters) {
+    if (semesters.list && semesters.list.length) {
+      const { list } = semesters;
 
-      if (!fetching) {
+      const currentDate = moment();
+
+      list.map((semester) => {
+        const startDate = moment(semester.start);
+        const endDate = moment(semester.end);
+
+        if (startDate.month() <= currentDate.month() && currentDate.month() <= endDate.month()) {
+          const { number } = semester;
+
+          this.setState({
+            semester: number,
+          });
+        }
+
+        return undefined;
+      });
+    }
+  }
+
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    if (this.props.schedule !== nextProps.schedule) {
+      const { schedule } = nextProps;
+
+      if (!schedule.fetching) {
         this.setState({
-          scheduleList: list,
+          scheduleList: schedule.list || [],
         });
+      }
+    }
+
+    if (this.props.groups !== nextProps.groups) {
+      const { groups } = nextProps;
+
+      if (!groups.fetching) {
+        this.setState({
+          group: groups.group || {},
+        });
+      }
+    }
+
+    if (this.props.semesters !== nextProps.semesters) {
+      const { semesters } = nextProps;
+
+      if (semesters && !semesters.fetching) {
+        this.detectCurrentSemester(semesters);
       }
     }
   }
@@ -178,8 +221,12 @@ class EditGroup extends Component {
       subjects,
       lang,
     } = this.props;
-    const { semester, submitted, scheduleList } = this.state;
-    const { group } = groups;
+    const {
+      semester,
+      submitted,
+      scheduleList,
+      group,
+    } = this.state;
     const { formatMessage } = intl;
 
     const headingParams = {
@@ -280,19 +327,6 @@ const mapStateToProps = (state, props) => {
   } = state;
   const { id } = props.match.params;
   const { lang } = locale;
-
-  /**
-   * TODO: 
-   *
-   * create
-   * get from store (by id) function
-   */
-
-  // console.log('groups: ', groups);
-  // console.log('schedule: ', schedule);
-  // console.log('teachers: ', teachers);
-  // console.log('semesters: ', semesters);
-  // console.log('subjects: ', subjects);
 
   return {
     groups,

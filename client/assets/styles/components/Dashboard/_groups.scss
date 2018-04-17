@@ -14,9 +14,7 @@
       &__day {}
 
       &__event {
-        padding-left: em($gutter-x);
-        padding-right: em($gutter-x);
-        border: 1px solid $grey;
+        border-bottom: 1px solid $grey;
 
         &:not(:last-of-type) {
           margin-bottom: em($gutter-y);
