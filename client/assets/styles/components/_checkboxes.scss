@@ -1,0 +1,58 @@
+$checkmark-size: 25;
+
+.checkbox {
+  position: relative;
+  display: flex;
+  align-items: center;
+  user-select: none;
+  font-size: 1em;
+  height: em($checkmark-size);
+  padding-left: em($checkmark-size + 5);
+  margin-bottom: em($gutter-y);
+
+  &__checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: em($checkmark-size);
+    width: em($checkmark-size);
+    border-radius: em(5);
+    background-color: #ccc;
+
+    &:after {
+      content: "";
+      position: absolute;
+      display: none;
+      left: 50%;
+      top: 50%;
+      width: em(8);
+      height: em(16);
+      border: solid white;
+      border-width: 0 3px 3px 0;
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+  }
+
+  input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+
+    &:checked ~ .checkbox__checkmark {
+      background-color: $lightblue;
+
+      &:after {
+        display: block;
+      }
+    }
+  }
+
+  @include lg {
+    &:hover {
+      cursor: pointer;
+      input ~ .checkbox__checkmark {
+        background-color: $grey;
+      }
+    }
+  }
+}

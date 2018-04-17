@@ -47,25 +47,23 @@ const Event = ({
     <div className="form__event" key={index}>
       <h3 className="form__event-title">{isoEventNumber}</h3>
 
-      <label className="form__label">
-        Свободное время
+      <label className="form__label checkbox">
+        Окно
         <input
           type="checkbox"
-          className="form__input"
           name="isFreeTime"
           value={(event.item && event.item.isFreeTime ? 1 : 0) || ''}
           checked={(event.item && event.item.isFreeTime) || false}
           onChange={(e) => onChangeScheduleItem(e, isoWeekDay, weekType, isoEventNumber, event)}
         />
+        <span className="checkbox__checkmark" />
       </label>
 
       <label
         className="form__label"
-        htmlFor={`${isoEventNumber}-teachers`}
       >
         Выберите преподавателя:
         <select
-          id={`${isoEventNumber}-teachers`}
           name="teacherId"
           className="form__select"
           value={(event.item && event.item.teacherId) || ''}
@@ -86,11 +84,9 @@ const Event = ({
 
       <label
         className="form__label"
-        htmlFor={`${isoEventNumber}-subjects`}
       >
         Выберите предмет:
         <select
-          id={`${isoEventNumber}-subjects`}
           name="subjectId"
           className="form__select"
           value={(event.item && event.item.subjectId) || ''}
@@ -111,11 +107,9 @@ const Event = ({
 
       <label
         className="form__label"
-        htmlFor={`${isoEventNumber}-location`}
       >
         Введите № аудитории
         <input
-          id={`${isoEventNumber}-location`}
           name="location"
           className="form__input"
           value={(event.item && event.item.location) || ''}
