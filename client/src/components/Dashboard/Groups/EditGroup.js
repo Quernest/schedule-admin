@@ -75,6 +75,13 @@ class EditGroup extends Component {
     const { value } = e.target;
     const { group } = this.state;
 
+    /**
+     * TODO:
+     *
+     * use $merge instead $set
+     *
+     */
+
     this.setState({
       group: update(group, {
         $set: {
@@ -88,6 +95,13 @@ class EditGroup extends Component {
   onChangeSemester(e) {
     const { value } = e.target;
     const { semester } = this.state;
+
+    /**
+     * TODO:
+     *
+     * use $merge instead $set
+     *
+     */
 
     this.setState({
       semester: update(semester, {
@@ -121,6 +135,12 @@ class EditGroup extends Component {
     if (weekDay && weekType && lesson && !isEmptyEvent) {
       const { item, index } = event;
 
+      /**
+       * TODO:
+       *
+       * use $merge instead $set
+       *
+       */
       this.setState({
         scheduleList: update(scheduleList, {
           [index]: {
@@ -206,7 +226,9 @@ class EditGroup extends Component {
         const startDate = moment(semester.start);
         const endDate = moment(semester.end);
 
-        if (startDate.month() <= currentDate.month() && currentDate.month() <= endDate.month()) {
+        const isCurrentSemester = startDate.month() <= currentDate.month() && currentDate.month() <= endDate.month();
+
+        if (isCurrentSemester) {
           this.setState({
             semester,
           });
