@@ -31,7 +31,7 @@ const Event = ({
       if (e.weekType === weekType &&
           e.weekDay === isoWeekDay &&
           e.lesson === isoEventNumber &&
-          e.semester === semester
+          e.semester === semester.number
       ) {
         event.index = i;
         event.item = e;
@@ -134,10 +134,10 @@ Event.propTypes = {
   index: PropTypes.number,
   weekType: PropTypes.number.isRequired,
   dayIndex: PropTypes.number.isRequired,
-  semester: PropTypes.oneOfType([
-    PropTypes.number,
-    PropTypes.string,
-  ]).isRequired,
+  // semester: PropTypes.oneOfType([
+  //   PropTypes.number,
+  //   PropTypes.string,
+  // ]).isRequired,
   scheduleList: PropTypes.arrayOf(PropTypes.object),
   onChangeScheduleItem: PropTypes.func.isRequired,
   teachersList: PropTypes.arrayOf(PropTypes.object),

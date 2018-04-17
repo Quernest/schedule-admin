@@ -20,7 +20,7 @@ class EditGroup extends Component {
 
     this.state = {
       submitted: false,
-      semester: 1,
+      semester: {},
       group: {},
       scheduleList: [],
     };
@@ -45,6 +45,32 @@ class EditGroup extends Component {
     this.getSubjects();
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.schedule !== prevProps.schedule) {
+      const { schedule } = this.props;
+
+      if (!schedule.fetching) {
+        this.updateSchedule(schedule);
+      }
+    }
+
+    if (this.props.groups !== prevProps.groups) {
+      const { groups } = this.props;
+
+      if (!groups.fetching) {
+        this.updateGroups(groups);
+      }
+    }
+
+    if (this.props.semesters !== prevProps.semesters) {
+      const { semesters } = this.props;
+
+      if (!semesters.fetching) {
+        this.detectCurrentSemester(semesters);
+      }
+    }
+  }
+
   onChangeGroupName(e) {
     const { value } = e.target;
     const { group } = this.state;
@@ -61,9 +87,15 @@ class EditGroup extends Component {
 
   onChangeSemester(e) {
     const { value } = e.target;
+    const { semester } = this.state;
 
     this.setState({
-      semester: Number(value),
+      semester: update(semester, {
+        $set: {
+          ...semester,
+          number: Number(value),
+        },
+      }),
     });
   }
 
@@ -74,11 +106,12 @@ class EditGroup extends Component {
 
     const updatedItem = {
       groupId: Number(groupId),
-      semester: Number(semester),
+      semester: semester.number,
       weekDay,
       weekType,
       lesson,
       [name]: value,
+      // 0 = not free time, 1 = true, free time
       isFreeTime: value ? 0 : 1,
     };
 
@@ -121,7 +154,12 @@ class EditGroup extends Component {
       submitted: true,
     });
 
-    // TODO: send (changed!) group from state to server
+    /**
+     * TODO:
+     *
+     * - create edit group name api function
+     * - send changed group name here
+     */
 
     if (scheduleList && scheduleList.length) {
       dispatch(scheduleActions.add(scheduleList));
@@ -169,10 +207,8 @@ class EditGroup extends Component {
         const endDate = moment(semester.end);
 
         if (startDate.month() <= currentDate.month() && currentDate.month() <= endDate.month()) {
-          const { number } = semester;
-
           this.setState({
-            semester: number,
+            semester,
           });
         }
 
@@ -181,34 +217,20 @@ class EditGroup extends Component {
     }
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    if (this.props.schedule !== nextProps.schedule) {
-      const { schedule } = nextProps;
+  updateSchedule(schedule) {
+    const { list } = schedule;
 
-      if (!schedule.fetching) {
-        this.setState({
-          scheduleList: schedule.list || [],
-        });
-      }
-    }
+    this.setState({
+      scheduleList: list,
+    });
+  }
 
-    if (this.props.groups !== nextProps.groups) {
-      const { groups } = nextProps;
+  updateGroups(groups) {
+    const { group } = groups;
 
-      if (!groups.fetching) {
-        this.setState({
-          group: groups.group || {},
-        });
-      }
-    }
-
-    if (this.props.semesters !== nextProps.semesters) {
-      const { semesters } = nextProps;
-
-      if (semesters && !semesters.fetching) {
-        this.detectCurrentSemester(semesters);
-      }
-    }
+    this.setState({
+      group,
+    });
   }
 
   render() {

@@ -50,16 +50,16 @@ const Form = ({
           <select
             id="semester"
             name="semester"
-            value={semester || ''}
+            value={(semester && semester.number) || ''}
             className="form__select"
             onChange={onChangeSemester}
           >
-            {semesters.list && semesters.list.map((_semester) => (
+            {semesters.list && semesters.list.map((s) => (
               <option
-                key={_semester.id}
-                value={_semester.id}
+                key={s.id}
+                value={s.number}
               >
-                {_semester.number}
+                {s.number}
               </option>
             ))}
           </select>
@@ -128,10 +128,10 @@ Form.propTypes = {
     fetching: PropTypes.bool,
     list: PropTypes.arrayOf(PropTypes.object),
   }),
-  semester: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-  ]),
+  // semester: PropTypes.oneOfType([
+  //   PropTypes.string,
+  //   PropTypes.number,
+  // ]),
 };
 
 Form.defaultProps = {
@@ -140,7 +140,7 @@ Form.defaultProps = {
   semesters: {},
   teachers: {},
   subjects: {},
-  semester: '',
+  // semester: {},
 };
 
 export default injectIntl(Form);
