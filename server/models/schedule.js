@@ -25,13 +25,13 @@ module.exports.add = (body, callback) => {
         } = row;
 
         const correctedRow = {
-          id: id || new Date().getTime(),
+          id: id || null,
           groupId: Number(groupId),
-          subjectId: Number(subjectId),
-          teacherId: Number(teacherId),
+          subjectId: subjectId ? Number(subjectId) : null,
+          teacherId: teacherId ? Number(teacherId) : null,
           weekDay: Number(weekDay),
           weekType: Number(weekType),
-          location: String(location),
+          location: location ? String(location) : null,
           semester: Number(semester),
           lesson: Number(lesson),
           isFreeTime: Number(isFreeTime),

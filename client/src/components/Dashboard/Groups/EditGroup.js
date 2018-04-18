@@ -29,11 +29,13 @@ class EditGroup extends Component {
     this.onChangeScheduleItem = this.onChangeScheduleItem.bind(this);
     this.onChangeGroupName = this.onChangeGroupName.bind(this);
     this.onChangeSemester = this.onChangeSemester.bind(this);
+
     this.getGroupById = this.getGroupById.bind(this);
     this.getScheduleById = this.getScheduleById.bind(this);
     this.getTeachers = this.getTeachers.bind(this);
     this.getSemesters = this.getSemesters.bind(this);
     this.getSubjects = this.getSubjects.bind(this);
+
     this.detectCurrentSemester = this.detectCurrentSemester.bind(this);
   }
 
@@ -75,17 +77,9 @@ class EditGroup extends Component {
     const { value } = e.target;
     const { group } = this.state;
 
-    /**
-     * TODO:
-     *
-     * use $merge instead $set
-     *
-     */
-
     this.setState({
       group: update(group, {
-        $set: {
-          ...group,
+        $merge: {
           name: value,
         },
       }),
@@ -96,17 +90,9 @@ class EditGroup extends Component {
     const { value } = e.target;
     const { semester } = this.state;
 
-    /**
-     * TODO:
-     *
-     * use $merge instead $set
-     *
-     */
-
     this.setState({
       semester: update(semester, {
-        $set: {
-          ...semester,
+        $merge: {
           number: Number(value),
         },
       }),
@@ -118,7 +104,7 @@ class EditGroup extends Component {
     const { groupId } = this.props;
     const { scheduleList = [], semester } = this.state;
 
-    const updatedItem = {
+    const updatedEvent = {
       groupId: Number(groupId),
       semester: semester.number,
       weekDay,
@@ -135,19 +121,15 @@ class EditGroup extends Component {
     if (weekDay && weekType && lesson && !isEmptyEvent) {
       const { item, index } = event;
 
-      /**
-       * TODO:
-       *
-       * use $merge instead $set
-       *
-       */
+      const mergedEvent = {
+        ...item,
+        ...updatedEvent,
+      };
+
       this.setState({
         scheduleList: update(scheduleList, {
           [index]: {
-            $set: {
-              ...item,
-              ...updatedItem,
-            },
+            $set: mergedEvent,
           },
         }),
       });
@@ -155,11 +137,13 @@ class EditGroup extends Component {
 
     // create new event
     if (isEmptyEvent) {
+      const newEvent = {
+        ...updatedEvent,
+      };
+
       this.setState({
         scheduleList: update(scheduleList, {
-          $push: [{
-            ...updatedItem,
-          }],
+          $push: [newEvent],
         }),
       });
     }
