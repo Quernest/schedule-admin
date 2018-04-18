@@ -11,14 +11,16 @@ module.exports.getSchedule = (id, callback) => {
       s.weekDay,
       s.weekType,
       sem.number as semester,
-      s.location
+      s.location,
+      s.isFreeTime,
+      s.isShortDay
     FROM
       schedule s
     INNER JOIN groups g ON s.groupId = g.id
-    INNER JOIN times t ON s.lesson = t.id
-    INNER JOIN subjects sub ON s.subjectId = sub.id
-    INNER JOIN teachers tc ON s.teacherId = tc.id
-    INNER JOIN semesters sem ON s.semester = sem.id
+    INNER JOIN times t ON s.lesson = t.number AND s.isShortDay = t.isShortDay
+    LEFT JOIN subjects sub ON s.subjectId = sub.id
+    LEFT JOIN teachers tc ON s.teacherId = tc.id
+    INNER JOIN semesters sem ON s.semester = sem.number
     WHERE
       g.id = ${id}
     `,

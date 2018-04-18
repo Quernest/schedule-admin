@@ -46,7 +46,7 @@ const Form = ({
 
       <div className="col-xs-12">
         <label className="form__label" htmlFor="semester">
-          Выберите семестр:
+          {formatMessage({ id: 'app.dashboard.semesters.form.editgroup.semester' })}
           <select
             id="semester"
             name="semester"

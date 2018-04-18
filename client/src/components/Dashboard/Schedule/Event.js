@@ -43,6 +43,8 @@ const Event = ({
     });
   }
 
+  console.log(semester);
+
   return (
     <div className="form__event" key={index}>
       <h3 className="form__event-title">
@@ -61,10 +63,8 @@ const Event = ({
         <span className="checkbox__checkmark" />
       </label>
 
-      <label
-        className="form__label"
-      >
-        Выберите преподавателя:
+      <label className="form__label">
+        {formatMessage({ id: 'app.dashboard.semesters.form.editgroup.schedule.event.teacher' })}
         <select
           name="teacherId"
           className="form__select"
@@ -84,10 +84,8 @@ const Event = ({
         </select>
       </label>
 
-      <label
-        className="form__label"
-      >
-        Выберите предмет:
+      <label className="form__label">
+        {formatMessage({ id: 'app.dashboard.semesters.form.editgroup.schedule.event.subject' })}
         <select
           name="subjectId"
           className="form__select"
@@ -107,17 +105,15 @@ const Event = ({
         </select>
       </label>
 
-      <label
-        className="form__label"
-      >
-        Введите № аудитории
+      <label className="form__label">
+        {formatMessage({ id: 'app.dashboard.semesters.form.editgroup.schedule.event.location' })}
         <input
           name="location"
           className="form__input"
           value={(event.item && event.item.location) || ''}
           disabled={(event.item && event.item.isFreeTime)}
           onChange={(e) => onChangeScheduleItem(e, isoWeekDay, weekType, isoEventNumber, event)}
-          placeholder="Например: 2215"
+          placeholder={formatMessage({ id: 'app.dashboard.semesters.form.editgroup.schedule.event.location.placeholder' })}
         />
       </label>
     </div>

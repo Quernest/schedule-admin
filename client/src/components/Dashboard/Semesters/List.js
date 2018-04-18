@@ -41,7 +41,7 @@ const List = ({
                 </div>
                 <small className="info">
                   <span className="info-label">{formatMessage({ id: 'app.dashboard.semesters.item.firstWeekType' })}:</span>
-                  <strong className="info-value">{formatMessage({ id: parseWeekTypes(firstWeekType) })}</strong>
+                  {firstWeekType && <strong className="info-value">{formatMessage({ id: parseWeekTypes(firstWeekType) })}</strong>}
                 </small>
               </div>
             </div>

@@ -18,7 +18,7 @@ const List = ({ items, onRemove, intl }) => {
           <li className="list__item" key={id}>
             <div>
               <h3>{name}</h3>
-              <small>{formatMessage({ id: parseSubjectTypes(type) })}</small>
+              {type && <small>{formatMessage({ id: parseSubjectTypes(type) })}</small>}
             </div>
             <div className="list__item-controls">
               <button

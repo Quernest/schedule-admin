@@ -161,6 +161,26 @@
     "message": "Вікно"
   },
   {
+    "id": "app.dashboard.semesters.form.editgroup.schedule.event.teacher",
+    "message": "Виберіть викладача"
+  },
+  {
+    "id": "app.dashboard.semesters.form.editgroup.schedule.event.subject",
+    "message": "Виберіть предмет"
+  },
+  {
+    "id": "app.dashboard.semesters.form.editgroup.schedule.event.location",
+    "message": "Введіть № аудиторії"
+  },
+  {
+    "id": "app.dashboard.semesters.form.editgroup.schedule.event.location.placeholder",
+    "message": "Наприклад: 2215"
+  },
+  {
+    "id": "app.dashboard.semesters.form.editgroup.semester",
+    "message": "Виберіть семестр"
+  },
+  {
     "id": "app.button.back",
     "message": "Назад"
   },

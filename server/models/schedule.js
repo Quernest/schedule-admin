@@ -22,6 +22,7 @@ module.exports.add = (body, callback) => {
           semester,
           lesson,
           isFreeTime,
+          isShortDay,
         } = row;
 
         const correctedRow = {
@@ -35,6 +36,7 @@ module.exports.add = (body, callback) => {
           semester: Number(semester),
           lesson: Number(lesson),
           isFreeTime: Number(isFreeTime),
+          isShortDay: Number(isShortDay),
         };
 
         fields.push(Object.values(correctedRow));
@@ -44,7 +46,7 @@ module.exports.add = (body, callback) => {
     database.pool.query(`
     REPLACE INTO
       schedule
-    (id, groupId, subjectId, teacherId, weekDay, weekType, location, semester, lesson, isFreeTime)
+    (id, groupId, subjectId, teacherId, weekDay, weekType, location, semester, lesson, isFreeTime, isShortDay)
     VALUES ?`, [fields], (err) => {
       if (err) throw err;
 
