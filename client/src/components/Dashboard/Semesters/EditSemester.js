@@ -55,7 +55,22 @@ class EditSemester extends Component {
     });
 
     if (id && number && start && end && firstWeekType) {
-      dispatch(semestersActions.edit(semester));
+      /**
+       * avoid mistakes, create data object
+       *
+       * - convert input string to number
+       * - convert (stat, end) dates to YYYY-MM-DD format because mysql takes 1 day
+       */
+
+      const data = {
+        id,
+        number: Number(number),
+        start: moment(start).format('YYYY-MM-DD'),
+        end: moment(end).format('YYYY-MM-DD'),
+        firstWeekType,
+      };
+
+      dispatch(semestersActions.edit(data));
     }
   }
 
@@ -110,8 +125,6 @@ class EditSemester extends Component {
     const { formatMessage } = intl;
     const { fetching } = semesters;
     const { submitted, semester } = this.state;
-
-    console.log(semester);
 
     const headingParams = {
       title: formatMessage({ id: 'app.dashboard.semesters.buttons.editsemester' }),
