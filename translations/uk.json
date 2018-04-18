@@ -171,5 +171,9 @@
   {
     "id": "app.words.practice",
     "message": "Практика"
+  },
+  {
+    "id": "app.words.norecords",
+    "message": "Немає жодного запису"
   }
 ]

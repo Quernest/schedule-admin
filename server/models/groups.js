@@ -20,8 +20,11 @@ module.exports.getById = (id, callback) => {
 
 module.exports.add = (name, callback) => {
   database.pool.query(
-    'INSERT INTO groups (name) values (?)',
-    [name],
+    'INSERT INTO groups SET ?',
+    {
+      id: null,
+      name,
+    },
     (err, rows) => {
       if (err) throw err;
 

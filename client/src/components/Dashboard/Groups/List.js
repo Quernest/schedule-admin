@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { Link } from 'react-router-dom';
+import NoRecordsMessage from '../../NoRecordsMessage';
 
 const List = ({
   items,
@@ -31,6 +32,7 @@ const List = ({
             </div>
           </li>
         ))}
+      <NoRecordsMessage records={items} />
     </ul>
   </ReactCSSTransitionGroup>
 );

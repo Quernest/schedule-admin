@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl, intlShape } from 'react-intl';
+import NoRecordsMessage from '../../NoRecordsMessage';
 import parsers from '../../../helpers/parsers';
 
 const { parseSubjectTypes } = parsers;
@@ -28,6 +29,8 @@ const List = ({ items, onRemove, intl }) => {
           </li>
         );
       })}
+
+      <NoRecordsMessage records={items} />
     </ul>
   );
 };

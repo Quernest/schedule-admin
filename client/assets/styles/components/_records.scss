@@ -1,0 +1,13 @@
+.records {
+  &__message {
+    margin-top: em($gutter-y);
+    margin-bottom: em($gutter-y);
+    font-size: $font-size-normal;
+    text-align: center;
+    color: $grey;
+
+    @include sm {
+      text-align: initial;
+    }
+  }
+}

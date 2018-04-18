@@ -3,6 +3,7 @@ import moment from 'moment';
 import PropTypes from 'prop-types';
 import { injectIntl, intlShape } from 'react-intl';
 import { Link } from 'react-router-dom';
+import NoRecordsMessage from '../../NoRecordsMessage';
 import parsers from '../../../helpers/parsers';
 
 const formatDate = date => moment(date).format('DD/MM');
@@ -58,6 +59,8 @@ const List = ({
           </li>
         );
       })}
+
+    <NoRecordsMessage records={semesters} />
   </ul>
 );
 

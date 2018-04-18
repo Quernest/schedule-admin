@@ -170,5 +170,9 @@
   {
     "id": "app.words.practice",
     "message": "Practice"
+  },
+  {
+    "id": "app.words.norecords",
+    "message": "No records"
   }
 ]
