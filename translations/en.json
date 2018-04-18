@@ -148,6 +148,18 @@
     "message": "Enter the teacher name"
   },
   {
+    "id": "app.dashboard.semesters.form.editgroup.schedule.week",
+    "message": "week"
+  },
+  {
+    "id": "app.dashboard.semesters.form.editgroup.schedule.event.freetime",
+    "message": "Free time"
+  },
+  {
+    "id": "app.dashboard.semesters.form.editgroup.schedule.event",
+    "message": "lesson"
+  },
+  {
     "id": "app.button.back",
     "message": "Back"
   },

@@ -149,6 +149,18 @@
     "message": "Наприклад: Сташкевич Ігор Ігорович"
   },
   {
+    "id": "app.dashboard.semesters.form.editgroup.schedule.week",
+    "message": "тиждень"
+  },
+  {
+    "id": "app.dashboard.semesters.form.editgroup.schedule.event",
+    "message": "пара"
+  },
+  {
+    "id": "app.dashboard.semesters.form.editgroup.schedule.event.freetime",
+    "message": "Вікно"
+  },
+  {
     "id": "app.button.back",
     "message": "Назад"
   },

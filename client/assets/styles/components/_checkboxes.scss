@@ -33,7 +33,8 @@
 
   input {
     position: absolute;
-    opacity: 0;
+    display: none;
+    visibility: hidden;
     cursor: pointer;
 
     &:checked ~ .checkbox__checkmark {
@@ -48,9 +49,6 @@
   @include lg {
     &:hover {
       cursor: pointer;
-      input ~ .checkbox__checkmark {
-        background-color: $grey;
-      }
     }
   }
 }

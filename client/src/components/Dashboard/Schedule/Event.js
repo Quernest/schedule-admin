@@ -45,10 +45,12 @@ const Event = ({
 
   return (
     <div className="form__event" key={index}>
-      <h3 className="form__event-title">{isoEventNumber}</h3>
+      <h3 className="form__event-title">
+        {isoEventNumber} {formatMessage({ id: 'app.dashboard.semesters.form.editgroup.schedule.event' })}
+      </h3>
 
       <label className="form__label checkbox">
-        Окно
+        {formatMessage({ id: 'app.dashboard.semesters.form.editgroup.schedule.event.freetime' })}
         <input
           type="checkbox"
           name="isFreeTime"
