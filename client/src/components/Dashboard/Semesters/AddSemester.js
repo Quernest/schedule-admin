@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { injectIntl, intlShape } from 'react-intl';
 import PropTypes from 'prop-types';
-
+import moment from 'moment';
+import update from 'react-addons-update';
 import semestersActions from '../../../actions/semesters.actions';
 import Heading from '../../Heading';
 import Form from './Form';
@@ -13,10 +14,9 @@ class AddSemester extends Component {
 
     this.state = {
       submitted: false,
-      number: undefined,
-      start: '',
-      end: '',
-      firstWeekType: 1,
+      semester: {
+        firstWeekType: 1,
+      },
     };
 
     this.onSubmit = this.onSubmit.bind(this);
@@ -27,13 +27,13 @@ class AddSemester extends Component {
   onSubmit(e) {
     e.preventDefault();
     const { dispatch } = this.props;
-
+    const { semester } = this.state;
     const {
       number,
       start,
       end,
       firstWeekType,
-    } = this.state;
+    } = semester;
 
     this.setState({
       submitted: true,
@@ -41,9 +41,9 @@ class AddSemester extends Component {
 
     if (number && start && end && firstWeekType) {
       const data = {
-        number,
-        start,
-        end,
+        number: Number(number),
+        start: moment(start).format('YYYY-MM-DD'),
+        end: moment(end).format('YYYY-MM-DD'),
         firstWeekType,
       };
 
@@ -51,17 +51,28 @@ class AddSemester extends Component {
     }
   }
 
-  onChange(e) {
-    const { value, name } = e.target;
+  onDateChange(date, name) {
+    const { semester } = this.state;
 
     this.setState({
-      [name]: value,
+      semester: update(semester, {
+        $merge: {
+          [name]: date,
+        },
+      }),
     });
   }
 
-  onDateChange(date, name) {
+  onChange(e) {
+    const { value, name } = e.target;
+    const { semester } = this.state;
+
     this.setState({
-      [name]: date,
+      semester: update(semester, {
+        $merge: {
+          [name]: value,
+        },
+      }),
     });
   }
 
@@ -69,13 +80,7 @@ class AddSemester extends Component {
     const { intl, semesters, lang } = this.props;
     const { formatMessage } = intl;
     const { fetching } = semesters;
-    const {
-      submitted,
-      number,
-      start,
-      end,
-      firstWeekType,
-    } = this.state;
+    const { submitted, semester } = this.state;
 
     const headingParams = {
       title: formatMessage({ id: 'app.dashboard.semesters.buttons.addsemester' }),
@@ -98,10 +103,7 @@ class AddSemester extends Component {
           onDateChange={this.onDateChange}
           submitted={submitted}
           fetching={fetching}
-          number={number}
-          start={start}
-          end={end}
-          firstWeekType={firstWeekType}
+          semester={semester}
           lang={lang}
         />
       </div>

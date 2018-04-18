@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import DatePicker from 'react-datepicker';
-import moment from 'moment';
 import { injectIntl, intlShape } from 'react-intl';
 
 const Form = ({
@@ -49,11 +48,12 @@ const Form = ({
             className={classNames('form__input', {
               invalid: submitted && !start,
             })}
-            selected={moment(start) || ''}
             dateFormat="DD MMMM"
+            selected={start || null}
             onChange={date => onDateChange(date, 'start')}
             locale={lang}
             isClearable
+            readOnly
           />
         </label>
       </div>
@@ -66,10 +66,11 @@ const Form = ({
               invalid: submitted && !end,
             })}
             dateFormat="DD MMMM"
-            selected={moment(end) || ''}
+            selected={end || null}
             onChange={date => onDateChange(date, 'end')}
             locale={lang}
             isClearable
+            readOnly
           />
         </label>
       </div>
@@ -110,7 +111,10 @@ Form.propTypes = {
   intl: intlShape.isRequired,
   semester: PropTypes.shape({
     id: PropTypes.number,
-    number: PropTypes.number,
+    number: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string,
+    ]),
     start: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.object,

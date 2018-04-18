@@ -64,7 +64,7 @@ module.exports.edit = (body, callback) => {
     newBody,
     (err, rows) => {
       if (err) throw err;
-    
+
       return callback(null, rows);
     },
   );

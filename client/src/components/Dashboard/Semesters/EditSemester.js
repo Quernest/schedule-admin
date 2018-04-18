@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { injectIntl, intlShape } from 'react-intl';
 import update from 'react-addons-update';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import semestersActions from '../../../actions/semesters.actions';
 import Heading from '../../Heading';
 import Form from './Form';
@@ -84,8 +85,23 @@ class EditSemester extends Component {
   }
 
   updateSemester(semester) {
+    const { start, end } = semester;
+
+    /**
+     * type conversion
+     * from ISO string to Moment object
+     *
+     */
+
+    const momentDates = {
+      start: moment(start),
+      end: moment(end),
+    };
+
     this.setState({
-      semester,
+      semester: update(semester, {
+        $merge: momentDates,
+      }),
     });
   }
 
@@ -94,6 +110,8 @@ class EditSemester extends Component {
     const { formatMessage } = intl;
     const { fetching } = semesters;
     const { submitted, semester } = this.state;
+
+    console.log(semester);
 
     const headingParams = {
       title: formatMessage({ id: 'app.dashboard.semesters.buttons.editsemester' }),
