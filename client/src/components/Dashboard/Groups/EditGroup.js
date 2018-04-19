@@ -158,7 +158,7 @@ class EditGroup extends Component {
     }
   }
 
-  async onSubmit(e) {
+  onSubmit(e) {
     e.preventDefault();
     const { dispatch } = this.props;
     const { scheduleList, group } = this.state;
