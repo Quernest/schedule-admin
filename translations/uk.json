@@ -185,6 +185,10 @@
     "message": "Назад"
   },
   {
+    "id": "app.button.save",
+    "message": "Зберегти"
+  },
+  {
     "id": "app.button.add",
     "message": "Додати"
   },

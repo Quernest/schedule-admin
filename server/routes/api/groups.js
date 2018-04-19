@@ -4,10 +4,8 @@ const groupsController = require('../../controllers/groups');
 const auth = require('../auth');
 const secret = require('../../config/app').config.keys.secret;
 
-// get all avilable groups
 router.get('/', groupsController.getAll);
 
-// add group
 router.use('/add', auth.required, (req, res) => {
   jwt.verify(req.token, secret, (err) => {
     if (err) {
@@ -19,7 +17,17 @@ router.use('/add', auth.required, (req, res) => {
   });
 });
 
-// remove group
+router.use('/edit', auth.required, (req, res) => {
+  jwt.verify(req.token, secret, (err) => {
+    if (err) {
+      res.sendStatus(403);
+      res.end();
+    }
+
+    return groupsController.edit(req, res);
+  });
+});
+
 router.use('/remove', auth.required, (req, res) => {
   jwt.verify(req.token, secret, (err) => {
     if (err) {
@@ -31,7 +39,6 @@ router.use('/remove', auth.required, (req, res) => {
   });
 });
 
-// get the semester by id
 router.use('/:id', groupsController.getById);
 
 module.exports = router;

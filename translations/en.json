@@ -184,6 +184,10 @@
     "message": "Back"
   },
   {
+    "id": "app.button.save",
+    "message": "Save"
+  },
+  {
     "id": "app.button.add",
     "message": "Add"
   },

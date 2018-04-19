@@ -44,6 +44,20 @@ module.exports.add = (name, callback) => {
   );
 };
 
+module.exports.edit = (body, callback) => {
+  const { id } = body;
+
+  database.pool.query(
+    `UPDATE groups SET ? WHERE groups.id = ${id}`,
+    body,
+    (err, rows) => {
+      if (err) throw err;
+
+      return callback(null, rows);
+    },
+  );
+};
+
 module.exports.remove = (id, callback) => {
   database.pool.query(
     `DELETE FROM groups WHERE groups.id = ${id}`,

@@ -43,8 +43,6 @@ const Event = ({
     });
   }
 
-  console.log(semester);
-
   return (
     <div className="form__event" key={index}>
       <h3 className="form__event-title">
@@ -125,6 +123,7 @@ Event.defaultProps = {
   scheduleList: [],
   teachersList: [],
   subjectsList: [],
+  semester: {},
 };
 
 Event.propTypes = {
@@ -132,10 +131,19 @@ Event.propTypes = {
   index: PropTypes.number,
   weekType: PropTypes.number.isRequired,
   dayIndex: PropTypes.number.isRequired,
-  // semester: PropTypes.oneOfType([
-  //   PropTypes.number,
-  //   PropTypes.string,
-  // ]).isRequired,
+  semester: PropTypes.shape({
+    id: PropTypes.number,
+    number: PropTypes.number,
+    start: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.object,
+    ]),
+    end: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.object,
+    ]),
+    firstWeekType: PropTypes.number,
+  }),
   scheduleList: PropTypes.arrayOf(PropTypes.object),
   onChangeScheduleItem: PropTypes.func.isRequired,
   teachersList: PropTypes.arrayOf(PropTypes.object),

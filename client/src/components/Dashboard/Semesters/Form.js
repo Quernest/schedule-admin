@@ -96,7 +96,7 @@ const Form = ({
       </div>
 
       <button className="form__btn btn">
-        {formatMessage({ id: 'app.button.add' })}
+        {formatMessage({ id: 'app.button.save' })}
       </button>
     </form>
   );

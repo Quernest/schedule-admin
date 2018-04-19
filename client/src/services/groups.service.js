@@ -54,6 +54,28 @@ const add = async (name) => {
   }
 };
 
+const edit = async (group) => {
+  const requestOptions = {
+    method: 'POST',
+    body: JSON.stringify({ ...group }),
+    headers: { ...authHeader(), 'Content-Type': 'application/json' },
+  };
+
+  try {
+    const response = await fetch('/api/groups/edit', requestOptions);
+
+    if (!response.ok) {
+      return Promise.reject(response.statusText);
+    }
+
+    const msg = await response.json();
+
+    return Promise.resolve(msg);
+  } catch (error) {
+    return error;
+  }
+};
+
 const remove = async (id) => {
   const requestOptions = {
     method: 'POST',
@@ -80,6 +102,7 @@ const groupsService = {
   getAll,
   getById,
   add,
+  edit,
   remove,
 };
 

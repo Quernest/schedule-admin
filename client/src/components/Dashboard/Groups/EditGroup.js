@@ -116,6 +116,11 @@ class EditGroup extends Component {
     };
 
     if (name === 'isFreeTime') {
+      /**
+       * 0 = false, not free time
+       * 1 = true, free time
+       */
+
       updatedEvent.isFreeTime = value ? 0 : 1;
     }
 
@@ -153,24 +158,21 @@ class EditGroup extends Component {
     }
   }
 
-  onSubmit(e) {
+  async onSubmit(e) {
     e.preventDefault();
     const { dispatch } = this.props;
-    const { scheduleList } = this.state;
+    const { scheduleList, group } = this.state;
 
     this.setState({
       submitted: true,
     });
 
-    /**
-     * TODO:
-     *
-     * - create edit group name api function
-     * - send changed group name here
-     */
+    if (group) {
+      const { name } = group;
 
-    if (scheduleList && scheduleList.length) {
-      dispatch(scheduleActions.add(scheduleList));
+      if (name) {
+        dispatch(groupsActions.edit(group, scheduleList));
+      }
     }
   }
 

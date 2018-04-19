@@ -28,6 +28,16 @@ module.exports.add = (req, res) => {
   });
 };
 
+module.exports.edit = (req, res) => {
+  const { body } = req;
+
+  groupsModel.edit(body, (err, rows) => {
+    if (err) throw err;
+
+    res.send(rows);
+  });
+};
+
 module.exports.remove = (req, res) => {
   const { body } = req;
   const { id } = body;

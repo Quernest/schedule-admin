@@ -2,6 +2,7 @@ import groupsConstants from '../constants/groups.constants';
 import groupsService from '../services/groups.service';
 import alertActions from '../actions/alert.actions';
 import history from '../helpers/history';
+import scheduleActions from './schedule.actions';
 
 const getAll = () => {
   const request = () => ({
@@ -91,6 +92,42 @@ const add = (name) => {
   };
 };
 
+const edit = (group, schedule) => {
+  const request = () => ({
+    type: groupsConstants.EDIT_REQUEST,
+    group,
+  });
+
+  const success = msg => ({
+    type: groupsConstants.EDIT_SUCCESS,
+    msg,
+  });
+
+  const failure = error => ({
+    type: groupsConstants.EDIT_FAILURE,
+    error,
+  });
+
+  return async (dispatch) => {
+    dispatch(request());
+
+    try {
+      const msg = await groupsService.edit(group);
+      dispatch(success(msg));
+
+      // add schedule after edit group success
+      if (schedule && schedule.length) {
+        dispatch(scheduleActions.add(schedule));
+      }
+
+      history.push('/dashboard/groups');
+    } catch (error) {
+      dispatch(failure(error));
+      dispatch(alertActions.error(error));
+    }
+  };
+};
+
 const remove = (id) => {
   const request = () => ({
     type: groupsConstants.REMOVE_REQUEST,
@@ -124,6 +161,7 @@ const groupsActions = {
   getAll,
   getById,
   add,
+  edit,
   remove,
 };
 

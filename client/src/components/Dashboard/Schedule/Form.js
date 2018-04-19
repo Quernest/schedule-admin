@@ -7,12 +7,9 @@ import Event from '../Schedule/Event';
 
 /**
  * TODO:
+ *
  * - handle error if no data
- * - translations
- * - prop-types
- * - add keys in loops
- * - submit button
- * - localSchedule
+ *
  */
 
 const Form = ({
@@ -66,7 +63,6 @@ const Form = ({
         </label>
       </div>
 
-      {/* n is week type */}
       {[...Array(2)].map((w, n) => (
         <Week
           className="form__week col-xs-12 col-md-6"
@@ -96,7 +92,7 @@ const Form = ({
     </div>
 
     <button className="form__btn btn">
-      {formatMessage({ id: 'app.button.add' })}
+      {formatMessage({ id: 'app.button.save' })}
     </button>
   </form>
 );
@@ -128,10 +124,20 @@ Form.propTypes = {
     fetching: PropTypes.bool,
     list: PropTypes.arrayOf(PropTypes.object),
   }),
-  // semester: PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.number,
-  // ]),
+  scheduleList: PropTypes.arrayOf(PropTypes.object),
+  semester: PropTypes.shape({
+    id: PropTypes.number,
+    number: PropTypes.number,
+    start: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.object,
+    ]),
+    end: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.object,
+    ]),
+    firstWeekType: PropTypes.number,
+  }),
 };
 
 Form.defaultProps = {
@@ -140,7 +146,8 @@ Form.defaultProps = {
   semesters: {},
   teachers: {},
   subjects: {},
-  // semester: {},
+  scheduleList: [],
+  semester: {},
 };
 
 export default injectIntl(Form);

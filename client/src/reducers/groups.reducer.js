@@ -52,6 +52,22 @@ const groups = (state = {}, action) => {
         ...state,
         fetching: false,
       };
+    case groupsConstants.EDIT_REQUEST:
+      return {
+        ...state,
+        fetching: true,
+      };
+    case groupsConstants.EDIT_SUCCESS:
+      return {
+        ...state,
+        fetching: false,
+      };
+    case groupsConstants.EDIT_FAILURE:
+      return {
+        ...state,
+        fetching: false,
+        error: action.error,
+      };
     case groupsConstants.REMOVE_REQUEST:
       return {
         ...state,
