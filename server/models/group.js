@@ -10,6 +10,7 @@ module.exports.getSchedule = (id, callback) => {
       t.end,
       s.weekDay,
       s.weekType,
+      sub.type,
       sem.number as semester,
       s.location,
       s.isFreeTime,
