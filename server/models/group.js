@@ -23,7 +23,7 @@ module.exports.getSchedule = (id, callback) => {
     LEFT JOIN teachers tc ON s.teacherId = tc.id
     INNER JOIN semesters sem ON s.semester = sem.number
     WHERE
-      g.id = ${id}
+      g.id = ${id} ORDER BY t.number ASC
     `,
     (err, rows) => {
       if (err) throw err;

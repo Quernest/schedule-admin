@@ -1,7 +1,7 @@
 const database = require('../config/database');
 
 module.exports.getAll = (callback) => {
-  database.pool.query('SELECT g.id, g.name FROM groups g', (err, rows) => {
+  database.pool.query('SELECT g.id, g.name FROM groups g ORDER BY g.name ASC', (err, rows) => {
     if (err) throw err;
 
     return callback(null, rows);
