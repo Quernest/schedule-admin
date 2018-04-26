@@ -19,7 +19,7 @@ module.exports.add = (body, callback) => {
           weekDay,
           weekType,
           location,
-          semester,
+          semesterId,
           lesson,
           isFreeTime,
           isShortDay,
@@ -30,10 +30,10 @@ module.exports.add = (body, callback) => {
           groupId: Number(groupId),
           subjectId: subjectId ? Number(subjectId) : null,
           teacherId: teacherId ? Number(teacherId) : null,
+          semesterId: semesterId ? Number(semesterId) : null,
           weekDay: Number(weekDay),
           weekType: Number(weekType),
           location: location ? String(location) : null,
-          semester: Number(semester),
           lesson: Number(lesson),
           isFreeTime: Number(isFreeTime),
           isShortDay: Number(isShortDay),
@@ -46,7 +46,7 @@ module.exports.add = (body, callback) => {
     database.pool.query(`
     REPLACE INTO
       schedule
-    (id, groupId, subjectId, teacherId, weekDay, weekType, location, semester, lesson, isFreeTime, isShortDay)
+    (id, groupId, subjectId, teacherId, semesterId, weekDay, weekType, location, lesson, isFreeTime, isShortDay)
     VALUES ?`, [fields], (err) => {
       if (err) throw err;
 

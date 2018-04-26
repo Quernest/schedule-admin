@@ -42,11 +42,11 @@ const Form = ({
       </div>
 
       <div className="col-xs-12">
-        <label className="form__label" htmlFor="semester">
+        <label className="form__label" htmlFor="semesterId">
           {formatMessage({ id: 'app.dashboard.semesters.form.editgroup.semester' })}
           <select
-            id="semester"
-            name="semester"
+            id="semesterId"
+            name="semesterId"
             value={(semester && semester.number) || ''}
             className="form__select"
             onChange={onChangeSemester}
@@ -54,7 +54,7 @@ const Form = ({
             {semesters.list && semesters.list.map((s) => (
               <option
                 key={s.id}
-                value={s.number}
+                value={s.id}
               >
                 {s.number}
               </option>

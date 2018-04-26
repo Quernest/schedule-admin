@@ -40,7 +40,6 @@ class AddSemester extends Component {
     });
 
     if (number && start && end && firstWeekType) {
-
       /**
        * avoid mistakes, create data object
        *

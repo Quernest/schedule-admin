@@ -93,7 +93,7 @@ class EditGroup extends Component {
     this.setState({
       semester: update(semester, {
         $merge: {
-          number: Number(value),
+          id: Number(value),
         },
       }),
     });
@@ -106,7 +106,7 @@ class EditGroup extends Component {
 
     const updatedEvent = {
       groupId: Number(groupId),
-      semester: semester.number,
+      semesterId: semester.id,
       weekDay,
       weekType,
       lesson,
@@ -114,6 +114,8 @@ class EditGroup extends Component {
       isFreeTime: 0,
       isShortDay: Number(weekDay === 5),
     };
+
+    console.log(updatedEvent);
 
     if (name === 'isFreeTime') {
       /**

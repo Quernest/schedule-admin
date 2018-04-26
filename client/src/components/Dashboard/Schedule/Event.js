@@ -31,7 +31,7 @@ const Event = ({
       if (e.weekType === weekType &&
           e.weekDay === isoWeekDay &&
           e.lesson === isoEventNumber &&
-          e.semester === semester.number
+          e.semesterId === semester.id
       ) {
         event.index = i;
         event.item = e;

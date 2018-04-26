@@ -6,31 +6,35 @@ module.exports.getAllData = (req, res) => {
     semesters: [],
   };
 
-  groupModel.getGroup(req.params.id, (err, groups) => {
-    if (err) throw err;
+  const { id } = req.params;
+
+  groupModel.getGroup(id, (groupsError, groups) => {
+    if (groupsError) throw groupsError;
 
     if (groups && groups.length) {
       const [group] = groups;
+
       data.group = group;
     }
 
-    groupModel.getSemesters(req.params.id, (err, semesters) => {
-      if (err) throw err;
+    groupModel.getSemesters(id, (semestersError, semesters) => {
+      if (semestersError) throw semestersError;
 
       if (semesters && semesters.length) {
-        data.semesters = semesters.map(row =>
-          Object.assign(row, { schedule: [] }),);
+        data.semesters = semesters.map((row) => Object.assign(row, { schedule: [] }));
       }
 
-      groupModel.getSchedule(req.params.id, (err, rows) => {
-        if (err) throw err;
+      groupModel.getSchedule(id, (scheduleError, schedule) => {
+        if (scheduleError) throw scheduleError;
 
-        if (rows && rows.length) {
-          rows.map((row) => {
-            data.semesters.map((semester, i) => {
-              if (row.semester === semester.number) {
-                data.semesters[i].schedule.push(row);
+        if (schedule && schedule.length) {
+          schedule.map((item) => {
+            return data.semesters.map((semester, index) => {
+              if (item.semesterId === semester.id) {
+                data.semesters[index].schedule.push(item);
               }
+
+              return semester;
             });
           });
         }
@@ -42,7 +46,9 @@ module.exports.getAllData = (req, res) => {
 };
 
 module.exports.getSchedule = (req, res) => {
-  groupModel.getSchedule(req.params.id, (err, rows) => {
+  const { id } = req.params;
+
+  groupModel.getSchedule(id, (err, rows) => {
     if (err) throw err;
 
     res.send(rows);
@@ -50,7 +56,9 @@ module.exports.getSchedule = (req, res) => {
 };
 
 module.exports.getSemesters = (req, res) => {
-  groupModel.getSemesters(req.params.id, (err, rows) => {
+  const { id } = req.params;
+
+  groupModel.getSemesters(id, (err, rows) => {
     if (err) throw err;
 
     res.send({
@@ -60,7 +68,9 @@ module.exports.getSemesters = (req, res) => {
 };
 
 module.exports.getGroup = (req, res) => {
-  groupModel.getGroup(req.params.id, (err, rows) => {
+  const { id } = req.params;
+
+  groupModel.getGroup(id, (err, rows) => {
     if (err) throw err;
 
     res.send(rows[0]);
