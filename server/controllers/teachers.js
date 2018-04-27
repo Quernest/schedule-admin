@@ -8,6 +8,26 @@ module.exports.getAll = (req, res) => {
   });
 };
 
+module.exports.getById = (req, res) => {
+  const { id } = req.params;
+
+  teachersModel.getById(id, (err, rows) => {
+    if (err) throw err;
+
+    res.send(rows);
+  });
+};
+
+module.exports.edit = (req, res) => {
+  const { body } = req;
+
+  teachersModel.edit(body, (err, rows) => {
+    if (err) throw err;
+
+    res.send(rows);
+  });
+};
+
 module.exports.add = (req, res) => {
   const { body } = req;
   const { name } = body;

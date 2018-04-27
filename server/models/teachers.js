@@ -8,6 +8,32 @@ module.exports.getAll = (callback) => {
   });
 };
 
+module.exports.getById = (id, callback) => {
+  if (id) {
+    database.pool.query(`SELECT * FROM teachers WHERE teachers.id = ${id}`, (err, rows) => {
+      if (err) throw err;
+
+      const [subject] = rows;
+
+      return callback(null, subject);
+    });
+  }
+};
+
+module.exports.edit = (body, callback) => {
+  const { id } = body;
+
+  database.pool.query(
+    `UPDATE teachers SET ? WHERE teachers.id = ${id}`,
+    body,
+    (err, rows) => {
+      if (err) throw err;
+
+      return callback(null, rows);
+    },
+  );
+};
+
 module.exports.add = (name, callback) => {
   database.pool.query(
     'INSERT INTO teachers (name) values (?)',
