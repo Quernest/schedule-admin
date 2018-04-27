@@ -1,7 +1,7 @@
 const database = require('../config/database');
 
 module.exports.getAll = (callback) => {
-  database.pool.query('SELECT t.id, t.name FROM teachers t', (err, rows) => {
+  database.pool.query('SELECT * FROM teachers', (err, rows) => {
     if (err) throw err;
 
     return callback(null, rows);
@@ -9,15 +9,13 @@ module.exports.getAll = (callback) => {
 };
 
 module.exports.getById = (id, callback) => {
-  if (id) {
-    database.pool.query(`SELECT * FROM teachers WHERE teachers.id = ${id}`, (err, rows) => {
-      if (err) throw err;
+  database.pool.query(`SELECT * FROM teachers WHERE teachers.id = ${id}`, (err, rows) => {
+    if (err) throw err;
 
-      const [subject] = rows;
+    const [teacher] = rows;
 
-      return callback(null, subject);
-    });
-  }
+    return callback(null, teacher);
+  });
 };
 
 module.exports.edit = (body, callback) => {
@@ -35,26 +33,22 @@ module.exports.edit = (body, callback) => {
 };
 
 module.exports.add = (name, callback) => {
-  database.pool.query(
-    'INSERT INTO teachers (name) values (?)',
-    [name],
-    (err, rows) => {
-      if (err) throw err;
+  database.pool.query('INSERT INTO teachers SET ?', { name }, (err, rows) => {
+    if (err) throw err;
 
-      if (rows) {
-        database.pool.query(
-          `SELECT t.id, t.name FROM teachers t WHERE t.name = "${name}"`,
-          (err, teachers) => {
-            if (err) throw err;
+    if (rows) {
+      database.pool.query(
+        `SELECT * FROM teachers WHERE teachers.name = "${name}"`,
+        (err, teachers) => {
+          if (err) throw err;
 
-            const [teacher] = teachers;
+          const [teacher] = teachers;
 
-            return callback(null, teacher);
-          },
-        );
-      }
-    },
-  );
+          return callback(null, teacher);
+        },
+      );
+    }
+  });
 };
 
 module.exports.remove = (id, callback) => {

@@ -32,10 +32,39 @@ const getAll = () => {
   };
 };
 
-const add = (name) => {
+const getById = (id) => {
+  const request = () => ({
+    type: teachersConstants.GET_BY_ID_REQUEST,
+    id,
+  });
+
+  const success = teacher => ({
+    type: teachersConstants.GET_BY_ID_SUCCESS,
+    teacher,
+  });
+
+  const failure = error => ({
+    type: teachersConstants.GET_BY_ID_FAILURE,
+    error,
+  });
+
+  return async (dispatch) => {
+    dispatch(request());
+
+    try {
+      const teacher = await teachersService.getById(id);
+      dispatch(success(teacher));
+    } catch (error) {
+      dispatch(failure(error));
+      dispatch(alertActions.error(error));
+    }
+  };
+};
+
+const add = (data) => {
   const request = () => ({
     type: teachersConstants.ADD_REQUEST,
-    name,
+    data,
   });
 
   const success = teacher => ({
@@ -49,12 +78,42 @@ const add = (name) => {
   });
 
   return async (dispatch) => {
-    dispatch(request(name));
+    dispatch(request());
 
     try {
-      const teacher = await teachersService.add(name);
-      dispatch(success(teacher));
+      const teacher = await teachersService.add(data);
       history.push('/dashboard/teachers');
+      dispatch(success(teacher));
+    } catch (error) {
+      dispatch(failure(error));
+      dispatch(alertActions.error(error));
+    }
+  };
+};
+
+const edit = (data) => {
+  const request = () => ({
+    type: teachersConstants.EDIT_REQUEST,
+    data,
+  });
+
+  const success = msg => ({
+    type: teachersConstants.EDIT_SUCCESS,
+    msg,
+  });
+
+  const failure = error => ({
+    type: teachersConstants.EDIT_FAILURE,
+    error,
+  });
+
+  return async (dispatch) => {
+    dispatch(request());
+
+    try {
+      const msg = await teachersService.edit(data);
+      history.push('/dashboard/teachers');
+      dispatch(success(msg));
     } catch (error) {
       dispatch(failure(error));
       dispatch(alertActions.error(error));
@@ -82,7 +141,6 @@ const remove = (id) => {
     dispatch(request(id));
 
     try {
-      // FIXME: make sure that msg here
       const msg = await teachersService.remove(id);
       dispatch(success(msg));
     } catch (error) {
@@ -94,7 +152,9 @@ const remove = (id) => {
 
 const teachersActions = {
   getAll,
+  getById,
   add,
+  edit,
   remove,
 };
 

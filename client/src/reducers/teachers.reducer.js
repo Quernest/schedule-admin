@@ -19,6 +19,23 @@ const teachers = (state = {}, action) => {
         fetching: false,
         error: action.error,
       };
+    case teachersConstants.GET_BY_ID_REQUEST:
+      return {
+        ...state,
+        fetching: true,
+      };
+    case teachersConstants.GET_BY_ID_SUCCESS:
+      return {
+        ...state,
+        fetching: false,
+        teacher: action.teacher,
+      };
+    case teachersConstants.GET_BY_ID_FAILURE:
+      return {
+        ...state,
+        fetching: false,
+        error: action.error,
+      };
     case teachersConstants.ADD_REQUEST:
       return {
         ...state,
@@ -31,6 +48,21 @@ const teachers = (state = {}, action) => {
         fetching: false,
       };
     case teachersConstants.ADD_FAILURE:
+      return {
+        ...state,
+        fetching: false,
+      };
+    case teachersConstants.EDIT_REQUEST:
+      return {
+        ...state,
+        fetching: true,
+      };
+    case teachersConstants.EDIT_SUCCESS:
+      return {
+        ...state,
+        fetching: false,
+      };
+    case teachersConstants.EDIT_FAILURE:
       return {
         ...state,
         fetching: false,

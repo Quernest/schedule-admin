@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { injectIntl, intlShape } from 'react-intl';
 import PropTypes from 'prop-types';
+import update from 'react-addons-update';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import Form from './Form';
+import ActivityLoader from '../../ActivityLoader';
 import teachersActions from '../../../actions/teachers.actions';
 import Heading from '../../Heading';
 
@@ -11,7 +14,9 @@ class AddTeacher extends Component {
     super(props);
 
     this.state = {
-      teacherName: '',
+      teacher: {
+        name: '',
+      },
       submitted: false,
     };
 
@@ -23,29 +28,38 @@ class AddTeacher extends Component {
     e.preventDefault();
 
     const { dispatch } = this.props;
-    const { teacherName } = this.state;
+    const { teacher } = this.state;
 
     this.setState({
       submitted: true,
     });
 
-    if (teacherName) {
-      dispatch(teachersActions.add(teacherName));
+    const { name } = teacher;
+
+    if (name) {
+      dispatch(teachersActions.add(teacher));
     }
   }
 
   onChange(e) {
     const { value, name } = e.target;
+    const { teacher } = this.state;
 
     this.setState({
-      [name]: value,
+      teacher: update(teacher, {
+        $merge: {
+          [name]: value,
+        },
+      }),
     });
   }
 
   render() {
-    const { teachers: { fetching }, intl } = this.props;
-    const { submitted, teacherName } = this.state;
+    const { teachers, intl } = this.props;
+    const { fetching } = teachers;
+    const { submitted, teacher } = this.state;
     const { formatMessage } = intl;
+
     const headingParams = {
       title: formatMessage({ id: 'app.dashboard.teachers.buttons.addteacher' }),
       link: {
@@ -61,13 +75,13 @@ class AddTeacher extends Component {
           hasLink
           link={headingParams.link}
         />
-        <Form
+        {!fetching && <Form
           onSubmit={this.onSubmit}
           onChange={this.onChange}
-          teacherName={teacherName}
+          teacher={teacher}
           submitted={submitted}
-          fetching={fetching}
-        />
+        />}
+        <ActivityLoader fetching={fetching} />
       </div>
     );
   }

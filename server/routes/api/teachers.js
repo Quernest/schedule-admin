@@ -6,8 +6,6 @@ const secret = require('../../config/app').config.keys.secret;
 
 router.get('/', teachersController.getAll);
 
-router.use('/:id', teachersController.getById);
-
 router.use('/edit', auth.required, (req, res) => {
   jwt.verify(req.token, secret, (err) => {
     if (err) {
@@ -40,5 +38,7 @@ router.use('/remove', auth.required, (req, res) => {
     return teachersController.remove(req, res);
   });
 });
+
+router.use('/:id', teachersController.getById);
 
 module.exports = router;

@@ -9,9 +9,7 @@ module.exports.getAll = (req, res) => {
 };
 
 module.exports.getById = (req, res) => {
-  const { id } = req.params;
-
-  teachersModel.getById(id, (err, rows) => {
+  teachersModel.getById(req.params.id, (err, rows) => {
     if (err) throw err;
 
     res.send(rows);

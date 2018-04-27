@@ -16,10 +16,26 @@ const getAll = async () => {
   }
 };
 
-const add = async (name) => {
+const getById = async (id) => {
+  try {
+    const response = await fetch(`/api/teachers/${id}`);
+
+    if (!response.ok) {
+      return Promise.reject(response.statusText);
+    }
+
+    const teacher = await response.json();
+
+    return Promise.resolve(teacher);
+  } catch (error) {
+    return error;
+  }
+};
+
+const add = async (data) => {
   const requestOptions = {
     method: 'POST',
-    body: JSON.stringify({ name }),
+    body: JSON.stringify({ ...data }),
     headers: { ...authHeader(), 'Content-Type': 'application/json' },
   };
 
@@ -33,6 +49,28 @@ const add = async (name) => {
     const teacher = await response.json();
 
     return Promise.resolve(teacher);
+  } catch (error) {
+    return error;
+  }
+};
+
+const edit = async (teacher) => {
+  const requestOptions = {
+    method: 'POST',
+    body: JSON.stringify({ ...teacher }),
+    headers: { ...authHeader(), 'Content-Type': 'application/json' },
+  };
+
+  try {
+    const response = await fetch('/api/teachers/edit', requestOptions);
+
+    if (!response.ok) {
+      return Promise.reject(response.statusText);
+    }
+
+    const msg = await response.json();
+
+    return Promise.resolve(msg);
   } catch (error) {
     return error;
   }
@@ -62,6 +100,8 @@ const remove = async (id) => {
 
 const teachersService = {
   getAll,
+  getById,
+  edit,
   add,
   remove,
 };
