@@ -13,6 +13,7 @@ import Subjects from '../components/Dashboard/Subjects';
 import AddSubject from '../components/Dashboard/Subjects/AddSubject';
 import EditSubject from '../components/Dashboard/Subjects/EditSubject';
 import Teachers from '../components/Dashboard/Teachers';
+import EditTeacher from '../components/Dashboard/Teachers/EditTeacher';
 import AddTeacher from '../components/Dashboard/Teachers/AddTeacher';
 import Semesters from '../components/Dashboard/Semesters';
 import AddSemester from '../components/Dashboard/Semesters/AddSemester';
@@ -38,6 +39,7 @@ const Dashboard = ({ intl }) => {
           <Route path="/dashboard/subjects/edit/:id" component={EditSubject} />
           <Route exact path="/dashboard/teachers" component={Teachers} />
           <Route path="/dashboard/teachers/add" component={AddTeacher} />
+          <Route path="/dashboard/teachers/edit/:id" component={EditTeacher} />
           <Route exact path="/dashboard/semesters" component={Semesters} />
           <Route path="/dashboard/semesters/add" component={AddSemester} />
           <Route path="/dashboard/semesters/edit/:id" component={EditSemester} />

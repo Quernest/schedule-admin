@@ -93,6 +93,10 @@
     "message": "Редактировать предмет"
   },
   {
+    "id": "app.dashboard.teachers.buttons.editteacher",
+    "message": "Редактировать учителя"
+  },
+  {
     "id": "app.dashboard.semesters.buttons.editsemester",
     "message": "Редактировать семестр"
   },

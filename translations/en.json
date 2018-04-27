@@ -88,6 +88,10 @@
     "message": "Edit subject"
   },
   {
+    "id": "app.dashboard.teachers.buttons.editteacher",
+    "message": "Edit teacher"
+  },
+  {
     "id": "app.dashboard.semesters.buttons.editgroup",
     "message": "Edit group"
   },
