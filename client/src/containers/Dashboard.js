@@ -11,6 +11,7 @@ import AddGroup from '../components/Dashboard/Groups/AddGroup';
 import EditGroup from '../components/Dashboard/Groups/EditGroup';
 import Subjects from '../components/Dashboard/Subjects';
 import AddSubject from '../components/Dashboard/Subjects/AddSubject';
+import EditSubject from '../components/Dashboard/Subjects/EditSubject';
 import Teachers from '../components/Dashboard/Teachers';
 import AddTeacher from '../components/Dashboard/Teachers/AddTeacher';
 import Semesters from '../components/Dashboard/Semesters';
@@ -34,6 +35,7 @@ const Dashboard = ({ intl }) => {
           <Route path="/dashboard/groups/edit/:id" component={EditGroup} />
           <Route exact path="/dashboard/subjects" component={Subjects} />
           <Route path="/dashboard/subjects/add" component={AddSubject} />
+          <Route path="/dashboard/subjects/edit/:id" component={EditSubject} />
           <Route exact path="/dashboard/teachers" component={Teachers} />
           <Route path="/dashboard/teachers/add" component={AddTeacher} />
           <Route exact path="/dashboard/semesters" component={Semesters} />

@@ -4,8 +4,8 @@ const secret = require('../config/app').config.keys.secret;
 const verifyToken = (req, res, next) => {
   const bearerHeader = req.headers.authorization;
 
-  if (bearerHeader) {
-    const bearer = bearerHeader.split('');
+  if (bearerHeader !== '') {
+    const bearer = bearerHeader.split(' ');
     const bearerToken = bearer[1];
 
     req.token = bearerToken;

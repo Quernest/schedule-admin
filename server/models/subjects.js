@@ -8,6 +8,18 @@ module.exports.getAll = (callback) => {
   });
 };
 
+module.exports.getById = (id, callback) => {
+  if (id) {
+    database.pool.query(`SELECT * FROM subjects WHERE subjects.id = ${id}`, (err, rows) => {
+      if (err) throw err;
+
+      const [subject] = rows;
+
+      return callback(null, subject);
+    });
+  }
+};
+
 module.exports.add = (body, callback) => {
   const { name, type } = body;
 
@@ -19,7 +31,7 @@ module.exports.add = (body, callback) => {
 
       if (rows) {
         database.pool.query(
-          `SELECT s.id, s.name FROM subjects s WHERE s.name = "${name}" AND s.type = "${type}"`,
+          `SELECT * FROM subjects s WHERE s.name = "${name}" AND s.type = "${type}"`,
           (err, subjects) => {
             if (err) throw err;
 

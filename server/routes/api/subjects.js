@@ -28,4 +28,6 @@ router.use('/add', auth.required, (req, res) => {
   });
 });
 
+router.use('/:id', subjectsController.getById);
+
 module.exports = router;

@@ -89,6 +89,10 @@
     "message": "Редагувати групу"
   },
   {
+    "id": "app.dashboard.subjects.buttons.editsubject",
+    "message": "Редагувати предмет"
+  },
+  {
     "id": "app.dashboard.semesters.buttons.editsemester",
     "message": "Редагувати семестр"
   },

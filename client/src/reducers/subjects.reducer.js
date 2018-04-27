@@ -19,6 +19,23 @@ const subjects = (state = {}, action) => {
         fetching: false,
         error: action.error,
       };
+    case subjectsConstants.GET_BY_ID_REQUEST:
+      return {
+        ...state,
+        fetching: true,
+      };
+    case subjectsConstants.GET_BY_ID_SUCCESS:
+      return {
+        ...state,
+        fetching: false,
+        subject: action.subject,
+      };
+    case subjectsConstants.GET_BY_ID_FAILURE:
+      return {
+        ...state,
+        fetching: false,
+        error: action.error,
+      };
     case subjectsConstants.ADD_REQUEST:
       return {
         ...state,

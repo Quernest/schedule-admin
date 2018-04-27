@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { injectIntl, intlShape } from 'react-intl';
+import update from 'react-addons-update';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import PropTypes from 'prop-types';
+import ActivityLoader from '../../ActivityLoader';
 import Form from './Form';
 import subjectsActions from '../../../actions/subjects.actions';
 import Heading from '../../Heading';
@@ -11,8 +14,10 @@ class AddSubject extends Component {
     super(props);
 
     this.state = {
-      subjectName: '',
-      subjectType: 1,
+      subject: {
+        name: '',
+        type: 1,
+      },
       submitted: false,
     };
 
@@ -24,33 +29,35 @@ class AddSubject extends Component {
     e.preventDefault();
 
     const { dispatch } = this.props;
-    const { subjectName, subjectType } = this.state;
+    const { subject } = this.state;
 
     this.setState({
       submitted: true,
     });
 
-    if (subjectName && subjectType) {
-      const data = {
-        name: subjectName,
-        type: subjectType,
-      };
+    const { name, type } = subject;
 
-      dispatch(subjectsActions.add(data));
+    if (name && type) {
+      dispatch(subjectsActions.add(subject));
     }
   }
 
   onChange(e) {
     const { value, name } = e.target;
+    const { subject } = this.state;
 
     this.setState({
-      [name]: value,
+      subject: update(subject, {
+        $merge: {
+          [name]: value,
+        },
+      }),
     });
   }
 
   render() {
     const { subjects: { fetching }, intl } = this.props;
-    const { submitted, subjectName, subjectType } = this.state;
+    const { submitted, subject } = this.state;
     const { formatMessage } = intl;
 
     const headingParams = {
@@ -68,14 +75,13 @@ class AddSubject extends Component {
           hasLink
           link={headingParams.link}
         />
-        <Form
+        {!fetching && <Form
           submitted={submitted}
-          fetching={fetching}
           onSubmit={this.onSubmit}
           onChange={this.onChange}
-          subjectName={subjectName}
-          subjectType={subjectType}
-        />
+          subject={subject}
+        />}
+        <ActivityLoader fetching={fetching} />
       </div>
     );
   }

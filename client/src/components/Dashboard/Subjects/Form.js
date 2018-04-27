@@ -2,33 +2,32 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
-import ActivityLoader from '../../ActivityLoader';
 
 const Form = ({
   intl,
   submitted,
-  fetching,
   onSubmit,
   onChange,
-  subjectName,
-  subjectType,
+  subject,
 }) => {
   const { formatMessage } = intl;
+  const { type, name } = subject;
 
   return (
     <form className="form" onSubmit={onSubmit}>
 
       <div className="form__group">
-        <label htmlFor="subjectName" className="form__label">
+        <label htmlFor="name" className="form__label">
           {formatMessage({ id: 'app.dashboard.subjects.form.addsubject.input.subjectName' })}
           <input
-            id="subjectName"
-            name="subjectName"
+            id="name"
+            name="name"
             type="text"
             className={classNames('form__input', {
-              invalid: submitted && !subjectName,
+              invalid: submitted && !name,
             })}
             onChange={onChange}
+            value={name || ''}
             placeholder={formatMessage({
               id: 'app.dashboard.subjects.form.addsubject.input.subjectName.placeholder',
             })}
@@ -37,13 +36,13 @@ const Form = ({
       </div>
 
       <div className="form__group">
-        <label htmlFor="subjectType" className="form__label">
+        <label htmlFor="type" className="form__label">
           {formatMessage({ id: 'app.dashboard.subjects.form.addsubject.input.subjectType' })}
           <select
-            id="subjectType"
+            id="type"
             className="form__select"
-            name="subjectType"
-            value={subjectType}
+            name="type"
+            value={type || ''}
             onChange={onChange}
           >
             <option value="1">{formatMessage({ id: 'app.words.lecture' })}</option>
@@ -53,12 +52,7 @@ const Form = ({
       </div>
 
       <button className="btn form__btn">
-        <ActivityLoader
-          fetching={fetching}
-          size={18}
-          color="#fff"
-        />
-        {!fetching && formatMessage({ id: 'app.button.add' })}
+        {formatMessage({ id: 'app.button.add' })}
       </button>
     </form>
   );
@@ -67,21 +61,18 @@ const Form = ({
 Form.propTypes = {
   intl: intlShape.isRequired,
   submitted: PropTypes.bool,
-  fetching: PropTypes.bool,
   onSubmit: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
-  subjectName: PropTypes.string,
-  subjectType: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-  ]),
+  subject: PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    type: PropTypes.number,
+  }),
 };
 
 Form.defaultProps = {
   submitted: false,
-  fetching: false,
-  subjectName: '',
-  subjectType: 1,
+  subject: {},
 };
 
 export default injectIntl(Form);

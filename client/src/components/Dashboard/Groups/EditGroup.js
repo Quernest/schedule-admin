@@ -115,8 +115,6 @@ class EditGroup extends Component {
       isShortDay: Number(weekDay === 5),
     };
 
-    console.log(updatedEvent);
-
     if (name === 'isFreeTime') {
       /**
        * 0 = false, not free time

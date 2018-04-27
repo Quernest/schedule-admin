@@ -32,6 +32,35 @@ const getAll = () => {
   };
 };
 
+const getById = (id) => {
+  const request = () => ({
+    type: subjectsConstants.GET_BY_ID_REQUEST,
+    id,
+  });
+
+  const success = subject => ({
+    type: subjectsConstants.GET_BY_ID_SUCCESS,
+    subject,
+  });
+
+  const failure = error => ({
+    type: subjectsConstants.GET_BY_ID_FAILURE,
+    error,
+  });
+
+  return async (dispatch) => {
+    dispatch(request());
+
+    try {
+      const subject = await subjectsService.getById(id);
+      dispatch(success(subject));
+    } catch (error) {
+      dispatch(failure(error));
+      dispatch(alertActions.error(error));
+    }
+  };
+};
+
 const add = (data) => {
   const request = () => ({
     type: subjectsConstants.ADD_REQUEST,
@@ -53,8 +82,8 @@ const add = (data) => {
 
     try {
       const subject = await subjectsService.add(data);
-      dispatch(success(subject));
       history.push('/dashboard/subjects');
+      dispatch(success(subject));
     } catch (error) {
       dispatch(failure(error));
       dispatch(alertActions.error(error));
@@ -93,6 +122,7 @@ const remove = (id) => {
 
 export default {
   getAll,
+  getById,
   add,
   remove,
 };

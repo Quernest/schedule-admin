@@ -16,6 +16,22 @@ const getAll = async () => {
   }
 };
 
+const getById = async (id) => {
+  try {
+    const response = await fetch(`/api/subjects/${id}`);
+
+    if (!response.ok) {
+      return Promise.reject(response.statusText);
+    }
+
+    const subject = await response.json();
+
+    return Promise.resolve(subject);
+  } catch (error) {
+    return error;
+  }
+};
+
 const add = async (data) => {
   const requestOptions = {
     method: 'POST',
@@ -63,6 +79,7 @@ const remove = async (id) => {
 
 export default {
   getAll,
+  getById,
   add,
   remove,
 };
