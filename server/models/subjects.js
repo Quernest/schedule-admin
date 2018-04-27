@@ -20,6 +20,20 @@ module.exports.getById = (id, callback) => {
   }
 };
 
+module.exports.edit = (body, callback) => {
+  const { id } = body;
+
+  database.pool.query(
+    `UPDATE subjects SET ? WHERE subjects.id = ${id}`,
+    body,
+    (err, rows) => {
+      if (err) throw err;
+
+      return callback(null, rows);
+    },
+  );
+};
+
 module.exports.add = (body, callback) => {
   const { name, type } = body;
 

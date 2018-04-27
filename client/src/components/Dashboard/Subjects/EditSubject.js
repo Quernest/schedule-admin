@@ -67,7 +67,9 @@ class EditSubject extends Component {
       submitted: true,
     });
 
-    if (subject) {
+    const { id, name, type } = subject;
+
+    if (id && name && type) {
       dispatch(subjectsActions.edit(subject));
     }
   }

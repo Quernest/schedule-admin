@@ -52,6 +52,21 @@ const subjects = (state = {}, action) => {
         ...state,
         fetching: false,
       };
+    case subjectsConstants.EDIT_REQUEST:
+      return {
+        ...state,
+        fetching: true,
+      };
+    case subjectsConstants.EDIT_SUCCESS:
+      return {
+        ...state,
+        fetching: false,
+      };
+    case subjectsConstants.EDIT_FAILURE:
+      return {
+        ...state,
+        fetching: false,
+      };
     case subjectsConstants.REMOVE_REQUEST:
       return {
         ...state,

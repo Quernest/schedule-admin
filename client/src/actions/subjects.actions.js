@@ -91,6 +91,36 @@ const add = (data) => {
   };
 };
 
+const edit = (data) => {
+  const request = () => ({
+    type: subjectsConstants.EDIT_REQUEST,
+    data,
+  });
+
+  const success = msg => ({
+    type: subjectsConstants.EDIT_SUCCESS,
+    msg,
+  });
+
+  const failure = error => ({
+    type: subjectsConstants.EDIT_FAILURE,
+    error,
+  });
+
+  return async (dispatch) => {
+    dispatch(request());
+
+    try {
+      const msg = await subjectsService.edit(data);
+      history.push('/dashboard/subjects');
+      dispatch(success(msg));
+    } catch (error) {
+      dispatch(failure(error));
+      dispatch(alertActions.error(error));
+    }
+  };
+};
+
 const remove = (id) => {
   const request = () => ({
     type: subjectsConstants.REMOVE_REQUEST,
@@ -125,4 +155,5 @@ export default {
   getById,
   add,
   remove,
+  edit,
 };

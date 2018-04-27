@@ -17,6 +17,17 @@ router.use('/remove', auth.required, (req, res) => {
   });
 });
 
+router.use('/edit', auth.required, (req, res) => {
+  jwt.verify(req.token, secret, (err) => {
+    if (err) {
+      res.sendStatus(403);
+      res.end();
+    }
+
+    return subjectsController.edit(req, res);
+  });
+});
+
 router.use('/add', auth.required, (req, res) => {
   jwt.verify(req.token, secret, (err) => {
     if (err) {
