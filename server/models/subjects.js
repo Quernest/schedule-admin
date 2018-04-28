@@ -11,17 +11,15 @@ module.exports.getAll = (callback) => {
 };
 
 module.exports.getById = (id, callback) => {
-  if (id) {
-    database.pool.query(`SELECT * FROM subjects WHERE subjects.id = ${id}`, (error, rows) => {
-      if (error) {
-        return callback(error, {});
-      }
+  database.pool.query(`SELECT * FROM subjects WHERE subjects.id = ${id}`, (error, rows) => {
+    if (error) {
+      return callback(error, {});
+    }
 
-      const [subject] = rows;
+    const [subject] = rows;
 
-      return callback(null, subject);
-    });
-  }
+    return callback(null, subject);
+  });
 };
 
 module.exports.edit = (body, callback) => {
@@ -47,8 +45,10 @@ module.exports.add = (body, callback) => {
     if (rows) {
       database.pool.query(
         `SELECT * FROM subjects s WHERE s.name = "${name}" AND s.type = "${type}"`,
-        (err, subjects) => {
-          if (err) throw err;
+        (subjectsError, subjects) => {
+          if (subjectsError) {
+            return callback(subjectsError, {});
+          }
 
           const [subject] = subjects;
 
