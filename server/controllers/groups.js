@@ -1,19 +1,24 @@
 const groupsModel = require('../models/groups');
 
 module.exports.getAll = (req, res) => {
-  groupsModel.getAll((err, rows) => {
-    if (err) throw err;
-    res.send(rows);
+  groupsModel.getAll((error, rows) => {
+    if (error) {
+      res.status(400).send({ error });
+    } else {
+      res.send(rows);
+    }
   });
 };
 
 module.exports.getById = (req, res) => {
   const { id } = req.params;
 
-  groupsModel.getById(id, (err, rows) => {
-    if (err) throw err;
-
-    res.send(rows);
+  groupsModel.getById(id, (error, rows) => {
+    if (error) {
+      res.status(400).send({ error });
+    } else {
+      res.send(rows);
+    }
   });
 };
 
@@ -21,20 +26,24 @@ module.exports.add = (req, res) => {
   const { body } = req;
   const { name } = body;
 
-  groupsModel.add(name, (err, rows) => {
-    if (err) throw err;
-
-    res.send(rows);
+  groupsModel.add(name, (error, rows) => {
+    if (error) {
+      res.status(400).send({ error });
+    } else {
+      res.send(rows);
+    }
   });
 };
 
 module.exports.edit = (req, res) => {
   const { body } = req;
 
-  groupsModel.edit(body, (err, rows) => {
-    if (err) throw err;
-
-    res.send(rows);
+  groupsModel.edit(body, (error, rows) => {
+    if (error) {
+      res.status(400).send({ error });
+    } else {
+      res.send(rows);
+    }
   });
 };
 
@@ -42,9 +51,11 @@ module.exports.remove = (req, res) => {
   const { body } = req;
   const { id } = body;
 
-  groupsModel.remove(id, (err, rows) => {
-    if (err) throw err;
-
-    res.send(rows);
+  groupsModel.remove(id, (error, rows) => {
+    if (error) {
+      res.status(400).send({ error });
+    } else {
+      res.send(rows);
+    }
   });
 };

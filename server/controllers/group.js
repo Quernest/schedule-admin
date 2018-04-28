@@ -9,7 +9,9 @@ module.exports.getAllData = (req, res) => {
   const { id } = req.params;
 
   groupModel.getGroup(id, (groupsError, groups) => {
-    if (groupsError) throw groupsError;
+    if (groupsError) {
+      return res.status(400).send({ error: groupsError });
+    }
 
     if (groups && groups.length) {
       const [group] = groups;
@@ -18,14 +20,18 @@ module.exports.getAllData = (req, res) => {
     }
 
     groupModel.getSemesters(id, (semestersError, semesters) => {
-      if (semestersError) throw semestersError;
+      if (semestersError) {
+        return res.status(400).send({ error: semestersError });
+      }
 
       if (semesters && semesters.length) {
         data.semesters = semesters.map((row) => Object.assign(row, { schedule: [] }));
       }
 
       groupModel.getSchedule(id, (scheduleError, schedule) => {
-        if (scheduleError) throw scheduleError;
+        if (scheduleError) {
+          return res.status(400).send({ error: scheduleError });
+        }
 
         if (schedule && schedule.length) {
           schedule.map((item) => {
@@ -48,31 +54,37 @@ module.exports.getAllData = (req, res) => {
 module.exports.getSchedule = (req, res) => {
   const { id } = req.params;
 
-  groupModel.getSchedule(id, (err, rows) => {
-    if (err) throw err;
-
-    res.send(rows);
+  groupModel.getSchedule(id, (error, rows) => {
+    if (error) {
+      res.status(400).send({ error });
+    } else {
+      res.send(rows);
+    }
   });
 };
 
 module.exports.getSemesters = (req, res) => {
   const { id } = req.params;
 
-  groupModel.getSemesters(id, (err, rows) => {
-    if (err) throw err;
-
-    res.send({
-      semesters: rows,
-    });
+  groupModel.getSemesters(id, (error, rows) => {
+    if (error) {
+      res.status(400).send({ error });
+    } else {
+      res.send({
+        semesters: rows,
+      });
+    }
   });
 };
 
 module.exports.getGroup = (req, res) => {
   const { id } = req.params;
 
-  groupModel.getGroup(id, (err, rows) => {
-    if (err) throw err;
-
-    res.send(rows[0]);
+  groupModel.getGroup(id, (error, rows) => {
+    if (error) {
+      res.status(400).send({ error });
+    } else {
+      res.send(rows[0]);
+    }
   });
 };

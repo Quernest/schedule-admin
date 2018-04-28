@@ -1,20 +1,24 @@
 const semestersModel = require('../models/semesters');
 
 module.exports.getAll = (req, res) => {
-  semestersModel.getAll((err, rows) => {
-    if (err) throw err;
-
-    res.send(rows);
+  semestersModel.getAll((error, rows) => {
+    if (error) {
+      res.status(400).send({ error });
+    } else {
+      res.send(rows);
+    }
   });
 };
 
 module.exports.add = (req, res) => {
   const { body } = req;
 
-  semestersModel.add(body, (err, rows) => {
-    if (err) throw err;
-
-    res.send(rows);
+  semestersModel.add(body, (error, rows) => {
+    if (error) {
+      res.status(400).send({ error });
+    } else {
+      res.send(rows);
+    }
   });
 };
 
@@ -22,30 +26,36 @@ module.exports.remove = (req, res) => {
   const { body } = req;
   const { id } = body;
 
-  semestersModel.remove(id, (err, rows) => {
-    if (err) throw err;
-
-    res.send(rows);
+  semestersModel.remove(id, (error, rows) => {
+    if (error) {
+      res.status(400).send({ error });
+    } else {
+      res.send(rows);
+    }
   });
 };
 
 module.exports.edit = (req, res) => {
   const { body } = req;
 
-  semestersModel.edit(body, (err, rows) => {
-    if (err) throw err;
-
-    res.send(rows);
+  semestersModel.edit(body, (error, rows) => {
+    if (error) {
+      res.status(400).send({ error });
+    } else {
+      res.send(rows);
+    }
   });
 };
 
 module.exports.getById = (req, res) => {
   const { id } = req.params;
 
-  semestersModel.getById(id, (err, rows) => {
-    if (err) throw err;
-
-    res.send(rows);
+  semestersModel.getById(id, (error, rows) => {
+    if (error) {
+      res.status(400).send({ error });
+    } else {
+      res.send(rows);
+    }
   });
 };
 

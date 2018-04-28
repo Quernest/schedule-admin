@@ -56,6 +56,8 @@ module.exports.add = (body, callback) => {
         },
       );
     }
+
+    return callback('add subjects error', {});
   });
 };
 
