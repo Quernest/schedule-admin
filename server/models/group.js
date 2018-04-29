@@ -1,6 +1,6 @@
 const database = require('../config/database');
 
-module.exports.getSchedule = (id, callback) => {
+module.exports.getSchedule = (id, cb) => {
   database.pool.query(
     `SELECT
       s.id,
@@ -23,34 +23,34 @@ module.exports.getSchedule = (id, callback) => {
     LEFT JOIN teachers tc ON s.teacherId = tc.id
     INNER JOIN semesters sem ON s.semesterId = sem.id
     WHERE
-      g.id = ${Number(id)} ORDER BY t.number ASC
+      g.id = ${id} ORDER BY t.number ASC
     `,
-    (error, rows) => {
+    (error, schedule) => {
       if (error) {
-        return callback(error, {});
+        return cb(error, {});
       }
 
-      return callback(error, rows);
+      return cb(null, schedule);
     },
   );
 };
 
-module.exports.getSemesters = (id, callback) => {
-  database.pool.query('SELECT * FROM semesters', (error, rows) => {
+module.exports.getSemesters = (id, cb) => {
+  database.pool.query('SELECT * FROM semesters', (error, semesters) => {
     if (error) {
-      return callback(error, {});
+      return cb(error, {});
     }
 
-    return callback(error, rows);
+    return cb(null, semesters);
   });
 };
 
-module.exports.getGroup = (id, callback) => {
-  database.pool.query(`SELECT * FROM groups g WHERE g.id = ${id}`, (error, rows) => {
+module.exports.getGroup = (id, cb) => {
+  database.pool.query(`SELECT * FROM groups g WHERE g.id = ${id}`, (error, group) => {
     if (error) {
-      return callback(error, {});
+      return cb(error, {});
     }
 
-    return callback(error, rows);
+    return cb(null, group);
   });
 };

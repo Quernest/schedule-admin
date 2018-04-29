@@ -1,51 +1,47 @@
 const database = require('../config/database');
 const moment = require('moment');
 
-module.exports.getAll = (callback) => {
-  database.pool.query('SELECT * FROM semesters', (error, rows) => {
+module.exports.getAll = (cb) => {
+  database.pool.query('SELECT * FROM semesters', (error, semesters) => {
     if (error) {
-      return callback(error, {});
+      return cb(error, {});
     }
 
-    return callback(null, rows);
+    cb(null, semesters);
   });
 };
 
-module.exports.add = (body, callback) => {
+module.exports.add = (body, cb) => {
   database.pool.query('INSERT INTO semesters SET ?', body, (error, rows) => {
     if (error) {
-      return callback(error, {});
+      return cb(error, {});
     }
 
-    if (rows) {
-      const { number } = body;
+    const { number } = body;
 
-      database.pool.query(`SELECT * FROM semesters WHERE semesters.number = ${number}`, (semestersError, semesters) => {
-        if (semestersError) {
-          return callback(semestersError, {});
-        }
+    database.pool.query(`SELECT * FROM semesters WHERE semesters.number = ${number}`, (err, semesters) => {
+      if (err) {
+        return cb(err, {});
+      }
 
-        const [semester] = semesters;
+      const [semester] = semesters;
 
-        return callback(null, semester);
-      });
-    }
-
-    return callback('add semesters error', {});
+      cb(null, semester);
+    });
   });
 };
 
-module.exports.remove = (id, callback) => {
-  database.pool.query(`DELETE FROM semesters WHERE semesters.id = ${id}`, (error, rows) => {
+module.exports.remove = (id, cb) => {
+  database.pool.query(`DELETE FROM semesters WHERE semesters.id = ${id}`, (error, semesters) => {
     if (error) {
-      return callback(error, {});
+      return cb(error, {});
     }
 
-    return callback(null, rows);
+    cb(null, semesters);
   });
 };
 
-module.exports.edit = (body, callback) => {
+module.exports.edit = (body, cb) => {
   const {
     id,
     number,
@@ -53,29 +49,29 @@ module.exports.edit = (body, callback) => {
     end,
   } = body;
 
-  const newBody = Object.assign(body, {
+  const semester = Object.assign(body, {
     number: Number(number),
     start: moment(start).format('YYYY-MM-DD'),
     end: moment(end).format('YYYY-MM-DD'),
   });
 
-  database.pool.query(`UPDATE semesters SET ? WHERE semesters.id = ${id}`, newBody, (error, rows) => {
+  database.pool.query(`UPDATE semesters SET ? WHERE semesters.id = ${id}`, semester, (error, rows) => {
     if (error) {
-      return callback(error, {});
+      return cb(error, {});
     }
 
-    return callback(null, rows);
+    cb(null, rows);
   });
 };
 
-module.exports.getById = (id, callback) => {
-  database.pool.query(`SELECT * FROM semesters s WHERE s.id = ${id}`, (error, rows) => {
+module.exports.getById = (id, cb) => {
+  database.pool.query(`SELECT * FROM semesters s WHERE s.id = ${id}`, (error, semesters) => {
     if (error) {
-      return callback(error, {});
+      return cb(error, {});
     }
 
-    const [semester] = rows;
+    const [semester] = semesters;
 
-    return callback(null, semester);
+    cb(null, semester);
   });
 };

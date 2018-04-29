@@ -11,7 +11,7 @@ router.use('/add', auth.required, (req, res) => {
       res.end();
     }
 
-    return scheduleController.add(req, res);
+    scheduleController.add(req, res);
   });
 });
 

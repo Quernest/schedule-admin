@@ -1,8 +1,8 @@
 const database = require('../config/database');
 
-module.exports.add = (body, callback) => {
+module.exports.add = (body, cb) => {
   if (body && body.length) {
-    const fields = [];
+    const schedule = [];
 
     let i = 0;
     const count = body.length;
@@ -25,7 +25,7 @@ module.exports.add = (body, callback) => {
           isShortDay,
         } = row;
 
-        const correctedRow = {
+        schedule.push(Object.values({
           id: id || null,
           groupId: Number(groupId),
           subjectId: subjectId ? Number(subjectId) : null,
@@ -37,41 +37,49 @@ module.exports.add = (body, callback) => {
           lesson: Number(lesson),
           isFreeTime: Number(isFreeTime),
           isShortDay: Number(isShortDay),
-        };
-
-        fields.push(Object.values(correctedRow));
+        }));
       }
     }
 
     database.pool.query(`
     REPLACE INTO
       schedule
-    (id, groupId, subjectId, teacherId, semesterId, weekDay, weekType, location, lesson, isFreeTime, isShortDay)
-    VALUES ?`, [fields], (error) => {
+    (
+      id,
+      groupId,
+      subjectId,
+      teacherId,
+      semesterId,
+      weekDay,
+      weekType,
+      location,
+      lesson,
+      isFreeTime,
+      isShortDay
+    )
+    VALUES ?`, [schedule], (error, result) => {
       if (error) {
-        return callback(error, {});
+        return cb(error, {});
       }
 
-      database.pool.query('SELECT * FROM schedule', (scheduleError, rows) => {
+      database.pool.query('SELECT * FROM schedule', (scheduleError, list) => {
         if (scheduleError) {
-          return callback(scheduleError, {});
+          return cb(scheduleError, {});
         }
 
-        return callback(null, rows);
+        cb(null, list);
       });
-
-      return callback('add schedule error', {});
     });
   }
 };
 
-module.exports.getById = (id, callback) => {
-  database.pool.query(`SELECT * FROM schedule WHERE schedule.groupId = ${id}`, (error, rows) => {
+module.exports.getById = (id, cb) => {
+  database.pool.query(`SELECT * FROM schedule WHERE schedule.groupId = ${id}`, (error, schedule) => {
     if (error) {
-      return callback(error, {});
+      return cb(error, {});
     }
 
-    return callback(null, rows);
+    cb(null, schedule);
   });
 };
 

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { injectIntl, intlShape } from 'react-intl';
 import PropTypes from 'prop-types';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import semestersActions from '../../../actions/semesters.actions';
 import ActivityLoader from '../../ActivityLoader';
 import Heading from '../../Heading';
@@ -53,10 +54,18 @@ class Semesters extends Component {
           link={headingParams.link}
         />
         {!fetching && (
-          <List
-            semesters={list}
-            onRemove={this.onRemove}
-          />
+          <ReactCSSTransitionGroup
+            transitionName="fade"
+            transitionAppear
+            transitionAppearTimeout={300}
+            transitionEnterTimeout={300}
+            transitionLeaveTimeout={300}
+          >
+            <List
+              semesters={list}
+              onRemove={this.onRemove}
+            />
+          </ReactCSSTransitionGroup>
         )}
         <ActivityLoader fetching={fetching} />
       </div>

@@ -32,10 +32,10 @@ const getById = async (id) => {
   }
 };
 
-const add = async (name) => {
+const add = async (data) => {
   const requestOptions = {
     method: 'POST',
-    body: JSON.stringify({ name }),
+    body: JSON.stringify({ ...data }),
     headers: { ...authHeader(), 'Content-Type': 'application/json' },
   };
 

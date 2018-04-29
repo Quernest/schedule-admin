@@ -62,10 +62,10 @@ const getById = (id) => {
   };
 };
 
-const add = (name) => {
+const add = (data) => {
   const request = () => ({
     type: groupsConstants.ADD_REQUEST,
-    name,
+    data,
   });
 
   const success = group => ({
@@ -82,9 +82,9 @@ const add = (name) => {
     dispatch(request());
 
     try {
-      const group = await groupsService.add(name);
-      dispatch(success(group));
+      const group = await groupsService.add(data);
       history.push('/dashboard/groups');
+      dispatch(success(group));
     } catch (error) {
       dispatch(failure(error));
       dispatch(alertActions.error(error));

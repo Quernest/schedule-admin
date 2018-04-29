@@ -1,11 +1,11 @@
 const subjectsModel = require('../models/subjects');
 
 module.exports.getAll = (req, res) => {
-  subjectsModel.getAll((error, rows) => {
+  subjectsModel.getAll((error, subjects) => {
     if (error) {
       res.status(400).send({ error });
     } else {
-      res.send(rows);
+      res.send(subjects);
     }
   });
 };
@@ -13,11 +13,11 @@ module.exports.getAll = (req, res) => {
 module.exports.getById = (req, res) => {
   const { id } = req.params;
 
-  subjectsModel.getById(id, (error, rows) => {
+  subjectsModel.getById(id, (error, subjects) => {
     if (error) {
       res.status(400).send({ error });
     } else {
-      res.send(rows);
+      res.send(subjects);
     }
   });
 };
@@ -25,11 +25,11 @@ module.exports.getById = (req, res) => {
 module.exports.edit = (req, res) => {
   const { body } = req;
 
-  subjectsModel.edit(body, (error, rows) => {
+  subjectsModel.edit(body, (error, subjects) => {
     if (error) {
       res.status(400).send({ error });
     } else {
-      res.send(rows);
+      res.send(subjects);
     }
   });
 };
@@ -37,11 +37,11 @@ module.exports.edit = (req, res) => {
 module.exports.add = (req, res) => {
   const { body } = req;
 
-  subjectsModel.add(body, (error, rows) => {
+  subjectsModel.add(body, (error, subjects) => {
     if (error) {
       res.status(400).send({ error });
     } else {
-      res.send(rows);
+      res.send(subjects);
     }
   });
 };
@@ -50,11 +50,11 @@ module.exports.remove = (req, res) => {
   const { body } = req;
   const { id } = body;
 
-  subjectsModel.remove(id, (error, rows) => {
+  subjectsModel.remove(id, (error, subjects) => {
     if (error) {
       res.status(400).send({ error });
     } else {
-      res.send(rows);
+      res.send(subjects);
     }
   });
 };

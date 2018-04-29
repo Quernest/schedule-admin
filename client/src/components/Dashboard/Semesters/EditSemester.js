@@ -4,6 +4,7 @@ import { injectIntl, intlShape } from 'react-intl';
 import update from 'react-addons-update';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import semestersActions from '../../../actions/semesters.actions';
 import Heading from '../../Heading';
 import Form from './Form';
@@ -143,15 +144,25 @@ class EditSemester extends Component {
           hasLink
           link={headingParams.link}
         />
-        {isRenderForm && <Form
-          onSubmit={this.onSubmit}
-          onChange={this.onChange}
-          onDateChange={this.onDateChange}
-          submitted={submitted}
-          fetching={fetching}
-          semester={semester}
-          lang={lang}
-        />}
+        {isRenderForm && (
+          <ReactCSSTransitionGroup
+            transitionName="fade"
+            transitionAppear
+            transitionAppearTimeout={300}
+            transitionEnterTimeout={300}
+            transitionLeaveTimeout={300}
+          >
+            <Form
+              onSubmit={this.onSubmit}
+              onChange={this.onChange}
+              onDateChange={this.onDateChange}
+              submitted={submitted}
+              fetching={fetching}
+              semester={semester}
+              lang={lang}
+            />
+          </ReactCSSTransitionGroup>
+        )}
         <ActivityLoader fetching={fetching} />
       </div>
     );

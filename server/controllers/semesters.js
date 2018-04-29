@@ -1,11 +1,11 @@
 const semestersModel = require('../models/semesters');
 
 module.exports.getAll = (req, res) => {
-  semestersModel.getAll((error, rows) => {
+  semestersModel.getAll((error, semesters) => {
     if (error) {
       res.status(400).send({ error });
     } else {
-      res.send(rows);
+      res.send(semesters);
     }
   });
 };
@@ -13,11 +13,11 @@ module.exports.getAll = (req, res) => {
 module.exports.add = (req, res) => {
   const { body } = req;
 
-  semestersModel.add(body, (error, rows) => {
+  semestersModel.add(body, (error, semesters) => {
     if (error) {
       res.status(400).send({ error });
     } else {
-      res.send(rows);
+      res.send(semesters);
     }
   });
 };
@@ -26,11 +26,11 @@ module.exports.remove = (req, res) => {
   const { body } = req;
   const { id } = body;
 
-  semestersModel.remove(id, (error, rows) => {
+  semestersModel.remove(id, (error, semesters) => {
     if (error) {
       res.status(400).send({ error });
     } else {
-      res.send(rows);
+      res.send(semesters);
     }
   });
 };
@@ -38,11 +38,11 @@ module.exports.remove = (req, res) => {
 module.exports.edit = (req, res) => {
   const { body } = req;
 
-  semestersModel.edit(body, (error, rows) => {
+  semestersModel.edit(body, (error, semesters) => {
     if (error) {
       res.status(400).send({ error });
     } else {
-      res.send(rows);
+      res.send(semesters);
     }
   });
 };
@@ -50,11 +50,11 @@ module.exports.edit = (req, res) => {
 module.exports.getById = (req, res) => {
   const { id } = req.params;
 
-  semestersModel.getById(id, (error, rows) => {
+  semestersModel.getById(id, (error, semesters) => {
     if (error) {
       res.status(400).send({ error });
     } else {
-      res.send(rows);
+      res.send(semesters);
     }
   });
 };

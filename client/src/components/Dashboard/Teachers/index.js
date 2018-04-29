@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { injectIntl, intlShape } from 'react-intl';
 import PropTypes from 'prop-types';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import ActivityLoader from '../../ActivityLoader';
 import Heading from '../../Heading';
 import List from './List';
@@ -49,10 +50,20 @@ class Teachers extends Component {
           hasLink
           link={headingParams.link}
         />
-        {!fetching && (<List
-          items={list}
-          onRemove={this.onRemove}
-        />)}
+        {!fetching && (
+          <ReactCSSTransitionGroup
+            transitionName="fade"
+            transitionAppear
+            transitionAppearTimeout={300}
+            transitionEnterTimeout={300}
+            transitionLeaveTimeout={300}
+          >
+            <List
+              items={list}
+              onRemove={this.onRemove}
+            />
+          </ReactCSSTransitionGroup>
+        )}
         <ActivityLoader fetching={fetching} />
       </div>
     );

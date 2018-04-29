@@ -1,16 +1,16 @@
 const bcrypt = require('bcrypt');
 const database = require('../config/database');
 
-module.exports.login = (req, username, password, callback) => {
-  database.pool.query('SELECT * FROM users WHERE username = ?', [username], (error, rows) => {
+module.exports.login = (req, username, password, cb) => {
+  database.pool.query('SELECT * FROM users WHERE username = ?', [username], (error, users) => {
     if (error) {
-      callback(error, {});
-    } else if (!rows.length) {
-      callback('app.errors.login.user.notfound', {});
-    } else if (!bcrypt.compareSync(password, rows[0].password)) {
-      callback('app.errors.login.password.doesntmatch', {});
+      cb(error, {});
+    } else if (!users.length) {
+      cb('app.errors.login.user.notfound', {});
+    } else if (!bcrypt.compareSync(password, users[0].password)) {
+      cb('app.errors.login.password.doesntmatch', {});
     } else {
-      callback(null, Object.assign({}, rows[0]));
+      cb(null, Object.assign({}, users[0]));
     }
   });
 };

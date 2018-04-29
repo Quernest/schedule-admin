@@ -1,6 +1,3 @@
-const jwt = require('jsonwebtoken');
-const secret = require('../config/app').config.keys.secret;
-
 const verifyToken = (req, res, next) => {
   const bearerHeader = req.headers.authorization;
 

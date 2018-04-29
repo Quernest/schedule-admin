@@ -117,12 +117,22 @@ class EditTeacher extends Component {
           hasLink
           link={headingParams.link}
         />
-        {!fetching && <Form
-          onSubmit={this.onSubmit}
-          onChange={this.onChange}
-          teacher={teacher}
-          submitted={submitted}
-        />}
+        {!fetching && (
+          <ReactCSSTransitionGroup
+            transitionName="fade"
+            transitionAppear
+            transitionAppearTimeout={300}
+            transitionEnterTimeout={300}
+            transitionLeaveTimeout={300}
+          >
+            <Form
+              onSubmit={this.onSubmit}
+              onChange={this.onChange}
+              teacher={teacher}
+              submitted={submitted}
+            />
+          </ReactCSSTransitionGroup>
+        )}
         <ActivityLoader fetching={fetching} />
       </div>
     );

@@ -1,67 +1,65 @@
 const database = require('../config/database');
 
-module.exports.getAll = (callback) => {
-  database.pool.query('SELECT * FROM teachers', (error, rows) => {
+module.exports.getAll = (cb) => {
+  database.pool.query('SELECT * FROM teachers', (error, teachers) => {
     if (error) {
-      return callback(error, {});
+      return cb(error, {});
     }
 
-    return callback(null, rows);
+    cb(null, teachers);
   });
 };
 
-module.exports.getById = (id, callback) => {
-  database.pool.query(`SELECT * FROM teachers WHERE teachers.id = ${id}`, (error, rows) => {
+module.exports.getById = (id, cb) => {
+  database.pool.query(`SELECT * FROM teachers WHERE teachers.id = ${id}`, (error, teachers) => {
     if (error) {
-      return callback(error, {});
+      return cb(error, {});
     }
 
-    const [teacher] = rows;
+    const [teacher] = teachers;
 
-    return callback(null, teacher);
+    cb(null, teacher);
   });
 };
 
-module.exports.edit = (body, callback) => {
+module.exports.edit = (body, cb) => {
   const { id } = body;
 
-  database.pool.query(`UPDATE teachers SET ? WHERE teachers.id = ${id}`, body, (error, rows) => {
+  database.pool.query(`UPDATE teachers SET ? WHERE teachers.id = ${id}`, body, (error, teachers) => {
     if (error) {
-      return callback(error, {});
+      return cb(error, {});
     }
 
-    return callback(null, rows);
+    cb(null, teachers);
   });
 };
 
-module.exports.add = (name, callback) => {
-  database.pool.query('INSERT INTO teachers SET ?', { name }, (error, rows) => {
+module.exports.add = (body, cb) => {
+  database.pool.query('INSERT INTO teachers SET ?', body, (error, result) => {
     if (error) {
-      return callback(error, {});
+      return cb(error, {});
     }
 
-    if (rows) {
-      database.pool.query(`SELECT * FROM teachers WHERE teachers.name = "${name}"`, (teachersError, teachers) => {
-        if (teachersError) {
-          return callback(teachersError, {});
-        }
+    const { insertId } = result;
 
-        const [teacher] = teachers;
+    database.pool.query(`SELECT * FROM teachers WHERE teachers.id = ${insertId}`, (err, teachers) => {
+      if (err) {
+        return cb(err, {});
+      }
 
-        return callback(null, teacher);
-      });
-    }
+      const [teacher] = teachers;
 
-    return callback('add teachers error', {});
+      cb(null, teacher);
+    });
   });
 };
 
-module.exports.remove = (id, callback) => {
-  database.pool.query(`DELETE FROM teachers WHERE teachers.id = ${id}`, (error, rows) => {
+module.exports.remove = (id, cb) => {
+  database.pool.query(`DELETE FROM teachers WHERE teachers.id = ${id}`, (error, teachers) => {
     if (error) {
-      return callback(error, {});
+      return cb(error, {});
     }
 
-    return callback(null, rows);
+    cb(null, teachers);
   });
 };

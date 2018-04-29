@@ -117,12 +117,22 @@ class EditSubject extends Component {
           link={headingParams.link}
           hasLink
         />
-        {!fetching && <Form
-          submitted={submitted}
-          onSubmit={this.onSubmit}
-          onChange={this.onChange}
-          subject={subject}
-        />}
+        {!fetching && (
+          <ReactCSSTransitionGroup
+            transitionName="fade"
+            transitionAppear
+            transitionAppearTimeout={300}
+            transitionEnterTimeout={300}
+            transitionLeaveTimeout={300}
+          >
+            <Form
+              submitted={submitted}
+              onSubmit={this.onSubmit}
+              onChange={this.onChange}
+              subject={subject}
+            />
+          </ReactCSSTransitionGroup>
+        )}
         <ActivityLoader fetching={fetching} />
       </div>
     );

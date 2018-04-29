@@ -13,7 +13,7 @@ router.use('/add', auth.required, (req, res) => {
       res.end();
     }
 
-    return groupsController.add(req, res);
+    groupsController.add(req, res);
   });
 });
 
@@ -24,7 +24,7 @@ router.use('/edit', auth.required, (req, res) => {
       res.end();
     }
 
-    return groupsController.edit(req, res);
+    groupsController.edit(req, res);
   });
 });
 
@@ -35,7 +35,7 @@ router.use('/remove', auth.required, (req, res) => {
       res.end();
     }
 
-    return groupsController.remove(req, res);
+    groupsController.remove(req, res);
   });
 });
 

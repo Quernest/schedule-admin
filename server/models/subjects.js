@@ -1,73 +1,66 @@
 const database = require('../config/database');
 
-module.exports.getAll = (callback) => {
-  database.pool.query('SELECT * FROM subjects ORDER BY subjects.name ASC', (error, rows) => {
+module.exports.getAll = (cb) => {
+  database.pool.query('SELECT * FROM subjects ORDER BY subjects.name ASC', (error, subjects) => {
     if (error) {
-      return callback(error, {});
+      return cb(error, {});
     }
 
-    return callback(null, rows);
+    cb(null, subjects);
   });
 };
 
-module.exports.getById = (id, callback) => {
-  database.pool.query(`SELECT * FROM subjects WHERE subjects.id = ${id}`, (error, rows) => {
+module.exports.getById = (id, cb) => {
+  database.pool.query(`SELECT * FROM subjects WHERE subjects.id = ${id}`, (error, subjects) => {
     if (error) {
-      return callback(error, {});
+      return cb(error, {});
     }
 
-    const [subject] = rows;
+    const [subject] = subjects;
 
-    return callback(null, subject);
+    cb(null, subject);
   });
 };
 
-module.exports.edit = (body, callback) => {
+module.exports.edit = (body, cb) => {
   const { id } = body;
 
-  database.pool.query(`UPDATE subjects SET ? WHERE subjects.id = ${id}`, body, (error, rows) => {
+  database.pool.query(`UPDATE subjects SET ? WHERE subjects.id = ${id}`, body, (error, subjects) => {
     if (error) {
-      return callback(error, {});
+      return cb(error, {});
     }
 
-    return callback(null, rows);
+    cb(null, subjects);
   });
 };
 
-module.exports.add = (body, callback) => {
-  const { name, type } = body;
-
-  database.pool.query('INSERT INTO subjects SET ?', body, (error, rows) => {
+module.exports.add = (body, cb) => {
+  database.pool.query('INSERT INTO subjects SET ?', body, (error, result) => {
     if (error) {
-      return callback(error, {});
+      return cb(error, {});
     }
 
-    if (rows) {
-      database.pool.query(
-        `SELECT * FROM subjects s WHERE s.name = "${name}" AND s.type = "${type}"`,
-        (subjectsError, subjects) => {
-          if (subjectsError) {
-            return callback(subjectsError, {});
-          }
+    const { insertId } = result;
 
-          const [subject] = subjects;
+    database.pool.query(`SELECT * FROM subjects WHERE subjects.id = ${insertId}`, (err, subjects) => {
+      if (err) {
+        return cb(err, {});
+      }
 
-          return callback(null, subject);
-        },
-      );
-    }
+      const [subject] = subjects;
 
-    return callback('add subjects error', {});
+      cb(null, subject);
+    });
   });
 };
 
-module.exports.remove = (id, callback) => {
+module.exports.remove = (id, cb) => {
   database.pool.query(`DELETE FROM subjects WHERE subjects.id = ${id}`, (error, rows) => {
     if (error) {
-      return callback(error, {});
+      return cb(error, {});
     }
 
-    return callback(null, rows);
+    cb(null, rows);
   });
 };
 

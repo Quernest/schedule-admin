@@ -2,16 +2,36 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { injectIntl, intlShape } from 'react-intl';
 import PropTypes from 'prop-types';
+import update from 'react-addons-update';
+import ActivityLoader from '../../ActivityLoader';
 import Form from './Form';
 import groupsActions from '../../../actions/groups.actions';
 import Heading from '../../Heading';
 
 class AddGroup extends Component {
+  static propTypes = {
+    dispatch: PropTypes.func.isRequired,
+    intl: intlShape.isRequired,
+    groups: PropTypes.shape({
+      list: PropTypes.arrayOf(PropTypes.object),
+      fetching: PropTypes.bool,
+    }),
+  }
+
+  static defaultProps = {
+    groups: {
+      list: [],
+      fetching: false,
+    },
+  }
+
   constructor(props) {
     super(props);
 
     this.state = {
-      groupName: '',
+      group: {
+        name: '',
+      },
       submitted: false,
     };
 
@@ -23,29 +43,38 @@ class AddGroup extends Component {
     e.preventDefault();
 
     const { dispatch } = this.props;
-    const { groupName } = this.state;
+    const { group } = this.state;
 
     this.setState({
       submitted: true,
     });
 
-    if (groupName) {
-      dispatch(groupsActions.add(groupName));
+    const { name } = group;
+
+    if (name) {
+      dispatch(groupsActions.add(group));
     }
   }
 
   onChange(e) {
     const { value, name } = e.target;
+    const { group } = this.state;
 
     this.setState({
-      [name]: value,
+      group: update(group, {
+        $merge: {
+          [name]: value,
+        },
+      }),
     });
   }
 
   render() {
-    const { groups: { fetching }, intl } = this.props;
-    const { submitted, groupName } = this.state;
+    const { groups, intl } = this.props;
+    const { submitted, group } = this.state;
     const { formatMessage } = intl;
+    const { fetching } = groups;
+
     const headingParams = {
       title: formatMessage({ id: 'app.dashboard.groups.button.addgroup' }),
       link: {
@@ -61,33 +90,19 @@ class AddGroup extends Component {
           hasLink
           link={headingParams.link}
         />
-        <Form
-          onSubmit={this.onSubmit}
-          onChange={this.onChange}
-          groupName={groupName}
-          submitted={submitted}
-          fetching={fetching}
-        />
+        {!fetching && (
+          <Form
+            onSubmit={this.onSubmit}
+            onChange={this.onChange}
+            group={group}
+            submitted={submitted}
+          />
+        )}
+        <ActivityLoader fetching={fetching} />
       </div>
     );
   }
 }
-
-AddGroup.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  intl: intlShape.isRequired,
-  groups: PropTypes.shape({
-    list: PropTypes.arrayOf(PropTypes.object),
-    fetching: PropTypes.bool,
-  }),
-};
-
-AddGroup.defaultProps = {
-  groups: {
-    list: [],
-    fetching: false,
-  },
-};
 
 const mapStateToProps = (state) => {
   const { user, groups } = state;

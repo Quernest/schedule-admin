@@ -24,9 +24,8 @@ module.exports.getById = (req, res) => {
 
 module.exports.add = (req, res) => {
   const { body } = req;
-  const { name } = body;
 
-  groupsModel.add(name, (error, rows) => {
+  groupsModel.add(body, (error, rows) => {
     if (error) {
       res.status(400).send({ error });
     } else {
