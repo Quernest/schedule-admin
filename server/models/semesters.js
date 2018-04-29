@@ -55,12 +55,12 @@ module.exports.edit = (body, cb) => {
     end: moment(end).format('YYYY-MM-DD'),
   });
 
-  database.pool.query(`UPDATE semesters SET ? WHERE semesters.id = ${id}`, semester, (error, rows) => {
+  database.pool.query(`UPDATE semesters SET ? WHERE semesters.id = ${id}`, semester, (error, semesters) => {
     if (error) {
       return cb(error, {});
     }
 
-    cb(null, rows);
+    cb(null, semesters);
   });
 };
 
