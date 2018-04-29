@@ -9,6 +9,22 @@ import subjectsActions from '../../../actions/subjects.actions';
 import Heading from '../../Heading';
 
 class AddSubject extends Component {
+  static propTypes = {
+    dispatch: PropTypes.func.isRequired,
+    intl: intlShape.isRequired,
+    subjects: PropTypes.shape({
+      list: PropTypes.arrayOf(PropTypes.object),
+      fetching: PropTypes.bool,
+    }),
+  }
+
+  static defaultProps = {
+    subjects: {
+      list: [],
+      fetching: false,
+    },
+  }
+
   constructor(props) {
     super(props);
 
@@ -85,22 +101,6 @@ class AddSubject extends Component {
     );
   }
 }
-
-AddSubject.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  intl: intlShape.isRequired,
-  subjects: PropTypes.shape({
-    list: PropTypes.arrayOf(PropTypes.object),
-    fetching: PropTypes.bool,
-  }),
-};
-
-AddSubject.defaultProps = {
-  subjects: {
-    list: [],
-    fetching: false,
-  },
-};
 
 const mapStateToProps = (state) => {
   const { user, subjects } = state;

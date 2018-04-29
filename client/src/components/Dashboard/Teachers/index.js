@@ -9,6 +9,19 @@ import List from './List';
 import teachersActions from '../../../actions/teachers.actions';
 
 class Teachers extends Component {
+  static propTypes = {
+    intl: intlShape.isRequired,
+    teachers: PropTypes.shape({
+      list: PropTypes.arrayOf(PropTypes.object),
+      fetching: PropTypes.bool,
+    }),
+    dispatch: PropTypes.func.isRequired,
+  }
+
+  static defaultProps = {
+    teachers: {},
+  }
+
   constructor(props) {
     super(props);
 
@@ -69,19 +82,6 @@ class Teachers extends Component {
     );
   }
 }
-
-Teachers.propTypes = {
-  intl: intlShape.isRequired,
-  teachers: PropTypes.shape({
-    list: PropTypes.arrayOf(PropTypes.object),
-    fetching: PropTypes.bool,
-  }),
-  dispatch: PropTypes.func.isRequired,
-};
-
-Teachers.defaultProps = {
-  teachers: {},
-};
 
 const mapStateToProps = (state) => {
   const { teachers } = state;

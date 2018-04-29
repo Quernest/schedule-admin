@@ -7,6 +7,21 @@ import userActions from '../actions/user.actions';
 import history from '../helpers/history';
 
 class Login extends Component {
+  static propTypes = {
+    user: PropTypes.shape({
+      id: PropTypes.number,
+      token: PropTypes.string,
+      username: PropTypes.string,
+      loggedIn: PropTypes.bool,
+      loading: PropTypes.bool,
+    }),
+    dispatch: PropTypes.func.isRequired,
+  }
+
+  static defaultProps = {
+    user: {},
+  };
+
   constructor(props) {
     super(props);
 
@@ -69,21 +84,6 @@ class Login extends Component {
     );
   }
 }
-
-Login.propTypes = {
-  user: PropTypes.shape({
-    id: PropTypes.number,
-    token: PropTypes.string,
-    username: PropTypes.string,
-    loggedIn: PropTypes.bool,
-    loading: PropTypes.bool,
-  }),
-  dispatch: PropTypes.func.isRequired,
-};
-
-Login.defaultProps = {
-  user: {},
-};
 
 const mapStateToProps = (state) => {
   const { user } = state;

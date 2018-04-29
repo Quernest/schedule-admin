@@ -11,6 +11,40 @@ import Form from './Form';
 import ActivityLoader from '../../ActivityLoader';
 
 class EditSemester extends Component {
+  static propTypes = {
+    dispatch: PropTypes.func.isRequired,
+    intl: intlShape.isRequired,
+    id: PropTypes.string.isRequired,
+    lang: PropTypes.string.isRequired,
+    semesters: PropTypes.shape({
+      list: PropTypes.arrayOf(PropTypes.object),
+      fetching: PropTypes.bool,
+    }),
+    semester: PropTypes.shape({
+      id: PropTypes.number,
+      number: PropTypes.number,
+      start: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.object,
+      ]),
+      end: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.object,
+      ]),
+      firstWeekType: PropTypes.number,
+    }),
+  }
+
+  static defaultProps = {
+    semesters: {
+      list: [],
+      fetching: false,
+    },
+    semester: {
+      firstWeekType: 1,
+    },
+  }
+
   constructor(props) {
     super(props);
 
@@ -56,13 +90,6 @@ class EditSemester extends Component {
     });
 
     if (id && number && start && end && firstWeekType) {
-      /**
-       * avoid mistakes, create data object
-       *
-       * - convert input string to number
-       * - convert (stat, end) dates to YYYY-MM-DD format because mysql takes 1 day
-       */
-
       const data = {
         id,
         number: Number(number),
@@ -102,12 +129,6 @@ class EditSemester extends Component {
 
   updateSemester(semester) {
     const { start, end } = semester;
-
-    /**
-     * type conversion
-     * from ISO string to Moment object
-     *
-     */
 
     const momentDates = {
       start: moment(start),
@@ -168,40 +189,6 @@ class EditSemester extends Component {
     );
   }
 }
-
-EditSemester.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  intl: intlShape.isRequired,
-  id: PropTypes.string.isRequired,
-  lang: PropTypes.string.isRequired,
-  semesters: PropTypes.shape({
-    list: PropTypes.arrayOf(PropTypes.object),
-    fetching: PropTypes.bool,
-  }),
-  semester: PropTypes.shape({
-    id: PropTypes.number,
-    number: PropTypes.number,
-    start: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.object,
-    ]),
-    end: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.object,
-    ]),
-    firstWeekType: PropTypes.number,
-  }),
-};
-
-EditSemester.defaultProps = {
-  semesters: {
-    list: [],
-    fetching: false,
-  },
-  semester: {
-    firstWeekType: 1,
-  },
-};
 
 const mapStateToProps = (state, props) => {
   const { semesters, locale } = state;

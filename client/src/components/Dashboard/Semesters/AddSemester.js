@@ -9,6 +9,23 @@ import Heading from '../../Heading';
 import Form from './Form';
 
 class AddSemester extends Component {
+  static propTypes = {
+    dispatch: PropTypes.func.isRequired,
+    intl: intlShape.isRequired,
+    lang: PropTypes.string.isRequired,
+    semesters: PropTypes.shape({
+      list: PropTypes.arrayOf(PropTypes.object),
+      fetching: PropTypes.bool,
+    }),
+  }
+
+  static defaultProps = {
+    semesters: {
+      list: [],
+      fetching: false,
+    },
+  }
+
   constructor(props) {
     super(props);
 
@@ -117,23 +134,6 @@ class AddSemester extends Component {
     );
   }
 }
-
-AddSemester.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  intl: intlShape.isRequired,
-  lang: PropTypes.string.isRequired,
-  semesters: PropTypes.shape({
-    list: PropTypes.arrayOf(PropTypes.object),
-    fetching: PropTypes.bool,
-  }),
-};
-
-AddSemester.defaultProps = {
-  semesters: {
-    list: [],
-    fetching: false,
-  },
-};
 
 const mapStateToProps = (state) => {
   const { semesters, locale } = state;

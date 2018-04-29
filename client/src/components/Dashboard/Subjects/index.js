@@ -9,6 +9,19 @@ import Heading from '../../Heading';
 import List from './List';
 
 class Subjects extends Component {
+  static propTypes = {
+    intl: intlShape.isRequired,
+    dispatch: PropTypes.func.isRequired,
+    subjects: PropTypes.shape({
+      list: PropTypes.arrayOf(PropTypes.object),
+      fetching: PropTypes.bool,
+    }),
+  }
+
+  static defaultProps = {
+    subjects: {},
+  }
+
   constructor(props) {
     super(props);
 
@@ -67,19 +80,6 @@ class Subjects extends Component {
     );
   }
 }
-
-Subjects.propTypes = {
-  intl: intlShape.isRequired,
-  dispatch: PropTypes.func.isRequired,
-  subjects: PropTypes.shape({
-    list: PropTypes.arrayOf(PropTypes.object),
-    fetching: PropTypes.bool,
-  }),
-};
-
-Subjects.defaultProps = {
-  subjects: {},
-};
 
 const mapStateToProps = (state) => {
   const { subjects } = state;

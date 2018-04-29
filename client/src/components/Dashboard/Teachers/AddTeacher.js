@@ -3,13 +3,28 @@ import { connect } from 'react-redux';
 import { injectIntl, intlShape } from 'react-intl';
 import PropTypes from 'prop-types';
 import update from 'react-addons-update';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import Form from './Form';
 import ActivityLoader from '../../ActivityLoader';
 import teachersActions from '../../../actions/teachers.actions';
 import Heading from '../../Heading';
 
 class AddTeacher extends Component {
+  static propTypes = {
+    dispatch: PropTypes.func.isRequired,
+    intl: intlShape.isRequired,
+    teachers: PropTypes.shape({
+      list: PropTypes.arrayOf(PropTypes.object),
+      fetching: PropTypes.bool,
+    }),
+  }
+
+  static defaultProps = {
+    teachers: {
+      list: [],
+      fetching: false,
+    },
+  }
+
   constructor(props) {
     super(props);
 
@@ -86,22 +101,6 @@ class AddTeacher extends Component {
     );
   }
 }
-
-AddTeacher.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  intl: intlShape.isRequired,
-  teachers: PropTypes.shape({
-    list: PropTypes.arrayOf(PropTypes.object),
-    fetching: PropTypes.bool,
-  }),
-};
-
-AddTeacher.defaultProps = {
-  teachers: {
-    list: [],
-    fetching: false,
-  },
-};
 
 const mapStateToProps = (state) => {
   const { user, teachers } = state;

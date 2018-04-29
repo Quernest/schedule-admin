@@ -15,6 +15,41 @@ import subjectsActions from '../../../actions/subjects.actions';
 import groupsActions from '../../../actions/groups.actions';
 
 class EditGroup extends Component {
+  static propTypes = {
+    intl: intlShape.isRequired,
+    lang: PropTypes.string.isRequired,
+    dispatch: PropTypes.func.isRequired,
+    groupId: PropTypes.string.isRequired,
+    schedule: PropTypes.shape({
+      fetching: PropTypes.bool,
+      list: PropTypes.arrayOf(PropTypes.object),
+    }),
+    groups: PropTypes.shape({
+      fetching: PropTypes.bool,
+      list: PropTypes.arrayOf(PropTypes.object),
+    }),
+    semesters: PropTypes.shape({
+      fetching: PropTypes.bool,
+      list: PropTypes.arrayOf(PropTypes.object),
+    }),
+    teachers: PropTypes.shape({
+      fetching: PropTypes.bool,
+      list: PropTypes.arrayOf(PropTypes.object),
+    }),
+    subjects: PropTypes.shape({
+      fetching: PropTypes.bool,
+      list: PropTypes.arrayOf(PropTypes.object),
+    }),
+  }
+
+  static defaultProps = {
+    schedule: {},
+    groups: {},
+    semesters: {},
+    teachers: {},
+    subjects: {},
+  }
+
   constructor(props) {
     super(props);
 
@@ -216,6 +251,7 @@ class EditGroup extends Component {
         const startDate = moment(semester.start);
         const endDate = moment(semester.end);
 
+        // TODO: change it to moment.between() without year DD/MM/____ example in Schedule repo
         const isCurrentSemester = startDate.month() <= currentDate.month() && currentDate.month() <= endDate.month();
 
         if (isCurrentSemester) {
@@ -314,41 +350,6 @@ class EditGroup extends Component {
     );
   }
 }
-
-EditGroup.propTypes = {
-  intl: intlShape.isRequired,
-  lang: PropTypes.string.isRequired,
-  dispatch: PropTypes.func.isRequired,
-  groupId: PropTypes.string.isRequired,
-  schedule: PropTypes.shape({
-    fetching: PropTypes.bool,
-    list: PropTypes.arrayOf(PropTypes.object),
-  }),
-  groups: PropTypes.shape({
-    fetching: PropTypes.bool,
-    list: PropTypes.arrayOf(PropTypes.object),
-  }),
-  semesters: PropTypes.shape({
-    fetching: PropTypes.bool,
-    list: PropTypes.arrayOf(PropTypes.object),
-  }),
-  teachers: PropTypes.shape({
-    fetching: PropTypes.bool,
-    list: PropTypes.arrayOf(PropTypes.object),
-  }),
-  subjects: PropTypes.shape({
-    fetching: PropTypes.bool,
-    list: PropTypes.arrayOf(PropTypes.object),
-  }),
-};
-
-EditGroup.defaultProps = {
-  schedule: {},
-  groups: {},
-  semesters: {},
-  teachers: {},
-  subjects: {},
-};
 
 const mapStateToProps = (state, props) => {
   const {

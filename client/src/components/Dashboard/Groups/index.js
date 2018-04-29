@@ -2,12 +2,29 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { injectIntl, intlShape } from 'react-intl';
 import PropTypes from 'prop-types';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import ActivityLoader from '../../ActivityLoader';
 import groupsActions from '../../../actions/groups.actions';
 import Heading from '../../Heading';
 import List from './List';
 
 class Groups extends Component {
+  static propTypes = {
+    dispatch: PropTypes.func.isRequired,
+    groups: PropTypes.shape({
+      list: PropTypes.arrayOf(PropTypes.object),
+      fetching: PropTypes.bool,
+    }),
+    intl: intlShape.isRequired,
+  }
+
+  static defaultProps = {
+    groups: {
+      list: [],
+      fetching: false,
+    },
+  }
+
   constructor(props) {
     super(props);
 
@@ -46,31 +63,25 @@ class Groups extends Component {
           hasLink
           link={headingParams.link}
         />
-        {!fetching && <List
-          items={list}
-          onRemove={this.onRemove}
-        />}
+        {!fetching && (
+          <ReactCSSTransitionGroup
+            transitionName="fade"
+            transitionAppear
+            transitionAppearTimeout={300}
+            transitionEnterTimeout={300}
+            transitionLeaveTimeout={300}
+          >
+            <List
+              items={list}
+              onRemove={this.onRemove}
+            />
+          </ReactCSSTransitionGroup>
+        )}
         <ActivityLoader fetching={fetching} />
       </div>
     );
   }
 }
-
-Groups.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  groups: PropTypes.shape({
-    list: PropTypes.arrayOf(PropTypes.object),
-    fetching: PropTypes.bool,
-  }),
-  intl: intlShape.isRequired,
-};
-
-Groups.defaultProps = {
-  groups: {
-    list: [],
-    fetching: false,
-  },
-};
 
 const mapStateToProps = (state) => {
   const { groups } = state;
