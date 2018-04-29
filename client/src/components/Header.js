@@ -8,6 +8,17 @@ import sidebarActions from '../actions/sidebar.actions';
 import { appLocales } from '../intl';
 
 class Header extends Component {
+  static propTypes = {
+    dispatch: PropTypes.func.isRequired,
+    lang: PropTypes.string.isRequired,
+    isOpened: PropTypes.bool.isRequired,
+    loggedIn: PropTypes.bool,
+  }
+
+  static defaultProps = {
+    loggedIn: false,
+  }
+
   constructor(props) {
     super(props);
 
@@ -49,11 +60,15 @@ class Header extends Component {
 
   render() {
     const { windowWidth } = this.state;
+
     const isSmallScreen = windowWidth <= 768;
 
     const {
- dispatch, lang, loggedIn, isOpened 
-} = this.props;
+      dispatch,
+      lang,
+      loggedIn,
+      isOpened,
+    } = this.props;
 
     return (
       <header className="header">
@@ -96,17 +111,6 @@ class Header extends Component {
     );
   }
 }
-
-Header.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  lang: PropTypes.string.isRequired,
-  isOpened: PropTypes.bool.isRequired,
-  loggedIn: PropTypes.bool,
-};
-
-Header.defaultProps = {
-  loggedIn: false,
-};
 
 const mapStateToProps = (state) => {
   const { locale, user, sidebar } = state;

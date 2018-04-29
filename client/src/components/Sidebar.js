@@ -31,6 +31,12 @@ const menu = [
 ];
 
 class Sidebar extends Component {
+  static propTypes = {
+    isOpened: PropTypes.bool.isRequired,
+    dispatch: PropTypes.func.isRequired,
+    intl: intlShape.isRequired,
+  }
+
   constructor(props) {
     super(props);
 
@@ -113,12 +119,6 @@ class Sidebar extends Component {
     );
   }
 }
-
-Sidebar.propTypes = {
-  isOpened: PropTypes.bool.isRequired,
-  dispatch: PropTypes.func.isRequired,
-  intl: intlShape.isRequired,
-};
 
 const mapStateToProps = (state) => {
   const { sidebar } = state;
