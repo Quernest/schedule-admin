@@ -1,4 +1,5 @@
 import LS from '../helpers/localStorage';
+import { handleResponseError } from '../helpers/handlers';
 
 const login = async (username, password) => {
   const requestOptions = {
@@ -11,7 +12,7 @@ const login = async (username, password) => {
     const response = await fetch('/api/login', requestOptions);
 
     if (!response.ok) {
-      return Promise.reject(response.statusText);
+      return handleResponseError(response);
     }
 
     const user = await response.json();
@@ -21,6 +22,7 @@ const login = async (username, password) => {
     }
 
     LS.set('user', user);
+
     return user;
   } catch (error) {
     return error;
