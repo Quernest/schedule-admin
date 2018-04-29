@@ -47,21 +47,29 @@ module.exports.add = (body, callback) => {
     REPLACE INTO
       schedule
     (id, groupId, subjectId, teacherId, semesterId, weekDay, weekType, location, lesson, isFreeTime, isShortDay)
-    VALUES ?`, [fields], (err) => {
-      if (err) throw err;
+    VALUES ?`, [fields], (error) => {
+      if (error) {
+        return callback(error, {});
+      }
 
-      database.pool.query('SELECT * FROM schedule', (err, rows) => {
-        if (err) throw err;
+      database.pool.query('SELECT * FROM schedule', (scheduleError, rows) => {
+        if (scheduleError) {
+          return callback(scheduleError, {});
+        }
 
         return callback(null, rows);
       });
+
+      return callback('add schedule error', {});
     });
   }
 };
 
 module.exports.getById = (id, callback) => {
-  database.pool.query(`SELECT * FROM schedule WHERE schedule.groupId = ${id}`, (err, rows) => {
-    if (err) throw err;
+  database.pool.query(`SELECT * FROM schedule WHERE schedule.groupId = ${id}`, (error, rows) => {
+    if (error) {
+      return callback(error, {});
+    }
 
     return callback(null, rows);
   });
