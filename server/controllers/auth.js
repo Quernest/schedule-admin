@@ -8,62 +8,54 @@ module.exports.login = (req, res) => {
 
   authModel.login(req, username, password, (error, user) => {
     if (error) {
-      res.statusMessage = error;
-      res.status(400).end();
+      res.status(400).send({ error });
     } else {
-      jwt.sign(
-        {
-          user,
-        },
-        appConfig.config.keys.secret,
-        (err, token) => {
-          if (err) {
-            res.statusMessage = 'Authentication error';
-            res.status(400).end();
-          } else {
-            const { id } = user;
+      jwt.sign({ user }, appConfig.config.keys.secret, (signError, token) => {
+        if (signError) {
+          res.status(400).send({ error: signError });
+        } else {
+          const { id } = user;
 
-            res.json({
-              token,
-              username,
-              id,
-            });
-          }
-        },
-      );
+          res.send({
+            token,
+            username,
+            id,
+          });
+        }
+      });
     }
   });
 };
 
-module.exports.registration = (req, res) => {
-  const { body } = req;
-  const { username, password } = body;
+// module.exports.registration = (req, res) => {
+//   const { body } = req;
+//   const { username, password } = body;
 
-  authModel.registration(req, username, password, (error, user) => {
-    if (error) {
-      res.statusMessage = error;
-      res.status(400).end();
-    } else {
-      jwt.sign(
-        {
-          user,
-        },
-        appConfig.config.keys.secret,
-        (err, token) => {
-          if (err) {
-            res.statusMessage = 'Authentication error';
-            res.status(400).end();
-          } else {
-            const { id } = user;
+//   authModel.registration(req, username, password, (error, user) => {
+//     if (error) {
+//       res.statusMessage = error;
+//       res.status(400).end();
+//     } else {
+//       jwt.sign(
+//         {
+//           user,
+//         },
+//         appConfig.config.keys.secret,
+//         (error, token) => {
+//           if (error) {
+//             res.statusMessage = 'Authentication error';
+//             res.status(400).end();
+//           } else {
+//             const { id } = user;
 
-            res.json({
-              token,
-              username,
-              id,
-            });
-          }
-        },
-      );
-    }
-  });
-};
+//             res.json({
+//               token,
+//               username,
+//               id,
+//             });
+//           }
+//         },
+//       );
+//     }
+//   });
+// };
