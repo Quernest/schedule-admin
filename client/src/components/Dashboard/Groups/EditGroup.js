@@ -248,11 +248,9 @@ class EditGroup extends Component {
       const currentDate = moment();
 
       list.map((semester) => {
-        const startDate = moment(semester.start);
-        const endDate = moment(semester.end);
+        const { start, end } = semester;
 
-        // TODO: change it to moment.between() without year DD/MM/____ example in Schedule repo
-        const isCurrentSemester = startDate.month() <= currentDate.month() && currentDate.month() <= endDate.month();
+        const isCurrentSemester = currentDate.isBetween(moment(start, 'YYYY-MM-DD'), moment(end, 'YYYY-MM-DD'));
 
         if (isCurrentSemester) {
           this.setState({

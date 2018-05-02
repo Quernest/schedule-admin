@@ -48,7 +48,7 @@ const Form = ({
             className={classNames('form__input', {
               invalid: submitted && !start,
             })}
-            dateFormat="DD MMMM"
+            dateFormat="DD/MM/YYYY"
             selected={start || null}
             onChange={date => onDateChange(date, 'start')}
             locale={lang}
@@ -65,7 +65,7 @@ const Form = ({
             className={classNames('form__input', {
               invalid: submitted && !end,
             })}
-            dateFormat="DD MMMM"
+            dateFormat="DD/MM/YYYY"
             selected={end || null}
             onChange={date => onDateChange(date, 'end')}
             locale={lang}

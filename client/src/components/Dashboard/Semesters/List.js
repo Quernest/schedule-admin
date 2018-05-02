@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import NoRecordsMessage from '../../NoRecordsMessage';
 import parsers from '../../../helpers/parsers';
 
-const formatDate = date => moment(date).format('DD/MM');
+const formatDate = date => moment(date).format('DD/MM/YYYY');
 const { parseWeekTypes } = parsers;
 
 const List = ({

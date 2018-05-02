@@ -57,13 +57,6 @@ class AddSemester extends Component {
     });
 
     if (number && start && end && firstWeekType) {
-      /**
-       * avoid mistakes, create data object
-       *
-       * - convert input string to number
-       * - convert (stat, end) dates to YYYY-MM-DD format because mysql takes 1 day
-       */
-
       const data = {
         number: Number(number),
         start: moment(start).format('YYYY-MM-DD'),
