@@ -250,7 +250,7 @@ class EditGroup extends Component {
       list.map((semester) => {
         const { start, end } = semester;
 
-        const isCurrentSemester = currentDate.isBetween(moment(start, 'YYYY-MM-DD'), moment(end, 'YYYY-MM-DD'));
+        const isCurrentSemester = currentDate.isBetween(moment(start, 'YYYY-MM-DD'), moment(end, 'YYYY-MM-DD'), null, '[]');
 
         if (isCurrentSemester) {
           this.setState({

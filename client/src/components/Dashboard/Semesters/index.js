@@ -9,11 +9,26 @@ import Heading from '../../Heading';
 import List from './List';
 
 class Semesters extends Component {
+  static propTypes = {
+    dispatch: PropTypes.func.isRequired,
+    intl: intlShape.isRequired,
+    semesters: PropTypes.shape({
+      list: PropTypes.arrayOf(PropTypes.object),
+      fetching: PropTypes.bool,
+    }),
+  }
+
+  static defaultProps = {
+    semesters: {
+      list: [],
+      fetching: false,
+    },
+  }
+
   constructor(props) {
     super(props);
 
     this.state = {};
-
     this.onRemove = this.onRemove.bind(this);
   }
 
@@ -72,22 +87,6 @@ class Semesters extends Component {
     );
   }
 }
-
-Semesters.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  intl: intlShape.isRequired,
-  semesters: PropTypes.shape({
-    list: PropTypes.arrayOf(PropTypes.object),
-    fetching: PropTypes.bool,
-  }),
-};
-
-Semesters.defaultProps = {
-  semesters: {
-    list: [],
-    fetching: false,
-  },
-};
 
 const mapStateToProps = (state) => {
   const { semesters } = state;
