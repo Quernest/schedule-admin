@@ -12,6 +12,7 @@ import scheduleActions from '../../../actions/schedule.actions';
 import teachersActions from '../../../actions/teachers.actions';
 import semestersActions from '../../../actions/semesters.actions';
 import subjectsActions from '../../../actions/subjects.actions';
+import locationsActions from '../../../actions/locations.actions';
 import groupsActions from '../../../actions/groups.actions';
 
 class EditGroup extends Component {
@@ -36,6 +37,10 @@ class EditGroup extends Component {
       fetching: PropTypes.bool,
       list: PropTypes.arrayOf(PropTypes.object),
     }),
+    locations: PropTypes.shape({
+      fetching: PropTypes.bool,
+      list: PropTypes.arrayOf(PropTypes.object),
+    }),
     subjects: PropTypes.shape({
       fetching: PropTypes.bool,
       list: PropTypes.arrayOf(PropTypes.object),
@@ -48,6 +53,7 @@ class EditGroup extends Component {
     semesters: {},
     teachers: {},
     subjects: {},
+    locations: {},
   }
 
   constructor(props) {
@@ -70,6 +76,7 @@ class EditGroup extends Component {
     this.getTeachers = this.getTeachers.bind(this);
     this.getSemesters = this.getSemesters.bind(this);
     this.getSubjects = this.getSubjects.bind(this);
+    this.getLocations = this.getLocations.bind(this);
 
     this.detectCurrentSemester = this.detectCurrentSemester.bind(this);
   }
@@ -80,6 +87,7 @@ class EditGroup extends Component {
     this.getTeachers();
     this.getSemesters();
     this.getSubjects();
+    this.getLocations();
   }
 
   componentDidUpdate(prevProps) {
@@ -241,6 +249,12 @@ class EditGroup extends Component {
     dispatch(subjectsActions.getAll());
   }
 
+  getLocations() {
+    const { dispatch } = this.props;
+
+    dispatch(locationsActions.getAll());
+  }
+
   detectCurrentSemester(semesters) {
     if (semesters.list && semesters.list.length) {
       const { list } = semesters;
@@ -287,6 +301,7 @@ class EditGroup extends Component {
       teachers,
       semesters,
       subjects,
+      locations,
       lang,
     } = this.props;
     const {
@@ -309,7 +324,8 @@ class EditGroup extends Component {
       && !groups.fetching
       && !teachers.fetching
       && !subjects.fetching
-      && !semesters.fetching;
+      && !semesters.fetching
+      && !locations.fetching;
 
     return (
       <div className="dashboard-editgroup">
@@ -339,6 +355,7 @@ class EditGroup extends Component {
               semester={semester}
               subjects={subjects}
               schedule={schedule}
+              locations={locations}
               scheduleList={scheduleList}
             />
           </ReactCSSTransitionGroup>
@@ -356,6 +373,7 @@ const mapStateToProps = (state, props) => {
     teachers,
     semesters,
     subjects,
+    locations,
     locale,
   } = state;
   const { id } = props.match.params;
@@ -367,6 +385,7 @@ const mapStateToProps = (state, props) => {
     teachers,
     semesters,
     subjects,
+    locations,
     groupId: id,
     lang,
   };

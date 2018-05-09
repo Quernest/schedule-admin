@@ -27,6 +27,7 @@ const Form = ({
   semesters,
   semester,
   subjects,
+  locations,
   scheduleList,
 }) => (
   <form className="form" onSubmit={onSubmit}>
@@ -80,6 +81,7 @@ const Form = ({
                   weekType={n + 1}
                   teachersList={teachers && teachers.list}
                   subjectsList={subjects && subjects.list}
+                  locationsList={locations && locations.list}
                   scheduleList={scheduleList}
                   semester={semester}
                   onChangeScheduleItem={onChangeScheduleItem}
@@ -120,6 +122,10 @@ Form.propTypes = {
     fetching: PropTypes.bool,
     list: PropTypes.arrayOf(PropTypes.object),
   }),
+  locations: PropTypes.shape({
+    fetching: PropTypes.bool,
+    list: PropTypes.arrayOf(PropTypes.object),
+  }),
   subjects: PropTypes.shape({
     fetching: PropTypes.bool,
     list: PropTypes.arrayOf(PropTypes.object),
@@ -146,6 +152,7 @@ Form.defaultProps = {
   semesters: {},
   teachers: {},
   subjects: {},
+  locations: {},
   scheduleList: [],
   semester: {},
 };

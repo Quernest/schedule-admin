@@ -14,6 +14,7 @@ const Event = ({
   teachersList,
   subjectsList,
   scheduleList,
+  locationsList,
   onChangeScheduleItem,
 }) => {
   const { formatMessage } = intl;
@@ -105,14 +106,24 @@ const Event = ({
 
       <label className="form__label">
         {formatMessage({ id: 'app.dashboard.semesters.form.editgroup.schedule.event.location' })}
-        <input
-          name="location"
+        <select
+          name="locationId"
           className="form__input"
-          value={(event.item && event.item.location) || ''}
+          value={(event.item && event.item.locationId) || ''}
           disabled={(event.item && event.item.isFreeTime)}
           onChange={(e) => onChangeScheduleItem(e, isoWeekDay, weekType, isoEventNumber, event)}
           placeholder={formatMessage({ id: 'app.dashboard.semesters.form.editgroup.schedule.event.location.placeholder' })}
-        />
+        >
+          <option value="" />
+          {locationsList.length && locationsList.map((location) => (
+            <option
+              key={location.id}
+              value={location.id}
+            >
+              {location.name}
+            </option>
+          ))}
+        </select>
       </label>
     </div>
   );
@@ -123,6 +134,7 @@ Event.defaultProps = {
   scheduleList: [],
   teachersList: [],
   subjectsList: [],
+  locationsList: [],
   semester: {},
 };
 
@@ -147,6 +159,7 @@ Event.propTypes = {
   scheduleList: PropTypes.arrayOf(PropTypes.object),
   onChangeScheduleItem: PropTypes.func.isRequired,
   teachersList: PropTypes.arrayOf(PropTypes.object),
+  locationsList: PropTypes.arrayOf(PropTypes.object),
   subjectsList: PropTypes.arrayOf(PropTypes.object),
 };
 

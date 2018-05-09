@@ -60,6 +60,10 @@
     "message": "Teachers"
   },
   {
+    "id": "app.sidebar.menu.item.locations",
+    "message": "Locations"
+  },
+  {
     "id": "app.sidebar.menu.item.semesters",
     "message": "Semesters"
   },
@@ -76,6 +80,10 @@
     "message": "Add a teacher"
   },
   {
+    "id": "app.dashboard.locations.buttons.addlocation",
+    "message": "Add a location"
+  },
+  {
     "id": "app.dashboard.semesters.buttons.addsemester",
     "message": "Add a semester"
   },
@@ -90,6 +98,10 @@
   {
     "id": "app.dashboard.teachers.buttons.editteacher",
     "message": "Edit teacher"
+  },
+  {
+    "id": "app.dashboard.locations.buttons.editlocation",
+    "message": "Edit location"
   },
   {
     "id": "app.dashboard.semesters.buttons.editgroup",
@@ -148,12 +160,20 @@
     "message": "For example: Walter White"
   },
   {
+    "id": "app.dashboard.locations.form.addlocation.input.placeholder",
+    "message": "For example: 2215"
+  },
+  {
     "id": "app.errors.dashboard.groups.form.addgroup.feedback",
     "message": "Enter the name of the group"
   },
   {
     "id": "app.errors.dashboard.teachers.form.addteacher.feedback",
     "message": "Enter the teacher name"
+  },
+  {
+    "id": "app.errors.dashboard.locations.form.addlocation.feedback",
+    "message": "Enter the location name"
   },
   {
     "id": "app.dashboard.semesters.form.editgroup.schedule.week",
@@ -173,7 +193,7 @@
   },
   {
     "id": "app.dashboard.semesters.form.editgroup.schedule.event.location",
-    "message": "Enter the number of audience"
+    "message": "Choose a location"
   },
   {
     "id": "app.dashboard.semesters.form.editgroup.schedule.event.location.placeholder",

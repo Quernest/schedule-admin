@@ -25,6 +25,10 @@ const menu = [
     link: '/dashboard/teachers',
   },
   {
+    id: 'app.sidebar.menu.item.locations',
+    link: '/dashboard/locations',
+  },
+  {
     id: 'app.sidebar.menu.item.semesters',
     link: '/dashboard/semesters',
   },

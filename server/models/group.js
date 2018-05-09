@@ -12,7 +12,7 @@ module.exports.getSchedule = (id, cb) => {
       s.weekType,
       sub.type,
       sem.id as semesterId,
-      s.location,
+      lc.name AS location,
       s.isFreeTime,
       s.isShortDay
     FROM
@@ -21,6 +21,7 @@ module.exports.getSchedule = (id, cb) => {
     INNER JOIN times t ON s.lesson = t.number AND s.isShortDay = t.isShortDay
     LEFT JOIN subjects sub ON s.subjectId = sub.id
     LEFT JOIN teachers tc ON s.teacherId = tc.id
+    LEFT JOIN locations lc ON lc.locationId = lc.id
     INNER JOIN semesters sem ON s.semesterId = sem.id
     WHERE
       g.id = ${id} ORDER BY t.number ASC

@@ -61,6 +61,10 @@
     "message": "Викладачі"
   },
   {
+    "id": "app.sidebar.menu.item.locations",
+    "message": "Аудиторії"
+  },
+  {
     "id": "app.sidebar.menu.item.semesters",
     "message": "Семестри"
   },
@@ -75,6 +79,10 @@
   {
     "id": "app.dashboard.teachers.buttons.addteacher",
     "message": "Додати викладача"
+  },
+  {
+    "id": "app.dashboard.locations.buttons.addlocation",
+    "message": "Додати аудиторію"
   },
   {
     "id": "app.dashboard.semesters.buttons.addsemester",
@@ -95,6 +103,10 @@
   {
     "id": "app.dashboard.teachers.buttons.editteacher",
     "message": "Редагувати вчителя"
+  },
+  {
+    "id": "app.dashboard.locations.buttons.editlocation",
+    "message": "Редагувати аудиторію"
   },
   {
     "id": "app.dashboard.semesters.buttons.editsemester",
@@ -137,6 +149,10 @@
     "message": "Введіть ім'я викладача"
   },
   {
+    "id": "app.errors.dashboard.locations.form.addlocation.feedback",
+    "message": "Введіть номер аудиторії"
+  },
+  {
     "id": "app.dashboard.subjects.form.addsubject.input.subjectName.placeholder",
     "message": "Наприклад: Математика"
   },
@@ -155,6 +171,10 @@
   {
     "id": "app.dashboard.teachers.form.addteacher.input.placeholder",
     "message": "Наприклад: Сташкевич Ігор Ігорович"
+  },
+  {
+    "id": "app.dashboard.locations.form.addlocation.input.placeholder",
+    "message": "Наприклад: 2215"
   },
   {
     "id": "app.dashboard.semesters.form.editgroup.schedule.week",
@@ -178,7 +198,7 @@
   },
   {
     "id": "app.dashboard.semesters.form.editgroup.schedule.event.location",
-    "message": "Введіть № аудиторії"
+    "message": "Виберіть аудиторію"
   },
   {
     "id": "app.dashboard.semesters.form.editgroup.schedule.event.location.placeholder",

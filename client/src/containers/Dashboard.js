@@ -15,6 +15,9 @@ import EditSubject from '../components/Dashboard/Subjects/EditSubject';
 import Teachers from '../components/Dashboard/Teachers';
 import EditTeacher from '../components/Dashboard/Teachers/EditTeacher';
 import AddTeacher from '../components/Dashboard/Teachers/AddTeacher';
+import Locations from '../components/Dashboard/Locations';
+import EditLocation from '../components/Dashboard/Locations/EditLocation';
+import AddLocation from '../components/Dashboard/Locations/AddLocation';
 import Semesters from '../components/Dashboard/Semesters';
 import AddSemester from '../components/Dashboard/Semesters/AddSemester';
 import EditSemester from '../components/Dashboard/Semesters/EditSemester';
@@ -40,6 +43,9 @@ const Dashboard = ({ intl }) => {
           <Route exact path="/dashboard/teachers" component={Teachers} />
           <Route path="/dashboard/teachers/add" component={AddTeacher} />
           <Route path="/dashboard/teachers/edit/:id" component={EditTeacher} />
+          <Route exact path="/dashboard/locations" component={Locations} />
+          <Route path="/dashboard/locations/add" component={AddLocation} />
+          <Route path="/dashboard/locations/edit/:id" component={EditLocation} />
           <Route exact path="/dashboard/semesters" component={Semesters} />
           <Route path="/dashboard/semesters/add" component={AddSemester} />
           <Route path="/dashboard/semesters/edit/:id" component={EditSemester} />
