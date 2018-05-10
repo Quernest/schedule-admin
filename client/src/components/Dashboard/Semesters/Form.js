@@ -15,7 +15,7 @@ const Form = ({
 }) => {
   const { formatMessage } = intl;
   const {
-    number,
+    name,
     start,
     end,
     firstWeekType,
@@ -24,19 +24,18 @@ const Form = ({
   return (
     <form className="form" onSubmit={onSubmit}>
       <div className="form__group">
-        <label className="form__label" htmlFor="number">
+        <label className="form__label" htmlFor="name">
           {formatMessage({ id: 'app.dashboard.semesters.form.addsemester.number' })}
           <input
-            id="number"
-            name="number"
-            type="number"
+            id="name"
+            name="name"
+            type="name"
             onChange={onChange}
             className={classNames('form__input', {
-              invalid: submitted && !number,
+              invalid: submitted && !name,
             })}
             placeholder={formatMessage({ id: 'app.dashboard.semesters.form.addsemester.number.example' })}
-            value={number || ''}
-            min="1"
+            value={name || ''}
           />
         </label>
       </div>
@@ -111,10 +110,7 @@ Form.propTypes = {
   intl: intlShape.isRequired,
   semester: PropTypes.shape({
     id: PropTypes.number,
-    number: PropTypes.oneOfType([
-      PropTypes.number,
-      PropTypes.string,
-    ]),
+    name: PropTypes.string,
     start: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.object,

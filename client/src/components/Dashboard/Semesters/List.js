@@ -21,7 +21,7 @@ const List = ({
       semesters.map((semester) => {
         const {
           id,
-          number,
+          name,
           start,
           end,
           firstWeekType,
@@ -29,7 +29,7 @@ const List = ({
 
         return (
           <li key={id} className="list__item">
-            <h4 className="list__item-number">{number}</h4>
+            <h4 className="list__item-number">{name}</h4>
 
             <div className="list__item-body">
               <div className="info-wrap">

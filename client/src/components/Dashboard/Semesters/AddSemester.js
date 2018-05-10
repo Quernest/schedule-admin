@@ -46,7 +46,7 @@ class AddSemester extends Component {
     const { dispatch } = this.props;
     const { semester } = this.state;
     const {
-      number,
+      name,
       start,
       end,
       firstWeekType,
@@ -56,9 +56,9 @@ class AddSemester extends Component {
       submitted: true,
     });
 
-    if (number && start && end && firstWeekType) {
+    if (name && start && end && firstWeekType) {
       const data = {
-        number: Number(number),
+        name,
         start: moment(start).format('YYYY-MM-DD'),
         end: moment(end).format('YYYY-MM-DD'),
         firstWeekType,

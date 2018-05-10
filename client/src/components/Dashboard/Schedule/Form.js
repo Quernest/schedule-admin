@@ -48,7 +48,7 @@ const Form = ({
           <select
             id="semesterId"
             name="semesterId"
-            value={(semester && semester.number) || ''}
+            value={(semester && semester.name) || ''}
             className="form__select"
             onChange={onChangeSemester}
           >
@@ -57,7 +57,7 @@ const Form = ({
                 key={s.id}
                 value={s.id}
               >
-                {s.number}
+                {s.name}
               </option>
             ))}
           </select>
@@ -133,7 +133,7 @@ Form.propTypes = {
   scheduleList: PropTypes.arrayOf(PropTypes.object),
   semester: PropTypes.shape({
     id: PropTypes.number,
-    number: PropTypes.number,
+    name: PropTypes.string,
     start: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.object,

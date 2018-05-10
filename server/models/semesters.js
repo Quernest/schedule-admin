@@ -17,9 +17,9 @@ module.exports.add = (body, cb) => {
       return cb(error, {});
     }
 
-    const { number } = body;
+    const { name } = body;
 
-    database.pool.query(`SELECT * FROM semesters WHERE semesters.number = ${number}`, (err, semesters) => {
+    database.pool.query(`SELECT * FROM semesters WHERE semesters.name = ${name}`, (err, semesters) => {
       if (err) {
         return cb(err, {});
       }
@@ -44,13 +44,13 @@ module.exports.remove = (id, cb) => {
 module.exports.edit = (body, cb) => {
   const {
     id,
-    number,
+    name,
     start,
     end,
   } = body;
 
   const semester = Object.assign(body, {
-    number: Number(number),
+    name,
     start: moment(start).format('YYYY-MM-DD'),
     end: moment(end).format('YYYY-MM-DD'),
   });

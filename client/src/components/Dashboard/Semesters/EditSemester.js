@@ -22,7 +22,7 @@ class EditSemester extends Component {
     }),
     semester: PropTypes.shape({
       id: PropTypes.number,
-      number: PropTypes.number,
+      name: PropTypes.string,
       start: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.object,
@@ -79,7 +79,7 @@ class EditSemester extends Component {
     const { semester } = this.state;
     const {
       id,
-      number,
+      name,
       start,
       end,
       firstWeekType,
@@ -89,10 +89,10 @@ class EditSemester extends Component {
       submitted: true,
     });
 
-    if (id && number && start && end && firstWeekType) {
+    if (id && name && start && end && firstWeekType) {
       const data = {
         id,
-        number: Number(number),
+        name,
         start: moment(start).format('YYYY-MM-DD'),
         end: moment(end).format('YYYY-MM-DD'),
         firstWeekType,
