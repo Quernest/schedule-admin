@@ -48,7 +48,7 @@ const Form = ({
           <select
             id="semesterId"
             name="semesterId"
-            value={(semester && semester.name) || ''}
+            value={(semester && semester.id) || ''}
             className="form__select"
             onChange={onChangeSemester}
           >

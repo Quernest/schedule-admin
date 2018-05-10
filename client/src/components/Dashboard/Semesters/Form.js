@@ -119,7 +119,10 @@ Form.propTypes = {
       PropTypes.string,
       PropTypes.object,
     ]),
-    firstWeekType: PropTypes.number,
+    firstWeekType: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+    ]),
   }),
 };
 

@@ -3,6 +3,7 @@ const database = require('../config/database');
 module.exports.add = (body, cb) => {
   if (body && body.length) {
     const schedule = [];
+    const idsOnDelete = [];
 
     let i = 0;
     const count = body.length;
@@ -25,21 +26,55 @@ module.exports.add = (body, cb) => {
           isShortDay,
         } = row;
 
-        schedule.push(Object.values({
-          id: id || null,
-          groupId: Number(groupId),
-          subjectId: subjectId ? Number(subjectId) : null,
-          teacherId: teacherId ? Number(teacherId) : null,
-          semesterId: semesterId ? Number(semesterId) : null,
-          locationId: locationId ? Number(locationId) : null,
-          weekDay: Number(weekDay),
-          weekType: Number(weekType),
-          lesson: Number(lesson),
-          isFreeTime: Number(isFreeTime),
-          isShortDay: Number(isShortDay),
-        }));
+        const hasRequiredFields = teacherId && subjectId && locationId;
+
+        if (isFreeTime) {
+          schedule.push(Object.values({
+            id: Number(id) || null,
+            groupId: Number(groupId),
+            subjectId: null,
+            teacherId: null,
+            semesterId: Number(semesterId),
+            locationId: null,
+            weekDay: Number(weekDay),
+            weekType: Number(weekType),
+            lesson: Number(lesson),
+            isFreeTime: 1,
+            isShortDay: Number(isShortDay),
+          }));
+        }
+
+        if (!isFreeTime && hasRequiredFields) {
+          schedule.push(Object.values({
+            id: Number(id) || null,
+            groupId: Number(groupId),
+            subjectId: Number(subjectId),
+            teacherId: Number(teacherId),
+            semesterId: Number(semesterId),
+            locationId: Number(locationId),
+            weekDay: Number(weekDay),
+            weekType: Number(weekType),
+            lesson: Number(lesson),
+            isFreeTime: 0,
+            isShortDay: Number(isShortDay),
+          }));
+        }
+
+        if (id && !isFreeTime && !hasRequiredFields) {
+          idsOnDelete.push(id);
+        }
       }
     }
+
+    const getAllSchedule = () => {
+      database.pool.query('SELECT * FROM schedule', (error, list) => {
+        if (error) {
+          return cb(error, {});
+        }
+
+        cb(null, list);
+      });
+    };
 
     database.pool.query(`
     REPLACE INTO
@@ -62,13 +97,17 @@ module.exports.add = (body, cb) => {
         return cb(error, {});
       }
 
-      database.pool.query('SELECT * FROM schedule', (scheduleError, list) => {
-        if (scheduleError) {
-          return cb(scheduleError, {});
-        }
+      if (idsOnDelete && idsOnDelete.length > 0) {
+        const ids = idsOnDelete.join();
 
-        cb(null, list);
-      });
+        database.pool.query(`DELETE FROM schedule WHERE id IN (${ids})`, (deleteError) => {
+          if (deleteError) {
+            return cb(deleteError, {});
+          }
+
+          getAllSchedule();
+        });
+      } else getAllSchedule();
     });
   }
 };

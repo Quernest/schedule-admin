@@ -2,7 +2,7 @@ const database = require('../config/database');
 const moment = require('moment');
 
 module.exports.getAll = (cb) => {
-  database.pool.query('SELECT * FROM semesters', (error, semesters) => {
+  database.pool.query('SELECT * FROM semesters ORDER BY semesters.name ASC', (error, semesters) => {
     if (error) {
       return cb(error, {});
     }
@@ -12,14 +12,14 @@ module.exports.getAll = (cb) => {
 };
 
 module.exports.add = (body, cb) => {
-  database.pool.query('INSERT INTO semesters SET ?', body, (error, rows) => {
+  database.pool.query('INSERT INTO semesters SET ?', body, (error, result) => {
     if (error) {
       return cb(error, {});
     }
 
-    const { name } = body;
+    const { insertId } = result;
 
-    database.pool.query(`SELECT * FROM semesters WHERE semesters.name = ${name}`, (err, semesters) => {
+    database.pool.query(`SELECT * FROM semesters WHERE semesters.id = ${insertId}`, (err, semesters) => {
       if (err) {
         return cb(err, {});
       }

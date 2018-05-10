@@ -210,6 +210,21 @@ class EditGroup extends Component {
       submitted: true,
     });
 
+    // const incompleteListItems = [];
+
+    // let modifiedScheduleList = scheduleList;
+
+    // if (scheduleList && scheduleList.length > 0) {
+    //   // if teacherId or subjectId or locationId is not selected remove this item from schedule list
+    //   scheduleList.map((listItem, index) => {
+    //     if (listItem && !listItem.isFreeTime && (!listItem.teacherId || !listItem.subjectId || !listItem.locationId)) {
+    //       incompleteListItems.push(listItem);
+
+    //       modifiedScheduleList = scheduleList.filter(value => !incompleteListItems.includes(value));
+    //     }
+    //   });
+    // }
+
     if (group) {
       const { name } = group;
 
