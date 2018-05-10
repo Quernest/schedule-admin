@@ -93,6 +93,15 @@ const Form = ({
       ))}
     </div>
 
+    {submitted &&
+      !group.name && (
+        <div className="form__feedback">
+          {formatMessage({
+            id: 'app.errors.dashboard.groups.form.addgroup.feedback',
+          })}
+        </div>
+      )}
+
     <button className="form__btn btn">
       {formatMessage({ id: 'app.button.save' })}
     </button>
