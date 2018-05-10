@@ -206,30 +206,46 @@ class EditGroup extends Component {
     const { dispatch } = this.props;
     const { scheduleList, group } = this.state;
 
+    // array with items to remove
+    const incompleteListItems = [];
+
+    // original array without "incompleted list items"
+    let modifiedScheduleList = scheduleList || [];
+
+    if (scheduleList && scheduleList.length > 0) {
+      scheduleList.map((item) => {
+        if (item) {
+          const {
+            isFreeTime,
+            teacherId,
+            subjectId,
+            locationId,
+          } = item;
+
+          const hasRequiredFileds = teacherId && subjectId && locationId;
+
+          if (!isFreeTime && !hasRequiredFileds) {
+            incompleteListItems.push(item);
+
+            modifiedScheduleList = scheduleList
+              .filter(value => !incompleteListItems.includes(value));
+          }
+        }
+
+        return item;
+      });
+    }
+
     this.setState({
       submitted: true,
+      scheduleList: modifiedScheduleList,
     });
-
-    // const incompleteListItems = [];
-
-    // let modifiedScheduleList = scheduleList;
-
-    // if (scheduleList && scheduleList.length > 0) {
-    //   // if teacherId or subjectId or locationId is not selected remove this item from schedule list
-    //   scheduleList.map((listItem, index) => {
-    //     if (listItem && !listItem.isFreeTime && (!listItem.teacherId || !listItem.subjectId || !listItem.locationId)) {
-    //       incompleteListItems.push(listItem);
-
-    //       modifiedScheduleList = scheduleList.filter(value => !incompleteListItems.includes(value));
-    //     }
-    //   });
-    // }
 
     if (group) {
       const { name } = group;
 
       if (name) {
-        dispatch(groupsActions.edit(group, scheduleList));
+        dispatch(groupsActions.edit(group, modifiedScheduleList));
       }
     }
   }
