@@ -154,16 +154,11 @@ class EditGroup extends Component {
       weekType,
       lesson,
       [name]: value,
-      isFreeTime: 0,
+      isFreeTime: 0, // 0 is not free time, 1 is a free time
       isShortDay: Number(weekDay === 5),
     };
 
     if (name === 'isFreeTime') {
-      /**
-       * 0 = false, not free time
-       * 1 = true, free time
-       */
-
       updatedEvent.isFreeTime = value ? 0 : 1;
     }
 
