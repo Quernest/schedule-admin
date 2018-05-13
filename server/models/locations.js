@@ -1,7 +1,7 @@
 const database = require('../config/database');
 
 module.exports.getAll = (cb) => {
-  database.pool.query('SELECT * FROM locations', (error, locations) => {
+  database.pool.query('SELECT * FROM locations ORDER BY locations.name ASC', (error, locations) => {
     if (error) {
       return cb(error, {});
     }

@@ -1,7 +1,7 @@
 const database = require('../config/database');
 
 module.exports.getAll = (cb) => {
-  database.pool.query('SELECT * FROM teachers', (error, teachers) => {
+  database.pool.query('SELECT * FROM teachers ORDER BY teachers.name ASC', (error, teachers) => {
     if (error) {
       return cb(error, {});
     }

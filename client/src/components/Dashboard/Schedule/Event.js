@@ -63,27 +63,6 @@ const Event = ({
       </label>
 
       <label className="form__label">
-        {formatMessage({ id: 'app.dashboard.semesters.form.editgroup.schedule.event.teacher' })}
-        <select
-          name="teacherId"
-          className="form__select"
-          value={(event.item && event.item.teacherId) || ''}
-          disabled={(event.item && event.item.isFreeTime)}
-          onChange={(e) => onChangeScheduleItem(e, isoWeekDay, weekType, isoEventNumber, event)}
-        >
-          <option value="" />
-          {teachersList.length && teachersList.map((teacher) => (
-            <option
-              key={teacher.id}
-              value={teacher.id}
-            >
-              {teacher.name}
-            </option>
-          ))}
-        </select>
-      </label>
-
-      <label className="form__label">
         {formatMessage({ id: 'app.dashboard.semesters.form.editgroup.schedule.event.subject' })}
         <select
           name="subjectId"
@@ -99,6 +78,27 @@ const Event = ({
               value={subject.id}
             >
               {subject.name} {formatMessage({ id: parseSubjectTypes(subject.type) }).toLowerCase()}
+            </option>
+          ))}
+        </select>
+      </label>
+
+      <label className="form__label">
+        {formatMessage({ id: 'app.dashboard.semesters.form.editgroup.schedule.event.teacher' })}
+        <select
+          name="teacherId"
+          className="form__select"
+          value={(event.item && event.item.teacherId) || ''}
+          disabled={(event.item && event.item.isFreeTime)}
+          onChange={(e) => onChangeScheduleItem(e, isoWeekDay, weekType, isoEventNumber, event)}
+        >
+          <option value="" />
+          {teachersList.length && teachersList.map((teacher) => (
+            <option
+              key={teacher.id}
+              value={teacher.id}
+            >
+              {teacher.name}
             </option>
           ))}
         </select>
