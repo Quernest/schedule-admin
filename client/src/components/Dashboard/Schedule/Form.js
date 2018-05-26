@@ -5,13 +5,6 @@ import Week from '../Schedule/Week';
 import Day from '../Schedule/Day';
 import Event from '../Schedule/Event';
 
-/**
- * TODO:
- *
- * - handle error if no data
- *
- */
-
 const Form = ({
   intl: {
     formatMessage,
@@ -29,6 +22,8 @@ const Form = ({
   subjects,
   locations,
   scheduleList,
+  days,
+  weeks,
 }) => (
   <form className="form" onSubmit={onSubmit}>
     <div className="row">
@@ -64,17 +59,17 @@ const Form = ({
         </label>
       </div>
 
-      {[...Array(2)].map((w, n) => (
+      {[...Array(weeks)].map((w, n) => (
         <Week
           className="form__week col-xs-12 col-md-6"
           type={n + 1}
         >
-          {[...Array(5)].map((d, i) => (
+          {[...Array(days)].map((d, i) => (
             <Day
               index={i}
               lang={lang}
             >
-              {[...Array(5)].map((p, j) => (
+              {[...Array(days)].map((p, j) => (
                 <Event
                   index={j}
                   dayIndex={i}
@@ -153,6 +148,8 @@ Form.propTypes = {
     ]),
     firstWeekType: PropTypes.number,
   }),
+  days: PropTypes.number,
+  weeks: PropTypes.number,
 };
 
 Form.defaultProps = {
@@ -164,6 +161,8 @@ Form.defaultProps = {
   locations: {},
   scheduleList: [],
   semester: {},
+  days: 5,
+  weeks: 2, // odd and even week
 };
 
 export default injectIntl(Form);

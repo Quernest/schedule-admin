@@ -145,7 +145,7 @@ class EditGroup extends Component {
   onChangeScheduleItem(e, weekDay, weekType, lesson, event) {
     const { name, value } = e.target;
     const { groupId } = this.props;
-    const { scheduleList = [], semester } = this.state;
+    const { scheduleList, semester } = this.state;
 
     const updatedEvent = {
       groupId: Number(groupId),
@@ -239,6 +239,7 @@ class EditGroup extends Component {
     if (group) {
       const { name } = group;
 
+      // if user did not leave blank field
       if (name) {
         dispatch(groupsActions.edit(group, modifiedScheduleList));
       }
@@ -282,7 +283,7 @@ class EditGroup extends Component {
   }
 
   detectCurrentSemester(semesters) {
-    if (semesters.list && semesters.list.length) {
+    if (semesters.list && semesters.list.length > 0) {
       const { list } = semesters;
 
       const currentDate = moment();
@@ -290,7 +291,12 @@ class EditGroup extends Component {
       list.map((semester) => {
         const { start, end } = semester;
 
-        const isCurrentSemester = currentDate.isBetween(moment(start, 'YYYY-MM-DD'), moment(end, 'YYYY-MM-DD'), null, '[]');
+        const isCurrentSemester = currentDate.isBetween(
+          moment(start, 'YYYY-MM-DD'),
+          moment(end, 'YYYY-MM-DD'),
+          null,
+          '[]',
+        );
 
         if (isCurrentSemester) {
           this.setState({
@@ -383,6 +389,8 @@ class EditGroup extends Component {
               schedule={schedule}
               locations={locations}
               scheduleList={scheduleList}
+              days={5}
+              weeks={2}
             />
           </ReactCSSTransitionGroup>
         )}
