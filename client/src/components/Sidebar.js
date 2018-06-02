@@ -41,14 +41,8 @@ class Sidebar extends Component {
     intl: intlShape.isRequired,
   }
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      windowWidth: 0,
-    };
-
-    this.handleResize = this.handleResize.bind(this);
+  state = {
+    windowWidth: 0,
   }
 
   componentDidMount() {
@@ -61,7 +55,7 @@ class Sidebar extends Component {
     window.removeEventListener('resize', this.handleResize);
   }
 
-  handleResize() {
+  handleResize = () => {
     const windowWidth = window.innerWidth;
 
     this.toggle(windowWidth);
@@ -71,7 +65,7 @@ class Sidebar extends Component {
     });
   }
 
-  toggle(windowWidth = 0) {
+  toggle = (windowWidth = 0) => {
     const { dispatch } = this.props;
 
     if (windowWidth > 768) {

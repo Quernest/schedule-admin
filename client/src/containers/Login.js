@@ -22,17 +22,10 @@ class Login extends Component {
     user: {},
   };
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      submitted: false,
-      username: '',
-      password: '',
-    };
-
-    this.onSubmit = this.onSubmit.bind(this);
-    this.onChange = this.onChange.bind(this);
+  state = {
+    submitted: false,
+    username: '',
+    password: '',
   }
 
   componentWillMount() {
@@ -44,7 +37,7 @@ class Login extends Component {
     }
   }
 
-  onSubmit(e) {
+  onSubmit = (e) => {
     e.preventDefault();
 
     const { dispatch } = this.props;
@@ -59,7 +52,7 @@ class Login extends Component {
     });
   }
 
-  onChange(e) {
+  onChange = (e) => {
     const { name, value } = e.target;
 
     this.setState({

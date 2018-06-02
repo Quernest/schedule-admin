@@ -45,18 +45,9 @@ class EditSemester extends Component {
     },
   }
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      semester: {},
-      submitted: false,
-    };
-
-    this.onSubmit = this.onSubmit.bind(this);
-    this.onChange = this.onChange.bind(this);
-    this.onDateChange = this.onDateChange.bind(this);
-    this.updateSemester = this.updateSemester.bind(this);
+  state = {
+    semester: {},
+    submitted: false,
   }
 
   componentDidMount() {
@@ -73,7 +64,7 @@ class EditSemester extends Component {
     }
   }
 
-  onSubmit(e) {
+  onSubmit = (e) => {
     e.preventDefault();
     const { dispatch } = this.props;
     const { semester } = this.state;
@@ -102,7 +93,7 @@ class EditSemester extends Component {
     }
   }
 
-  onDateChange(date, name) {
+  onDateChange = (date, name) => {
     const { semester } = this.state;
 
     this.setState({
@@ -114,7 +105,7 @@ class EditSemester extends Component {
     });
   }
 
-  onChange(e) {
+  onChange = (e) => {
     const { value, name } = e.target;
     const { semester } = this.state;
 
@@ -127,7 +118,7 @@ class EditSemester extends Component {
     });
   }
 
-  updateSemester(semester) {
+  updateSemester = (semester) => {
     const { start, end } = semester;
 
     const momentDates = {

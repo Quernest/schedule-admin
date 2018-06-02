@@ -56,29 +56,11 @@ class EditGroup extends Component {
     locations: {},
   }
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      submitted: false,
-      semester: {},
-      group: {},
-      scheduleList: [],
-    };
-
-    this.onSubmit = this.onSubmit.bind(this);
-    this.onChangeScheduleItem = this.onChangeScheduleItem.bind(this);
-    this.onChangeGroupName = this.onChangeGroupName.bind(this);
-    this.onChangeSemester = this.onChangeSemester.bind(this);
-
-    this.getGroupById = this.getGroupById.bind(this);
-    this.getScheduleById = this.getScheduleById.bind(this);
-    this.getTeachers = this.getTeachers.bind(this);
-    this.getSemesters = this.getSemesters.bind(this);
-    this.getSubjects = this.getSubjects.bind(this);
-    this.getLocations = this.getLocations.bind(this);
-
-    this.detectCurrentSemester = this.detectCurrentSemester.bind(this);
+  state = {
+    submitted: false,
+    semester: {},
+    group: {},
+    scheduleList: [],
   }
 
   componentDidMount() {
@@ -116,7 +98,7 @@ class EditGroup extends Component {
     }
   }
 
-  onChangeGroupName(e) {
+  onChangeGroupName = (e) => {
     const { value } = e.target;
     const { group } = this.state;
 
@@ -129,7 +111,7 @@ class EditGroup extends Component {
     });
   }
 
-  onChangeSemester(e) {
+  onChangeSemester = (e) => {
     const { value } = e.target;
     const { semester } = this.state;
 
@@ -142,7 +124,7 @@ class EditGroup extends Component {
     });
   }
 
-  onChangeScheduleItem(e, weekDay, weekType, lesson, event) {
+  onChangeScheduleItem = (e, weekDay, weekType, lesson, event) => {
     const { name, value } = e.target;
     const { groupId } = this.props;
     const { scheduleList, semester } = this.state;
@@ -196,7 +178,7 @@ class EditGroup extends Component {
     }
   }
 
-  onSubmit(e) {
+  onSubmit = (e) => {
     e.preventDefault();
     const { dispatch } = this.props;
     const { scheduleList, group } = this.state;
@@ -246,43 +228,43 @@ class EditGroup extends Component {
     }
   }
 
-  getGroupById() {
+  getGroupById = () => {
     const { dispatch, groupId } = this.props;
 
     dispatch(groupsActions.getById(groupId));
   }
 
-  getScheduleById() {
+  getScheduleById = () => {
     const { dispatch, groupId } = this.props;
 
     dispatch(scheduleActions.getById(groupId));
   }
 
-  getTeachers() {
+  getTeachers = () => {
     const { dispatch } = this.props;
 
     dispatch(teachersActions.getAll());
   }
 
-  getSemesters() {
+  getSemesters = () => {
     const { dispatch } = this.props;
 
     dispatch(semestersActions.getAll());
   }
 
-  getSubjects() {
+  getSubjects = () => {
     const { dispatch } = this.props;
 
     dispatch(subjectsActions.getAll());
   }
 
-  getLocations() {
+  getLocations = () => {
     const { dispatch } = this.props;
 
     dispatch(locationsActions.getAll());
   }
 
-  detectCurrentSemester(semesters) {
+  detectCurrentSemester = (semesters) => {
     if (semesters.list && semesters.list.length > 0) {
       const { list } = semesters;
 
@@ -309,7 +291,7 @@ class EditGroup extends Component {
     }
   }
 
-  updateSchedule(schedule) {
+  updateSchedule = (schedule) => {
     const { list } = schedule;
 
     this.setState({
@@ -317,7 +299,7 @@ class EditGroup extends Component {
     });
   }
 
-  updateGroups(groups) {
+  updateGroups = (groups) => {
     const { group } = groups;
 
     this.setState({

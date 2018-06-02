@@ -25,21 +25,14 @@ class AddLocation extends Component {
     },
   }
 
-  constructor(props) {
-    super(props);
+  state = {
+    location: {
+      name: '',
+    },
+    submitted: false,
+  };
 
-    this.state = {
-      location: {
-        name: '',
-      },
-      submitted: false,
-    };
-
-    this.onSubmit = this.onSubmit.bind(this);
-    this.onChange = this.onChange.bind(this);
-  }
-
-  onSubmit(e) {
+  onSubmit = (e) => {
     e.preventDefault();
 
     const { dispatch } = this.props;
@@ -56,7 +49,7 @@ class AddLocation extends Component {
     }
   }
 
-  onChange(e) {
+  onChange = (e) => {
     const { value, name } = e.target;
     const { location } = this.state;
 

@@ -25,21 +25,13 @@ class AddGroup extends Component {
     },
   }
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      group: {
-        name: '',
-      },
-      submitted: false,
-    };
-
-    this.onSubmit = this.onSubmit.bind(this);
-    this.onChange = this.onChange.bind(this);
+  state = {
+    group: {
+      name: '',
+    },
   }
 
-  onSubmit(e) {
+  onSubmit = (e) => {
     e.preventDefault();
 
     const { dispatch } = this.props;
@@ -56,7 +48,7 @@ class AddGroup extends Component {
     }
   }
 
-  onChange(e) {
+  onChange = (e) => {
     const { value, name } = e.target;
     const { group } = this.state;
 

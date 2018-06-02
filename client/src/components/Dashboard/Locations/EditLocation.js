@@ -31,20 +31,13 @@ class EditLocation extends Component {
     },
   }
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      location: {
-        id: undefined,
-        name: '',
-      },
-      submitted: false,
-    };
-
-    this.onSubmit = this.onSubmit.bind(this);
-    this.onChange = this.onChange.bind(this);
-  }
+  state = {
+    location: {
+      id: undefined,
+      name: '',
+    },
+    submitted: false,
+  };
 
   componentDidMount() {
     const { dispatch, locationId } = this.props;
@@ -60,7 +53,7 @@ class EditLocation extends Component {
     }
   }
 
-  onSubmit(e) {
+  onSubmit = (e) => {
     e.preventDefault();
 
     const { dispatch } = this.props;
@@ -77,7 +70,7 @@ class EditLocation extends Component {
     }
   }
 
-  onChange(e) {
+  onChange = (e) => {
     const { value, name } = e.target;
     const { location } = this.state;
 

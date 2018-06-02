@@ -25,21 +25,14 @@ class AddTeacher extends Component {
     },
   }
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      teacher: {
-        name: '',
-      },
-      submitted: false,
-    };
-
-    this.onSubmit = this.onSubmit.bind(this);
-    this.onChange = this.onChange.bind(this);
+  state = {
+    teacher: {
+      name: '',
+    },
+    submitted: false,
   }
 
-  onSubmit(e) {
+  onSubmit = (e) => {
     e.preventDefault();
 
     const { dispatch } = this.props;
@@ -56,7 +49,7 @@ class AddTeacher extends Component {
     }
   }
 
-  onChange(e) {
+  onChange = (e) => {
     const { value, name } = e.target;
     const { teacher } = this.state;
 

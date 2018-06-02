@@ -3,16 +3,12 @@ import { injectIntl } from 'react-intl';
 import Heading from '../../Heading';
 
 class Home extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {};
-  }
+  state = {};
 
   render() {
     return (
       <div className="dashboard-home">
-        <Heading title="Title" />
+        <Heading title="@beta 1.0" />
       </div>
     );
   }

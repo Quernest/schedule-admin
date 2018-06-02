@@ -25,22 +25,15 @@ class AddSubject extends Component {
     },
   }
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      subject: {
-        name: '',
-        type: 1,
-      },
-      submitted: false,
-    };
-
-    this.onSubmit = this.onSubmit.bind(this);
-    this.onChange = this.onChange.bind(this);
+  state = {
+    subject: {
+      name: '',
+      type: 1,
+    },
+    submitted: false,
   }
 
-  onSubmit(e) {
+  onSubmit = (e) => {
     e.preventDefault();
 
     const { dispatch } = this.props;
@@ -57,7 +50,7 @@ class AddSubject extends Component {
     }
   }
 
-  onChange(e) {
+  onChange = (e) => {
     const { value, name } = e.target;
     const { subject } = this.state;
 

@@ -19,15 +19,8 @@ class Header extends Component {
     loggedIn: false,
   }
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      windowWidth: 0,
-    };
-
-    this.handleResize = this.handleResize.bind(this);
-    this.toggleSidebar = this.toggleSidebar.bind(this);
+  state = {
+    windowWidth: 0,
   }
 
   componentDidMount() {
@@ -40,7 +33,7 @@ class Header extends Component {
     window.removeEventListener('resize', this.handleResize);
   }
 
-  handleResize() {
+  handleResize = () => {
     const windowWidth = window.innerWidth;
 
     this.setState({
@@ -48,7 +41,7 @@ class Header extends Component {
     });
   }
 
-  toggleSidebar() {
+  toggleSidebar = () => {
     const { dispatch, isOpened } = this.props;
 
     if (isOpened) {

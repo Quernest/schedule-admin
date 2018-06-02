@@ -32,15 +32,8 @@ class EditSubject extends Component {
     subjects: {},
   };
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      submitted: false,
-    };
-
-    this.onChange = this.onChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
+  state = {
+    submitted: false,
   }
 
   componentDidMount() {
@@ -57,7 +50,7 @@ class EditSubject extends Component {
     }
   }
 
-  onSubmit(e) {
+  onSubmit = (e) => {
     e.preventDefault();
 
     const { dispatch } = this.props;
@@ -74,7 +67,7 @@ class EditSubject extends Component {
     }
   }
 
-  onChange(e) {
+  onChange = (e) => {
     const { value, name } = e.target;
     const { subject } = this.state;
 

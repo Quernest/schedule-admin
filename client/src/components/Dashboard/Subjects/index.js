@@ -22,20 +22,13 @@ class Subjects extends Component {
     subjects: {},
   }
 
-  constructor(props) {
-    super(props);
-
-    this.state = {};
-    this.onRemove = this.onRemove.bind(this);
-  }
-
   componentDidMount() {
     const { dispatch } = this.props;
 
     dispatch(subjectsActions.getAll());
   }
 
-  onRemove(id) {
+  onRemove = (id) => {
     const { dispatch } = this.props;
 
     dispatch(subjectsActions.remove(id));

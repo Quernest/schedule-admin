@@ -26,22 +26,14 @@ class AddSemester extends Component {
     },
   }
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      submitted: false,
-      semester: {
-        firstWeekType: 1,
-      },
-    };
-
-    this.onSubmit = this.onSubmit.bind(this);
-    this.onChange = this.onChange.bind(this);
-    this.onDateChange = this.onDateChange.bind(this);
+  state = {
+    submitted: false,
+    semester: {
+      firstWeekType: 1,
+    },
   }
 
-  onSubmit(e) {
+  onSubmit = (e) => {
     e.preventDefault();
     const { dispatch } = this.props;
     const { semester } = this.state;
@@ -68,7 +60,7 @@ class AddSemester extends Component {
     }
   }
 
-  onDateChange(date, name) {
+  onDateChange = (date, name) => {
     const { semester } = this.state;
 
     this.setState({
@@ -80,7 +72,7 @@ class AddSemester extends Component {
     });
   }
 
-  onChange(e) {
+  onChange = (e) => {
     const { value, name } = e.target;
     const { semester } = this.state;
 
