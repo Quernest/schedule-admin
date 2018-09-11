@@ -183,39 +183,39 @@ class EditGroup extends Component {
     const { dispatch } = this.props;
     const { scheduleList, group } = this.state;
 
-    // array with items to remove
-    const incompleteListItems = [];
+    // // array with items to remove
+    // const incompleteListItems = [];
 
-    // original array without "incompleted list items"
-    let modifiedScheduleList = scheduleList || [];
+    // // original array without "incompleted list items"
+    // let modifiedScheduleList = scheduleList || [];
 
-    if (scheduleList && scheduleList.length > 0) {
-      scheduleList.map((item) => {
-        if (item) {
-          const {
-            isFreeTime,
-            teacherId,
-            subjectId,
-            locationId,
-          } = item;
+    // if (scheduleList && scheduleList.length > 0) {
+    //   scheduleList.map((item) => {
+    //     if (item) {
+    //       const {
+    //         isFreeTime,
+    //         teacherId,
+    //         subjectId,
+    //         locationId,
+    //       } = item;
 
-          const hasRequiredFileds = teacherId && subjectId && locationId;
+    //       const hasRequiredFileds = teacherId && subjectId && locationId;
 
-          if (!isFreeTime && !hasRequiredFileds) {
-            incompleteListItems.push(item);
+    //       if (!isFreeTime && !hasRequiredFileds) {
+    //         // incompleteListItems.push(item);
 
-            modifiedScheduleList = scheduleList
-              .filter(value => !incompleteListItems.includes(value));
-          }
-        }
+    //         modifiedScheduleList = scheduleList
+    //           .filter(value => !incompleteListItems.includes(value));
+    //       }
+    //     }
 
-        return item;
-      });
-    }
+    //     return item;
+    //   });
+    // }
 
     this.setState({
       submitted: true,
-      scheduleList: modifiedScheduleList,
+      scheduleList,
     });
 
     if (group) {
@@ -223,7 +223,7 @@ class EditGroup extends Component {
 
       // if user did not leave blank field
       if (name) {
-        dispatch(groupsActions.edit(group, modifiedScheduleList));
+        dispatch(groupsActions.edit(group, scheduleList));
       }
     }
   }
