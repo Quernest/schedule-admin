@@ -202,7 +202,7 @@ class EditGroup extends Component {
     //       const hasRequiredFileds = teacherId && subjectId && locationId;
 
     //       if (!isFreeTime && !hasRequiredFileds) {
-    //         // incompleteListItems.push(item);
+    //         incompleteListItems.push(item);
 
     //         modifiedScheduleList = scheduleList
     //           .filter(value => !incompleteListItems.includes(value));

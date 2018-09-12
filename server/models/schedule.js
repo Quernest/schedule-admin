@@ -27,6 +27,10 @@ module.exports.add = (body, cb) => {
         } = row;
 
         const hasRequiredFields = teacherId && subjectId && locationId;
+      
+        if (!isFreeTime && !hasRequiredFields) {
+          idsOnDelete.push(id);
+        }
 
         if (isFreeTime) {
           schedule.push(Object.values({
@@ -58,10 +62,6 @@ module.exports.add = (body, cb) => {
             isFreeTime: 0,
             isShortDay: Number(isShortDay),
           }));
-        }
-
-        if (id && !isFreeTime && !hasRequiredFields) {
-          idsOnDelete.push(id);
         }
       }
     }
