@@ -69,7 +69,7 @@ const Form = ({
               index={i}
               lang={lang}
             >
-              {[...Array(days)].map((p, j) => (
+              {[...Array(5)].map((p, j) => (
                 <Event
                   index={j}
                   dayIndex={i}

@@ -1,6 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl, intlShape } from 'react-intl';
+import {
+  Accordion,
+  AccordionItem,
+  AccordionItemTitle,
+  AccordionItemBody,
+} from 'react-accessible-accordion';
 import parsers from '../../../helpers/parsers';
 
 const { parseSubjectTypes } = parsers;
@@ -46,85 +52,92 @@ const Event = ({
 
   return (
     <div className="form__event" key={index}>
-      <h3 className="form__event-title">
-        {isoEventNumber} {formatMessage({ id: 'app.dashboard.semesters.form.editgroup.schedule.event' })}
-      </h3>
+      <Accordion>
+        <AccordionItem>
+          <AccordionItemTitle>
+            <h3 className="form__event-title">
+              {isoEventNumber} {formatMessage({ id: 'app.dashboard.semesters.form.editgroup.schedule.event' })}
+            </h3>
+          </AccordionItemTitle>
+          <AccordionItemBody>
+            <label className="form__label checkbox">
+              {formatMessage({ id: 'app.dashboard.semesters.form.editgroup.schedule.event.freetime' })}
+              <input
+                type="checkbox"
+                name="isFreeTime"
+                value={(event.item && event.item.isFreeTime ? 1 : 0) || ''}
+                checked={(event.item && event.item.isFreeTime) || false}
+                onChange={(e) => onChangeScheduleItem(e, isoWeekDay, weekType, isoEventNumber, event)}
+              />
+              <span className="checkbox__checkmark" />
+            </label>
 
-      <label className="form__label checkbox">
-        {formatMessage({ id: 'app.dashboard.semesters.form.editgroup.schedule.event.freetime' })}
-        <input
-          type="checkbox"
-          name="isFreeTime"
-          value={(event.item && event.item.isFreeTime ? 1 : 0) || ''}
-          checked={(event.item && event.item.isFreeTime) || false}
-          onChange={(e) => onChangeScheduleItem(e, isoWeekDay, weekType, isoEventNumber, event)}
-        />
-        <span className="checkbox__checkmark" />
-      </label>
+            <label className="form__label">
+              {formatMessage({ id: 'app.dashboard.semesters.form.editgroup.schedule.event.subject' })}
+              <select
+                name="subjectId"
+                className="form__select"
+                value={(event.item && event.item.subjectId) || ''}
+                disabled={(event.item && event.item.isFreeTime)}
+                onChange={(e) => onChangeScheduleItem(e, isoWeekDay, weekType, isoEventNumber, event)}
+              >
+                <option value="" />
+                {subjectsList.length && subjectsList.map((subject) => (
+                  <option
+                    key={subject.id}
+                    value={subject.id}
+                  >
+                    {subject.name} {formatMessage({ id: parseSubjectTypes(subject.type) }).toLowerCase()}
+                  </option>
+                ))}
+              </select>
+            </label>
 
-      <label className="form__label">
-        {formatMessage({ id: 'app.dashboard.semesters.form.editgroup.schedule.event.subject' })}
-        <select
-          name="subjectId"
-          className="form__select"
-          value={(event.item && event.item.subjectId) || ''}
-          disabled={(event.item && event.item.isFreeTime)}
-          onChange={(e) => onChangeScheduleItem(e, isoWeekDay, weekType, isoEventNumber, event)}
-        >
-          <option value="" />
-          {subjectsList.length && subjectsList.map((subject) => (
-            <option
-              key={subject.id}
-              value={subject.id}
-            >
-              {subject.name} {formatMessage({ id: parseSubjectTypes(subject.type) }).toLowerCase()}
-            </option>
-          ))}
-        </select>
-      </label>
+            <label className="form__label">
+              {formatMessage({ id: 'app.dashboard.semesters.form.editgroup.schedule.event.teacher' })}
+              <select
+                name="teacherId"
+                className="form__select"
+                value={(event.item && event.item.teacherId) || ''}
+                disabled={(event.item && event.item.isFreeTime)}
+                onChange={(e) => onChangeScheduleItem(e, isoWeekDay, weekType, isoEventNumber, event)}
+              >
+                <option value="" />
+                {teachersList.length && teachersList.map((teacher) => (
+                  <option
+                    key={teacher.id}
+                    value={teacher.id}
+                  >
+                    {teacher.name}
+                  </option>
+                ))}
+              </select>
+            </label>
 
-      <label className="form__label">
-        {formatMessage({ id: 'app.dashboard.semesters.form.editgroup.schedule.event.teacher' })}
-        <select
-          name="teacherId"
-          className="form__select"
-          value={(event.item && event.item.teacherId) || ''}
-          disabled={(event.item && event.item.isFreeTime)}
-          onChange={(e) => onChangeScheduleItem(e, isoWeekDay, weekType, isoEventNumber, event)}
-        >
-          <option value="" />
-          {teachersList.length && teachersList.map((teacher) => (
-            <option
-              key={teacher.id}
-              value={teacher.id}
-            >
-              {teacher.name}
-            </option>
-          ))}
-        </select>
-      </label>
-
-      <label className="form__label">
-        {formatMessage({ id: 'app.dashboard.semesters.form.editgroup.schedule.event.location' })}
-        <select
-          name="locationId"
-          className="form__input"
-          value={(event.item && event.item.locationId) || ''}
-          disabled={(event.item && event.item.isFreeTime)}
-          onChange={(e) => onChangeScheduleItem(e, isoWeekDay, weekType, isoEventNumber, event)}
-          placeholder={formatMessage({ id: 'app.dashboard.semesters.form.editgroup.schedule.event.location.placeholder' })}
-        >
-          <option value="" />
-          {locationsList.length && locationsList.map((location) => (
-            <option
-              key={location.id}
-              value={location.id}
-            >
-              {location.name}
-            </option>
-          ))}
-        </select>
-      </label>
+            <label className="form__label">
+              {formatMessage({ id: 'app.dashboard.semesters.form.editgroup.schedule.event.location' })}
+              <select
+                name="locationId"
+                className="form__input"
+                value={(event.item && event.item.locationId) || ''}
+                disabled={(event.item && event.item.isFreeTime)}
+                onChange={(e) => onChangeScheduleItem(e, isoWeekDay, weekType, isoEventNumber, event)}
+                placeholder={formatMessage({ id: 'app.dashboard.semesters.form.editgroup.schedule.event.location.placeholder' })}
+              >
+                <option value="" />
+                {locationsList.length && locationsList.map((location) => (
+                  <option
+                    key={location.id}
+                    value={location.id}
+                  >
+                    {location.name}
+                  </option>
+                ))}
+              </select>
+            </label>
+          </AccordionItemBody>
+        </AccordionItem>
+      </Accordion>
     </div>
   );
 };

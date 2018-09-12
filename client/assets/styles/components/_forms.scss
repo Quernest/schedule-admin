@@ -54,14 +54,9 @@
     color: $black;
   }
 
-  &__fieldset {
-    border-color: $lightgrey;
-
-    legend {
-      font-family: $font-family-bold;
-      font-size: em($font-size-h4);
-      color: $black;
-    }
+  &__h3 {
+    font-size: em(18);
+    color: $black;
   }
 
   &__group {

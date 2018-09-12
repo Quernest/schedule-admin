@@ -2,6 +2,12 @@ import React from 'react';
 import { injectIntl } from 'react-intl';
 import moment from 'moment';
 import PropTypes from 'prop-types';
+import {
+  Accordion,
+  AccordionItem,
+  AccordionItemTitle,
+  AccordionItemBody,
+} from 'react-accessible-accordion';
 
 const Day = ({
   children,
@@ -12,12 +18,16 @@ const Day = ({
 
   return (
     <div className="form__group" key={index}>
-      <fieldset className="form__fieldset">
-        <legend>
-          {moment().locale(lang).day(isoWeekDay).format('dddd')}
-        </legend>
-        {children}
-      </fieldset>
+      <Accordion>
+        <AccordionItem>
+          <AccordionItemTitle>
+            <h3 className="form__h3">{moment().locale(lang).day(isoWeekDay).format('dddd')}</h3>
+          </AccordionItemTitle>
+          <AccordionItemBody>
+            {children}
+          </AccordionItemBody>
+        </AccordionItem>
+      </Accordion>
     </div>
   );
 };
